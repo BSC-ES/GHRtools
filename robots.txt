@@ -1,0 +1,1 @@
+Sitemap: https://BSC-ES.github.io/GHRtools/sitemap.xml
