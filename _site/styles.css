@@ -1,0 +1,127 @@
+/* css styles */
+
+/* Code blocks */
+code {
+  background-color: #f4f4f4;
+  border-radius: 4px;
+}
+pre {
+  background-color: #f4f4f4 !important;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre code {
+  background-color: transparent !important;
+  padding: 0;
+}
+pre.sourceCode {
+  background-color: #f4f4f4 !important;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+div.sourceCode {
+  background-color: #f4f4f4 !important;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+div.output pre {
+  background-color: #f4f4f4 !important;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Banner */
+.full-banner {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: #92e8d0;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  margin-top: -65px;
+  border-top: 1px solid transparent; 
+  z-index: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.quarto-title-banner {
+  min-height: 250px; 
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.quarto-title-banner .title {
+  font-size: 2.5rem;     
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+
+/* Make the subtitle larger */
+.quarto-title-banner .subtitle {
+  font-size: 1.3rem;   /* Default is ~1.1rem */
+  font-weight: 400;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* Navbar container */
+.navbar-container {
+  max-width: 1140px; 
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0rem;
+  padding-right: 0rem;
+  box-sizing: border-box;
+}
+
+/* Level 1 headers */
+h1 {
+  font-size: 2.8rem !important;  /* Change this to your preferred size */
+  font-weight: 700;
+}
+
+/* Floating TOC  */
+#quarto-margin-sidebar .toc-actions a,
+#quarto-margin-sidebar nav ul {
+  font-size: 1rem;
+  padding: 0.6rem 0.5rem;
+  display: block;
+}
+
+#quarto-margin-sidebar nav ul > li > a {
+  font-size: 0.95rem;
+  padding: 0.6rem 0.5rem;
+  display: block;
+}
+#quarto-margin-sidebar nav ul ul > li > a {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.5rem;
+}
+#quarto-margin-sidebar nav ul ul ul > li > a {
+  font-size: 0.8rem;   /* Level 3 - h3 equivalent */
+  margin-left: 2rem;   /* More indent */
+  font-weight: 400;
+  padding: 0.1rem 0;
+}
+#toc-title {
+  font-size: 1.1rem;    /* Or larger if you prefer */
+  margin-bottom: 1.2rem;
+}
+#quarto-margin-sidebar .nav-link.active {
+  background-color: #e3e3e3;  /* Your desired background color */
+  color: black !important;    /* White text */
+  border-radius: 0px;
+  padding-left: 0.5rem;       /* Optional: indent */
+  padding-right: 0.5rem;
+}
+
+/* Dropdown */
+.dropdown-header {font-weight: 600; color: #242424; }
+.dropdown-menu {
+  background-color: #f7fff5;   // your custom colour
+}

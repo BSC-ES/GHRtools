@@ -1,0 +1,74 @@
+project:
+  type: website
+
+website:
+  title: "GHRtools"
+  back-to-top-navigation: false
+  search: true
+  favicon: "figures/bsc-logo.png"
+  navbar:
+    title: "GHRtools"
+    navigation-container: narrow
+    background: "#f5fcf6"
+    foreground: "#3d3d3d"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "data4health"
+        menu:
+          - text: Overview
+            href: docs/data4health/data4health.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/data4health/data4health-vignette1.qmd 
+      - text: "clim4health"
+        menu:
+          - text: Overview
+            href: docs/clim4health/clim4health.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/clim4health/clim4health-vignette1.qmd 
+      - text: "GHRexplore"
+        menu:
+          - text: Overview
+            href: docs/GHRexplore/GHRexplore.qmd
+          - text: Reference
+            href: docs/GHRexplore/GHRexplore-index.qmd
+          - text: Changelog
+            href: docs/GHRexplore/GHRexplore-news.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/GHRexplore/GHRexplore-vignette.qmd         
+      - text: "GHRmodel"
+        menu:
+          - text: Overview
+            href: docs/GHRmodel/GHRmodel.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/GHRmodel/GHRmodel-vignette1.qmd 
+      - text: "GHRpredict"
+        menu:
+          - text: Overview
+            href: docs/GHRpredict/GHRpredict.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/GHRpredict/GHRpredict-vignette1.qmd 
+      
+    right:
+      - text: "About GHR"
+        href: https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience
+        target: _blank
+  page-footer: 
+    background: "#168c81"
+    left: "Copyright 2025, GHR" 
+
+format:
+  html:
+    page-layout: full
+    theme: simplex
+    css: styles.css
