@@ -79,9 +79,14 @@ div.output pre {
   box-sizing: border-box;
 }
 
+.navbar .nav-link {
+  color: #1c1c1c !important;   
+  font-weight: 500;          
+}
+
 /* Level 1 headers */
 h1 {
-  font-size: 2.8rem !important;  /* Change this to your preferred size */
+  font-size: 2.8rem !important; 
   font-weight: 700;
 }
 
@@ -121,7 +126,8 @@ h1 {
 }
 
 /* Dropdown */
-.dropdown-header {font-weight: 600; color: #242424; }
+.dropdown-header {font-weight: 600; color: #0a0a0a; }
 .dropdown-menu {
-  background-color: #f7fff5;   // your custom colour
+  background-color: #f7fff5;   
+  width: 10px;
 }

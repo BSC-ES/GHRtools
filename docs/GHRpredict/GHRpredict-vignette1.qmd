@@ -1,5 +1,0 @@
----
-title: "GHRpredict tutorial"
----
-
-Under construction.

@@ -16,7 +16,7 @@ website:
       - text: "data4health"
         menu:
           - text: Overview
-            href: docs/data4health/data4health
+            href: docs/data4health/data4health.qmd
       - text: "clim4health"
         menu:
           - text: Overview
