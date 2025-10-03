@@ -1,0 +1,52 @@
+---
+format: html
+toc: true
+---
+
+# Generate Interaction Terms Between Covariates
+
+## Description
+
+This function generates interaction terms between covariates specified in the `pattern` or `name` arguments. It requires a list of character vectors and appends interaction terms to each vector based on pairwise or three-way interactions. The resulting list can be input into the `covariates` argument in `write_inla_formulas`.
+
+```r
+cov_interact(covariates = NULL, pattern = NULL, name = NULL, add = FALSE)
+```
+
+## Arguments
+
+- `covariates`: A list of character vectors, each vector containing variable names. Typically an output of `cov_multi` or `cov_uni`.
+- `pattern`: A character vector of length 2 or 3 specifying prefixes of variables to interact (e.g., "tmin" matches "tmin", "tmin.l1", etc.).
+- `name`: A character vector specifying the exact variable names to be included in the interactions.
+- `add`: Logical; if `TRUE`, appends the newly created formulas to the original list. Default is `FALSE`.
+
+## Details
+
+ * If two variables are matched, their pairwise interaction is added (`var1:var2`).
+ * If three variables are matched, two-way and three-way interactions are generated.
+ * Only variables that are expressed as linear terms can be used in interactions.
+ * Use either `pattern`, `name`, or both to identify variables for interaction.
+
+## Returns
+
+A list of character vectors, where each vector includes covariates and their corresponding interaction terms. This object can be passed to the `covariates` argument in `write_inla_formulas`.
+
+## Examples
+
+```r
+# Example dataset
+data <- data.frame(tmin.l1 = rnorm(10), pdsi.l1 = rnorm(10), urban = rnorm(10))
+
+# Extract names
+covs <- extract_names(data, pattern = c("tmin", "pdsi", "urban"))
+
+# Create combinations
+combos <- cov_multi(covariates = covs, pattern = c("tmin", "pdsi"))
+
+# Add interaction terms
+cov_interact(covariates = combos, pattern = c("tmin", "pdsi"))
+
+# Output can be passed to write_inla_formulas()
+new_covs <- cov_interact(combos, pattern = c("tmin", "pdsi"))
+formulas <- write_inla_formulas(outcome = "cases", covariates = new_covs)
+```

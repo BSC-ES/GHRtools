@@ -1,0 +1,67 @@
+---
+format: html
+toc: true
+---
+
+# Produce a Forest Plot for a Spatially or Temporally Varying Effects from a `GHRmodels` object.
+
+## Description
+
+Generates a forest plot for a specified spatially or temporally varying coefficient (i.e. a random slope) from a fitted `GHRmodels` object. The plot displays the effect estimates (x-axis) for each spatial/temporal unit (y-axis).
+
+```r
+plot_coef_varying(
+  models,
+  mod_id,
+  name,
+  unit_label = NULL,
+  palette = "IDE2",
+  title = NULL,
+  xlab = "Effect size",
+  ylab = NULL,
+  exp = FALSE
+)
+```
+
+## Arguments
+
+- `models`: A `GHRmodels` object containing fitted model output.
+- `mod_id`: A character specifying which model to be plotted (as in `models$mod_gof$model_id`).
+- `name`: A character string naming the spatially or temporally varying coefficient to plot. This should match a random effect name in `models$random[[mod_id]]`.
+- `unit_label`: Optional named character vector providing custom labels for each spatial/temporal unit.
+- `palette`: Character string for the GHR, RColorBrewer or colorspace palette (e.g. "Purp") colour palette to use for the different models. See all available options by running `GHR_palettes()`, `RColorBrewer::display.brewer.all()` and `colorspace::hcl_palettes(plot=TRUE)`. Single R colors in `colors()` or hex codes can also be used.
+- `title`: Optional string for the plot title.
+- `xlab`: Optional character string for the x-axis label (default = "Effect size").
+- `ylab`: Optional character string for the y-axis label (default constructed from varying covariate name).
+- `exp`: Logical,if `TRUE` the coefficients are exponentiated, Default is if `FALSE`.
+
+## Returns
+
+A `ggplot2` forest plot object representing the spatially or temporally varying effect, with each line corresponding to a different spatial or temporal unit.
+
+## Examples
+
+```r
+## Not run:
+
+# Load example GHRmodels object from the package: 
+model_cov_list_file <- system.file("examples", "model_cov_list.rds", package = "GHRmodel")
+model_cov_list <- readRDS(model_cov_list_file)
+
+# Plot varying slopes of pdsi.l1 depending on the climate zone
+plot_coef_varying(
+models = model_cov_list,               # A list of fitted INLA model objects
+mod_id = "mod8",                       # Select the model with varying slopes
+palette = "Blues",                     # Color palette for the plot 
+name = "main_climate_f",               # The grouping variable 
+title = "Effect of PDSI at one-month lag for each climate zone",  # Plot title
+ylab = "Main climate zones",           # Label for the y-axis 
+unit_label = c(                        # Map factor levels to descriptive names 
+  "1" = "Tropical Rainforest Climate", 
+  "2" = "Tropical Monsoon Climate", 
+  "3" = "Tropical Savanna Climate with Dry Winter",
+  "4" = "Humid Subtropical Climate"
+)
+)
+## End(Not run)
+```

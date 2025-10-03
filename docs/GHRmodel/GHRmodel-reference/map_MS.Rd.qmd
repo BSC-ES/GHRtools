@@ -1,0 +1,25 @@
+---
+format: html
+toc: true
+---
+
+# Administrative Map for Municipalities in the Mato Grosso do Sul
+
+## Description
+
+A simple feature (`sf`) multipolygon object representing a map of **Mato Grosso do Sul**, Brazil, including 11 municipalities. See `@source` for access to the complete data set.
+
+```r
+map_MS
+```
+
+## Format
+
+A simple feature (sf) object including 11 rows and 2 columns:
+
+- **`$code`**: Unique ID number for each micro region (11 units)
+- **`$geometry`**: geometries of the sf multipolygon
+
+## Source
+
+[source code on GitHub](https://github.com/drrachellowe/hydromet_dengue); [source code on Zenodo](http://doi.org/10.5281/zenodo.4632205));

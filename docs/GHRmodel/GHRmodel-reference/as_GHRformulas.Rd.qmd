@@ -1,0 +1,51 @@
+---
+format: html
+toc: true
+---
+
+# Convert R-INLA Model Formulas into a GHRformulas Object
+
+## Description
+
+This function converts a character vector of suitable R-INLA formulas into a structured `GHRformulas` object. The `GHRformulas` object contains the standardized information about the fixed effects, the random effects, and the outcome variable, ensuring consistency across multiple models to be fitted using the `fit_models` function.
+
+```r
+as_GHRformulas(formulas)
+```
+
+## Arguments
+
+- `formulas`: A character vector of model formulas formatted for R-INLA. Each formula must contain a single `~` separating the outcome variable from the predictors. Formulas generated with `write_inla_formulas` are compatible with this function.
+
+## Details
+
+The `as_GHRformulas()` function parses each input formula to extract the outcome variable, fixed effects (covariates), and random effects. The resulting `GHRformulas` object is designed to be used with the `fit_models` function for model fitting with R-INLA.
+
+## Returns
+
+A structured list of class `GHRformulas` with the following components:
+
+- **`formulas`**: A character vector of the original INLA-compatible model formulas.
+- **`vars`**: A data frame where each row corresponds to a formula and each column to a covariate. Entries indicate whether a covariate is included in the formula.
+- **`re`**: A character vector listing the random effects specified across all formulas.
+- **`outcome`**: A character string indicating the outcome variable (must be consistent across formulas).
+
+## See Also
+
+`write_inla_formulas` to generate R-INLA compatible input formulas
+
+## Examples
+
+```r
+formulas <- c(
+"dengue_cases ~ 1 + f(month_id, model = 'rw1')", 
+"dengue_cases ~ 1 + f(month_id, model = 'rw1') + tmin.l1") 
+
+# Convert the formulas into a GHRformulas object
+formulas <- as_GHRformulas(formulas)
+
+# Inspect the structured GHRformulas object
+print(formulas)
+# Visualize output: GHRformulas object
+class(formulas)
+```

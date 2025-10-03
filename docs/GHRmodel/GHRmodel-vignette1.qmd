@@ -1,5 +1,0 @@
----
-title: "GHRmodel tutorial"
----
-
-Under construction.

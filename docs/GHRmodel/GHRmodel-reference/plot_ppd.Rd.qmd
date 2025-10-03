@@ -1,0 +1,52 @@
+---
+format: html
+toc: true
+---
+
+# Plot Posterior Predictive Densities Versus Observed Data
+
+## Description
+
+This function draws kernel-density curves for posterior-predictive samples and observed data using `ggplot2::geom_line()`. Each predictive sample’s density is plotted in light blue; the observed density is overlaid in black.
+
+```r
+plot_ppd(
+  ppd,
+  xlab = "Outcome",
+  ylab = "Density",
+  title = "Posterior Predictive Distribution",
+  xlim = NULL,
+  obs_color = NULL,
+  ppd_color = NULL
+)
+```
+
+## Arguments
+
+- `ppd`: A `data.frame` containing posterior-predictive samples (one column per sample) and the column with `observed` data.
+- `xlab`: Character: x-axis label. Default `"Outcome"`.
+- `ylab`: Character: y-axis label. Default `"Density"`.
+- `title`: Character: plot title. Default `"Posterior Predictive Distribution"`.
+- `xlim`: Numeric vector of length 2 giving the minimum and maximum x-axis values, e.g. `c(0, 25)`. If `NULL` (default) the limits are `c(0, quantile(observed, 0.95))`.
+- `obs_color`: Color for the observed line density
+- `ppd_color`: Color for the posterior predictive distribution lines density
+
+## Returns
+
+A `ggplot2` plot object.
+
+## Examples
+
+```r
+## Not run:
+
+# Load example posterior predictive distribution from the package: 
+ppd_df_file <- system.file("examples", "ppd_df.rds", package = "GHRmodel")
+ppd_df <- readRDS(ppd_df_file) # loads ghr_models into the environment
+
+# Plot densities of the posterior predictive distribution and observed cases. 
+plot_ppd(ppd_df, 
+obs_color = "blue",
+ppd_color = "red")
+## End(Not run)
+```

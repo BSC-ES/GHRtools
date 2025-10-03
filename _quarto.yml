@@ -38,6 +38,10 @@ website:
         menu:
           - text: Overview
             href: docs/GHRmodel/GHRmodel.qmd
+          - text: Reference
+            href: docs/GHRmodel/GHRmodel-index.qmd
+          - text: Changelog
+            href: docs/GHRmodel/GHRmodel-news.qmd
       - text: "GHRpredict"
         menu:
           - text: Overview

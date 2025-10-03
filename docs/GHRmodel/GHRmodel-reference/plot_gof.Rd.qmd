@@ -1,0 +1,83 @@
+---
+format: html
+toc: true
+---
+
+# Plot Models by Goodness-of-Fit
+
+## Description
+
+Provides visualization of model performance using selected goodness-of-fit (GoF) metrics for one or more models. It is typically used with the `mod_gof` component of a `GHRmodels` object (produced by `fit_models`), but it can also accept any custom data frame — provided it contains the same column names as the default `mod_gof` output (including `model_id` and the relevant metric column names). It supports visual grouping by aesthetics (color, shape, facet), arranging models by metric, and adding credible intervals for model differences.
+
+```r
+plot_gof(
+  mod_gof,
+  metric = "dic",
+  mod_id = NULL,
+  mod_label = NULL,
+  ci = FALSE,
+  var_arrange = NULL,
+  var_color = NULL,
+  var_shape = NULL,
+  var_facet = NULL,
+  palette = "IDE2"
+)
+```
+
+## Arguments
+
+- `mod_gof`: A data frame containing goodness-of-fit statistics for each model. Typically this is the `mod_gof` component of a `GHRmodels` object. It must include at least a `model_id` column and the selected `metric`. Other columns can be used for aesthetics (e.g., color, shape).
+- `metric`: Character string specifying the GoF metric to plot. Common options include:
+    
+     * `"dic"`, `"waic"`, `"lms"`, `"mae"`, `"rmse"`, `"crps"`, `"rsq"`
+     * Differences from baseline: `"dic_vs_first"`, `"waic_vs_first"`, `"mae_vs_first"`, etc.
+     * Random effect variances: `"re_n_var"`, `"re_n_var_change"`, where `n` is an index.
+- `mod_id`: Optional character vector of model IDs to include. If `NULL`, includes all in `mod_gof`.
+- `mod_label`: Optional named or unnamed vector to customize display names for models. If unnamed, must match the order of `mod_id`.
+- `ci`: Logical. If `TRUE`, adds credible intervals for `"*_vs_first"` metrics (if available).
+- `var_arrange`: Character string for a column name used to order models along the x-axis. Defaults to `"model_id"` order if `NULL`.
+- `var_color`: Optional; name of a column in `mod_gof` to use for color grouping.
+- `var_shape`: Optional; name of a column in `mod_gof` to use for point shape grouping.
+- `var_facet`: Optional; name of a column in `mod_gof` to use for faceting the plot.
+- `palette`: Character; name of a color palette to use if `var_color` is provided. Default is `"IDE2"`.
+
+## Details
+
+This function helps interpret and visualize comparative model performance:
+
+ * Relative metrics (e.g., `"*_vs_first"`) assume the first model is a reference.
+ * If `ci = TRUE`, the function looks for columns like `"dic_vs_first_lci"` and `"_uci"`.
+ * The user can customize model order with `var_arrange` and legend groupings using `var_color`, etc.
+
+## Returns
+
+A `ggplot2` object showing the specified metric for each model, optionally grouped and faceted. The plot supports:
+
+ * Ranking or sorting models by a specified variable
+ * Highlighting credible intervals for relative metrics (e.g. `"dic_vs_first"`)
+ * Group-level comparisons via color, shape, and facet aesthetics
+
+## See Also
+
+`fit_models` for fitting multiple INLA models.
+
+## Examples
+
+```r
+## Not run:
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Plot models by difference in DIC
+        
+plot_gof(mod_gof = model_list$mod_gof,
+        metric = "dic_vs_first",
+        ci = TRUE,
+        var_arrange = "dic",
+        var_color = "covariate_1",
+        var_shape = "covariate_2",
+        palette= "IDE2")
+## End(Not run)
+```

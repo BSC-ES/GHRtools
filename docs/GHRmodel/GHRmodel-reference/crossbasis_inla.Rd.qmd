@@ -1,0 +1,66 @@
+---
+format: html
+toc: true
+---
+
+# Create a Two-Dimensional INLA-compatible Cross-basis Matrix
+
+## Description
+
+This function is a wrapper around dlnm::crossbasis
+
+to generate cross-basis matrices that capture nonlinear effects of a predictor across both exposure and lag dimensions. The input covariate is passed as a numeric matrix of lagged values, and the resulting columns can be renamed via `basis_name` for easier reference in model formulas.
+
+```r
+crossbasis_inla(
+  covariate,
+  basis_name,
+  lag,
+  argvar = list(),
+  arglag = list(),
+  ...
+)
+```
+
+## Arguments
+
+- `covariate`: A numeric matrix of covariate values. Typically this will be a matrix of lagged covariate values (which can be generated using `lag_cov`).
+- `basis_name`: A character string specifying the prefix for the spline columns in the resulting basis matrix (replacing the default `"v"`).
+- `lag`: A numeric vector with min and max lag of the matrix (as in `crossbasis`).
+- `argvar`: A list specifying the shape of the exposure-response function (as in `crossbasis`).
+- `arglag`: A list specifying the shape of the lag-response function (as in `crossbasis`).
+- `...`: Additional arguments passed to dlnm::crossbasis , such as `df`, `degree`, `knots`, etc.
+
+## Returns
+
+An object of class `"crossbasis_inla"` (also inheriting class `"crossbasis"`), as returned by `dlnm:crossbasis()` but with customized column names.
+
+## Examples
+
+```r
+# Build cross-basis with a custom prefix for columns
+
+# Import example data set 
+data("dengue_MS")
+
+lag_mat <- lag_cov(data = dengue_MS,
+  name = c("tmin"),
+  time = "date",
+  lag = c(1:6),
+  group = "micro_code",
+  add = FALSE) # add = FALSE return only the lagged matrix
+  
+cb_inla <- crossbasis_inla(
+  covariate  = lag_mat,
+  basis_name = "tempLag",
+  lag = c(1,6),
+  argvar = list(fun = "bs", df = 3),
+  arglag = list(fun = "poly", degree = 2)
+)
+
+# Check class of the cross-basis object
+class(cb_inla)
+
+# View resulting cross-basis matrix
+head(colnames(cb_inla))
+```

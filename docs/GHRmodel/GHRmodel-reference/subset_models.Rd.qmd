@@ -1,0 +1,60 @@
+---
+format: html
+toc: true
+---
+
+# Subset `GHRmodels` Objects
+
+## Description
+
+This function subsets selected models from a `GHRmodels` object into a new reduced `GHRmodels` object.
+
+```r
+subset_models(models, mod_id, new_name = NULL)
+```
+
+## Arguments
+
+- `models`: A `GHRmodels` object.
+- `mod_id`: A character vector of model IDs indicating which model(s) to keep. These must match `models$mod_gof$model_id`.
+- `new_name`: `NULL` (default) or a character used to build the new model IDs.
+
+## Returns
+
+A new `GHRmodels` object containing only the specified model(s).
+
+## See Also
+
+`stack_models` for combining GHRmodels objects, `fit_models` for fitting INLA models.
+
+## Examples
+
+```r
+## Not run:
+
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Extract a vector with the moded IDs of the 2 best fitting models by WAIC
+best_waic <- rank_models(
+  models = model_list,  # GHRmodels object containing model fit results
+  metric = "waic",      # Metric used to rank models (lower WAIC is better)
+  n = 2                 # Number of top-ranked models to return
+)
+
+# The output is a vector 
+best_waic
+
+# Subset those specific models and assign new IDs
+model_waic <- subset_models(
+  model = model_list,
+  mod_id = best_waic,
+  new_name = "best_waic"
+)
+
+# Check output subset model names
+model_waic$mod_gof$model_id  
+## End(Not run)
+```

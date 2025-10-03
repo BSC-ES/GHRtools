@@ -1,0 +1,161 @@
+---
+format: html
+toc: true
+---
+
+# Fit Multiple INLA Models
+
+## Description
+
+This function fits a set of `INLA` model formulas, provided in a `GHRformulas` object, to a specified dataset. For each fitted model, it extracts a range of outputs, including goodness-of-fit (GoF) metrics and other model outputs (fitted values, fixed effects, random effects). Results are extracted and stored in a `GHRmodels` object.
+
+```r
+fit_models(
+  formulas,
+  data,
+  family,
+  name,
+  offset = NULL,
+  control_compute = list(config = FALSE, vcov = FALSE),
+  nthreads = 8,
+  pb = FALSE
+)
+```
+
+## Arguments
+
+- `formulas`: A `GHRformulas` object containing multiple INLA model formulas.
+- `data`: A data frame containing the variables used in the model formulas.
+- `family`: A character string specifying the likelihood family (e.g., `"poisson"`, `"nbinomial"`, etc.).
+- `name`: A character string to label each fitted model (e.g., `"mod"`).
+- `offset`: A character string specifying the name of the offset variable in `data`. If `NULL`, no offset is applied. Default is `NULL`. Internally, `log(offset_values)` is applied.
+- `control_compute`: A named list controlling additional computation options:
+    
+    - **`config`**: Logical ; if `TRUE`, stores the Gaussian Markov Random Field (GMRF) and enables the computation of posterior predictive distribution (1,000 draws). Defaults to `FALSE`.
+    - **`vcov`**: Logical if `TRUE`, returns the variance-covariance (correlation) matrix of fixed effects. Defaults to `FALSE`.
+- `nthreads`: An integer specifying the number of threads for parallel computation. Default is `8`.
+- `pb`: Logical; if `TRUE`, displays a progress bar while fitting models. Default is `FALSE`.
+
+## Details
+
+This function iterates over each formula in the `GHRformulas` object and fits the corresponding `INLA` model using the internal function `.fit_single_model()`. For each fitted model, it extracts the fitted values, fixed effects, and random effects summaries. Then, it calculates a series of model evaluation metrics using the `.gof_single_model()` internal function.
+
+The goodness-of-fit (GoF) metrics are organized into two categories:
+
+A) Model-Specific Goodness-of-Fit Metrics
+
+These are computed separately for each model:
+
+1. Deviance Information Criterion (DIC)
+   
+   `DIC = \bar{D} + p_{D}`
+   
+   where `\bar{D}` is the posterior mean deviance and `p_{D}` is the effective number of parameters. Lower DIC values indicate a better model fit, balancing goodness-of-fit and model complexity.
+2. Watanabe-Akaike Information Criterion (WAIC)
+   
+   `WAIC = -2\left(\mathrm{lppd} - p_{\mathrm{WAIC}}\right)`
+   
+   WAIC evaluates predictive accuracy and penalizes model complexity through the log pointwise predictive density (`\mathrm{lppd}`). Lower values imply better generalization.
+3. Log Mean Score (LMS)
+   
+   `LMS = \frac{1}{n} \sum_{i=1}^n \left( -\log(\mathrm{CPO}_i) \right)`
+   
+   LMS assesses the average negative log-predictive density using Conditional Predictive Ordinates (CPO). Lower LMS values indicate stronger predictive performance by penalizing models that assign low probability to observed outcomes.
+4. Mean Absolute Error (MAE)
+   
+   `MAE = \frac{1}{n} \sum_{i=1}^n \left| y_i - \hat{y}_i \right|`
+   
+   Measures the average absolute deviation between observed values `y_i` and predicted values `\hat{y}_i`. Lower MAE values indicate improved fit. If `config = TRUE`, MAE is computed using the full posterior predictive distribution (PPD); otherwise, it uses point estimates from INLA's `summary.fitted.values`.
+5. Root Mean Squared Error (RMSE)
+   
+   `RMSE = \sqrt{ \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2 }`
+   
+   Captures average squared deviation between observed and predicted values. RMSE penalizes larger errors more heavily. Lower values reflect better model fit. If `config = TRUE`, RMSE uses the PPD; otherwise, it uses point estimates.
+6. Continuous Ranked Probability Score (CRPS)
+   
+   `\mathrm{CRPS}(F, y) = \int_{-\infty}^{\infty} \left[F(t) - \mathbf{1}\{y \leq t\}\right]^2 dt`
+   
+   CRPS assesses how well the predictive cumulative distribution aligns with the observed outcome. Lower scores suggest better calibrated predictive distributions. Only available when `config = TRUE`.
+
+B) Model Comparison Metrics (relative to the first model)
+
+The first model in the list is treated as the baseline for model comparisons. All other models are evaluated against it using the following metrics:
+
+1. Difference in DIC and WAIC
+   
+   Stored as `dic_vs_first` and `waic_vs_first`. These represent how much higher (or lower) each model's DIC/WAIC is compared to the first model. Additionally, 95% credible intervals for these differences are stored as `*_vs_first_lci` and `*_vs_first_uci`.
+2. Difference in MAE and RMSE
+   
+   Stored as `mae_vs_first` and `rmse_vs_first`. These reflect the absolute difference in prediction error compared to the first model. No credible intervals are computed for these metrics.
+3. Continuous Ranked Probability Score Skill Score (CRPSS)
+   
+   `\mathrm{CRPSS} = 1 - \frac{\mathrm{CRPS}_{\text{model}}}{\mathrm{CRPS}_{\text{baseline}}}`
+   
+   Indicates how much better the predictive distribution of the current model is relative to the baseline model. Values closer to 1 indicate improvement; negative values imply worse performance. Available only when `config = TRUE`.
+4. Pseudo R-squared based on deviance
+   
+   `R^2 = 1 - \exp\left( \frac{-2}{n} \left( \frac{dev_{\text{model}}}{-2} - \frac{dev_{\text{base}}}{-2} \right) \right)`
+   
+   Captures relative deviance reduction compared to the baseline model. Values range from 0 (no improvement) to 1 (strong improvement).
+5. Random Effect Variance
+   
+   `\mathrm{Var}_{re} = \frac{1}{\mathrm{precision}}`
+   
+   Quantifies residual variance due to group- or cluster-level effects. Computed only when random effects are defined in the model formula.
+6. Proportional Change in Random Effect Variance
+   
+   `\frac{\mathrm{Var}_{re}}{\mathrm{Var}_{re}^{(1)}} - 1`
+   
+   Represents the relative change in group-level variance compared to the baseline model. Helps assess how much variance is explained by added covariates.
+
+## Returns
+
+An object of class `GHRmodels` containing:
+
+- **`$mod_gof`**: A data frame of model-specific goodness-of-fit metrics.
+- **`$fitted`**: A list of fitted values (one element per model). If `config = TRUE`, these are derived from the posterior predictive distribution (PPD); otherwise, they are extracted from INLA's `summary.fitted.values`.
+- **`$fixed`**: A list of summary tables for fixed effects (one element per model).
+- **`$random`**: A list of summary tables for random effects (one element per model).
+- **`$formulas`**: A character vector of the original model formulas used.
+- **`$re`**: A character vector specifying any random effects defined in `formulas`.
+- **`$outcome`**: A character string indicating the outcome variable used.
+- **`$data`**: The original data frame passed to the function.
+
+## See Also
+
+`as_GHRformulas` converts a set of R-INLA-compatible formulas into a `GHRformulas` object.
+
+## Examples
+
+```r
+## Not run:
+
+# Load example dataset
+data(dengueMS)
+
+# Declare formulas
+formulas <- c(
+  "dengue_cases ~ tmin +  f(year, model='rw1')",
+  "dengue_cases ~ pdsi +  f(year, model='rw1')"
+)
+
+# Tranform formulas into a 'GHRformulas' object
+ghr_formulas <- as_GHRformulas(formulas)
+
+# Fit multiple models 
+results <- fit_models(
+  formulas = ghr_formulas,
+  data     = dengue_MS,
+  family   = "nbinomial",
+  name     = "TestModel",
+  offset   = "population",
+nthreads = 2,
+control_compute = list(config = FALSE),
+pb       = TRUE
+)
+
+# Inspect goodness-of-fit metrics
+
+head(results$mod_gof)
+## End(Not run)
+```

@@ -1,0 +1,98 @@
+---
+format: html
+toc: true
+---
+
+# Plot Observed vs. Fitted Cases
+
+## Description
+
+This function creates a time-series plot comparing observed cases with fitted values from one or more models in a `GHRmodels` object. The plot supports faceting by model and/or group.
+
+```r
+plot_fit(
+  models = NULL,
+  mod_id = NULL,
+  time = NULL,
+  group = NULL,
+  group_id = NULL,
+  mod_label = NULL,
+  mod_facet = FALSE,
+  palette = "IDE2",
+  ref_color = NULL,
+  obs_color = NULL,
+  obs_label = NULL,
+  title = "",
+  ci = FALSE,
+  transform = "identity",
+  xlab = "Time",
+  ylab = "Cases",
+  xlim = NULL,
+  legend = "Model"
+)
+```
+
+## Arguments
+
+- `models`: A `GHRmodels` object containing fitted model output.
+- `mod_id`: Character vector of model identifiers (from `models$mod_gof$model_id`) to plot.
+- `time`: Character; name of the time-variable column in `models$data`.
+- `group`: Optional; character name of the column defining independent time series (e.g., spatial areas).
+- `group_id`: Optional vector of specific group values to subset if `group` is provided.
+- `mod_label`: Optional custom labels for each model. Can be a named vector (e.g., `c("mod1" = "Base")`) or an unnamed vector with the same length and order as `mod_id`.
+- `mod_facet`: Logical; if `TRUE`, faceting is applied by model. Can be combined with `group`.
+- `palette`: Character; name of the color palette for fitted lines. Default is `"IDE2"`.
+- `ref_color`: Optional color to override the first model's line (reference model).
+- `obs_color`: Color for observed data line. Default is `"black"`.
+- `obs_label`: Legend label for observed data. Default is `"Observed"`.
+- `title`: Character; title of the plot.
+- `ci`: Logical; if `TRUE`, adds 95% credible interval ribbons for model fits.
+- `transform`: Character string for y-axis transformation. Defaults to `"identity"` (no transform). Other options include `"log10p1"`, `"log1p"`, `"sqrt"`, etc.
+- `xlab`: Label for the x-axis. Default is `"Time"`.
+- `ylab`: Label for the y-axis. Default is `"Cases"`.
+- `xlim`: Character vector of length two in "yyyy-mm-dd" format (e.g., `c("2010-01-01", "2020-12-31")`). Use `NA` to leave one side open (e.g., `c("2015-01-01", NA)`).
+- `legend`: Legend title for model lines. Default is `"Model"`.
+
+## Details
+
+ * Faceting is flexible: if `mod_facet = TRUE` and `group` is provided, both are used.
+ * If `ci = TRUE`, ribbons are plotted for fitted model uncertainty.
+ * `mod_label`, `ref_color`, and `obs_color` allow full customization of the legend.
+ * The function automatically sums values across replicates for grouped time series.
+
+## Returns
+
+A `ggplot2` object:
+
+ * Time-series line plot of observed vs fitted cases
+ * Optionally includes credible intervals and facets by model or group
+ * X-axis can be limited by `xlim`; Y-axis can be transformed for readability
+
+## See Also
+
+`fit_models` to generate GHRmodels.
+
+## Examples
+
+```r
+## Not run:
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Plot observed vs. fitted cases over time for three selected models
+plot_fit(
+  models = model_list,                         # A GHRmodels object containing the fitted models
+  mod_id = c("mod1", "mod3", "mod5"),          # Vector of model IDs to plot
+  mod_label = c("Baseline",                    # Custom display names 
+                "tmin.l1.nl",                  
+                "pdsi.l1.nl_tmin.l1.nl"),            
+  ref_color = "grey",                          # Color for the reference model 
+  time = "date",                               # Name of the time variable 
+  palette = "Set2",                            # Color palette for fitted lines
+  xlim = c("2010-01-01", "2020-01-01"),        # Limit x-axis to this date range
+  title = "Fitted vs Observed"                 # Main plot title
+)  
+## End(Not run)
+```

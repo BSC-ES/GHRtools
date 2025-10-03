@@ -1,0 +1,92 @@
+---
+format: html
+toc: true
+---
+
+# Plot Nonlinear Effects from a `GHRmodels` Object
+
+## Description
+
+Generates plots of nonlinear effects from one or more fitted models contained within a `GHRmodels` object. The function supports two main display modes:
+
+ * Grid (when `collapse = FALSE`): one plot per covariate and model, with effects by column and models by row.
+   
+    * If multiple models are specified, the user must provide either `name` or `pattern` to select which nonlinear effects to plot.
+    * If only one model is selected and both `name` and `pattern` are `NULL`, all nonlinear effects in the model will be plotted.
+ * Collapsed (when `collapse = TRUE`): one non-linear effect combined across models into a single panel.
+   
+    * The user must explicitly specify the exact variable name using `name`. It only accepts one covariate name.
+    * Collapse mode can only be used when the selected effect is not replicated (that is, does not have the format `f(covariate, model = ..., replicate = group))` If replication is detected, an error will be thrown.
+
+```r
+plot_coef_nl(
+  models,
+  mod_id,
+  mod_label = NULL,
+  name = NULL,
+  pattern = NULL,
+  title = NULL,
+  var_label = NULL,
+  palette = "IDE2",
+  xlim = NULL,
+  ylab = NULL,
+  xlab = NULL,
+  histogram = FALSE,
+  legend = NULL,
+  hist_fill = "grey",
+  rug = FALSE,
+  collapse = FALSE,
+  exp = FALSE
+)
+```
+
+## Arguments
+
+- `models`: A `GHRmodels` object containing fitted model outputs.
+- `mod_id`: Integer vector specifying which model(s) to plot (as indexed in `model$models`).
+- `mod_label`: An optional named character vector mapping model names to custom labels, e.g. c("mod1" = "Model 1"). Any model not found in the vector names retains its original label.
+- `name`: Optional character vector of variable names (as used in `inla.group(...)`) to select specific nonlinear effects. Required for collapse mode.
+- `pattern`: Optional regular expression pattern to match effect names. Used to select nonlinear effects when `name` is not provided.
+- `title`: Optional overall title for the plot.
+- `var_label`: Optional named character vector providing custom labels for each nonlinear variable. Names must match the variable names (e.g., used in `inla.group(x)`), not full effect names.
+- `palette`: Name of the color palette to use (passed to `GHR_palette`). Default is `"IDE2"`.
+- `xlim`: Optional named list specifying x-axis limits for each effect. Each element should be a numeric vector of length 2: `list(var1 = c(min, max), var2 = c(min, max))`. Variable names must match those used in `inla.group()`.
+- `ylab`: Optional y-axis label. If `NULL`, defaults to `"Effect size"`.
+- `xlab`: Optional x-axis label. If `NULL`, defaults to `"<variable> values"`. If explicitly set to `NULL`, no x-axis label will be shown.
+- `histogram`: Logical; if `TRUE` (default), includes a histogram below each partial-effect plot.
+- `legend`: Legend title for the replicate color scale (if multi-replicate effects are present). Default is `"Replicate"`.
+- `hist_fill`: Fill color for histogram bars. Default is `"grey"`.
+- `rug`: Include a rug plot in the x-axis. Default is FALSE.
+- `collapse`: Logical; if `TRUE`, attempts to collapse plots across models to show one plot per variable. This requires that selected nonlinear effect is not replicated (i.e. the covariate is not in the format f(covariate, model = ..., replicate = group))
+- `exp`: Logical,if `TRUE` the coefficients are exponentiated, Default is if `FALSE`.
+
+## Returns
+
+A `ggplot` or `cowplot` object, depending on the plotting mode.
+
+## Examples
+
+```r
+## Not run:
+
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Plot 2 models with a non-linear term of PDSI at one month lag in collapsed mode: 
+plot_coef_nl(
+models = model_list,
+mod_id = c( "mod5", "mod6") ,
+mod_label = c("mod6" = "pdsi.l1_nl",
+              "mod5" = "pdsi.l1_nl + tmin.l1_nl"),
+var_label = c("pdsi.l1" = "Drought index (PDSI)"),
+name = c("pdsi.l1"),
+title = "Change in non-linear term for drought index (PDSI)
+with and without mean min. temp lag 1",
+xlab = "PDSI",
+palette = "IDE2",
+collapse = TRUE    
+)
+## End(Not run)
+```

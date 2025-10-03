@@ -1,4 +1,5 @@
 generate_news <- function(input_md, output_qmd = NULL, package = NULL) {
+  
   # Read input markdown file
   lines <- readLines(input_md, warn = FALSE)
   
@@ -9,6 +10,9 @@ generate_news <- function(input_md, output_qmd = NULL, package = NULL) {
     lines <- gsub("  +", " ", lines)
     lines <- trimws(lines)
   }
+  
+  # Convert level 1 headers (#) to level 2 headers (##)
+  lines <- gsub("^# ", "## ", lines)
   
   # Define output file if not provided
   if (is.null(output_qmd)) {
@@ -22,4 +26,4 @@ generate_news <- function(input_md, output_qmd = NULL, package = NULL) {
   invisible(output_qmd)
 }
 
-generate_news("NEWS.md", package = "GHRexplore")
+generate_news("GHRexplore-news.md", package = "GHRexplore")

@@ -1,0 +1,46 @@
+---
+format: html
+toc: true
+---
+
+# Create a One-Dimensional Basis for INLA
+
+## Description
+
+This function is a wrapper around onebasis to create a one-dimensional basis for spline modeling. This wrapper enhances the original function by allowing users to specify a custom prefix for the column names using the `basis_name` argument, such that each set of basis variables can be easily identified in the model formula by the `INLA` framework.
+
+```r
+onebasis_inla(covariate, fun, basis_name, ...)
+```
+
+## Arguments
+
+- `covariate`: A numeric vector representing the covariate
+- `fun`: A character string specifying the shape function to be used by `onebasis`.
+- `basis_name`: A character string giving a base name for the columns in the resulting basis matrix. The default prefix (usually `"b"`) is replaced by this string.
+- `...`: Additional arguments passed to `onebasis`, such as `degree`, `df`, `knots`, etc.
+
+## Returns
+
+An object of class `"onebasis"`, as returned by `onebasis`, with column names modified according to `basis_name`.
+
+## Examples
+
+```r
+# Import example data set
+data("dengue_MS")
+
+# Build a one-dimensional spline basis with a custom name
+ob_inla <- onebasis_inla(
+ covariate = dengue_MS$tmin,
+ fun = "bs",
+ basis_name = "tempBasis",
+ degree = 2
+)
+
+# Check class of the one-basis object
+class(ob_inla)
+
+# View first rows of the one-basis matrix
+head(ob_inla)
+```

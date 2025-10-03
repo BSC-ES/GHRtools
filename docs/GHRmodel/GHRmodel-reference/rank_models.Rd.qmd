@@ -1,0 +1,46 @@
+---
+format: html
+toc: true
+---
+
+# Rank Models by Goodness-of-Fit
+
+## Description
+
+This function ranks fitted models in a `GHRmodels` object by a chosen metric (e.g., `dic`, `waic`, `crps`, etc.).
+
+```r
+rank_models(models, metric = "dic", n = 10)
+```
+
+## Arguments
+
+- `models`: A `GHRmodels` object containing fitted model output.
+- `metric`: A character string indicating which goodness-of-fit metric to use for ranking. One of: `"dic"`, `"waic"`,`"lms"`,`"mae"`, `"rmse"`,`"crps"`, `"rsq"`,`"dic_vs_first"`, `"waic_vs_first"`, `"mae_vs_first"`, `"rmse_vs_first"`, `"crps_vs_first"`, `"re_n_var"`, and `"re_n_var_change"` (where n is the number of random effect, for ex. `re_1_var`, `re_1_var_change`).
+- `n`: An integer specifying how many top-ranked models to return (default `10`).
+
+## Returns
+
+A character vector of the top model IDs (in ascending order of the specified `metric`).
+
+## See Also
+
+`fit_models` for fitting multiple INLA models.
+
+## Examples
+
+```r
+## Not run:
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Get a list of the 5 best models by DIC
+top_model_dic <- rank_models(
+  models = model_list,
+  metric = "dic",
+  n = 5
+)
+## End(Not run)
+```

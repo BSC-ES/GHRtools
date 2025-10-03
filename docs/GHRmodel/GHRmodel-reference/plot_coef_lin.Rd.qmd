@@ -1,0 +1,73 @@
+---
+format: html
+toc: true
+---
+
+# Produce a Forest Plot of Linear Covariates from a `GHRmodels` Object
+
+## Description
+
+This function extracts fixed-effect coefficients from a specified model in `models`, filters them by name or interaction pattern, and produces a forest plot (point estimates with error bars).
+
+ * If `name = NULL`, all fixed-effect terms (excluding the intercept) are shown.
+ * If `name` is a character vector, only the matching terms are included.
+
+```r
+plot_coef_lin(
+  models,
+  mod_id = NULL,
+  name = NULL,
+  pattern = NULL,
+  title = NULL,
+  mod_label = NULL,
+  var_label = NULL,
+  palette = "IDE2",
+  exp = FALSE,
+  legend = "Model"
+)
+```
+
+## Arguments
+
+- `models`: An object of class `GHRmodels` containing fitted model output.
+- `mod_id`: Character vector of model identifiers (must match entries in `model$mod_gof$model_id`). If `NULL` (the default), all models are considered.
+- `name`: A character vector specifying exact linear covariates names to be plotted. If both `pattern` and `name` are `NULL` (the default), all terms (except `(Intercept)`) are plotted.
+- `pattern`: A character vector specifying prefix(es) to match (e.g., "tmin" matches "tmin", "tmin.l1", etc.) Covariates matching these patterns (case‐insensitive search) will be plotted. If both `pattern` and `name` are `NULL` (the default), all terms (except `(Intercept)`) are plotted.
+- `title`: An optional string specifying an overall plot title.
+- `mod_label`: An optional named character vector mapping model names to custom labels, e.g. c("mod1" = "Model 1"). Any model not found in the vector names retains its original label.
+- `var_label`: An optional named character vector mapping variable (or interaction) names to custom labels. Interaction matching is order-insensitive: `"A:B"` matches `"B:A"`. Any term not found in the vector names retains its original label.
+- `palette`: GHR, RColorBrewer or colorspace palette (e.g. "Purp") colour palette to use for the different models. See all available options by running `GHR_palettes()`, `RColorBrewer::display.brewer.all()` and `colorspace::hcl_palettes(plot=TRUE)`. Single R colors in `colors()` or hex codes can also be used.
+- `exp`: Logical,if `TRUE` the coefficients are exponentiated, Default is if `FALSE`.
+- `legend`: Legend title for the replicate color scale. Default is `"Model"`.
+
+## Details
+
+- **Intercept**: By default, `(Intercept)` is excluded unless explicitly included in `name`.
+- **Individual terms**: e.g., `"temp"`.
+- **Interaction Terms**: e.g. `"temp:precip"`. Split by `:`, sorted, and compared setwise; for example, `"temp:precip"` matches `"precip:temp"`.
+- **Labels**: If `var_label` is supplied, any matched covariate or interaction string is replaced by its custom label on the y-axis.
+
+## Returns
+
+A `ggplot2` forest plot object (class `ggplot`).
+
+## See Also
+
+`geom_errorbar` for the plotting environment.
+
+## Examples
+
+```r
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Plot point estimates with confidence intervals for the linear covariates: 
+plot_coef_lin(
+model = model_list,
+mod_id = c("mod2","mod4"),
+var_label = c("tmin.l1"= "Min. temp lag 1",
+              "pdsi.l1" = "Drought index lag 1"),
+title = "Effects of linear covariates"
+)
+```

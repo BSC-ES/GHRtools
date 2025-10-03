@@ -1,0 +1,44 @@
+---
+format: html
+toc: true
+---
+
+# Sample from the Posterior Predictive Distribution
+
+## Description
+
+This function refits a specified model from a `GHRmodels` object and generates samples from its posterior predictive distribution.
+
+```r
+sample_ppd(models, mod_id, s = 1000, nthreads = 8)
+```
+
+## Arguments
+
+- `models`: A `GHRmodels` object.
+- `mod_id`: Character; model identifier (from `models$mod_gof$model_id`).
+- `s`: An integer specifying the number of samples to draw from the posterior predictive distribution.
+- `nthreads`: An integer specifying the number of threads for parallel computation to refit the model. Default is `8`.
+
+## Returns
+
+A `data.frame` containing columns for each of the posterior predictive samples and one column with observed data.
+
+## Examples
+
+```r
+## Not run:
+
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Generate 1000 samples from the posterior predictive distribution of model 3.
+ppd_df <- sample_ppd( 
+  model_list,
+  mod_id = "mod3", 
+  s = 1000,
+  nthreads = 2)
+## End(Not run)
+```

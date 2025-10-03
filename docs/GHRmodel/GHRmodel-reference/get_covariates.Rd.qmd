@@ -1,0 +1,57 @@
+---
+format: html
+toc: true
+---
+
+# Retrieve Covariates from a `GHRmodels` Object as a List of Character Vectors
+
+## Description
+
+Extracts covariates from a `GHRmodels` object and returns them as a list of character vectors. If `unique = TRUE`, the output contains unique covariates across models. If `unique = FALSE`, the output preserves the original combinations of covariates as specified in the `GHRmodels` object.
+
+```r
+get_covariates(model, unique = TRUE)
+```
+
+## Arguments
+
+- `model`: A `GHRmodels` object containing fitted models.
+- `unique`: Logical; if `TRUE`, returns unique covariates across models. If `FALSE`, returns vectors of covariate combinations as declared in the `GHRmodels` object.
+
+## Returns
+
+A list of character vectors.
+
+## Examples
+
+```r
+## Not run:
+
+# Load example dataset
+data(dengueMS)
+
+# Declare formulas
+formulas <- c(
+  "dengue_cases ~ tmin +  f(year, model='rw1')",
+  "dengue_cases ~ pdsi +  f(year, model='rw1')"
+)
+
+# Tranform formulas into a 'GHRformulas' object
+ghr_formulas <- as_GHRformulas(formulas)
+
+# Fit multiple models 
+results <- fit_models(
+  formulas = ghr_formulas,
+  data     = dengue_MS,
+  family   = "nbinomial",
+  name     = "TestModel",
+  offset   = "population",
+nthreads = 2,
+control_compute = list(config = FALSE),
+pb       = TRUE
+)
+
+# Extract the list of covariates from the models 
+get_covariates(results)
+## End(Not run)
+```

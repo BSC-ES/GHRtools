@@ -1,0 +1,111 @@
+---
+format: html
+toc: true
+---
+
+# Plot Random Effects
+
+## Description
+
+Generates plots of random effects from one or more fitted models contained within a `GHRmodels` object. The function supports two main display modes:
+
+ * Caterpillar plot of effect sizes with uncertainty intervals (the default).
+ * Choropleth map (when a spatial map (`sf` object) is provided in the `map` argument).
+
+It also supports visualization of replicated or grouped effects via the `rep_id` argument.
+
+```r
+plot_re(
+  models,
+  mod_id,
+  re_id,
+  rep_id = NULL,
+  map = NULL,
+  map_area = NULL,
+  mod_label = NULL,
+  re_label = NULL,
+  rep_label = NULL,
+  ref_color = NULL,
+  palette = NULL,
+  var_arrange = "ID",
+  title = "",
+  xlab = "Re ID",
+  ylab = "Effect Size",
+  legend = "Effect Size",
+  centering = 0,
+  exp = FALSE
+)
+```
+
+## Arguments
+
+- `models`: A `GHRmodels` object containing fitted models and random effects.
+- `mod_id`: Character vector of model IDs to plot (must match entries in `models$mod_gof$model_id`).
+- `re_id`: Character; name of the variable defining the random effect (from `models$re`).
+- `rep_id`: Optional character string; name of a grouping variable if random effects are replicated. Default is `NULL`.
+- `map`: Optional `sf` object providing spatial geometry. If `NULL`, returns a caterpillar plot.
+- `map_area`: Character; column name in `map` indicating spatial units (must match `re_id` order).
+- `mod_label`: Optional labels for models. Can be a named vector (e.g., `c("mod1" = "Baseline", "mod2" = "Adjusted")`) or an unnamed vector with the same order as `mod_id`.
+- `re_label`: Optional; variable in the data to label the random effect units (e.g., year names instead of numeric IDs).
+- `rep_label`: Optional; label for replicated grouping variable (e.g., for years or time periods).
+- `ref_color`: Color used for the reference model. If specified, this will apply to the first model in `mod_id`.
+- `palette`: Character; name of the color palette to use. Defaults to `"IDE1"` for maps and `"IDE2"` otherwise.
+- `var_arrange`: Character; how to arrange REs on the x-axis. Options: `"median"` or `"ID"`. Default is `"ID"`.
+- `title`: Title for the plot.
+- `xlab`: Label for the x-axis. Default is `"Re ID"`.
+- `ylab`: Label for the y-axis. Default is `"Effect Size"`.
+- `legend`: Label for the legend in map plots. Default is `"Effect Size"`.
+- `centering`: Value at which to center the color scale for map plots. Default is `0`.
+- `exp`: Logical; if `TRUE`, exponentiates the effects (useful for log-scale models). Default is `FALSE`.
+
+## Details
+
+Plot Random Effects from GHRmodels
+
+ * If `map` is used, `map_area` must match a column in `map` and correspond in order to the RE unit.
+ * For BYM/BYM2 models, only the total random effect is plotted (structured/unstructured parts are merged).
+ * When no map is used, the plot compares models via colored points and intervals for each RE unit.
+ * Replicated REs (e.g., for years) can be plotted across facets using `rep_label`.
+ * Model comparison is visually aided using distinct colors; the first model in `mod_id` is the reference.
+
+## Returns
+
+A `ggplot2` plot object:
+
+ * If `map` is `NULL`, returns a caterpillar plot showing median REs with 95% uncertainty intervals.
+ * If `map` is provided, returns a faceted choropleth map showing RE medians by area and (optionally) replicate.
+
+## See Also
+
+`fit_models` for model fitting; `as_GHRformulas` for formula setup.
+
+## Examples
+
+```r
+## Not run:
+
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+#  Plot the estimated yearly random effects for three different models.
+plot_re(
+model = model_list,                          # A GHRmodels object 
+mod_id = c("mod1", "mod3", "mod5"),          # IDs of the models 
+
+mod_label = c("Baseline",                    # Custom labels for the models
+              "tmin.l1_nl",           
+              "pdsi.l1_nl + tmin.l1_nl"),     
+
+re_id = "year_id",                           # Name of the random effect variable 
+re_label = "year",                           # Label to map year_id to calendar years
+
+ref_color = "grey",                          # Color for the reference model’s effects
+palette = "IDE2",                            # Color for other model effects
+
+title = "Yearly Random Effect",              # Title for the plot
+xlab = "Year"                                # Label for the x-axis 
+)
+## End(Not run)
+```

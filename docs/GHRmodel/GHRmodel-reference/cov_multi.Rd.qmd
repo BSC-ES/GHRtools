@@ -1,0 +1,45 @@
+---
+format: html
+toc: true
+---
+
+# Create Covariate Combinations Across Groups
+
+## Description
+
+This function generates all possible combinations of covariates by selecting one variable from each user-defined group. Groups can be defined either by a regular expression pattern (`pattern`) or by exact variable names (`name`). The resulting list can be input into the `covariates` argument in `write_inla_formulas` to generate multivariable model formulas where all combinations of covariates are needed.
+
+```r
+cov_multi(covariates, pattern = NULL, name = NULL, add = FALSE)
+```
+
+## Arguments
+
+- `covariates`: A character vector or a list of single-element character vectors. Typically obtained from `extract_names` or `cov_uni` or `cov_nl`.
+- `pattern`: A character vector of regular expression patterns (e.g., "tmin" matches "tmin", "tmin.l1", etc.). Each pattern defines a group to draw covariates from.
+- `name`: A character vector of exact variable names to include as an additional group.
+- `add`: Logical; if `TRUE`, appends the generated combinations to the original `covariates` object. Default is `FALSE`.
+
+## Returns
+
+A list of character vectors. Each element is a unique combination of covariates, where one variable is drawn from each specified group. The resulting list is suitable as input in the `covariates` argument in `write_inla_formulas`.
+
+## Examples
+
+```r
+data <- data.frame(tmin = rnorm(10), tmin.l1 = rnorm(10),
+                   pdsi = rnorm(10), urban = rnorm(10))
+
+# Extract covariate names
+covs <- extract_names(data, pattern = c("tmin", "pdsi", "urban"))
+
+# Combine "tmin" and "pdsi" into all possible pairings
+cov_multi(covariates = covs, pattern = c("tmin", "pdsi"))
+
+# Combine "tmin" and "urban", treating "urban" as an exact match
+cov_multi(covariates = covs, pattern = "tmin", name = "urban")
+
+# Use output as input to write_inla_formulas()
+combined_covs <- cov_multi(covariates = covs, pattern = c("tmin", "pdsi"))
+formulas <- write_inla_formulas(outcome = "cases", covariates = combined_covs)
+```

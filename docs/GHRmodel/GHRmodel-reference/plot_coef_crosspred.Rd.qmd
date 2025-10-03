@@ -1,0 +1,99 @@
+---
+format: html
+toc: true
+---
+
+# Plot `crosspred` Objects: Overall, Slices, or Heatmap
+
+## Description
+
+Generate plots from a `"crosspred"` object. Three plot types are available:
+
+ * `type = "overall"`: Shows the overall exposure–response relationship, aggregated across all lags.
+ * `type = "slices"`: Produces line plots with credible interval ribbons, either across lags (for a fixed `var`) or across values of `var` (for a fixed `lag`).
+ * `type = "heatmap"`: Displays a two-dimensional heatmap of effects across both `var` and `lag`. Not applicable for one-basis models.
+
+```r
+plot_coef_crosspred(
+  crosspred,
+  type = c("heatmap", "slices", "overall"),
+  var = NULL,
+  lag = NULL,
+  exp = FALSE,
+  palette = "-RdBu",
+  n_lag_smooth = 50,
+  line_color = "black",
+  line_size = 0.7,
+  ribbon_color = NULL,
+  ribbon_alpha = 0.2,
+  title = "",
+  ylab = NULL,
+  xlab = NULL,
+  ...
+)
+```
+
+## Arguments
+
+- `crosspred`: An object of class `"crosspred"` or `"GHR_crosspred"`, produced by `crosspred` or `crosspred_inla`.
+- `type`: Character string. Options: `"overall"`, `"slices"`, or `"heatmap"`.
+- `var`: Optional numeric vector of exposure values (used when `type = "slices"` to plot across lags).
+- `lag`: Optional numeric vector of lag values (used when `type = "slices"` to plot across variables).
+- `exp`: Logical. If `TRUE`, exponentiates the results (e.g., for log or logit links).
+- `palette`: Character string for heatmap palette when `type = "heatmap"`. Options: `GHR`, `RColorBrewer` or `colorspace` palette (e.g. "Purp").
+- `n_lag_smooth`: Integer, number of interpolation points along lag for heatmap smoothing (default = 50).
+- `line_color`: Character string. Line color when `type = "slices"` or `type = "overall"`. Default is "black".
+- `line_size`: Numeric. Line width (default = 0.7).
+- `ribbon_color`: Character string. Color for credible interval ribbons. Defaults to `line_color`.
+- `ribbon_alpha`: Numeric. Alpha transparency for ribbons (default = 0.2).
+- `title`: Character string. Plot title.
+- `ylab`: Character string. Label for y-axis.
+- `xlab`: Character string. Label for x-axis.
+- `...`: Additional arguments passed to `ggplot2` functions.
+
+## Returns
+
+A `ggplot` object for the specified plot type.
+
+## See Also
+
+`crosspred`
+
+## Examples
+
+```r
+# Load example GHRmodels object from the package
+model_dlnm_file <- system.file("examples", "model_dlnm.rds", package = "GHRmodel")
+model_dlnm <- readRDS(model_dlnm_file) 
+
+# Load example cross-basis matrix from the package: 2-dimensional cross-basis matrix of the 
+# non-linear effect of dengue risk across tmin values and lags: 
+cb_tmin_file <- system.file("examples","cb_tmin.rds", package = "GHRmodel")
+cb_tmin <- readRDS(cb_tmin_file) # loads cross-basis matrix into the environment
+
+# Generate predictions
+pred_result <- crosspred_inla(
+  models    = model_dlnm,
+  basis    = cb_tmin,
+  mod_id = "mod2",
+  at       = seq(10, 30, by = 1),  # e.g., temperature sequence
+  lag      = 4,
+  cen      = 20,
+  ci.level = 0.95
+)
+
+# Plot DLNM predictions 
+plot_coef_crosspred(
+crosspred = pred_result,    # Crosspred object with model predictions
+type = "slices",            # Plot temperature-specific slices of exposure-response curves
+exp = TRUE,                 # Exponentiate the coefficients (to relative risk scale)
+var = c(22:24),             # Display results for temperature 22°C to 24°C
+line_color = "red",         # Red color for the lines representing effect estimates
+line_size = 0.8,            # Line thickness set to 0.8 for better visibility
+ribbon_color = "red",       # Red shading for credible interval ribbons
+ribbon_alpha = 0.3,         # Set ribbon transparency to 30%
+title = "Effect of minimum temperatures 22°C to 23°C on dengue relative risk by lag",
+xlab = "Lag",               # Label for the x-axis (exposure variable)
+ylab = "Relative Risk (RR)" # Label for the y-axis (effect estimate scale)
+)
+```

@@ -26,6 +26,8 @@ Customize the index page, e.g. add sections and logo
 
 # Reference
 
+Install package locally.
+
 Run in the R package project: generate-reference.R
 
 copy/paste the index and function files in the respective docs folder

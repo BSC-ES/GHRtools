@@ -1,0 +1,103 @@
+---
+title: "GHRmodel reference"
+format: html
+toc: false
+---
+
+<!-- badges: start -->
+[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![CRAN status](https://img.shields.io/cran/v/GHRexplore)](https://cran.r-project.org/package=GHRmodel)
+<!-- badges: end -->
+
+```{=html}
+<img src="/figures/GHRmodel.svg" align="right" width="14%" style="margin-top: -130px; style="margin-top: 0px;>
+<br><br>
+```
+
+- [`as_GHRformulas`](GHRmodel-reference/as_GHRformulas.Rd.qmd): This function converts a character vector of suitable R-INLA formulas into a structured  GHRformulas  object.
+
+- [`cov_add`](GHRmodel-reference/cov_add.Rd.qmd): This function appends one or more covariate names to all elements (i.
+
+- [`cov_interact`](GHRmodel-reference/cov_interact.Rd.qmd): This function generates interaction terms between covariates specified in the  pattern  or  name  arguments.
+
+- [`cov_multi`](GHRmodel-reference/cov_multi.Rd.qmd): This function generates all possible combinations of covariates by selecting one
+ variable from each user-defined group.
+
+- [`cov_nl`](GHRmodel-reference/cov_nl.Rd.qmd): This function transforms selected covariates identified by  pattern  or  name  into non-linear
+ terms using INLA's  f()  syntax.
+
+- [`cov_uni`](GHRmodel-reference/cov_uni.Rd.qmd): This function returns a list where each element contains a single covariate, based on
+ covariates specified in the  pattern  or  name  arguments.
+
+- [`cov_varying`](GHRmodel-reference/cov_varying.Rd.qmd): This function transforms covariates identified by  pattern  or   name  into
+ varying effect terms of the form: f(unit, covariate, model = 'iid') ,
+ which allows covariates to have varying slopes across spatial or temporal units.
+
+- [`crossbasis_inla`](GHRmodel-reference/crossbasis_inla.Rd.qmd): This function is a wrapper around  dlnm::crossbasis 
+ to generate cross-basis matrices that
+ capture nonlinear effects of a predictor across both exposure and lag dimensions.
+
+- [`crosspred_inla`](GHRmodel-reference/crosspred_inla.Rd.qmd): This function takes an object of class  GHRmodels , extracts the relevant
+ coefficients and variance-covariance matrix, and then calls
+ dlnm::crosspred  to compute predictions over a range of covariate
+ values (or at specified points).
+
+- [`dengue_MS`](GHRmodel-reference/dengue_MS.Rd.qmd): The  dengue_MS  example data set contains monthly counts of notified dengue cases by
+ microregion, along with a range of spatial and spatiotemporal covariates
+ (e.
+
+- [`dengue_SP`](GHRmodel-reference/dengue_SP.Rd.qmd): The  dengue_SP  example data set reports the weekly number of notified dengue cases in
+ the municipality of São Paulo together with climatic covariates.
+
+- [`extract_names`](GHRmodel-reference/extract_names.Rd.qmd): This function allows the user to select variables from a data set by prefix
+ (using the  pattern  argument) or by exact name matching.
+
+- [`fit_models`](GHRmodel-reference/fit_models.Rd.qmd): This function fits a set of  INLA  model formulas, provided in a  GHRformulas  object,
+ to a specified dataset.
+
+- [`get_covariates`](GHRmodel-reference/get_covariates.Rd.qmd): Extracts covariates from a  GHRmodels  object and returns them as a list of character vectors.
+
+- [`lag_cov`](GHRmodel-reference/lag_cov.Rd.qmd): This function creates lagged versions of one or more numeric or categorical variables
+ in an equally spaced time-series data set.
+
+- [`map_MS`](GHRmodel-reference/map_MS.Rd.qmd): A simple feature ( sf ) multipolygon object representing a map of  Mato Grosso do Sul , Brazil,
+ including 11 municipalities.
+
+- [`onebasis_inla`](GHRmodel-reference/onebasis_inla.Rd.qmd): This function is a wrapper around  onebasis  to
+ create a one-dimensional basis for spline modeling.
+
+- [`plot_coef_crosspred`](GHRmodel-reference/plot_coef_crosspred.Rd.qmd): Generate plots from a  "crosspred"  object.
+
+- [`plot_coef_lin`](GHRmodel-reference/plot_coef_lin.Rd.qmd): This function extracts fixed-effect coefficients from a specified model in  models ,
+ filters them by name or interaction pattern, and produces a forest plot (point estimates
+ with error bars).
+
+- [`plot_coef_nl`](GHRmodel-reference/plot_coef_nl.Rd.qmd): Generates plots of nonlinear effects from one or more fitted models contained within a  GHRmodels  object.
+
+- [`plot_coef_varying`](GHRmodel-reference/plot_coef_varying.Rd.qmd): Generates a forest plot for a specified spatially or temporally varying coefficient
+ (i.
+
+- [`plot_fit`](GHRmodel-reference/plot_fit.Rd.qmd): This function creates a time-series plot comparing observed cases with fitted values from one or more models
+ in a  GHRmodels  object.
+
+- [`plot_gof`](GHRmodel-reference/plot_gof.Rd.qmd): Provides visualization of model performance using selected goodness-of-fit (GoF) metrics for one or more models.
+
+- [`plot_ppd`](GHRmodel-reference/plot_ppd.Rd.qmd): This function draws kernel-density curves for posterior-predictive samples
+ and observed data using  ggplot2::geom_line() .
+
+- [`plot_re`](GHRmodel-reference/plot_re.Rd.qmd): Generates plots of random effects from one or more fitted models contained within a  GHRmodels  object.
+
+- [`rank_models`](GHRmodel-reference/rank_models.Rd.qmd): This function ranks fitted models in a  GHRmodels  object by a chosen metric
+ (e.
+
+- [`sample_ppd`](GHRmodel-reference/sample_ppd.Rd.qmd): This function refits a specified model from a  GHRmodels  object and generates
+ samples from its posterior predictive distribution.
+
+- [`stack_models`](GHRmodel-reference/stack_models.Rd.qmd): This function stack together two or more objects  GHRmodels  object,
+ returning  one   GHRmodels  object that contains  all  the input models.
+
+- [`subset_models`](GHRmodel-reference/subset_models.Rd.qmd): This function subsets selected models from a  GHRmodels  object into a new
+ reduced  GHRmodels  object.
+
+- [`write_inla_formulas`](GHRmodel-reference/write_inla_formulas.Rd.qmd): This function streamlines the creation of INLA-compatible model formulas
+ by automatically structuring fixed effects, random effects, and interactions.

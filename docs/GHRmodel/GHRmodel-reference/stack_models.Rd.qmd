@@ -1,0 +1,59 @@
+---
+format: html
+toc: true
+---
+
+# Merge GHRmodels
+
+## Description
+
+This function stack together two or more objects `GHRmodels` object, returning one `GHRmodels` object that contains **all** the input models.
+
+If any `model_id` is duplicated across the inputs the `new_name` argument must be provided to ensure unique IDs.
+
+```r
+stack_models(..., new_name = NULL, vs_first = FALSE)
+```
+
+## Arguments
+
+- `...`: Two or more `GHRmodels` objects, or a single list of them.
+- `new_name`: `NULL` (default) or a character used to build the new model IDs.
+- `vs_first`: Logical. If TRUE columns comparing the model vs the first model are kept in the `mod_gof`, otherwise are discarded. Default is FALSE. Set to TRUE only when models contained in the `GHRmodels` object to be stacked are compared with the same first models.
+
+## Details
+
+Combine (Stack) Multiple GHRmodels Objects
+
+## Returns
+
+A single `GHRmodels` object containing all models from the inputs.
+
+## See Also
+
+`subset_models` for subsetting GHRmodels objects, `fit_models` for fitting INLA models.
+
+## Examples
+
+```r
+## Not run:
+
+
+# Load example GHRmodels object from the package: 
+model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+model_list <- readRDS(model_list_file)
+
+# Load example GHRmodels object with DLNM from the package:
+model_dlnm_file <- system.file("examples", "model_dlnm.rds", package = "GHRmodel")
+model_dlnm <- readRDS(model_dlnm_file)
+
+# Merge models from the model_list and model_dlnm objects
+model_stack <- stack_models( 
+  model_list,
+  model_dlnm, 
+  new_name = "mod")
+  
+# The combined model_stack combines the models in the model_list and model_dlnm objects
+model_stack$mod_gof$model_id  
+## End(Not run)
+```
