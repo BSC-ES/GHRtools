@@ -1,127 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://BSC-ES.github.io/GHRtools/index.html</loc>
-    <lastmod>2025-09-23T14:40:19.730Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/clim4health/clim4health.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/data4health/data4health.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-index.html</loc>
-    <lastmod>2025-09-23T14:40:19.710Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_compare.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/aggregate_cov.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_seasonality.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/dengue_MS.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_combine.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_multiple.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_heatmap.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/GHRexplore-package.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-vignette.html</loc>
-    <lastmod>2025-09-23T14:40:19.712Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRmodel/GHRmodel-vignette1.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRpredict/GHRpredict.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRpredict/GHRpredict-vignette1.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
+    <loc>https://BSC-ES.github.io/GHRtools/content/upload-instructions.html</loc>
+    <lastmod>2025-10-03T07:47:54.454Z</lastmod>
   </url>
   <url>
     <loc>https://BSC-ES.github.io/GHRtools/docs/GHRmodel/GHRmodel.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
   </url>
   <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-news.html</loc>
-    <lastmod>2025-09-23T14:40:19.710Z</lastmod>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRpredict/GHRpredict-vignette1.html</loc>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/data4health/data4health.html</loc>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
   </url>
   <url>
     <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/map_MS.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
   </url>
   <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_correlation.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_bivariate.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_timeseries.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.712Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/GHR_palette.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.710Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/aggregate_cases.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/dengue_SP.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/aggregate_cov.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
   </url>
   <url>
     <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_map.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.711Z</lastmod>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
   </url>
   <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_timeseries2.Rd.html</loc>
-    <lastmod>2025-09-23T14:40:19.712Z</lastmod>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_heatmap.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
   </url>
   <url>
-    <loc>https://BSC-ES.github.io/GHRtools/docs/data4health/data4health-vignette1.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/dengue_MS.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/GHRexplore-package.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.454Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_correlation.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_multiple.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore.html</loc>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-news.html</loc>
+    <lastmod>2025-10-03T07:47:54.454Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/clim4health/clim4health.html</loc>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/index.html</loc>
+    <lastmod>2025-10-03T07:47:54.472Z</lastmod>
   </url>
   <url>
     <loc>https://BSC-ES.github.io/GHRtools/docs/clim4health/clim4health-vignette1.html</loc>
-    <lastmod>2025-09-23T14:40:19.722Z</lastmod>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
   </url>
   <url>
-    <loc>https://BSC-ES.github.io/GHRtools/content/upload-instructions.html</loc>
-    <lastmod>2025-09-23T14:40:19.710Z</lastmod>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-vignette.html</loc>
+    <lastmod>2025-10-03T07:47:54.456Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-index.html</loc>
+    <lastmod>2025-10-03T07:47:54.454Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/dengue_SP.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/GHR_palette.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.454Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/aggregate_cases.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_seasonality.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_timeseries.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.456Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_timeseries2.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.456Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_compare.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_combine.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRexplore/GHRexplore-reference/plot_bivariate.Rd.html</loc>
+    <lastmod>2025-10-03T07:47:54.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/data4health/data4health-vignette1.html</loc>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRpredict/GHRpredict.html</loc>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://BSC-ES.github.io/GHRtools/docs/GHRmodel/GHRmodel-vignette1.html</loc>
+    <lastmod>2025-10-03T07:47:54.465Z</lastmod>
   </url>
 </urlset>

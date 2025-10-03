@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6ff591c7253f0ffcb02f12af66ed8282.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-81db3bc9543b97ff6e1d188ef868d7e2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,12 +106,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../docs/data4health/data4health.html">
  <span class="dropdown-text">Overview</span></a>
   </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Vignettes</li>
-        <li>
-    <a class="dropdown-item" href="../../docs/data4health/data4health-vignette1.html">
- <span class="dropdown-text">Getting started</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -122,12 +116,6 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../../docs/clim4health/clim4health.html">
  <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Vignettes</li>
-        <li>
-    <a class="dropdown-item" href="../../docs/clim4health/clim4health-vignette1.html">
- <span class="dropdown-text">Getting started</span></a>
   </li>  
     </ul>
   </li>
@@ -165,12 +153,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel.html">
  <span class="dropdown-text">Overview</span></a>
   </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Vignettes</li>
-        <li>
-    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-vignette1.html">
- <span class="dropdown-text">Getting started</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -181,12 +163,6 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../../docs/GHRpredict/GHRpredict.html">
  <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Vignettes</li>
-        <li>
-    <a class="dropdown-item" href="../../docs/GHRpredict/GHRpredict-vignette1.html">
- <span class="dropdown-text">Getting started</span></a>
   </li>  
     </ul>
   </li>
@@ -207,9 +183,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#developers" id="toc-developers" class="nav-link" data-scroll-target="#developers">Developers</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -218,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -230,9 +215,58 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Under construction.</p>
+<img src="../../figures/clim4health/logo_BSC.png" width="24%" style="float:right; margin-left:50px;">
+
+<img src="../../figures/clim4health/logo_harmonize.png" width="12%" style="float:right;">
+<!-- badges: start -->
+<p><a href="https://www.gnu.org/licenses/agpl-3.0.html"><img src="https://img.shields.io/badge/License-AGPL_v3-brightgreen.svg?style=flat" class="img-fluid" alt="License"></a> <!-- badges: end --></p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<div class="columns">
+<div class="column" style="width:75%;">
+<p><strong>clim4health</strong> is an R package designed to obtain, transform and export climate data for their use in epidemiological analyses and other types of applications. The package contains a series of functions structured in three sequential blocks: input, transformation, and output.</p>
+<p>In the input block, <strong>clim4health</strong> provides functions to download several types of climate data including reanalyses, forecasts, hindcasts, and weather stations and load them into memory for their processing. The transformation block includes functions to postprocess and downscale climate data, perform spatiotemporal aggregations, as well as compute threshold-based suitability indicators. Finally, in the output block, functions to visualize and export the transformed data are provided.</p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:20%;">
+<img src="../../figures/clim4health.svg" width="100%">
+</div>
+</div>
+<br>
+<center>
+<img src="../../figures/clim4health/package_structure.jpg" width="80%">
+</center>
+
+<p><br></p>
+<p><strong>clim4health</strong> is one of the packages developed by the <a href="https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience">Global Health Resilience</a> (GHR) team at the <a href="https://www.bsc.es/">Barcelona Supercomputing Center</a> (BSC) within the <a href="https://www.harmonize-tools.org/">HARMONIZE</a> project, which comprises different R and Python libraries tailored for health, climate, environmental, and socioeconomic data acquisition, harmonisation, and visualization.</p>
+<p>The package is currently under development and its expected release date is <strong>February 2026</strong>.</p>
+</section>
+<section id="developers" class="level2">
+<h2 class="anchored" data-anchor-id="developers">Developers</h2>
+<p><strong><a href="https://www.bsc.es/ball-emily">Emily Ball, PhD</a></strong> <a href="https://orcid.org/0000-0002-3002-4068" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center<br>
+Climate Services</p>
+<p><strong><a href="https://www.bsc.es/llabres-alba">Alba Llabrés, PhD</a></strong> <a href="https://orcid.org/0000-0003-2144-675X" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center<br>
+Climate Services</p>
+<p><strong><a href="https://www.bsc.es/mila-garcia-carles">Carles Milà, PhD</a></strong> <a href="https://orcid.org/0000-0003-0470-0760" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center<br>
+Global Health Resilience</p>
+<p><strong><a href="https://www.bsc.es/capellan-fernandez-raul">Raul Capellan Fernandez, MSc</a></strong><br>
+Barcelona Supercomputing Center<br>
+Earth Data and Diagnostics</p>
+<p><strong><a href="https://www.bsc.es/luhrsen-daniela-sofie">Daniela Lührsen, MSc</a></strong> <a href="https://orcid.org/0009-0002-6340-5964" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center<br>
+Global Health Resilience</p>
+<p><strong><a href="https://www.bsc.es/kawiecki-peralta-ania">Anna B. Kawiecki, PhD</a></strong> <a href="https://orcid.org/0000-0002-0499-2612" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center<br>
+Global Health Resilience</p>
+<p><strong><a href="https://www.bsc.es/lowe-rachel">Rachel Lowe, PhD</a></strong> <a href="https://orcid.org/0000-0003-3939-7343" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center<br>
+Global Health Resilience (Group leader)</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
