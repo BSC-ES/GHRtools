@@ -1,5 +1,7 @@
 ---
 title: "data4health"
+aliases: 
+  - /docs/data4health/data4health
 ---
 
 Under construction.

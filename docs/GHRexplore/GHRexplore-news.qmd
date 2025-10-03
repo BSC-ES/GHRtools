@@ -1,7 +1,7 @@
 ---
 title: "GHRexplore changelog"
 format: html
-toc: false
+toc: true
 ---
 
 <!-- badges: start -->

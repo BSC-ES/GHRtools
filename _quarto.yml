@@ -8,7 +8,6 @@ website:
   favicon: "figures/bsc-logo.png"
   navbar:
     title: "GHRtools"
-    navigation-container: narrow
     background: "#f5fcf6"
     foreground: "#3d3d3d"
     left:
@@ -17,7 +16,7 @@ website:
       - text: "data4health"
         menu:
           - text: Overview
-            href: docs/data4health/data4health.qmd
+            href: docs/data4health/data4health
       - text: "clim4health"
         menu:
           - text: Overview
@@ -60,3 +59,5 @@ format:
     page-layout: full
     theme: simplex
     css: styles.css
+    html-metadata:
+      pretty_urls: true
