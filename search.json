@@ -616,13 +616,6 @@
     "text": "Under construction."
   },
   {
-    "objectID": "docs/data4health/data4health-vignette1.html",
-    "href": "docs/data4health/data4health-vignette1.html",
-    "title": "data4health tutorial",
-    "section": "",
-    "text": "Under construction."
-  },
-  {
     "objectID": "docs/GHRexplore/GHRexplore-reference/plot_bivariate.Rd.html",
     "href": "docs/GHRexplore/GHRexplore-reference/plot_bivariate.Rd.html",
     "title": "Bivariate plot",
@@ -1064,13 +1057,6 @@
     "text": "Compare\nplot_compare allows the visualization of several variables in the same figure using the same GHRexplore plotting function. Possible functions include plot_timeseries, plot_heatmap, plot_seasonality and plot_map.\nIn plot_compare, the var, var_lab, type and palette can be vectors of the same length that refer to each of the elements to be plotted, while some other elements, like pop, pt, time, area and aggregation functions are shared. The final display of the multiple plots is automatically done via the cowplot package, and several options to arrange the figures are available (see ?plot_combine) including all arguments of cowplot::plot_grid.\nIn this first example, we plot the time series of PDSI and dengue incidence as a single column and combine the legends (ncol=1, combine_legend=TRUE):\nplot_compare(plot_function = plot_timeseries,\n             data = dengue_MS, \n             var = c(\"pdsi\", \"dengue_cases\"),\n             type = c(\"cov\", \"inc\"), \n             var_lab = c(\"PDSI\", \"Dengue Incidence\"),\n             pop = \"population\",\n             time = \"date\", \n             area = \"micro_code\", \n             aggregate_space = \"meso_code\",\n             ncol=1, \n             combine_legend=TRUE)\n\nIn this second example, we plot heatmaps of PDSI and dengue incidence using different palettes:\nplot_compare(plot_function = plot_heatmap,\n             data = dengue_MS, \n             var = c(\"pdsi\", \"dengue_cases\"),\n             type = c(\"cov\", \"inc\"), \n             var_lab = c(\"PDSI\", \"Incidence\"),\n             palette = c(\"Purp\", \"Reds\"), \n             pop = \"population\",\n             time = \"date\", \n             area = \"micro_code\", \n             aggregate_space = \"meso_code\",\n             ncol=1)"
   },
   {
-    "objectID": "docs/clim4health/clim4health-vignette1.html",
-    "href": "docs/clim4health/clim4health-vignette1.html",
-    "title": "clim4health tutorial",
-    "section": "",
-    "text": "Under construction."
-  },
-  {
     "objectID": "index.html#from-health-and-climate-data-to-disease-forecasts",
     "href": "index.html#from-health-and-climate-data-to-disease-forecasts",
     "title": "GHRtools",
@@ -1417,13 +1403,6 @@
     "objectID": "docs/data4health/data4health.html",
     "href": "docs/data4health/data4health.html",
     "title": "data4health",
-    "section": "",
-    "text": "Under construction."
-  },
-  {
-    "objectID": "docs/GHRpredict/GHRpredict-vignette1.html",
-    "href": "docs/GHRpredict/GHRpredict-vignette1.html",
-    "title": "GHRpredict tutorial",
     "section": "",
     "text": "Under construction."
   },
