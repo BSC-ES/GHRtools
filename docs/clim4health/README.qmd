@@ -1,28 +1,13 @@
----
-title: "clim4health"
-format: 
-  html:
-    toc: true
----
-
-```{=html}
-<img src='/figures/clim4health/logo_BSC.png' 
-     width="24%" 
-     style="float:right; margin-left:50px;" />
-
-<img src='/figures/clim4health/logo_harmonize.png' 
-     width="12%" 
-     style="float:right;" />
-```
+# clim4health  <img src='man/figures/logo_harmonize.png' align="right" width="9%" /> <span> <span> <img src='man/figures/logo_BSC.png' align="right" width="16%" /> 
 
 <!-- badges: start -->
 [![License](https://img.shields.io/badge/License-AGPL_v3-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/agpl-3.0.html)
 <!-- badges: end -->
 
+<img src='man/figures/clim4health.jpg' align="right" width="14%" />
+
 ## Overview
 
-::: columns
-::: {.column width="75%"}
 **clim4health** is an R package designed to obtain, transform and export climate 
 data for their use in epidemiological analyses and other types of applications. 
 The package contains a series of functions structured in three sequential blocks: 
@@ -35,21 +20,12 @@ functions to postprocess and downscale climate data, perform spatiotemporal
 aggregations, as well as compute threshold-based suitability indicators. Finally, 
 in the output block, functions to visualize and export the transformed data are 
 provided.
-:::
-::: {.column width="5%"}
-:::
-::: {.column width="20%"}
-```{=html}
-<img src="/figures/clim4health.svg" width="100%">
-```
-:::
-:::
 
 <br>
-<center>
-<img src='/figures/clim4health/package_structure.jpg' width="80%" /></center>
-</center>
-<br> 
+<div align="center">
+<img src='man/figures/package_structure.jpg' width="80%" /></center>
+</div>
+<br> \
 
 **clim4health** is one of the packages developed by the
 [Global Health Resilience](https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience) (GHR)

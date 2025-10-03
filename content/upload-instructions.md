@@ -24,7 +24,6 @@ Add the link to the reference in the main page
 Customize the index page, e.g. add sections and logo
 
 
-
 # Reference
 
 Run in the R package project: generate-reference.R

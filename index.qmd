@@ -23,7 +23,7 @@ format:
 
 ```{=html}
 <br> 
-<center><img src="figures/landing.png" width="80%"></center>
+<center><img src="figures/landing.png" width="75%"></center>
 <br> 
 ```
 
