@@ -9,8 +9,11 @@ rmarkdown::render(
   output_file = "GHRexplore-vignette.md"
 )
 ```
-Move the .md file and depending image files to the website repo and link in the index
-Copy paste header, badges and hex sticker from main page to the vignette
+Move the .md file and depending image files to the website repo and link in the index.
+
+Copy paste header, badges and hex sticker from main page to the vignette.
+
+Change the file extension from .md to .qmd
 
 
 # Changelog

@@ -41,6 +41,14 @@ website:
             href: docs/GHRmodel/GHRmodel-index.qmd
           - text: Changelog
             href: docs/GHRmodel/GHRmodel-news.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/GHRmodel/GHRmodel_overview.qmd  
+          - text: Covariate structures
+            href: docs/GHRmodel/GHRmodel_covariates.qmd  
+          - text: DLNMs in GHRmodel
+            href: docs/GHRmodel/GHRmodel_DLNM.qmd  
       - text: "GHRpredict"
         menu:
           - text: Overview
