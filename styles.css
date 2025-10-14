@@ -104,14 +104,14 @@ h1 {
   display: block;
 }
 #quarto-margin-sidebar nav ul ul > li > a {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   padding: 0.4rem 0.5rem;
 }
 #quarto-margin-sidebar nav ul ul ul > li > a {
-  font-size: 0.8rem;   /* Level 3 - h3 equivalent */
-  margin-left: 2rem;   /* More indent */
+  font-size: 0.77rem;   /* Level 3 - h3 equivalent */
+  margin-left: 0.3rem;   /* More indent */
   font-weight: 400;
-  padding: 0.1rem 0;
+  padding: 0.2rem 0;
 }
 #toc-title {
   font-size: 1.1rem;    /* Or larger if you prefer */
