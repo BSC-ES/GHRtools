@@ -12,9 +12,17 @@ format:
 <!-- badges: start -->
 [![License](https://img.shields.io/badge/License-AGPL_v3-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![CRAN status](https://img.shields.io/cran/v/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
-<!-- badges: end -->
 
-# Introduction to Distributed Lag Nonlinear Models in **GHRmodel**
+<style>
+div.csl-bib-body {
+  font-size: 0.9em;         /* smaller font */
+}
+div.csl-entry {
+  margin-bottom: 0.6em;     /* add space between references */
+}
+</style>
+
+# Overview
 
 This vignette demonstrates how Distributed Lag Nonlinear Models (DLNMs)
 (Gasparrini, 2011) are integrated into the **GHRmodel** spatio-temporal
@@ -29,7 +37,7 @@ leveraging the functionality of the **dlnm** package (Gasparrini, 2011)
 within **GHRmodel**.
 
 DLNMs extend distributed lag models (DLMs) to capture associations where
-the effect of an exposure (e.g. temperature) on an outcome (e.g. dengue
+the effect of an exposure (e.g. temperature) on an outcome (e.g. dengue
 incidence) is lagged in time. These exposure–lag–response associations
 are represented along two dimensions, exposure and lag, each modelled
 with its own basis function (a mathematical function used to flexibly
@@ -49,7 +57,7 @@ using either a forward or backward perspective (Gasparrini & Leone,
 package methodology is included in the vignette *GHRmodel Overview*,
 which can be accessed by typing `vignette("GHRmodel_overview")`.
 
-# Example: DLNMs in **GHRmodel**
+# Example: DLNMs in GHRmodel
 
 In this example, we demonstrate how to use **GHRmodel** to formulate,
 fit and evaluate DLNM terms within Bayesian hierarchical models in the
@@ -96,7 +104,7 @@ library(dlnm)         # Distributed linear and nonlinear models
 library(GHRmodel)     
 ```
 
-### Prepare the data set for modelling in R-INLA
+### Data pre-processing
 
 Create numeric ID variables for categorical features (such as year,
 month, or spatial units) that may be included as random effects, in line
@@ -120,7 +128,7 @@ df <- df |>
   )
 ```
 
-### Prepare data for spatial analysis in R-INLA
+### Spatial data and graphs
 
 To perform spatial analysis, polygon geometries must be provided as an
 `sf` object. For the `dengue_MS` data set, the areal polygons are
@@ -143,7 +151,7 @@ In this example we demonstrate how to use the **GHRmodel** helper
 functions to streamline writing INLA-compatible formulas including DLNM
 matrices.
 
-### Create a one-dimensional basis matrix for DLNM analysis
+### One-dimensional basis matrix
 
 The `onebasis_inla()` function is a wrapper around `dlnm::onebasis()`,
 which creates a one-dimensional basis matrix - a function used to model
@@ -232,7 +240,7 @@ head(ob_tmin)
 #> [6,]     0 0.0014234095 0.24044045 0.6086812 0.14945494 0.0000000000
 ```
 
-### Create a cross-basis matrix for DLNM analysis
+### Cross-basis matrix
 
 The `crossbasis_inla()` function is a wrapper around
 `dlnm::crossbasis()`, which creates a cross-basis matrix which models
@@ -316,7 +324,7 @@ cb_pdsi <- crossbasis_inla(
 )
 ```
 
-### Write INLA-compatible model formulas including DLNM terms
+### Model formulas including DLNM terms
 
 1.  **Define priors**
 
@@ -396,7 +404,7 @@ class(formulas_dlnm_ghr)
 #> [1] "GHRformulas" "list"
 ```
 
-## 2. Fit DLNM with INLA
+## 2. Fit DLNMs with INLA
 
 To fit a DLNM using INLA, you must first create the necessary basis
 functions using appropriate spline or polynomial transformations. These
@@ -459,14 +467,14 @@ the one-basis or cross-basis objects included.
 
 | model_id | covariate_1 | covariate_2 |
 |:---------|:------------|:------------|
-| mod1     | NA          | NA          |
-| mod2     | ob_tmin     | NA          |
-| mod3     | cb_tmin     | NA          |
+| mod1     |             |             |
+| mod2     | ob_tmin     |             |
+| mod3     | cb_tmin     |             |
 | mod4     | cb_tmin     | cb_pdsi     |
 
 DLNM terms in `model_dlnm`
 
-### Evaluate one-basis terms (one-dimensional matrices)
+### One-basis terms
 
 The following example demonstrates how to extract and visualize the
 nonlinear effect of the *tmin* variable at lag 0 from a fitted model
@@ -517,16 +525,16 @@ plot_coef_crosspred(
   line_color = "red",      # Color of the fitted effect line
   line_size = 0.8,         # Thickness of the effect line
   ribbon_color = "red",    # Color of the credible interval (ribbon)
-  ribbon_alpha = 0.3,      # Transparency level of the ribbon (0 = invisible, 1 = opaque)
+  ribbon_alpha = 0.3,      # Transparency level of the ribbon (0 = invisible)
   title = "Effect of minimum temperature on dengue risk",  # Plot title
   xlab = "Minimum temperature",   # Label for the x-axis
   ylab = "Effect"                 # Label for the y-axis 
 )
 ```
 
-<img src="GHRmodel_DLNM_files/figure-gfm/plot_coef_crosspred-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_DLNM_files/figure-gfm/plot_coef_crosspred-1.png" style="display: block; margin: auto;" />
 
-### Evaluate cross-basis terms (two-dimensional matrices)
+### Cross-basis terms
 
 This section demonstrates how to evaluate and visualize the effects from
 cross-basis DLNM estimates fit in an INLA model. In this case we use
@@ -580,7 +588,7 @@ plot_coef_crosspred(
 )
 ```
 
-<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by lag-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by lag-1.png" style="display: block; margin: auto;" />
 <br>
 
 Here we focus on the estimated relative risk for specific temperature
@@ -606,14 +614,15 @@ plot_coef_crosspred(
 ```
 
 <img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by temp values-1.png" width="100%" style="display: block; margin: auto;" />
-<br> Here we visualize the estimated relative risks using
-`type = "heatmap"` to examine how the association between temperature
-and dengue varies jointly across different temperature values and lag
-periods. The plot reveals that the most pronounced effects occur at a
-lag of approximately one month: higher minimum temperatures at this lag
-are associated with an increased risk of dengue, while lower
-temperatures, around the mean temperature, are linked to a decreased
-risk.
+<br>
+
+Here we visualize the estimated relative risks using `type = "heatmap"`
+to examine how the association between temperature and dengue varies
+jointly across different temperature values and lag periods. The plot
+reveals that the most pronounced effects occur at a lag of approximately
+one month: higher minimum temperatures at this lag are associated with
+an increased risk of dengue, while lower temperatures, around the mean
+temperature, are linked to a decreased risk.
 
 ``` r
 # Plot the predicted dengue risk values against the tmin values and lags
@@ -627,7 +636,7 @@ plot_coef_crosspred(
 )
 ```
 
-<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap -1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap-1.png" style="display: block; margin: auto;" />
 <br>
 
 > 💡 **Tip**: To produce a smoother exposure-lag heatmap, you can
@@ -644,7 +653,6 @@ plot_coef_crosspred(
   heatmap.
 
 ``` r
-
 # Generate predictions using a higher-resolution range of temperature values
 cpred_cb_tmin_smooth <- crosspred_inla(
   models = model_dlnm,    # GHRmodels object
@@ -669,8 +677,10 @@ plot_coef_crosspred(
 )
 ```
 
-<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap smooth-1.png" width="100%" style="display: block; margin: auto;" />
-<br> Lastly, the `type = "overall"` displays the overall effect of the
+<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap smooth-1.png" style="display: block; margin: auto;" />
+<br>
+
+Lastly, the `type = "overall"` displays the overall effect of the
 exposure variable (*tmin*) aggregated across all lag times, summarizing
 the total exposure-response relationship. This plot helps in
 understanding the net impact of the exposure on the outcome without
@@ -684,18 +694,17 @@ the lag-specific plots.
 # Plot overall effect of tmin on dengue across lags
 plot_coef_crosspred(crosspred = cpred_cb_tmin,
                     type = "overall",
-                    exp= TRUE,                  # Exponentiate effects to show relative risks
-                    line_color = "Red",         # Red color for the lines representing effect estimates
-                    line_size = 0.8,            # Line thickness set to 0.8 for better visibility
-                    ribbon_color = "Red",       # Red shading for credible interval ribbons
-                    ribbon_alpha = 0.3,         # Set ribbon transparency to 30%
-                    title = "Effect of minimum temperature on dengue relative risk across lags",  # Main plot title
-                    xlab = "Mean minimum temperature exposure",    # Label for the x-axis (exposure variable)
-                    ylab = "Effect"             # Label for the y-axis (effect estimate scale)
+                    exp= TRUE, # Exponentiate effects to show relative risks
+                    line_color = "Red", # Red color for the lines representing effect estimates
+                    line_size = 0.8, # Line thickness set to 0.8 for better visibility
+                    ribbon_color = "Red", # Red shading for credible interval ribbons
+                    ribbon_alpha = 0.3, # Set ribbon transparency to 30%
+                    xlab = "Mean minimum temperature exposure", # Label for the x-axis
+                    ylab = "Effect" # Label for the y-axis (effect estimate scale)
 )
 ```
 
-<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin overall -1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin overall-1.png" style="display: block; margin: auto;" />
 
 # References
 

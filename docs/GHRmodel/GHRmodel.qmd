@@ -149,7 +149,9 @@ plot_coef_lin(
   title = "Relative Risk (RR)"     # Plot title
 )
 ```
-<span> <img src='/figures/GHRmodel/example_plot.png' align="center" width="50%" height="50%" />
+
+<img src='/figures/GHRmodel/example_plot.png' width="80%">
+
 
 ## Developers
 

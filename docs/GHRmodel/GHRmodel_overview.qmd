@@ -9,7 +9,16 @@ format:
 <img src='/figures/GHRexplore/logo_IDExtremes.jpg' align="right" width="18%" /> <span> <span> <img src='/figures/GHRexplore/logo_BSC.png' align="right" width="16%" /> 
 ```
 
-# Overview of **GHRmodel**
+<style>
+div.csl-bib-body {
+  font-size: 0.9em;         /* smaller font */
+}
+div.csl-entry {
+  margin-bottom: 0.6em;     /* add space between references */
+}
+</style>
+
+# Overview
 
 The **GHRmodel** package supports modeling health outcomes using
 Bayesian hierarchical spatio-temporal models with complex covariate
@@ -60,7 +69,9 @@ One key dependency of the **GHRmodel** package, the
 must be installed manually using:
 
 ``` r
-install.packages("INLA",repos=c(getOption("repos"),INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
+install.packages("INLA",
+                 repos=c(getOption("repos"),  
+                         INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
 ```
 
 Instructions on how to install R-INLA and troubleshooting suggestions
@@ -175,7 +186,7 @@ or [Geospatial Health Data: modeling and visualization with R-INLA and
 Shiny](https://www.paulamoraga.com/book-geospatial/index.html)
 (Gómez-Rubio, 2020; Moraga, 2019)
 
-## **GHRmodel** structure
+## GHRmodel structure
 
 <div class="figure" style="text-align: center">
 
@@ -192,8 +203,9 @@ helper functions.
 
 <br> This vignette outlines the full modeling workflow using the
 **GHRmodel** package. The process is organized into three key stages:
+model development, model fitting, and model evaluation.
 
-### 1. Model development in the R-INLA framework
+### 1. Model development
 
 To fit a model with R-INLA, formulas need to follow its required syntax
 and structural conventions. INLA-compatible model formulas can be
@@ -248,7 +260,7 @@ seasonal random effects.
 
 For more information see `vignette("GHRmodel_covariates")`.
 
-### 2. Model fitting in the R-INLA framework
+### 2. Model fitting
 
 The `fit_models()` function allows users to fit a set of INLA-compatible
 model formulas defined by a `GHRformulas` object to a provided data set.
@@ -300,7 +312,7 @@ several in-house palettes, as well as palettes from **RColorBrewer** and
 
 <br> <br>
 
-# Example **GHRmodel** workflow
+# GHRmodel workflow
 
 In this example, we demonstrate how to use **GHRmodel** to formulate,
 fit and evaluate univariable and bivariate models of dengue risk with
@@ -337,7 +349,7 @@ library(GHRmodel)
 
 ## 0. Data
 
-### Description of example data set
+### Dataset description
 
 The example dataset contains monthly counts of notified dengue cases by
 microregion, along with a range of spatial and spatio-temporal
@@ -364,21 +376,20 @@ df <- dengue_MS
 # View initial rows in example dataframe
 head(df)
 #> # A tibble: 6 × 27
-#>   micro_code micro_name     micro_name_ibge meso_code meso_name       state_code state_name region_code region_name
-#>        <dbl> <chr>          <chr>               <dbl> <chr>                <dbl> <chr>            <dbl> <chr>      
-#> 1      50001 Baixo Pantanal BAIXO PANTANAL       5001 Pantanais Sul …         50 Mato Gros…           5 Centre-West
-#> 2      50002 Aquidauana     AQUIDAUANA           5001 Pantanais Sul …         50 Mato Gros…           5 Centre-West
-#> 3      50003 Alto Taquari   ALTO TAQUARI         5002 Centro Norte D…         50 Mato Gros…           5 Centre-West
-#> 4      50004 Campo Grande   CAMPO GRANDE         5002 Centro Norte D…         50 Mato Gros…           5 Centre-West
-#> 5      50005 Cassilândia    CASSILÂNDIA          5003 Leste De Mato …         50 Mato Gros…           5 Centre-West
-#> 6      50006 Paranaíba      PARANAÍBA            5003 Leste De Mato …         50 Mato Gros…           5 Centre-West
-#> # ℹ 18 more variables: biome_code <dbl>, biome_name <chr>, ecozone_code <dbl>, ecozone_name <chr>,
-#> #   main_climate <chr>, month <dbl>, year <dbl>, time <dbl>, dengue_cases <dbl>, population <dbl>,
-#> #   pop_density <dbl>, tmax <dbl>, tmin <dbl>, pdsi <dbl>, urban <dbl>, water_network <dbl>, water_shortage <dbl>,
-#> #   date <date>
+#>   micro_code micro_name     micro_name_ibge meso_code meso_name    state_code state_name region_code region_name biome_code biome_name
+#>        <dbl> <chr>          <chr>               <dbl> <chr>             <dbl> <chr>            <dbl> <chr>            <dbl> <chr>     
+#> 1      50001 Baixo Pantanal BAIXO PANTANAL       5001 Pantanais S…         50 Mato Gros…           5 Centre-West          3 Pantanal  
+#> 2      50002 Aquidauana     AQUIDAUANA           5001 Pantanais S…         50 Mato Gros…           5 Centre-West          3 Pantanal  
+#> 3      50003 Alto Taquari   ALTO TAQUARI         5002 Centro Nort…         50 Mato Gros…           5 Centre-West          2 Cerrado   
+#> 4      50004 Campo Grande   CAMPO GRANDE         5002 Centro Nort…         50 Mato Gros…           5 Centre-West          2 Cerrado   
+#> 5      50005 Cassilândia    CASSILÂNDIA          5003 Leste De Ma…         50 Mato Gros…           5 Centre-West          2 Cerrado   
+#> 6      50006 Paranaíba      PARANAÍBA            5003 Leste De Ma…         50 Mato Gros…           5 Centre-West          2 Cerrado   
+#> # ℹ 16 more variables: ecozone_code <dbl>, ecozone_name <chr>, main_climate <chr>, month <dbl>, year <dbl>, time <dbl>,
+#> #   dengue_cases <dbl>, population <dbl>, pop_density <dbl>, tmax <dbl>, tmin <dbl>, pdsi <dbl>, urban <dbl>, water_network <dbl>,
+#> #   water_shortage <dbl>, date <date>
 ```
 
-### Prepare the data set for modeling in R-INLA
+### Data pre-processing
 
 Create numeric ID variables for categorical features (such as year,
 month, or spatial units) that may be included as random effects, in line
@@ -421,7 +432,7 @@ df <- df |>
   )
 ```
 
-### Prepare data for spatial analysis in R-INLA
+### Spatial data and graphs
 
 To perform spatial analysis and generate maps of observations across
 multiple spatial units, the polygon geometries must be provided as an
@@ -449,7 +460,7 @@ ggplot() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/Load map_MS-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/Load map_MS-1.png" style="display: block; margin: auto;" />
 
 To model spatially structured random effects (e.g., using the
 Besag-York-Mollié model (BYM (Besag et al., 1991)) or BYM2 model
@@ -586,7 +597,7 @@ cov_names <- extract_names(data = data,
 
 # Visualize output: character vector of covariate names
 glimpse(cov_names)
-#>  chr [1:12] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" ...
+#>  chr [1:12] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" "pdsi.l4" "pdsi.l5" ...
 ```
 
 - **Generate list of linear covariates for univariable models**
@@ -1026,7 +1037,7 @@ return graphical `ggplot2` or `cowplot` objects and require a
 `GHRmodels` object as input. Users can customize visual outputs using
 standard `ggplot2` syntax.
 
-### Rank models by goodness-of-fit
+### Rank models
 
 The `rank_models()` function provides a simple way to rank models stored
 in a `GHRmodels object` based on a selected GoF metric. This function
@@ -1078,7 +1089,7 @@ between the predicted and observed outcome distributions.
 plot_ppd(ppd_df)
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_ppd-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_ppd-1.png" style="display: block; margin: auto;" />
 
 ### Goodness-of-fit metrics
 
@@ -1106,9 +1117,7 @@ model in the `model_list$mod_gof` dataframe with descriptive labels that
 classify the type of transformation applied to each covariate.
 
 ``` r
-
 # Annotate each model in the model_list$mod_gof dataframe with descriptive labels
-
 model_list_gof <- model_list$mod_gof |> 
   dplyr::mutate(
     `Variable transformation 1st covariate` = dplyr::case_when(
@@ -1130,19 +1139,18 @@ the previous month’s mean temperature (*tmin.l1*) improved model fit
 relative to the baseline most.
 
 ``` r
-
 # Plot change in WAIC for each model compared to the baseline (first model in the list)
 plot_gof(
   mod_gof = model_list_gof,            # Goodness-of-fit data from model_list
   metric = "waic_vs_first",            # Compare WAIC to the first model (baseline)
   ci = TRUE,                           # Include credible intervals (if available)
   var_arrange = "waic_vs_first",       # Arrange models by WAIC difference
-  var_color =  "Variable transformation 1st covariate",    # color mapped to variable transformation
+  var_color =  "Variable transformation 1st covariate",    # variable transformation
   var_shape = "Covariates",  # Shape mapped to including tmin.l1
   palette = "Colorblind")    
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_gof covariate 1 and 2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_gof covariate 1 and 2-1.png" style="display: block; margin: auto;" />
 
 ### Fitted vs. Observed
 
@@ -1167,12 +1175,12 @@ during some dengue outbreaks than the baseline random-effect-only model
 ``` r
 # Plot observed vs. fitted cases over time for three selected models
 plot_fit(
-  models = model_list,                         # A GHRmodels object containing the fitted models
+  models = model_list,                         # A GHRmodels object (fitted models)
   mod_id = c("mod1", "mod3", "mod5"),          # Vector of model IDs to plot
   mod_label = c("Baseline",                    # Custom display names 
                 "tmin.l1.nl",            
                 "pdsi.l1.nl_tmin.l1.nl"),            
-  ref_color = "grey",                          # Color override for the reference model (first listed)
+  ref_color = "grey",                          # Color override for the ref model (first)
   time = "date",                               # Name of the time variable in the dataset
   palette = "Set2",                            # Color palette for fitted lines
   xlim = c("2010-01-01", "2020-01-01"),        # Limit x-axis to this date range
@@ -1180,7 +1188,7 @@ plot_fit(
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_fit default-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_fit default-1.png" style="display: block; margin: auto;" />
 
 <br> Here we visualize how well each model’s predictions match the
 observed case counts over time, grouped by the region ID *meso_code*.
@@ -1190,7 +1198,6 @@ of different modeling strategies. The log-transformed y-axis using
 improved visibility where count data vary greatly in scale.
 
 ``` r
-
 # Plot observed vs. fitted values from multiple models with faceted panels by model
 plot_fit(
   model = model_list,                          # GHRmodels object containing fitted models
@@ -1214,7 +1221,7 @@ plot_fit(
 
 <img src="GHRmodel_overview_files/figure-gfm/plot_fit facet by group-1.png" width="100%" style="display: block; margin: auto;" />
 
-### Evaluate effect of the covariates
+### Covariate effects
 
 **Linear coefficients**
 
@@ -1242,7 +1249,6 @@ month, as well as wetter conditions at the same lag, are both associated
 with a significant increase in dengue cases.
 
 ``` r
-
 plot_coef_lin(
   model = model_list,
   mod_id = c("mod2","mod4"),
@@ -1252,7 +1258,7 @@ plot_coef_lin(
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin-1.png" style="display: block; margin: auto;" />
 
 <br> **Non-linear coeficients**
 
@@ -1290,7 +1296,6 @@ dengue cases at one month lag, while there is no effect at 2 and 3 lags
 previous and the relationship inverts at longer lags:
 
 ``` r
-
 plot_coef_nl(
   # List of fitted models from which to extract nonlinear effects
   models = model_list,
@@ -1329,7 +1334,7 @@ plot_coef_nl(
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl grid 6 variables-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl grid 6 variables-1.png" style="display: block; margin: auto;" />
 
 <br> Here we plot 2 models with a non-linear term of PDSI at one month
 lag, with and without an additional non-linear term for mean minimum
@@ -1352,7 +1357,7 @@ plot_coef_nl(
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl collapse 2 variables-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl collapse 2 variables-1.png" style="display: block; margin: auto;" />
 
 ### Evaluate random effects
 
@@ -1394,27 +1399,26 @@ of climate covariates resulted in a small reduction (shift towards the
 null) of the contribution of the yearly random effect.
 
 ``` r
-
 plot_re(
-  model = model_list,                          # A GHRmodels object containing fitted model outputs
+  model = model_list, # A GHRmodels object containing fitted model outputs
   mod_id = c("mod1", "mod3", "mod5"), # IDs of the models to compare (must match those in model_list)
   
-  mod_label = c("Baseline",                    # Label for mod1: baseline model
-                "tmin.l1_nl",            # Label for mod4: includes PDSI replicated by climate
-                "pdsi.l1_nl + tmin.l1_nl"),     # Label for mod6: includes nonlinear effects of PDSI and Tmin
+  mod_label = c("Baseline", # Label for mod1: baseline model
+                "tmin.l1_nl", # Label for mod4: includes PDSI replicated by climate
+                "pdsi.l1_nl + tmin.l1_nl"), # Label for mod6: includes nonlinear effects of PDSI and Tmin
   
-  re_id = "year_id",                           # Name of the random effect variable (as defined in model structure)
-  re_label = "year",                           # Optional: label to map year_id to calendar years
+  re_id = "year_id",  # Name of the random effect variable (as defined in model structure)
+  re_label = "year",  # Optional: label to map year_id to calendar years
   
-  ref_color = "grey",                          # Color to use for the first (reference) model’s effects
-  palette = "IDE2",                            # Color palette for other model effects
+  ref_color = "grey",  # Color to use for the first (reference) model’s effects
+  palette = "IDE2", # Color palette for other model effects
   
-  title = "Yearly Random Effect",              # Title for the plot
-  xlab = "Year"                                # Label for the x-axis (since re_label maps ID to actual years)
+  title = "Yearly Random Effect", # Title for the plot
+  xlab = "Year" # Label for the x-axis (since re_label maps ID to actual years)
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_re yearly no replication-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_re yearly no replication-1.png" style="display: block; margin: auto;" />
 
 <br> Below we produce a faceted plot of monthly random effects
 replicated across mesoregions, allowing for comparison of temporal
@@ -1427,7 +1431,6 @@ regions.
 > example we add a more descriptive month label:
 
 ``` r
-
 # Maps integers 1–12 to "January" through "December" using R’s built-in month.name vector
 model_list[["data"]] <- model_list[["data"]]|>
   dplyr::mutate(month_label = month.name[month_id]) 
@@ -1444,31 +1447,30 @@ substantial portion of the seasonality (the monthly random effect values
 are closer to 0).
 
 ``` r
-
 plot_re(
-  models = model_list,                          # A GHRmodels object containing fitted model outputs
+  models = model_list, # A GHRmodels object containing fitted model outputs
   
   mod_id = c("mod1", "mod3", "mod5"), # IDs of the models to compare (must match those in model_list)
   
-  mod_label = c("Baseline",                    # Label for mod1: baseline model
-                "tmin.l1_nl",            # Label for mod4: includes PDSI replicated by climate
-                "pdsi.l1_nl + tmin.l1_nl"),     # Label for mod6: includes nonlinear effects of PDSI and Tmin
+  mod_label = c("Baseline", # Label for mod1: baseline model
+                "tmin.l1_nl", # Label for mod4: includes PDSI replicated by climate
+                "pdsi.l1_nl + tmin.l1_nl"), # Label for mod6: includes nonlinear effects of PDSI and Tmin
   
-  re_id = "month_id",                          # Name of the random effect in the model formula (e.g., f(month_id, ...))
-  re_label = "month_label",                    # Variable in the dataset corresponding to readable month names
+  re_id = "month_id", # Name of the random effect in the model formula (e.g., f(month_id, ...))
+  re_label = "month_label", # Variable in the dataset corresponding to readable month names
   
-  rep_id = "spat_meso_id",                     # Variable indicating the grouping structure (replication across meso areas)
-  rep_label = "meso_name",                     # Variable to label facets (e.g., "Centro Norte", "Sudoeste", etc.)
+  rep_id = "spat_meso_id", # Variable indicating the grouping structure (replication across meso areas)
+  rep_label = "meso_name",# Variable to label facets (e.g., "Centro Norte", "Sudoeste", etc.)
   
-  ref_color = "grey",                          # Color for the reference model (first listed in mod_id)
-  palette = "IDE2",                            # Palette for coloring additional models
+  ref_color = "grey", # Color for the reference model (first listed in mod_id)
+  palette = "IDE2", # Palette for coloring additional models
   
   title = "Monthly random effect repeated by meso area",  # Plot title
-  xlab = "Month"                               # Label for x-axis (calendar month, from re_label)
+  xlab = "Month" # Label for x-axis (calendar month, from re_label)
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_re monthly replication-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_re monthly replication-1.png" style="display: block; margin: auto;" />
 
 <br> Here we create a **caterpillar** plot of the spatial random effects
 for four models. Each point represents the estimated effect for a
@@ -1479,23 +1481,23 @@ microregion names).
 
 ``` r
 plot_re(
-  models = model_list,                          # A GHRmodels object containing the output of fitted models
+  models = model_list, # A GHRmodels object containing the output of fitted models
   
   mod_id = c("mod1", "mod3", "mod5"), # IDs of the models to compare (must match those in model_list)
   
-  mod_label = c("Baseline",                    # Label for mod1: baseline model
-                "tmin.l1_nl",            # Label for mod4: includes PDSI replicated by climate
-                "pdsi.l1_nl + tmin.l1_nl"),     # Label for mod6: includes nonlinear effects of PDSI and Tmin
+  mod_label = c("Baseline", # Label for mod1: baseline model
+                "tmin.l1_nl", # Label for mod4: includes PDSI replicated by climate
+                "pdsi.l1_nl + tmin.l1_nl"), # Label for mod6: includes nonlinear effects of PDSI and Tmin
   
-  re_id = "spat_id",                           # Name of the spatial random effect variable as defined in the model (e.g., f(spat_id, ...))
-  re_label = "micro_name",                     # Optional label to map spat_id to readable microregion names (for axis display)
+  re_id = "spat_id",  # Name of the spatial random effect variable as defined in the model
+  re_label = "micro_name", # Optional label to map spat_id to readable microregion names 
   
-  title = "Spatial random effects",            # Title of the plot
-  xlab = "Micro code for spatial units"        # Label for the x-axis (spatial units with interpretable names)
+  title = "Spatial random effects",  # Title of the plot
+  xlab = "Micro code for spatial units" # Label for the x-axis 
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_re spatial no map-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_re spatial no map-1.png" style="display: block; margin: auto;" />
 
 <br>
 
@@ -1523,27 +1525,27 @@ risk in this area.
 
 ``` r
 plot_re(
-  models = model_list,                          # A GHRmodels object containing the output of fitted models
+  models = model_list, # A GHRmodels object containing the output of fitted models
   
   mod_id = c("mod1", "mod3", "mod5"), # IDs of the models to compare (must match those in model_list)
   
-  mod_label = c("Baseline",                    # Label for mod1: baseline model
-                "tmin.l1_nl",            # Label for mod4: includes PDSI replicated by climate
-                "pdsi.l1_nl + tmin.l1_nl"),     # Label for mod6: includes nonlinear effects of PDSI and Tmin
+  mod_label = c("Baseline", # Label for mod1: baseline model
+                "tmin.l1_nl", # Label for mod4: includes PDSI replicated by climate
+                "pdsi.l1_nl + tmin.l1_nl"), # Label for mod6: includes nonlinear effects of PDSI and Tmin
   
-  re_id = "spat_id",                           # Name of the spatial random effect variable used in model
-  re_label = "micro_name",                     # Variable used to map IDs to readable names
+  re_id = "spat_id", # Name of the spatial random effect variable used in model
+  re_label = "micro_name", # Variable used to map IDs to readable names
   
-  map = map_MS,                                # An sf object with polygon boundaries for plotting
-  map_area = "code",                           # Name of the column in map_MS that matches spat_id in the model
+  map = map_MS, # An sf object with polygon boundaries for plotting
+  map_area = "code", # Name of the column in map_MS that matches spat_id in the model
   
-  title = "Spatial random effects",            # Title for the spatial plot
+  title = "Spatial random effects", # Title for the spatial plot
   
   legend = "Median of the \nrandom effect ppd" # Title for the legend
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_re spatial map-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_re spatial map-1.png" style="display: block; margin: auto;" />
 
 ## 4. Iterative model selection
 
@@ -1568,7 +1570,6 @@ Here we use the vector produced using `rank_models` to subset the
 ranking WAIC models:
 
 ``` r
-
 # Extract a vector with the model IDs of the 2 best fitting models by WAIC
 best_waic <- rank_models(
   models = model_list,  # GHRmodels object containing model fit results
@@ -1596,7 +1597,7 @@ head(model_waic$mod_gof$model_id)
 #> [1] "best_waic1" "best_waic2"
 ```
 
-### Extract covariates from a `GHRmodels` object
+### Extract covariates
 
 Use `get_covariates()` to inspect which covariates were included in your
 fitted models. You can choose to retrieve:
@@ -1634,7 +1635,7 @@ best_waic_cov_unique
 #> [1] "f(INLA::inla.group(pdsi.l1, method = 'quantile', n = 10), model = 'rw2')"
 ```
 
-### Add a covariate to each element in a list of covariates
+### Add an additional covariate
 
 The `cov_add()` function appends one or more covariate names to each set
 of covariates in a list.
@@ -1704,7 +1705,6 @@ Then we can fit the models to assess the added effect of *urban* on
 dengue cases:
 
 ``` r
-
 model_urban_list <- fit_models(
   formulas = formulas_cov_urban_list_ghr, # GHRformulas object
   data = data,                      # Data to fit the models 
@@ -1744,7 +1744,7 @@ model_stack$mod_gof$model_id
 #> [1] "best_waic1" "best_waic2" "mod1"       "mod2"       "mod3"
 ```
 
-### Evaluate combined model object
+### Evaluate combined models
 
 Using the `rank_models()` and `plot_gof()` we observe that adding the
 *urban* covariate does not improve the model fit by WAIC compared to
@@ -1752,7 +1752,6 @@ models that only have 1-month lag terms for mean minimum temperature and
 PDSI.
 
 ``` r
-
 rank_models(model_stack, 
             metric = "waic")
 #> [1] "best_waic2" "best_waic1" "mod2"       "mod3"       "mod1"
@@ -1771,7 +1770,6 @@ model_stack_gof  <- model_stack$mod_gof |>
 ```
 
 ``` r
-
 # Plot change in WAIC for each model compared to the baseline (first model in the list)
 plot_gof(
   mod_gof = model_stack_gof,           # Goodness-of-fit data from model_list
@@ -1789,20 +1787,19 @@ plot_gof(
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/plot_gof model_stack-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/plot_gof model_stack-1.png" style="display: block; margin: auto;" />
 
 We also observe that the 95% credible interval of the effect of *urban*
 on the outcome (*dengue cases*) contains zero.
 
 ``` r
-
 plot_coef_lin(
   model = model_stack,
   title = "Effects of linear covariates"
 )
 ```
 
-<img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin model stack-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin model stack-1.png" style="display: block; margin: auto;" />
 
 These results point against including *urban* as a linear covariate in
 the final model.

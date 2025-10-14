@@ -14,7 +14,16 @@ format:
 [![CRAN status](https://img.shields.io/cran/v/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
 <!-- badges: end -->
 
-# Introduction to complex covariate structures in **GHRmodel**
+<style>
+div.csl-bib-body {
+  font-size: 0.9em;         /* smaller font */
+}
+div.csl-entry {
+  margin-bottom: 0.6em;     /* add space between references */
+}
+</style>
+
+# Overview
 
 The *GHRmodel_covariates* vignette shows how to create INLA-compatible
 formulas for complex Bayesian spatio-temporal models (including
@@ -51,7 +60,7 @@ development.
 package methodology is included in the vignette *GHRmodel Overview*,
 which can be accessed by typing `vignette("GHRmodel_overview")`.
 
-## Overview of **GHRmodel** helper functions for writing INLA-compatible formulas
+## GHRmodel formula helper functions
 
 Model formulas in INLA follow a specific structure. The functions below
 streamline their construction by generating organized lists of
@@ -114,7 +123,7 @@ this [GitHub
 repository](https://github.com/drrachellowe/hydromet_dengue) and in
 [Zenodo](https://doi.org/10.5281/zenodo.4632205).
 
-### Load libraries
+## Load libraries
 
 ``` r
 # Load necessary package dependencies
@@ -137,7 +146,7 @@ library(GHRexplore)   # Exploratory analysis of health data
 library(GHRmodel)     
 ```
 
-### Prepare the data set for modeling in R-INLA
+## Data pre-processing
 
 Create numeric ID variables for categorical features (such as year,
 month, or spatial units) that may be included as random effects, in line
@@ -163,7 +172,7 @@ df <- df |>
   )
 ```
 
-### Prepare data for spatial analysis in R-INLA
+## Spatial data and graphs
 
 To perform spatial analysis, polygon geometries must be provided as an
 `sf` object. For the `dengue_MS` data set, the areal polygons are
@@ -182,7 +191,7 @@ g <- spdep::nb2mat(nb, style = "B")
 
 ## Pre-process covariates
 
-### Create lagged covariates
+## Lagged covariates
 
 Here, we use `lag_cov()` to generate lagged values for the variables
 *tmin* (monthly average daily minimum temperature averaged across each
@@ -243,14 +252,14 @@ prior_sp <- list(
 )
 ```
 
-# Example 1: Complex covariate structures in **GHRmodel** using helper functions
+# Example 1: GHRmodel helper functions
 
-## 1. Model development using **GHRmodel** helper functions
+## 1. Model development
 
 In this example we demonstrate how to use **GHRmodel** helper functions
 to streamline writing INLA-compatible formulas.
 
-### Select variables to include in the model formulas
+### Select variables
 
 Users can specify which variables from the data set to include as
 covariates using the `extract_names()` function.
@@ -268,10 +277,10 @@ cov_names <- extract_names(data = data,
                                        "main_climate_f"))
 # Visualize output: character vector of covariate names
 glimpse(cov_names)
-#>  chr [1:14] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" ...
+#>  chr [1:14] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" "pdsi.l4" "pdsi.l5" ...
 ```
 
-### List of linear covariates
+### Linear covariates
 
 The `cov_uni()` function returns a list where each element contains a
 single covariate. This structure is suitable for fitting separate
@@ -293,7 +302,7 @@ head(uni_cov_lin,2)
 #> [1] "pdsi.l2"
 ```
 
-### List of nonlinear covariates
+### Non-linear covariates
 
 To include nonlinear covariates in the model, the `cov_nl()` function
 generates nonlinear effect terms compatible with the INLA formula
@@ -353,7 +362,7 @@ head(uni_cov_nl,2)
 #> [1] "f(INLA::inla.group(tmin.l2, method='quantile', n=10), model='rw2')"
 ```
 
-### List of nonlinear covariates replicated by group
+### Non-linear covariates replicated by group
 
 If the user wants to replicate the structure of a nonlinear effect
 across another variable (e.g., administrative unit), the name of the
@@ -389,7 +398,7 @@ head(uni_cov_nl_rep[13:14])
 #> [1] "f(INLA::inla.group(pdsi.l2, method='quantile', n=10), model='rw2', replicate=main_climate_f)"
 ```
 
-### List of covariates for multivariate models
+### Covariates for multivariate models
 
 The `cov_multi()` function takes a character vector or a list of
 character vectors (e.g., output from `cov_uni()` or `cov_nl()`) and
@@ -421,7 +430,7 @@ head(multi_cov_nl_rep[7:8])
 #> [2] "tmin.l1"
 ```
 
-### Add a covariate to each element in a list of covariates
+### Add a covariate to all covariate lists
 
 The `cov_add()` function appends one or more covariate names to each set
 of covariates in a list. This is useful for stepwise inclusion of
@@ -466,7 +475,7 @@ head(triple_cov_lin,2)
 #> [1] "pdsi.l2" "tmin.l1" "urban"
 ```
 
-### List of interacting covariates
+### Interacting covariates
 
 Interaction terms capture the additional effect of two (or more)
 covariates acting together on the outcome, beyond their individual
@@ -502,15 +511,15 @@ interacting_cov <- cov_interact(covariates = triple_cov_lin,
 # Visualize output: list of interactions between linear pdsi terms and linear tmin terms
 head(interacting_cov, 2)
 #> [[1]]
-#> [1] "pdsi.l1"               "tmin.l1"               "urban"                 "pdsi.l1:tmin.l1"      
-#> [5] "pdsi.l1:urban"         "tmin.l1:urban"         "pdsi.l1:tmin.l1:urban"
+#> [1] "pdsi.l1"               "tmin.l1"               "urban"                 "pdsi.l1:tmin.l1"       "pdsi.l1:urban"        
+#> [6] "tmin.l1:urban"         "pdsi.l1:tmin.l1:urban"
 #> 
 #> [[2]]
-#> [1] "pdsi.l2"               "tmin.l1"               "urban"                 "pdsi.l2:tmin.l1"      
-#> [5] "pdsi.l2:urban"         "tmin.l1:urban"         "pdsi.l2:tmin.l1:urban"
+#> [1] "pdsi.l2"               "tmin.l1"               "urban"                 "pdsi.l2:tmin.l1"       "pdsi.l2:urban"        
+#> [6] "tmin.l1:urban"         "pdsi.l2:tmin.l1:urban"
 ```
 
-### List of varying covariates
+### Varying covariates
 
 The `cov_varying()` function generates spatially or temporally varying
 linear effect terms compatible with INLA formulas. It modifies covariate
@@ -537,12 +546,10 @@ varying_cov <- cov_varying(covariates = multi_cov_lin,
 # Visualize output: list of combinations of lagged pdsi varying by main_climate_f and linear tmin terms
 head(varying_cov,2)
 #> [[1]]
-#> [1] "f(main_climate_f, pdsi.l1, model = 'iid', constr = FALSE)"
-#> [2] "tmin.l1"                                                  
+#> [1] "f(main_climate_f, pdsi.l1, model = 'iid', constr = FALSE)" "tmin.l1"                                                  
 #> 
 #> [[2]]
-#> [1] "f(main_climate_f, pdsi.l2, model = 'iid', constr = FALSE)"
-#> [2] "tmin.l1"
+#> [1] "f(main_climate_f, pdsi.l2, model = 'iid', constr = FALSE)" "tmin.l1"
 ```
 
 ### Varying vs. Replicated Effects in INLA
@@ -578,7 +585,7 @@ independently repeated across climate zones.
 
 Comparison of Replicate and Varying Effects in INLA
 
-### Write INLA-compatible model formulas from a list of covariates
+### Write INLA-compatible model formulas
 
 The `write_inla_formulas()` function simplifies the creation of multiple
 INLA models by automatically structuring fixed effects, random effects,
@@ -649,7 +656,7 @@ class(formulas_cov_list_ghr)
 #> [1] "GHRformulas" "list"
 ```
 
-## 2. Model fitting from a list of covariates
+## 2. Model fitting
 
 To evaluate the performance of multiple covariate model specifications
 using INLA, we can pass a list of predefined formulas as a `GHRformulas`
@@ -683,7 +690,7 @@ class(model_cov_list)
 model_cov_list_gof <- model_cov_list$mod_gof
 ```
 
-## 3. Model evaluation: effects of complex covariate structures
+## 3. Model evaluation
 
 This section explains how to interpret the estimated coefficients from
 the complex covariate structures created above, including:
@@ -701,7 +708,7 @@ For guidance on evaluating covariates fitted as linear or nonlinear
 terms, as well as other model assessment tools in the package, see the
 *GHRmodel_overview* vignette.
 
-### Evaluate interaction effects
+### Interaction effects
 
 `plot_coef_lin()` can be used to evaluate interaction effects between
 linear covariates (the only interactions currently supported in
@@ -728,7 +735,7 @@ plot_coef_lin(
 )
 ```
 
-<img src="GHRmodel_covariates_files/figure-gfm/plot interactions-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_covariates_files/figure-gfm/plot interactions-1.png" style="display: block; margin: auto;" />
 
 ### Varying linear coefficients
 
@@ -771,13 +778,13 @@ contain zero in humid subtropical climates.
 ``` r
 # Plot linear slopes varying by climate zone. 
 plot_coef_varying(
-  models = model_cov_list,               # A list of fitted INLA model objects
-  mod_id = "mod8",                       # Select the model with varying slopes
-  palette = "Blues",                     # Color palette for the plot (from RColorBrewer)
-  name = "main_climate_f",               # The grouping variable (factor) for which varying slopes were estimated
+  models = model_cov_list, # A list of fitted INLA model objects
+  mod_id = "mod8",  # Select the model with varying slopes
+  palette = "Blues",   # Color palette for the plot (from RColorBrewer)
+  name = "main_climate_f", # The grouping variable (factor) 
   title = "Effect of PDSI at one-month lag for each climate zone",  # Plot title
-  ylab = "Main climate zones",           # Label for the y-axis (groups/climate zones)
-  unit_label = c(                        # Map factor levels to descriptive names 
+  ylab = "Main climate zones",  # Label for the y-axis (groups/climate zones)
+  unit_label = c( # Map factor levels to descriptive names 
     "1" = "Tropical Rainforest Climate", 
     "2" = "Tropical Monsoon Climate", 
     "3" = "Tropical Savanna Climate with Dry Winter",
@@ -813,23 +820,23 @@ by climate ([see plot above](#varying-pdsi-plot)). The effects of
 ``` r
 # PLot replicated nonlinear effects
 plot_coef_nl(
-  models = model_cov_list,          # List of fitted INLA model objects
-  mod_id = c("mod3", "mod6"),       # Select which models to include in the plot
-  mod_label = c(                    # Custom display labels for the selected models
+  models = model_cov_list, # List of fitted INLA model objects
+  mod_id = c("mod3", "mod6"), # Select which models to include in the plot
+  mod_label = c( # Custom display labels for the selected models
     "mod3" = "pdsi.l1_rep_clim",    
     "mod6" = "pdsi.l1_rep_clim + tmin.l1"
   ),
-  var_label = c(                    # Rename variables for clearer axis/legend labels
+  var_label = c( # Rename variables for clearer axis/legend labels
     "pdsi.l1" = "PDSI lag 1"
   ),
-  name = "pdsi.l1",                 # Variable to plot: nonlinear effect of pdsi.l1
-  title = "nonlinear effect of PDSI at one-month lag replicated by main climate",   # Main plot title
-  xlab = "PDSI",                     # X-axis label
-  palette = "IDE2",                  # Color palette for plotting the nonlinear curves
-  collapse = FALSE,                  # Display results in a grid (one plot per covariate-model pair)
-  rug = FALSE,                       # Do not show rug plot for data density along the x-axis
-  histogram = TRUE,                  # Show histogram of covariate distribution instead of rug plot
-  legend = "Climate zone"            # Add legend title
+  name = "pdsi.l1", # Variable to plot: nonlinear effect of pdsi.l1
+  title = "Nonlinear effect of PDSI at one-month lag replicated by main climate", 
+  xlab = "PDSI", # X-axis label
+  palette = "IDE2", # Color palette for plotting the nonlinear curves
+  collapse = FALSE, # Display results in a grid (one plot per covariate-model pair)
+  rug = FALSE,  # Do not show rug plot for data density along the x-axis
+  histogram = TRUE, # Show histogram of covariate distribution instead of rug plot
+  legend = "Climate zone" # Add legend title
 )
 ```
 
@@ -837,7 +844,7 @@ plot_coef_nl(
 
 <br>
 
-# Example 2: Modeling in GHRmodel with user-defined INLA-compatible formulas
+# Example 2: INLA-compatible formulas
 
 In some cases, users may wish to define their own INLA-compatible model
 formulas manually rather than generating them through **GHRmodel**
@@ -852,7 +859,7 @@ computing differences in goodness-of-fit metrics. In addition, all
 formulas are required to have the same random effect structure for
 compatibility with `as_GHRformulas()`.
 
-**1. Model development**
+## 1. Model development
 
 Below, we provide a user-defined vector of INLA-compatible model
 formulas and convert it into a standardized `GHRformulas` object using
@@ -887,7 +894,7 @@ class(formulas_user_ghr)
 #> [1] "GHRformulas" "list"
 ```
 
-**2. Model fitting**
+## 2. Model fitting
 
 Fit the user-defined model formulas:
 
@@ -908,7 +915,7 @@ model_user <- fit_models(
 )
 ```
 
-**3. Model evaluation**
+## 3. Model evaluation
 
 The *GHRmodel Overview* vignette describes the full set of functions
 available for model evaluation, which can be applied here to assess
@@ -926,7 +933,7 @@ plot_coef_lin(
 )
 ```
 
-<img src="GHRmodel_covariates_files/figure-gfm/plot user model-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_covariates_files/figure-gfm/plot user model-1.png" style="display: block; margin: auto;" />
 
 # References
 

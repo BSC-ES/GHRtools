@@ -15,6 +15,12 @@ Copy paste header, badges and hex sticker from main page to the vignette.
 
 Change the file extension from .md to .qmd
 
+# README
+
+Copy/paste the README file content taking into account the different grid configuration
+of the website vs. the raw README file.
+
+Change the extensions to quarto (.qmd) and apply the website quarto header.
 
 # Changelog
 
