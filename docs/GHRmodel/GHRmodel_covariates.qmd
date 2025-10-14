@@ -47,13 +47,11 @@ This vignette covers:
 > guidance for model selection.
 
 <div class="figure" style="text-align: center">
-
-<img src="../inst/images/GHRmodel_model_development.png" alt="**GHRmodel** functions to streamline INLA-compatible model formula development." width="100%" />
+<img src="https://gitlab.earth.bsc.es/ghr/ghrmodel/-/raw/510e4737684359badce248d83a9113be8a3b976f/inst/images/GHRmodel_structure.png" alt="**GHRmodel** functions to streamline INLA-compatible model formula development." width="100%" />
 <p class="caption">
 **GHRmodel** functions to streamline INLA-compatible model formula
 development.
 </p>
-
 </div>
 
 <br> Information regarding installation and a brief summary of the

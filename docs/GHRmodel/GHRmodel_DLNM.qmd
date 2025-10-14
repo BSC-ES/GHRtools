@@ -37,7 +37,7 @@ leveraging the functionality of the **dlnm** package (Gasparrini, 2011)
 within **GHRmodel**.
 
 DLNMs extend distributed lag models (DLMs) to capture associations where
-the effect of an exposure (e.g. temperature) on an outcome (e.g. dengue
+the effect of an exposure (e.g. temperature) on an outcome (e.g. dengue
 incidence) is lagged in time. These exposure–lag–response associations
 are represented along two dimensions, exposure and lag, each modelled
 with its own basis function (a mathematical function used to flexibly

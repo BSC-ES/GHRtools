@@ -189,16 +189,11 @@ Shiny](https://www.paulamoraga.com/book-geospatial/index.html)
 ## GHRmodel structure
 
 <div class="figure" style="text-align: center">
-
-<img src="../inst/images/GHRmodel_structure.png" alt="Structure of the **GHRmodel** package, outlining its functions (in blue), GHRmodel-specific output objects (in purple), generic output objects (in grey), and general functionality. Generic output objects can be provided directly by the user or can be generated using GHRmodel helper functions." width="100%" />
+<img src="https://gitlab.earth.bsc.es/ghr/ghrmodel/-/raw/510e4737684359badce248d83a9113be8a3b976f/inst/images/GHRmodel_structure.png" alt="**GHRmodel** functions to streamline INLA-compatible model formula development." width="100%" />
 <p class="caption">
-Structure of the **GHRmodel** package, outlining its functions (in
-blue), GHRmodel-specific output objects (in purple), generic output
-objects (in grey), and general functionality. Generic output objects can
-be provided directly by the user or can be generated using GHRmodel
-helper functions.
+**GHRmodel** functions to streamline INLA-compatible model formula
+development.
 </p>
-
 </div>
 
 <br> This vignette outlines the full modeling workflow using the
