@@ -294,50 +294,50 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview-of-ghrmodel" id="toc-overview-of-ghrmodel" class="nav-link active" data-scroll-target="#overview-of-ghrmodel">Overview of <strong>GHRmodel</strong></a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#data-requirements" id="toc-data-requirements" class="nav-link" data-scroll-target="#data-requirements">Data requirements</a></li>
   <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
-  <li><a href="#ghrmodel-structure" id="toc-ghrmodel-structure" class="nav-link" data-scroll-target="#ghrmodel-structure"><strong>GHRmodel</strong> structure</a>
+  <li><a href="#ghrmodel-structure" id="toc-ghrmodel-structure" class="nav-link" data-scroll-target="#ghrmodel-structure">GHRmodel structure</a>
   <ul class="collapse">
-  <li><a href="#model-development-in-the-r-inla-framework" id="toc-model-development-in-the-r-inla-framework" class="nav-link" data-scroll-target="#model-development-in-the-r-inla-framework">1. Model development in the R-INLA framework</a></li>
-  <li><a href="#model-fitting-in-the-r-inla-framework" id="toc-model-fitting-in-the-r-inla-framework" class="nav-link" data-scroll-target="#model-fitting-in-the-r-inla-framework">2. Model fitting in the R-INLA framework</a></li>
+  <li><a href="#model-development" id="toc-model-development" class="nav-link" data-scroll-target="#model-development">1. Model development</a></li>
+  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting">2. Model fitting</a></li>
   <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">3. Model evaluation</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#example-ghrmodel-workflow" id="toc-example-ghrmodel-workflow" class="nav-link" data-scroll-target="#example-ghrmodel-workflow">Example <strong>GHRmodel</strong> workflow</a>
+  <li><a href="#ghrmodel-workflow" id="toc-ghrmodel-workflow" class="nav-link" data-scroll-target="#ghrmodel-workflow">GHRmodel workflow</a>
   <ul class="collapse">
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">0. Data</a>
   <ul class="collapse">
-  <li><a href="#description-of-example-data-set" id="toc-description-of-example-data-set" class="nav-link" data-scroll-target="#description-of-example-data-set">Description of example data set</a></li>
-  <li><a href="#prepare-the-data-set-for-modeling-in-r-inla" id="toc-prepare-the-data-set-for-modeling-in-r-inla" class="nav-link" data-scroll-target="#prepare-the-data-set-for-modeling-in-r-inla">Prepare the data set for modeling in R-INLA</a></li>
-  <li><a href="#prepare-data-for-spatial-analysis-in-r-inla" id="toc-prepare-data-for-spatial-analysis-in-r-inla" class="nav-link" data-scroll-target="#prepare-data-for-spatial-analysis-in-r-inla">Prepare data for spatial analysis in R-INLA</a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset description</a></li>
+  <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">Data pre-processing</a></li>
+  <li><a href="#spatial-data-and-graphs" id="toc-spatial-data-and-graphs" class="nav-link" data-scroll-target="#spatial-data-and-graphs">Spatial data and graphs</a></li>
   </ul></li>
-  <li><a href="#model-development" id="toc-model-development" class="nav-link" data-scroll-target="#model-development">1. Model development</a>
+  <li><a href="#model-development-1" id="toc-model-development-1" class="nav-link" data-scroll-target="#model-development-1">1. Model development</a>
   <ul class="collapse">
   <li><a href="#create-lagged-covariates" id="toc-create-lagged-covariates" class="nav-link" data-scroll-target="#create-lagged-covariates">Create lagged covariates</a></li>
   <li><a href="#write-covariates" id="toc-write-covariates" class="nav-link" data-scroll-target="#write-covariates">Write covariates</a></li>
   <li><a href="#write-formulas" id="toc-write-formulas" class="nav-link" data-scroll-target="#write-formulas">Write formulas</a></li>
   </ul></li>
-  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting">2. Model fitting</a></li>
+  <li><a href="#model-fitting-1" id="toc-model-fitting-1" class="nav-link" data-scroll-target="#model-fitting-1">2. Model fitting</a></li>
   <li><a href="#model-evaluation-1" id="toc-model-evaluation-1" class="nav-link" data-scroll-target="#model-evaluation-1">3. Model evaluation</a>
   <ul class="collapse">
-  <li><a href="#rank-models-by-goodness-of-fit" id="toc-rank-models-by-goodness-of-fit" class="nav-link" data-scroll-target="#rank-models-by-goodness-of-fit">Rank models by goodness-of-fit</a></li>
+  <li><a href="#rank-models" id="toc-rank-models" class="nav-link" data-scroll-target="#rank-models">Rank models</a></li>
   <li><a href="#posterior-predictive-checks" id="toc-posterior-predictive-checks" class="nav-link" data-scroll-target="#posterior-predictive-checks">Posterior predictive checks</a></li>
   <li><a href="#goodness-of-fit-metrics" id="toc-goodness-of-fit-metrics" class="nav-link" data-scroll-target="#goodness-of-fit-metrics">Goodness-of-fit metrics</a></li>
   <li><a href="#fitted-vs.-observed" id="toc-fitted-vs.-observed" class="nav-link" data-scroll-target="#fitted-vs.-observed">Fitted vs.&nbsp;Observed</a></li>
-  <li><a href="#evaluate-effect-of-the-covariates" id="toc-evaluate-effect-of-the-covariates" class="nav-link" data-scroll-target="#evaluate-effect-of-the-covariates">Evaluate effect of the covariates</a></li>
+  <li><a href="#covariate-effects" id="toc-covariate-effects" class="nav-link" data-scroll-target="#covariate-effects">Covariate effects</a></li>
   <li><a href="#evaluate-random-effects" id="toc-evaluate-random-effects" class="nav-link" data-scroll-target="#evaluate-random-effects">Evaluate random effects</a></li>
   </ul></li>
   <li><a href="#iterative-model-selection" id="toc-iterative-model-selection" class="nav-link" data-scroll-target="#iterative-model-selection">4. Iterative model selection</a>
   <ul class="collapse">
   <li><a href="#subset-models" id="toc-subset-models" class="nav-link" data-scroll-target="#subset-models">Subset models</a></li>
-  <li><a href="#extract-covariates-from-a-ghrmodels-object" id="toc-extract-covariates-from-a-ghrmodels-object" class="nav-link" data-scroll-target="#extract-covariates-from-a-ghrmodels-object">Extract covariates from a <code>GHRmodels</code> object</a></li>
-  <li><a href="#add-a-covariate-to-each-element-in-a-list-of-covariates" id="toc-add-a-covariate-to-each-element-in-a-list-of-covariates" class="nav-link" data-scroll-target="#add-a-covariate-to-each-element-in-a-list-of-covariates">Add a covariate to each element in a list of covariates</a></li>
+  <li><a href="#extract-covariates" id="toc-extract-covariates" class="nav-link" data-scroll-target="#extract-covariates">Extract covariates</a></li>
+  <li><a href="#add-an-additional-covariate" id="toc-add-an-additional-covariate" class="nav-link" data-scroll-target="#add-an-additional-covariate">Add an additional covariate</a></li>
   <li><a href="#fit-new-models" id="toc-fit-new-models" class="nav-link" data-scroll-target="#fit-new-models">Fit new models</a></li>
   <li><a href="#combine-models" id="toc-combine-models" class="nav-link" data-scroll-target="#combine-models">Combine models</a></li>
-  <li><a href="#evaluate-combined-model-object" id="toc-evaluate-combined-model-object" class="nav-link" data-scroll-target="#evaluate-combined-model-object">Evaluate combined model object</a></li>
+  <li><a href="#evaluate-combined-models" id="toc-evaluate-combined-models" class="nav-link" data-scroll-target="#evaluate-combined-models">Evaluate combined models</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -367,8 +367,16 @@ window.Quarto = {
 
 
 <img src="../../figures/GHRexplore/logo_IDExtremes.jpg" align="right" width="18%"> <span> <span> <img src="../../figures/GHRexplore/logo_BSC.png" align="right" width="16%"> 
-<section id="overview-of-ghrmodel" class="level1">
-<h1>Overview of <strong>GHRmodel</strong></h1>
+<style>
+div.csl-bib-body {
+  font-size: 0.9em;         /* smaller font */
+}
+div.csl-entry {
+  margin-bottom: 0.6em;     /* add space between references */
+}
+</style>
+<section id="overview" class="level1">
+<h1>Overview</h1>
 <p>The <strong>GHRmodel</strong> package supports modeling health outcomes using Bayesian hierarchical spatio-temporal models with complex covariate effects (e.g., linear, non-linear, interactions, distributed lag linear and non-linear models) in the <a href="https://www.r-inla.org/home">R-INLA</a> framework. It is designed to help users identify key drivers and predictors of disease risk by enabling streamlined model exploration, comparison, and visualization of complex covariate effects.</p>
 <p>The <strong>GHRmodel</strong> package is designed to work in tandem with other packages of the GHRtools suite: <strong>GHRexplore</strong>, which facilitates data exploration and visualization, and <strong>GHRpredict</strong>, which computes out-of-sample probabilistic predictions of models developed in <strong>GHRmodel</strong> and enables predictive performance evaluation. More information about the toolkit, with tutorials and published examples can be found at this <a href="https://bsc-es.github.io/GHRtools/">website</a>.</p>
 <p>This vignette provides an overview of the <strong>GHRmodel</strong> package methodology, the core functions, and a simple example workflow using real data. More complex use-cases and examples are described in other vignettes (<em>GHRmodel_DLNM</em> regarding Distributed Lag Nonlinear Models in <strong>GHRmodel</strong> and <em>GHRmodel_covariates</em> describing Complex Covariate Structures in <strong>GHRmodel</strong>). Vignettes loaded in the package can be accessed in R by typing <code>vignette("vignettename")</code> (e.g., <code>vignette("GHRmodel_overview")</code>).</p>
@@ -383,7 +391,9 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">'https://earth.bsc.es/gitlab/ghr/ghrmodel.git'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If you have downloaded the source package as a <code>.tar.gz</code> file (e.g., from a release), you can install it locally using by typing <code>install.packages("path_to_tar.gz_file/GHRmodel_0.1.0.tar.gz", repos = NULL, type = "source", build_vignettes = TRUE)</code>.</p>
 <p>One key dependency of the <strong>GHRmodel</strong> package, the <a href="https://www.r-inla.org/home">R-INLA</a> package, is not hosted on CRAN and must be installed manually using:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"INLA"</span>,<span class="at">repos=</span><span class="fu">c</span>(<span class="fu">getOption</span>(<span class="st">"repos"</span>),<span class="at">INLA=</span><span class="st">"https://inla.r-inla-download.org/R/stable"</span>), <span class="at">dep=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"INLA"</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">repos=</span><span class="fu">c</span>(<span class="fu">getOption</span>(<span class="st">"repos"</span>),  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">INLA=</span><span class="st">"https://inla.r-inla-download.org/R/stable"</span>), <span class="at">dep=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Instructions on how to install R-INLA and troubleshooting suggestions can be found on the <a href="https://www.r-inla.org/download-install">R-INLA download and installation page</a>.</p>
 </section>
 <section id="data-requirements" class="level2">
@@ -431,16 +441,16 @@ log(\mu_{s,t}) = \alpha + \delta_m(t) + \gamma_a(t) + u_s + v_s + \sum_{k} \beta
 <p>To learn more about Bayesian inference, <a href="https://srcd.onlinelibrary.wiley.com/doi/10.1111/cdev.12169">this paper</a> provides an initial overview and this book (<a href="https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf">Statistical Rethinking</a>) is a comprehensive and accessible introduction to the subject (McElreath, 2020; Van De Schoot et al., 2014). To learn more about Bayesian inference using R-INLA there is a wide array of freely accessible <a href="https://www.r-inla.org/learnmore">resources online</a>. Useful online <a href="https://www.r-inla.org/learnmore/books">books</a> include <a href="https://becarioprecario.bitbucket.io/inla-gitbook/">Bayesian Inference with INLA</a> or <a href="https://www.paulamoraga.com/book-geospatial/index.html">Geospatial Health Data: modeling and visualization with R-INLA and Shiny</a> (Gómez-Rubio, 2020; Moraga, 2019)</p>
 </section>
 <section id="ghrmodel-structure" class="level2">
-<h2 class="anchored" data-anchor-id="ghrmodel-structure"><strong>GHRmodel</strong> structure</h2>
+<h2 class="anchored" data-anchor-id="ghrmodel-structure">GHRmodel structure</h2>
 <div class="figure" style="text-align: center">
 <img src="../inst/images/GHRmodel_structure.png" alt="Structure of the **GHRmodel** package, outlining its functions (in blue), GHRmodel-specific output objects (in purple), generic output objects (in grey), and general functionality. Generic output objects can be provided directly by the user or can be generated using GHRmodel helper functions." width="100%">
 <p class="caption">
 Structure of the <strong>GHRmodel</strong> package, outlining its functions (in blue), GHRmodel-specific output objects (in purple), generic output objects (in grey), and general functionality. Generic output objects can be provided directly by the user or can be generated using GHRmodel helper functions.
 </p>
 </div>
-<p><br> This vignette outlines the full modeling workflow using the <strong>GHRmodel</strong> package. The process is organized into three key stages:</p>
-<section id="model-development-in-the-r-inla-framework" class="level3">
-<h3 class="anchored" data-anchor-id="model-development-in-the-r-inla-framework">1. Model development in the R-INLA framework</h3>
+<p><br> This vignette outlines the full modeling workflow using the <strong>GHRmodel</strong> package. The process is organized into three key stages: model development, model fitting, and model evaluation.</p>
+<section id="model-development" class="level3">
+<h3 class="anchored" data-anchor-id="model-development">1. Model development</h3>
 <p>To fit a model with R-INLA, formulas need to follow its required syntax and structural conventions. INLA-compatible model formulas can be developed using either:</p>
 <ul>
 <li><p>User-defined INLA-compatible input, which may consist of either user-defined covariate lists or user-defined formula lists.</p></li>
@@ -497,8 +507,8 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 <p>Once the INLA-compatible model formulas are developed, they must be passed to the <code>as_GHRformulas()</code> function to be converted into a standardized <code>GHRformulas</code> object. This ensures consistent output structure and random effect specification across models that can be interpreted by the function <code>fit_models()</code> for model fitting. The <code>as_GHRformulas()</code> function accepts either a user-defined vector of formulas or the output from <code>write_inla_formulas()</code>. Currently all formulas in a <code>GHRformulas</code> object must share the same random-effect structure. For example, you cannot combine formulas that include both seasonal and annual random effects with formulas that include only seasonal random effects.</p>
 <p>For more information see <code>vignette("GHRmodel_covariates")</code>.</p>
 </section>
-<section id="model-fitting-in-the-r-inla-framework" class="level3">
-<h3 class="anchored" data-anchor-id="model-fitting-in-the-r-inla-framework">2. Model fitting in the R-INLA framework</h3>
+<section id="model-fitting" class="level3">
+<h3 class="anchored" data-anchor-id="model-fitting">2. Model fitting</h3>
 <p>The <code>fit_models()</code> function allows users to fit a set of INLA-compatible model formulas defined by a <code>GHRformulas</code> object to a provided data set. It automates model fitting, extraction of outputs, and computation of a wide range of goodness-of-fit (GoF) metrics. The output is a <code>GHRmodels</code> object.</p>
 <p>Efficient modeling workflows often require organizing, comparing, and extracting subsets of models. The <code>GHRmodels</code> object supports these operations via helper functions to subset, stack, and retrieve covariates (<code>subset_models()</code>, <code>stack_models()</code>, <code>get_covariates()</code>, respectively).</p>
 </section>
@@ -520,8 +530,8 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 </section>
 </section>
 </section>
-<section id="example-ghrmodel-workflow" class="level1">
-<h1>Example <strong>GHRmodel</strong> workflow</h1>
+<section id="ghrmodel-workflow" class="level1">
+<h1>GHRmodel workflow</h1>
 <p>In this example, we demonstrate how to use <strong>GHRmodel</strong> to formulate, fit and evaluate univariable and bivariate models of dengue risk with <em>tmin</em> (monthly average daily minimum temperature averaged across each spatial unit) and <em>pdsi</em> (self-calibrated Palmer Drought Severity Index for each microregion) across 1- to 6-month lags.</p>
 <blockquote class="blockquote">
 <p>📝 <strong>Note</strong>: The examples in this vignette are designed to demonstrate package functionality and should not be interpreted as best-practice guidance for model selection.</p>
@@ -547,8 +557,8 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GHRmodel)     </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">0. Data</h2>
-<section id="description-of-example-data-set" class="level3">
-<h3 class="anchored" data-anchor-id="description-of-example-data-set">Description of example data set</h3>
+<section id="dataset-description" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-description">Dataset description</h3>
 <p>The example dataset contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatio-temporal covariates. This dataset represents a subset of a larger national dataset that covers the entire territory of Brazil. The subset focuses on a specific region, <em>Mato Grosso do Sul</em>, for the purposes of illustration and computational efficiency. The original full data set, which includes data from all Brazilian microregions, is cited in the accompanying <a href="https://github.com/drrachellowe/hydromet_dengue">source code on GitHub</a> and <a href="https://doi.org/10.5281/zenodo.4632205">Zenodo</a>.</p>
 <p>In this data frame, the <em>date</em> column contains the temporal identifier (in this case, we have monthly data) and the spatial unit identifier is <em>micro_code</em>. Each <em>micro_code</em> corresponds to a distinct microregion with a complete monthly time series. For more information about the data set, see <code>?dengue_MS</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load data </span></span>
@@ -558,21 +568,20 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View initial rows in example dataframe</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 27</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   micro_code micro_name     micro_name_ibge meso_code meso_name       state_code state_name region_code region_name</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;      </span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      50001 Baixo Pantanal BAIXO PANTANAL       5001 Pantanais Sul …         50 Mato Gros…           5 Centre-West</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      50002 Aquidauana     AQUIDAUANA           5001 Pantanais Sul …         50 Mato Gros…           5 Centre-West</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      50003 Alto Taquari   ALTO TAQUARI         5002 Centro Norte D…         50 Mato Gros…           5 Centre-West</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      50004 Campo Grande   CAMPO GRANDE         5002 Centro Norte D…         50 Mato Gros…           5 Centre-West</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5      50005 Cassilândia    CASSILÂNDIA          5003 Leste De Mato …         50 Mato Gros…           5 Centre-West</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6      50006 Paranaíba      PARANAÍBA            5003 Leste De Mato …         50 Mato Gros…           5 Centre-West</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 18 more variables: biome_code &lt;dbl&gt;, biome_name &lt;chr&gt;, ecozone_code &lt;dbl&gt;, ecozone_name &lt;chr&gt;,</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   main_climate &lt;chr&gt;, month &lt;dbl&gt;, year &lt;dbl&gt;, time &lt;dbl&gt;, dengue_cases &lt;dbl&gt;, population &lt;dbl&gt;,</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   pop_density &lt;dbl&gt;, tmax &lt;dbl&gt;, tmin &lt;dbl&gt;, pdsi &lt;dbl&gt;, urban &lt;dbl&gt;, water_network &lt;dbl&gt;, water_shortage &lt;dbl&gt;,</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   date &lt;date&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   micro_code micro_name     micro_name_ibge meso_code meso_name    state_code state_name region_code region_name biome_code biome_name</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      50001 Baixo Pantanal BAIXO PANTANAL       5001 Pantanais S…         50 Mato Gros…           5 Centre-West          3 Pantanal  </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      50002 Aquidauana     AQUIDAUANA           5001 Pantanais S…         50 Mato Gros…           5 Centre-West          3 Pantanal  </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      50003 Alto Taquari   ALTO TAQUARI         5002 Centro Nort…         50 Mato Gros…           5 Centre-West          2 Cerrado   </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      50004 Campo Grande   CAMPO GRANDE         5002 Centro Nort…         50 Mato Gros…           5 Centre-West          2 Cerrado   </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5      50005 Cassilândia    CASSILÂNDIA          5003 Leste De Ma…         50 Mato Gros…           5 Centre-West          2 Cerrado   </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6      50006 Paranaíba      PARANAÍBA            5003 Leste De Ma…         50 Mato Gros…           5 Centre-West          2 Cerrado   </span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 16 more variables: ecozone_code &lt;dbl&gt;, ecozone_name &lt;chr&gt;, main_climate &lt;chr&gt;, month &lt;dbl&gt;, year &lt;dbl&gt;, time &lt;dbl&gt;,</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   dengue_cases &lt;dbl&gt;, population &lt;dbl&gt;, pop_density &lt;dbl&gt;, tmax &lt;dbl&gt;, tmin &lt;dbl&gt;, pdsi &lt;dbl&gt;, urban &lt;dbl&gt;, water_network &lt;dbl&gt;,</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   water_shortage &lt;dbl&gt;, date &lt;date&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="prepare-the-data-set-for-modeling-in-r-inla" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-the-data-set-for-modeling-in-r-inla">Prepare the data set for modeling in R-INLA</h3>
+<section id="data-pre-processing" class="level3">
+<h3 class="anchored" data-anchor-id="data-pre-processing">Data pre-processing</h3>
 <p>Create numeric ID variables for categorical features (such as year, month, or spatial units) that may be included as random effects, in line with R-INLA’s requirements. R-INLA expects random effect variables to be specified as numeric indices. Additionally, each variable can only appear in a single model term. Therefore, if a categorical variable is used in multiple roles (e.g., as a random effect and also as a grouping variable for a fixed effect), separate numeric ID variables must be created for each usage.</p>
 <blockquote class="blockquote">
 <p>💡 <strong>Tip</strong>: It is recommended to retain both the numeric ID and the original categorical variable in your dataset, as this supports easier interpretation and model evaluation, for example by allowing users to easily map model outputs based on numeric IDs back to the original labels for reporting or visualization.</p>
@@ -597,8 +606,8 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">spat_meso_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(meso_code))</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="prepare-data-for-spatial-analysis-in-r-inla" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-data-for-spatial-analysis-in-r-inla">Prepare data for spatial analysis in R-INLA</h3>
+<section id="spatial-data-and-graphs" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-data-and-graphs">Spatial data and graphs</h3>
 <p>To perform spatial analysis and generate maps of observations across multiple spatial units, the polygon geometries must be provided as an <code>sf</code> object. Polygon geometries represent the shapes and boundaries of spatial units (e.g., districts, or ecological zones) using a series of connected coordinate points that enclose an area. The <code>sf</code> object must include a spatial unit identifier to enable linkage with the corresponding data frame. For the <code>dengue_MS</code> dataset, the areal polygons are already included in the package in the <code>map_MS</code> object. In <code>map_MS</code>, the <em>code</em> variable corresponds to the <em>micro_code</em> area identifier in the <code>dengue_MS</code> object.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load map (sf object) included in package</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"map_MS"</span>)</span>
@@ -612,7 +621,7 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Longitude"</span>,</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Latitude"</span>)<span class="sc">+</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/Load map_MS-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_overview_files/figure-gfm/Load map_MS-1.png" style="display: block; margin: auto;"></p>
 <p>To model spatially structured random effects (e.g., using the Besag-York-Mollié model (BYM (Besag et al., 1991)) or BYM2 model (Simpson et al., 2017) for areal data in R-INLA), we need an adjacency matrix that defines neighboring relationships between spatial units. Spatially structured random effects (represented by <span class="math inline">\(u_s\)</span> in the example model formulation above) account for spatial autocorrelation (meaning that nearby regions tend to have similar values) by introducing a correlation structure based on geographic proximity. Spatially unstructured random effects (represented by <span class="math inline">\(v_s\)</span> in the example model formulation above) can be used to account for uncorrelated noise. Including these random effects helps capture spatial variation that is not explained by the fixed effects in the model.</p>
 <p>The adjacency matrix, indicating which spatial units share borders, is constructed using the <strong>spdep</strong> package.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create adjacency Matrix</span></span>
@@ -620,8 +629,8 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> spdep<span class="sc">::</span><span class="fu">nb2mat</span>(nb, <span class="at">style =</span> <span class="st">"B"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="model-development" class="level2">
-<h2 class="anchored" data-anchor-id="model-development">1. Model development</h2>
+<section id="model-development-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-development-1">1. Model development</h2>
 <p>In this example we demonstrate how to use the <strong>GHRmodel</strong> helper functions to streamline writing INLA-compatible formulas.</p>
 <section id="create-lagged-covariates" class="level3">
 <h3 class="anchored" data-anchor-id="create-lagged-covariates">Create lagged covariates</h3>
@@ -679,7 +688,7 @@ Structure of the <strong>GHRmodel</strong> package, outlining its functions (in 
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize output: character vector of covariate names</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cov_names)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  chr [1:12] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  chr [1:12] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" "pdsi.l4" "pdsi.l5" ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><strong>Generate list of linear covariates for univariable models</strong></li>
 </ul>
@@ -876,8 +885,8 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRformulas" "list"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="model-fitting" class="level2">
-<h2 class="anchored" data-anchor-id="model-fitting">2. Model fitting</h2>
+<section id="model-fitting-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-fitting-1">2. Model fitting</h2>
 <p>The <code>fit_models()</code> function allows users to fit a set of INLA-compatible models defined by a <code>GHRformulas</code> object to a provided data set. It automates model fitting, extraction of outputs, and computation of a wide range of goodness-of-fit (GoF) metrics. It also facilitates model selection: if a baseline model (e.g., random effects-only) is included as the first entry in the formula list—as when generated via <code>write_inla_formulas(..., baseline = TRUE)</code>—the function highlights how subsequent models improve on this baseline across multiple dimensions.</p>
 <p><strong>Inputs</strong></p>
 <p><code>formulas</code>: A <code>GHRformulas</code> object containing one or more INLA model formulas.</p>
@@ -933,8 +942,8 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <section id="model-evaluation-1" class="level2">
 <h2 class="anchored" data-anchor-id="model-evaluation-1">3. Model evaluation</h2>
 <p>Most, but not all, model evaluation functions in the GHR package suite return graphical <code>ggplot2</code> or <code>cowplot</code> objects and require a <code>GHRmodels</code> object as input. Users can customize visual outputs using standard <code>ggplot2</code> syntax.</p>
-<section id="rank-models-by-goodness-of-fit" class="level3">
-<h3 class="anchored" data-anchor-id="rank-models-by-goodness-of-fit">Rank models by goodness-of-fit</h3>
+<section id="rank-models" class="level3">
+<h3 class="anchored" data-anchor-id="rank-models">Rank models</h3>
 <p>The <code>rank_models()</code> function provides a simple way to rank models stored in a <code>GHRmodels object</code> based on a selected GoF metric. This function supports any of the GoF metrics or relative metrics output in the <code>mod_gof</code> component of a <code>GHRmodels</code> object ( see <code>?fit_models</code>).</p>
 <p>Here we rank models based on WAIC and return the top 2 models with the lowest WAIC values.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -959,41 +968,38 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>plot_ppd()</code> function takes the output from <code>sample_ppd()</code> and creates a density plot comparing the distributions of the posterior predictive (purple line) with the observed data (black line). This visual comparison helps assess model fit and detect discrepancies between the predicted and observed outcome distributions.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ppd</span>(ppd_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_ppd-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_ppd-1.png" style="display: block; margin: auto;"></p>
 </section>
 <section id="goodness-of-fit-metrics" class="level3">
 <h3 class="anchored" data-anchor-id="goodness-of-fit-metrics">Goodness-of-fit metrics</h3>
 <p>The <code>plot_gof()</code> function provides a convenient way to visualize and compare the performance of multiple models using a selected goodness-of-fit (GoF) metric, such as DIC, WAIC, RMSE, or CRPS. It is typically used with the <code>mod_gof</code> component of a <code>GHRmodels</code> object (produced by <code>fit_models()</code>), but it can also accept any custom data frame — provided it contains the same column names as the default <code>mod_gof</code> output (including <code>model_id</code> and the relevant metric column names). A key feature of <code>plot_gof()</code> is its ability to visually arrange and distinguish models by mapping any column in the input data frame to plot aesthetics such as color, shape, or facet layout. This makes it easy for the user to customize the input data frame to organize models by additional user-defined categories (e.g., <em>environmental variables</em> or <em>dlnm models</em>). Further, the plot supports customization by allowing users to specify which models to include, apply custom labels, and optionally display 95% credible intervals for metrics like <code>dic_vs_first</code> or <code>waic_vs_first</code>.</p>
 <p>Here we assess how the inclusion of different covariates impacts model performance using <code>plot_gof()</code> to compare each model’s WAIC against that of a baseline model (<code>waic_vs_first</code>). Before plotting, we annotate each model in the <code>model_list$mod_gof</code> dataframe with descriptive labels that classify the type of transformation applied to each covariate.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate each model in the model_list$mod_gof dataframe with descriptive labels</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>model_list_gof <span class="ot">&lt;-</span> model_list<span class="sc">$</span>mod_gof <span class="sc">|&gt;</span> </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Variable transformation 1st covariate</span><span class="st">`</span> <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"_nl"</span>, covariate_1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">~</span> <span class="st">"non-linear"</span>, </span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(covariate_1) <span class="sc">~</span> <span class="st">"baseline"</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>      T <span class="sc">~</span> <span class="st">"linear"</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Covariates</span><span class="st">`</span> <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"tmin"</span>, covariate_1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> <span class="fu">is.na</span>(covariate_2) <span class="sc">~</span> <span class="st">"tmin"</span>,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"pdsi"</span>, covariate_1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> <span class="fu">is.na</span>(covariate_2) <span class="sc">~</span> <span class="st">"pdsi"</span>,</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(covariate_1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(covariate_2) <span class="sc">~</span> <span class="st">"tmin + pdsi"</span>,</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(covariate_1) <span class="sc">~</span> <span class="st">"random effect only"</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate each model in the model_list$mod_gof dataframe with descriptive labels</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>model_list_gof <span class="ot">&lt;-</span> model_list<span class="sc">$</span>mod_gof <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Variable transformation 1st covariate</span><span class="st">`</span> <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"_nl"</span>, covariate_1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">~</span> <span class="st">"non-linear"</span>, </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(covariate_1) <span class="sc">~</span> <span class="st">"baseline"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>      T <span class="sc">~</span> <span class="st">"linear"</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Covariates</span><span class="st">`</span> <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"tmin"</span>, covariate_1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> <span class="fu">is.na</span>(covariate_2) <span class="sc">~</span> <span class="st">"tmin"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"pdsi"</span>, covariate_1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> <span class="fu">is.na</span>(covariate_2) <span class="sc">~</span> <span class="st">"pdsi"</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(covariate_1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(covariate_2) <span class="sc">~</span> <span class="st">"tmin + pdsi"</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(covariate_1) <span class="sc">~</span> <span class="st">"random effect only"</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In this plot we observe that models that included a non-linear term for the previous month’s mean temperature (<em>tmin.l1</em>) improved model fit relative to the baseline most.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot change in WAIC for each model compared to the baseline (first model in the list)</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_gof</span>(</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_gof =</span> model_list_gof,            <span class="co"># Goodness-of-fit data from model_list</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"waic_vs_first"</span>,            <span class="co"># Compare WAIC to the first model (baseline)</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci =</span> <span class="cn">TRUE</span>,                           <span class="co"># Include credible intervals (if available)</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_arrange =</span> <span class="st">"waic_vs_first"</span>,       <span class="co"># Arrange models by WAIC difference</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_color =</span>  <span class="st">"Variable transformation 1st covariate"</span>,    <span class="co"># color mapped to variable transformation</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_shape =</span> <span class="st">"Covariates"</span>,  <span class="co"># Shape mapped to including tmin.l1</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Colorblind"</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_gof covariate 1 and 2-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot change in WAIC for each model compared to the baseline (first model in the list)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_gof</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_gof =</span> model_list_gof,            <span class="co"># Goodness-of-fit data from model_list</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"waic_vs_first"</span>,            <span class="co"># Compare WAIC to the first model (baseline)</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci =</span> <span class="cn">TRUE</span>,                           <span class="co"># Include credible intervals (if available)</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_arrange =</span> <span class="st">"waic_vs_first"</span>,       <span class="co"># Arrange models by WAIC difference</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_color =</span>  <span class="st">"Variable transformation 1st covariate"</span>,    <span class="co"># variable transformation</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_shape =</span> <span class="st">"Covariates"</span>,  <span class="co"># Shape mapped to including tmin.l1</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Colorblind"</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_gof covariate 1 and 2-1.png" style="display: block; margin: auto;"></p>
 </section>
 <section id="fitted-vs.-observed" class="level3">
 <h3 class="anchored" data-anchor-id="fitted-vs.-observed">Fitted vs.&nbsp;Observed</h3>
@@ -1007,56 +1013,54 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <p>Here we observe that the best-fitting model by WAIC performs better during some dengue outbreaks than the baseline random-effect-only model (especially in 2010, 2015 and 2016).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot observed vs. fitted cases over time for three selected models</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_fit</span>(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,                         <span class="co"># A GHRmodels object containing the fitted models</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,                         <span class="co"># A GHRmodels object (fitted models)</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>),          <span class="co"># Vector of model IDs to plot</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Custom display names </span></span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1.nl"</span>,            </span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1.nl_tmin.l1.nl"</span>),            </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>,                          <span class="co"># Color override for the reference model (first listed)</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>,                          <span class="co"># Color override for the ref model (first)</span></span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,                               <span class="co"># Name of the time variable in the dataset</span></span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Set2"</span>,                            <span class="co"># Color palette for fitted lines</span></span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="st">"2010-01-01"</span>, <span class="st">"2020-01-01"</span>),        <span class="co"># Limit x-axis to this date range</span></span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Fitted vs Observed"</span>                 <span class="co"># Main plot title</span></span>
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_fit default-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_fit default-1.png" style="display: block; margin: auto;"></p>
 <p><br> Here we visualize how well each model’s predictions match the observed case counts over time, grouped by the region ID <em>meso_code</em>. Faceting (<code>mod_facet = TRUE</code>) allows for side-by-side visual comparison of different modeling strategies. The log-transformed y-axis using <code>transform = "log10p1"</code> applies a log10(x + 1) transformation for improved visibility where count data vary greatly in scale.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot observed vs. fitted values from multiple models with faceted panels by model</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_fit</span>(</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,                          <span class="co"># GHRmodels object containing fitted models</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod4"</span>),                  <span class="co"># Vector of model IDs to plot</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Custom display name for mod1</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_tmin.l1"</span>),            <span class="co"># Custom display name for mod4</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,                               <span class="co"># Name of the time variable</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"meso_name"</span>,                         <span class="co"># Column defining grouped time-series (meso region)</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">group_id =</span> <span class="fu">c</span>(<span class="st">"Pantanais Sul Mato-Grossense"</span>, <span class="co"># Select specific groups to display</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Leste De Mato Grosso Do Sul"</span>),</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="st">"log10p1"</span>,                       <span class="co"># Apply log10(x + 1) transformation to y-axis for scaling</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Set2"</span>,                            <span class="co"># Color palette for model fits</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_facet =</span> <span class="cn">TRUE</span>,                            <span class="co"># Facet by model to compare fits across panels</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs_color =</span> <span class="st">"purple"</span>,                        <span class="co"># Line color for observed case counts</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs_label =</span> <span class="st">"Observed cases"</span>,                <span class="co"># Legend label for observed values</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>,                          <span class="co"># Override color for the reference model</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Fitted models vs. Observed Cases"</span>,  <span class="co"># Main plot title</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci =</span> <span class="cn">FALSE</span>                                   <span class="co"># Do not plot credible intervals</span></span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot observed vs. fitted values from multiple models with faceted panels by model</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_fit</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,                          <span class="co"># GHRmodels object containing fitted models</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod4"</span>),                  <span class="co"># Vector of model IDs to plot</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Custom display name for mod1</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_tmin.l1"</span>),            <span class="co"># Custom display name for mod4</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,                               <span class="co"># Name of the time variable</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"meso_name"</span>,                         <span class="co"># Column defining grouped time-series (meso region)</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">group_id =</span> <span class="fu">c</span>(<span class="st">"Pantanais Sul Mato-Grossense"</span>, <span class="co"># Select specific groups to display</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Leste De Mato Grosso Do Sul"</span>),</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="st">"log10p1"</span>,                       <span class="co"># Apply log10(x + 1) transformation to y-axis for scaling</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Set2"</span>,                            <span class="co"># Color palette for model fits</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_facet =</span> <span class="cn">TRUE</span>,                            <span class="co"># Facet by model to compare fits across panels</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs_color =</span> <span class="st">"purple"</span>,                        <span class="co"># Line color for observed case counts</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs_label =</span> <span class="st">"Observed cases"</span>,                <span class="co"># Legend label for observed values</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>,                          <span class="co"># Override color for the reference model</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Fitted models vs. Observed Cases"</span>,  <span class="co"># Main plot title</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci =</span> <span class="cn">FALSE</span>                                   <span class="co"># Do not plot credible intervals</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="GHRmodel_overview_files/figure-gfm/plot_fit facet by group-1.png" width="100%" style="display: block; margin: auto;"></p>
 </section>
-<section id="evaluate-effect-of-the-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="evaluate-effect-of-the-covariates">Evaluate effect of the covariates</h3>
+<section id="covariate-effects" class="level3">
+<h3 class="anchored" data-anchor-id="covariate-effects">Covariate effects</h3>
 <p><strong>Linear coefficients</strong></p>
 <p>The <code>plot_coef_lin()</code> function generates a forest plot of fixed-effect (linear) coefficients from one or more models stored in a <code>GHRmodels</code> object. This plot provides a visual summary of point estimates and uncertainty (e.g., credible intervals) for linear covariates, helping to interpret the strength and direction of modeled associations.</p>
 <p>By default, the function plots all linear fixed-effect terms except the intercept. Users can filter the coefficients by exact variable names (<code>name</code>) or matching patterns (<code>pattern</code>), including interaction terms. If users do not select specific <em>model_id</em>s, by default the function plots all linear effects across all models in a provided <code>GHRmodels</code> object. Note that if any of the models contains a cross-basis covariate the function will plot the coefficients for each element in the cross-basis matrix (for more information about one-basis and cross-basis terms see the <em>Distributed Lag Nonlinear Models in GHRmodel</em> vignette by typing <code>vignette("GHRmodel_DLNM")</code>).</p>
 <p>This plot shows point estimates with confidence intervals for the linear covariates in <code>model_list</code>, enabling comparison of their effects across models. We observe that higher mean minimum temperatures lagged by one month, as well as wetter conditions at the same lag, are both associated with a significant increase in dengue cases.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod2"</span>,<span class="st">"mod4"</span>),</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"tmin.l1"</span><span class="ot">=</span> <span class="st">"Min. temp lag 1"</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index lag 1"</span>),</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effects of linear covariates"</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod2"</span>,<span class="st">"mod4"</span>),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"tmin.l1"</span><span class="ot">=</span> <span class="st">"Min. temp lag 1"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index lag 1"</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effects of linear covariates"</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin-1.png" style="display: block; margin: auto;"></p>
 <p><br> <strong>Non-linear coeficients</strong></p>
 <p>The <code>plot_coef_nl()</code> function generates plots of nonlinear effects from one or more fitted models contained within a <code>GHRmodels</code> object. It visualizes nonlinear covariates (typically created with <code>inla.group()</code>). Users can select non-linear terms to display by <code>name</code> or <code>pattern</code>, and customize labels, axes, and color palettes. The function supports two main display modes:</p>
 <ul>
@@ -1065,44 +1069,43 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 </ul>
 <p>To show the distribution of the covariate values, the function provides 2 possibilities. By default, the function overlays a <strong>rug plot</strong> on the x-axis, which can be removed with <code>rug = FALSE</code>. Optionally, a <strong>histogram</strong> can be shown below each plot by setting <code>histogram = TRUE</code>.</p>
 <p>Here we plot six models with a non-linear term of PDSI at one to six month lags. We observe that there is an effect of very wet conditions on dengue cases at one month lag, while there is no effect at 2 and 3 lags previous and the relationship inverts at longer lags:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_nl</span>(</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># List of fitted models from which to extract nonlinear effects</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model IDs to include in the plot (must match names in `model_list`)</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">"mod"</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>)),</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Custom labels for the selected models (used for legend or facet titles)</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod6"</span>  <span class="ot">=</span> <span class="st">"pdsi.l1_nl"</span>,</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod7"</span> <span class="ot">=</span> <span class="st">"pdsi.l2_nl"</span>, </span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod8"</span> <span class="ot">=</span> <span class="st">"pdsi.l3_nl"</span>,</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod9"</span> <span class="ot">=</span> <span class="st">"pdsi.l4_nl"</span>,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod10"</span> <span class="ot">=</span> <span class="st">"pdsi.l5_nl"</span>, </span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod11"</span> <span class="ot">=</span> <span class="st">"pdsi.l6_nl"</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Custom labels for the nonlinear covariates (used in axis or strip labels)</span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 1"</span>,</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l2"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 2"</span>,</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l3"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 3"</span>,</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l4"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 4"</span>,</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l5"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 5"</span>, </span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l6"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 6"</span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Include only variables whose names contain "pdsi"</span></span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"pdsi"</span>,</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Title for the entire plot</span></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Change in non-linear term for drought index (PDSI) with and without mean min. temp lag 1"</span>,</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Label for the x-axis</span></span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"PDSI"</span>,</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Color palette to use for plotting (a predefined IDExtremes palette)</span></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Grid display mode</span></span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Disable rug plot on the x-axis</span></span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">FALSE</span></span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl grid 6 variables-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_nl</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># List of fitted models from which to extract nonlinear effects</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model IDs to include in the plot (must match names in `model_list`)</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">"mod"</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>)),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Custom labels for the selected models (used for legend or facet titles)</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod6"</span>  <span class="ot">=</span> <span class="st">"pdsi.l1_nl"</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod7"</span> <span class="ot">=</span> <span class="st">"pdsi.l2_nl"</span>, </span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod8"</span> <span class="ot">=</span> <span class="st">"pdsi.l3_nl"</span>,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod9"</span> <span class="ot">=</span> <span class="st">"pdsi.l4_nl"</span>,</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod10"</span> <span class="ot">=</span> <span class="st">"pdsi.l5_nl"</span>, </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod11"</span> <span class="ot">=</span> <span class="st">"pdsi.l6_nl"</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Custom labels for the nonlinear covariates (used in axis or strip labels)</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 1"</span>,</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l2"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 2"</span>,</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l3"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 3"</span>,</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l4"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 4"</span>,</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l5"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 5"</span>, </span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l6"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI) lag 6"</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Include only variables whose names contain "pdsi"</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"pdsi"</span>,</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Title for the entire plot</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Change in non-linear term for drought index (PDSI) with and without mean min. temp lag 1"</span>,</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Label for the x-axis</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"PDSI"</span>,</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Color palette to use for plotting (a predefined IDExtremes palette)</span></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Grid display mode</span></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Disable rug plot on the x-axis</span></span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">FALSE</span></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl grid 6 variables-1.png" style="display: block; margin: auto;"></p>
 <p><br> Here we plot 2 models with a non-linear term of PDSI at one month lag, with and without an additional non-linear term for mean minimum temperature at one-month lag in collapsed mode. We observe that the effect of PDSI does not change substantially when a temperature covariate is added:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_nl</span>(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,</span>
@@ -1116,7 +1119,7 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,</span>
 <span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> <span class="cn">TRUE</span>         <span class="co"># Combine all plots into a single panel</span></span>
 <span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl collapse 2 variables-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_coef_nl collapse 2 variables-1.png" style="display: block; margin: auto;"></p>
 </section>
 <section id="evaluate-random-effects" class="level3">
 <h3 class="anchored" data-anchor-id="evaluate-random-effects">Evaluate random effects</h3>
@@ -1130,99 +1133,96 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 </blockquote>
 <p>The following plot visualizes the estimated yearly random effects from three different models. The <code>re_id</code> argument (<code>"year_id"</code>) corresponds to the indexing variable used in the INLA model’s random effect term (in this case <code>f(year_id, ...)</code>). The <code>re_label</code> maps this ID back to the original variable in the dataset (<em>year</em>), allowing the x-axis to display readable calendar years instead of numeric IDs.</p>
 <p>The plot suggests that the addition of covariates alters the contribution of the yearly random effect in accounting for interannual variability in some years. For example, in 2004 and 2018, the inclusion of climate covariates resulted in a small reduction (shift towards the null) of the contribution of the yearly random effect.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,                          <span class="co"># A GHRmodels object containing fitted model outputs</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>), <span class="co"># IDs of the models to compare (must match those in model_list)</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Label for mod1: baseline model</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>,            <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),     <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"year_id"</span>,                           <span class="co"># Name of the random effect variable (as defined in model structure)</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"year"</span>,                           <span class="co"># Optional: label to map year_id to calendar years</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>,                          <span class="co"># Color to use for the first (reference) model’s effects</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,                            <span class="co"># Color palette for other model effects</span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Yearly Random Effect"</span>,              <span class="co"># Title for the plot</span></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Year"</span>                                <span class="co"># Label for the x-axis (since re_label maps ID to actual years)</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_re yearly no replication-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list, <span class="co"># A GHRmodels object containing fitted model outputs</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>), <span class="co"># IDs of the models to compare (must match those in model_list)</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="co"># Label for mod1: baseline model</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>, <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>), <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"year_id"</span>,  <span class="co"># Name of the random effect variable (as defined in model structure)</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"year"</span>,  <span class="co"># Optional: label to map year_id to calendar years</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>,  <span class="co"># Color to use for the first (reference) model’s effects</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>, <span class="co"># Color palette for other model effects</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Yearly Random Effect"</span>, <span class="co"># Title for the plot</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Year"</span> <span class="co"># Label for the x-axis (since re_label maps ID to actual years)</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_re yearly no replication-1.png" style="display: block; margin: auto;"></p>
 <p><br> Below we produce a faceted plot of monthly random effects replicated across mesoregions, allowing for comparison of temporal variation across four models. This visualization is useful for examining how model structure influences unexplained temporal variability across regions.</p>
 <blockquote class="blockquote">
 <p>💡 <strong>Tip</strong>: Users can customize the variables used in the visualization by modifying the <code>GHRmodels$data</code> element. In this example we add a more descriptive month label:</p>
 </blockquote>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Maps integers 1–12 to "January" through "December" using R’s built-in month.name vector</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model_list[[<span class="st">"data"</span>]] <span class="ot">&lt;-</span> model_list[[<span class="st">"data"</span>]]<span class="sc">|&gt;</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">month_label =</span> month.name[month_id]) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Maps integers 1–12 to "January" through "December" using R’s built-in month.name vector</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>model_list[[<span class="st">"data"</span>]] <span class="ot">&lt;-</span> model_list[[<span class="st">"data"</span>]]<span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">month_label =</span> month.name[month_id]) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Each facet in the plot corresponds to a different mesoregion, and the plotted lines show the monthly random effects estimated by each model. The use of <code>re_id</code>, <code>rep_id</code>, and their associated label mappings (<code>re_label</code>, <code>rep_label</code>) ensures that both temporal and spatial structures are clearly presented.</p>
 <p>This plot suggests that the covariates in all <em>mesoregions</em> explain a substantial portion of the seasonality (the monthly random effect values are closer to 0).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,                          <span class="co"># A GHRmodels object containing fitted model outputs</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>), <span class="co"># IDs of the models to compare (must match those in model_list)</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Label for mod1: baseline model</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>,            <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),     <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"month_id"</span>,                          <span class="co"># Name of the random effect in the model formula (e.g., f(month_id, ...))</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"month_label"</span>,                    <span class="co"># Variable in the dataset corresponding to readable month names</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep_id =</span> <span class="st">"spat_meso_id"</span>,                     <span class="co"># Variable indicating the grouping structure (replication across meso areas)</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep_label =</span> <span class="st">"meso_name"</span>,                     <span class="co"># Variable to label facets (e.g., "Centro Norte", "Sudoeste", etc.)</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>,                          <span class="co"># Color for the reference model (first listed in mod_id)</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,                            <span class="co"># Palette for coloring additional models</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Monthly random effect repeated by meso area"</span>,  <span class="co"># Plot title</span></span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Month"</span>                               <span class="co"># Label for x-axis (calendar month, from re_label)</span></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_re monthly replication-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list, <span class="co"># A GHRmodels object containing fitted model outputs</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>), <span class="co"># IDs of the models to compare (must match those in model_list)</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="co"># Label for mod1: baseline model</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>, <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>), <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"month_id"</span>, <span class="co"># Name of the random effect in the model formula (e.g., f(month_id, ...))</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"month_label"</span>, <span class="co"># Variable in the dataset corresponding to readable month names</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep_id =</span> <span class="st">"spat_meso_id"</span>, <span class="co"># Variable indicating the grouping structure (replication across meso areas)</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep_label =</span> <span class="st">"meso_name"</span>,<span class="co"># Variable to label facets (e.g., "Centro Norte", "Sudoeste", etc.)</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>, <span class="co"># Color for the reference model (first listed in mod_id)</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>, <span class="co"># Palette for coloring additional models</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Monthly random effect repeated by meso area"</span>,  <span class="co"># Plot title</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Month"</span> <span class="co"># Label for x-axis (calendar month, from re_label)</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_re monthly replication-1.png" style="display: block; margin: auto;"></p>
 <p><br> Here we create a <strong>caterpillar</strong> plot of the spatial random effects for four models. Each point represents the estimated effect for a microregion, with models compared side by side. The <code>re_id</code> refers to the variable used in the model to define spatial units, and <code>re_label</code> is used to map those to more interpretable labels (e.g., actual microregion names).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,                          <span class="co"># A GHRmodels object containing the output of fitted models</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list, <span class="co"># A GHRmodels object containing the output of fitted models</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>), <span class="co"># IDs of the models to compare (must match those in model_list)</span></span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Label for mod1: baseline model</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>,            <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),     <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="co"># Label for mod1: baseline model</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>, <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>), <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
 <span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"spat_id"</span>,                           <span class="co"># Name of the spatial random effect variable as defined in the model (e.g., f(spat_id, ...))</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"micro_name"</span>,                     <span class="co"># Optional label to map spat_id to readable microregion names (for axis display)</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"spat_id"</span>,  <span class="co"># Name of the spatial random effect variable as defined in the model</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"micro_name"</span>, <span class="co"># Optional label to map spat_id to readable microregion names </span></span>
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Spatial random effects"</span>,            <span class="co"># Title of the plot</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Micro code for spatial units"</span>        <span class="co"># Label for the x-axis (spatial units with interpretable names)</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Spatial random effects"</span>,  <span class="co"># Title of the plot</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Micro code for spatial units"</span> <span class="co"># Label for the x-axis </span></span>
 <span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_re spatial no map-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_re spatial no map-1.png" style="display: block; margin: auto;"></p>
 <p><br></p>
 <p>This version of <code>plot_re()</code> displays spatial random effects on a map, using the polygon geometries provided in the <code>map_MS</code> object. The <code>map_area</code> argument must match the name of the variable in the <code>sf</code> object (<code>map_MS</code>) that corresponds to the <code>re_id</code> used in the model (here, <em>spat_id</em> in the data matches to <em>code</em> in the <code>sf</code> object).</p>
 <p>The resulting plot shows the median of the posterior distribution of the random effect per area, allowing users to visually assess spatial patterns in unexplained variability across the study region. Each facet (if multiple models are used) displays how spatial structure changes based on model specification.</p>
 <p>Here we observe that, in some areas, the inclusion of climate covariates in the model do not change the contribution of the spatial random effect, suggesting they are accounting for other sources of overdispersion or spatial autocorrelation (e.g., variation in interventions). In some microregions (e.g.&nbsp;the southernmost microregion), the inclusion of climate covariates in the model leads to a reduction in the contribution of the spatial effect, suggesting the climate may help understand some of the spatial variation in disease risk in this area.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,                          <span class="co"># A GHRmodels object containing the output of fitted models</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list, <span class="co"># A GHRmodels object containing the output of fitted models</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>), <span class="co"># IDs of the models to compare (must match those in model_list)</span></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Label for mod1: baseline model</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>,            <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),     <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="co"># Label for mod1: baseline model</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>, <span class="co"># Label for mod4: includes PDSI replicated by climate</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>), <span class="co"># Label for mod6: includes nonlinear effects of PDSI and Tmin</span></span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"spat_id"</span>,                           <span class="co"># Name of the spatial random effect variable used in model</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"micro_name"</span>,                     <span class="co"># Variable used to map IDs to readable names</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"spat_id"</span>, <span class="co"># Name of the spatial random effect variable used in model</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"micro_name"</span>, <span class="co"># Variable used to map IDs to readable names</span></span>
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> map_MS,                                <span class="co"># An sf object with polygon boundaries for plotting</span></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_area =</span> <span class="st">"code"</span>,                           <span class="co"># Name of the column in map_MS that matches spat_id in the model</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> map_MS, <span class="co"># An sf object with polygon boundaries for plotting</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_area =</span> <span class="st">"code"</span>, <span class="co"># Name of the column in map_MS that matches spat_id in the model</span></span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Spatial random effects"</span>,            <span class="co"># Title for the spatial plot</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Spatial random effects"</span>, <span class="co"># Title for the spatial plot</span></span>
 <span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="st">"Median of the </span><span class="sc">\n</span><span class="st">random effect ppd"</span> <span class="co"># Title for the legend</span></span>
 <span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_re spatial map-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_re spatial map-1.png" style="display: block; margin: auto;"></p>
 </section>
 </section>
 <section id="iterative-model-selection" class="level2">
@@ -1232,35 +1232,34 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <h3 class="anchored" data-anchor-id="subset-models">Subset models</h3>
 <p>Use <code>subset_models()</code> to subset selected models from a <code>GHRmodels</code> object into a new reduced <code>GHRmodels</code> object. If new_name is supplied, it will prefix the new model IDs (e.g., <code>"best_waic_1"</code>, <code>"best_waic_2"</code>).</p>
 <p>Here we use the vector produced using <code>rank_models</code> to subset the <em>model_list</em> <code>GHRmodels</code> object into an object with only the 2 best ranking WAIC models:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a vector with the model IDs of the 2 best fitting models by WAIC</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>best_waic <span class="ot">&lt;-</span> <span class="fu">rank_models</span>(</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,  <span class="co"># GHRmodels object containing model fit results</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"waic"</span>,      <span class="co"># Metric used to rank models (lower WAIC is better)</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">2</span>                 <span class="co"># Number of top-ranked models to return</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The output is a vector </span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>best_waic</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "mod5" "mod3"</span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset those specific models and assign new IDs</span></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>model_waic <span class="ot">&lt;-</span> <span class="fu">subset_models</span>(</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> best_waic,</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">new_name =</span> <span class="st">"best_waic"</span></span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="co"># The output is a reduced GHRmodels object</span></span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(model_waic)</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRmodels" "list"</span></span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the model IDs of the subset GHRmodels object</span></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(model_waic<span class="sc">$</span>mod_gof<span class="sc">$</span>model_id) </span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "best_waic1" "best_waic2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a vector with the model IDs of the 2 best fitting models by WAIC</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>best_waic <span class="ot">&lt;-</span> <span class="fu">rank_models</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,  <span class="co"># GHRmodels object containing model fit results</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"waic"</span>,      <span class="co"># Metric used to rank models (lower WAIC is better)</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">2</span>                 <span class="co"># Number of top-ranked models to return</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The output is a vector </span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>best_waic</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "mod5" "mod3"</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset those specific models and assign new IDs</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>model_waic <span class="ot">&lt;-</span> <span class="fu">subset_models</span>(</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> best_waic,</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">new_name =</span> <span class="st">"best_waic"</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="co"># The output is a reduced GHRmodels object</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(model_waic)</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRmodels" "list"</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the model IDs of the subset GHRmodels object</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(model_waic<span class="sc">$</span>mod_gof<span class="sc">$</span>model_id) </span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "best_waic1" "best_waic2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="extract-covariates-from-a-ghrmodels-object" class="level3">
-<h3 class="anchored" data-anchor-id="extract-covariates-from-a-ghrmodels-object">Extract covariates from a <code>GHRmodels</code> object</h3>
+<section id="extract-covariates" class="level3">
+<h3 class="anchored" data-anchor-id="extract-covariates">Extract covariates</h3>
 <p>Use <code>get_covariates()</code> to inspect which covariates were included in your fitted models. You can choose to retrieve:</p>
 <ul>
 <li><p>All covariate combinations as specified in each model by setting <code>unique = FALSE</code>. This preserves the exact combinations used in each model.</p></li>
@@ -1289,8 +1288,8 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
 <span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(INLA::inla.group(pdsi.l1, method = 'quantile', n = 10), model = 'rw2')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="add-a-covariate-to-each-element-in-a-list-of-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="add-a-covariate-to-each-element-in-a-list-of-covariates">Add a covariate to each element in a list of covariates</h3>
+<section id="add-an-additional-covariate" class="level3">
+<h3 class="anchored" data-anchor-id="add-an-additional-covariate">Add an additional covariate</h3>
 <p>The <code>cov_add()</code> function appends one or more covariate names to each set of covariates in a list.</p>
 <p>Here we add the covariate <em>urban</em> to the covariates of the best fitting models:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>best_waic_cov_urban <span class="ot">&lt;-</span> <span class="fu">cov_add</span>(best_waic_cov, <span class="at">name=</span> <span class="st">"urban"</span>)</span>
@@ -1343,19 +1342,18 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <section id="fit-new-models" class="level3">
 <h3 class="anchored" data-anchor-id="fit-new-models">Fit new models</h3>
 <p>Then we can fit the models to assess the added effect of <em>urban</em> on dengue cases:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>model_urban_list <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> formulas_cov_urban_list_ghr, <span class="co"># GHRformulas object</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,                      <span class="co"># Data to fit the models </span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"nbinomial"</span>,             <span class="co"># Negative binomial likelihood</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"mod"</span>,                     <span class="co"># Label prefix for each model</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset =</span> <span class="st">"population"</span>,            <span class="co"># Offset variable to account for population size</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_compute =</span> <span class="fu">list</span>(</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">config =</span> <span class="cn">FALSE</span>,                 <span class="co"># Do not posterior predictive distribution</span></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">vcov =</span> <span class="cn">FALSE</span>                    <span class="co"># Do not return variance-covariance matrix</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">8</span>                      <span class="co"># Use 8 threads for parallel computation</span></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_urban_list <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> formulas_cov_urban_list_ghr, <span class="co"># GHRformulas object</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,                      <span class="co"># Data to fit the models </span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"nbinomial"</span>,             <span class="co"># Negative binomial likelihood</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"mod"</span>,                     <span class="co"># Label prefix for each model</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset =</span> <span class="st">"population"</span>,            <span class="co"># Offset variable to account for population size</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_compute =</span> <span class="fu">list</span>(</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">config =</span> <span class="cn">FALSE</span>,                 <span class="co"># Do not posterior predictive distribution</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">vcov =</span> <span class="cn">FALSE</span>                    <span class="co"># Do not return variance-covariance matrix</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">8</span>                      <span class="co"># Use 8 threads for parallel computation</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="combine-models" class="level3">
 <h3 class="anchored" data-anchor-id="combine-models">Combine models</h3>
@@ -1372,13 +1370,12 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>model_stack<span class="sc">$</span>mod_gof<span class="sc">$</span>model_id  </span>
 <span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "best_waic1" "best_waic2" "mod1"       "mod2"       "mod3"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="evaluate-combined-model-object" class="level3">
-<h3 class="anchored" data-anchor-id="evaluate-combined-model-object">Evaluate combined model object</h3>
+<section id="evaluate-combined-models" class="level3">
+<h3 class="anchored" data-anchor-id="evaluate-combined-models">Evaluate combined models</h3>
 <p>Using the <code>rank_models()</code> and <code>plot_gof()</code> we observe that adding the <em>urban</em> covariate does not improve the model fit by WAIC compared to models that only have 1-month lag terms for mean minimum temperature and PDSI.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rank_models</span>(model_stack, </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="st">"waic"</span>)</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "best_waic2" "best_waic1" "mod2"       "mod3"       "mod1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rank_models</span>(model_stack, </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="st">"waic"</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "best_waic2" "best_waic1" "mod2"       "mod3"       "mod1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a variable to the mod_gof dataframe to distinguish models with the urban covariate</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>model_stack_gof  <span class="ot">&lt;-</span> model_stack<span class="sc">$</span>mod_gof <span class="sc">|&gt;</span> </span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
@@ -1388,30 +1385,28 @@ Below, we define priors for the monthly, yearly and spatial structured random ef
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="st">"yes"</span>, </span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(covariate_3) <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"no"</span></span>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot change in WAIC for each model compared to the baseline (first model in the list)</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_gof</span>(</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_gof =</span> model_stack_gof,           <span class="co"># Goodness-of-fit data from model_list</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"waic"</span>,                     <span class="co"># Compare WAIC </span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci =</span> <span class="cn">TRUE</span>,                           <span class="co"># Include credible intervals (if available)</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_arrange =</span> <span class="st">"waic"</span>,                <span class="co"># Arrange models by WAIC </span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_color =</span>  <span class="st">"Add urban"</span>, </span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod1"</span> <span class="ot">=</span> <span class="st">"Baseline"</span>,                 </span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod2"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl + urban"</span>,      </span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod3"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl + pdsi.l1_nl + urban"</span>, </span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"best_waic1"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl"</span>, </span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"best_waic2"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl + pdsi.l1_nl"</span></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/plot_gof model_stack-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot change in WAIC for each model compared to the baseline (first model in the list)</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_gof</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_gof =</span> model_stack_gof,           <span class="co"># Goodness-of-fit data from model_list</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"waic"</span>,                     <span class="co"># Compare WAIC </span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci =</span> <span class="cn">TRUE</span>,                           <span class="co"># Include credible intervals (if available)</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_arrange =</span> <span class="st">"waic"</span>,                <span class="co"># Arrange models by WAIC </span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_color =</span>  <span class="st">"Add urban"</span>, </span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod1"</span> <span class="ot">=</span> <span class="st">"Baseline"</span>,                 </span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod2"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl + urban"</span>,      </span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod3"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl + pdsi.l1_nl + urban"</span>, </span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"best_waic1"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl"</span>, </span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"best_waic2"</span> <span class="ot">=</span> <span class="st">"tmin.l1_nl + pdsi.l1_nl"</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_overview_files/figure-gfm/plot_gof model_stack-1.png" style="display: block; margin: auto;"></p>
 <p>We also observe that the 95% credible interval of the effect of <em>urban</em> on the outcome (<em>dengue cases</em>) contains zero.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_stack,</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effects of linear covariates"</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin model stack-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_stack,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effects of linear covariates"</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_overview_files/figure-gfm/pot_coef_lin model stack-1.png" style="display: block; margin: auto;"></p>
 <p>These results point against including <em>urban</em> as a linear covariate in the final model.</p>
 </section>
 </section>

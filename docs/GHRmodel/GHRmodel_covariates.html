@@ -265,45 +265,48 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-complex-covariate-structures-in-ghrmodel" id="toc-introduction-to-complex-covariate-structures-in-ghrmodel" class="nav-link active" data-scroll-target="#introduction-to-complex-covariate-structures-in-ghrmodel">Introduction to complex covariate structures in <strong>GHRmodel</strong></a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
-  <li><a href="#overview-of-ghrmodel-helper-functions-for-writing-inla-compatible-formulas" id="toc-overview-of-ghrmodel-helper-functions-for-writing-inla-compatible-formulas" class="nav-link" data-scroll-target="#overview-of-ghrmodel-helper-functions-for-writing-inla-compatible-formulas">Overview of <strong>GHRmodel</strong> helper functions for writing INLA-compatible formulas</a></li>
+  <li><a href="#ghrmodel-formula-helper-functions" id="toc-ghrmodel-formula-helper-functions" class="nav-link" data-scroll-target="#ghrmodel-formula-helper-functions">GHRmodel formula helper functions</a></li>
   </ul></li>
   <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data">0. Prepare data</a>
   <ul class="collapse">
   <li><a href="#load-libraries" id="toc-load-libraries" class="nav-link" data-scroll-target="#load-libraries">Load libraries</a></li>
-  <li><a href="#prepare-the-data-set-for-modeling-in-r-inla" id="toc-prepare-the-data-set-for-modeling-in-r-inla" class="nav-link" data-scroll-target="#prepare-the-data-set-for-modeling-in-r-inla">Prepare the data set for modeling in R-INLA</a></li>
-  <li><a href="#prepare-data-for-spatial-analysis-in-r-inla" id="toc-prepare-data-for-spatial-analysis-in-r-inla" class="nav-link" data-scroll-target="#prepare-data-for-spatial-analysis-in-r-inla">Prepare data for spatial analysis in R-INLA</a></li>
-  <li><a href="#pre-process-covariates" id="toc-pre-process-covariates" class="nav-link" data-scroll-target="#pre-process-covariates">Pre-process covariates</a>
-  <ul class="collapse">
-  <li><a href="#create-lagged-covariates" id="toc-create-lagged-covariates" class="nav-link" data-scroll-target="#create-lagged-covariates">Create lagged covariates</a></li>
-  </ul></li>
+  <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">Data pre-processing</a></li>
+  <li><a href="#spatial-data-and-graphs" id="toc-spatial-data-and-graphs" class="nav-link" data-scroll-target="#spatial-data-and-graphs">Spatial data and graphs</a></li>
+  <li><a href="#pre-process-covariates" id="toc-pre-process-covariates" class="nav-link" data-scroll-target="#pre-process-covariates">Pre-process covariates</a></li>
+  <li><a href="#lagged-covariates" id="toc-lagged-covariates" class="nav-link" data-scroll-target="#lagged-covariates">Lagged covariates</a></li>
   <li><a href="#define-priors" id="toc-define-priors" class="nav-link" data-scroll-target="#define-priors">Define priors</a></li>
   </ul></li>
-  <li><a href="#example-1-complex-covariate-structures-in-ghrmodel-using-helper-functions" id="toc-example-1-complex-covariate-structures-in-ghrmodel-using-helper-functions" class="nav-link" data-scroll-target="#example-1-complex-covariate-structures-in-ghrmodel-using-helper-functions">Example 1: Complex covariate structures in <strong>GHRmodel</strong> using helper functions</a>
+  <li><a href="#example-1-ghrmodel-helper-functions" id="toc-example-1-ghrmodel-helper-functions" class="nav-link" data-scroll-target="#example-1-ghrmodel-helper-functions">Example 1: GHRmodel helper functions</a>
   <ul class="collapse">
-  <li><a href="#model-development-using-ghrmodel-helper-functions" id="toc-model-development-using-ghrmodel-helper-functions" class="nav-link" data-scroll-target="#model-development-using-ghrmodel-helper-functions">1. Model development using <strong>GHRmodel</strong> helper functions</a>
+  <li><a href="#model-development" id="toc-model-development" class="nav-link" data-scroll-target="#model-development">1. Model development</a>
   <ul class="collapse">
-  <li><a href="#select-variables-to-include-in-the-model-formulas" id="toc-select-variables-to-include-in-the-model-formulas" class="nav-link" data-scroll-target="#select-variables-to-include-in-the-model-formulas">Select variables to include in the model formulas</a></li>
-  <li><a href="#list-of-linear-covariates" id="toc-list-of-linear-covariates" class="nav-link" data-scroll-target="#list-of-linear-covariates">List of linear covariates</a></li>
-  <li><a href="#list-of-nonlinear-covariates" id="toc-list-of-nonlinear-covariates" class="nav-link" data-scroll-target="#list-of-nonlinear-covariates">List of nonlinear covariates</a></li>
-  <li><a href="#list-of-nonlinear-covariates-replicated-by-group" id="toc-list-of-nonlinear-covariates-replicated-by-group" class="nav-link" data-scroll-target="#list-of-nonlinear-covariates-replicated-by-group">List of nonlinear covariates replicated by group</a></li>
-  <li><a href="#list-of-covariates-for-multivariate-models" id="toc-list-of-covariates-for-multivariate-models" class="nav-link" data-scroll-target="#list-of-covariates-for-multivariate-models">List of covariates for multivariate models</a></li>
-  <li><a href="#add-a-covariate-to-each-element-in-a-list-of-covariates" id="toc-add-a-covariate-to-each-element-in-a-list-of-covariates" class="nav-link" data-scroll-target="#add-a-covariate-to-each-element-in-a-list-of-covariates">Add a covariate to each element in a list of covariates</a></li>
-  <li><a href="#list-of-interacting-covariates" id="toc-list-of-interacting-covariates" class="nav-link" data-scroll-target="#list-of-interacting-covariates">List of interacting covariates</a></li>
-  <li><a href="#list-of-varying-covariates" id="toc-list-of-varying-covariates" class="nav-link" data-scroll-target="#list-of-varying-covariates">List of varying covariates</a></li>
+  <li><a href="#select-variables" id="toc-select-variables" class="nav-link" data-scroll-target="#select-variables">Select variables</a></li>
+  <li><a href="#linear-covariates" id="toc-linear-covariates" class="nav-link" data-scroll-target="#linear-covariates">Linear covariates</a></li>
+  <li><a href="#non-linear-covariates" id="toc-non-linear-covariates" class="nav-link" data-scroll-target="#non-linear-covariates">Non-linear covariates</a></li>
+  <li><a href="#non-linear-covariates-replicated-by-group" id="toc-non-linear-covariates-replicated-by-group" class="nav-link" data-scroll-target="#non-linear-covariates-replicated-by-group">Non-linear covariates replicated by group</a></li>
+  <li><a href="#covariates-for-multivariate-models" id="toc-covariates-for-multivariate-models" class="nav-link" data-scroll-target="#covariates-for-multivariate-models">Covariates for multivariate models</a></li>
+  <li><a href="#add-a-covariate-to-all-covariate-lists" id="toc-add-a-covariate-to-all-covariate-lists" class="nav-link" data-scroll-target="#add-a-covariate-to-all-covariate-lists">Add a covariate to all covariate lists</a></li>
+  <li><a href="#interacting-covariates" id="toc-interacting-covariates" class="nav-link" data-scroll-target="#interacting-covariates">Interacting covariates</a></li>
+  <li><a href="#varying-covariates" id="toc-varying-covariates" class="nav-link" data-scroll-target="#varying-covariates">Varying covariates</a></li>
   <li><a href="#varying-vs.-replicated-effects-in-inla" id="toc-varying-vs.-replicated-effects-in-inla" class="nav-link" data-scroll-target="#varying-vs.-replicated-effects-in-inla">Varying vs.&nbsp;Replicated Effects in INLA</a></li>
-  <li><a href="#write-inla-compatible-model-formulas-from-a-list-of-covariates" id="toc-write-inla-compatible-model-formulas-from-a-list-of-covariates" class="nav-link" data-scroll-target="#write-inla-compatible-model-formulas-from-a-list-of-covariates">Write INLA-compatible model formulas from a list of covariates</a></li>
+  <li><a href="#write-inla-compatible-model-formulas" id="toc-write-inla-compatible-model-formulas" class="nav-link" data-scroll-target="#write-inla-compatible-model-formulas">Write INLA-compatible model formulas</a></li>
   </ul></li>
-  <li><a href="#model-fitting-from-a-list-of-covariates" id="toc-model-fitting-from-a-list-of-covariates" class="nav-link" data-scroll-target="#model-fitting-from-a-list-of-covariates">2. Model fitting from a list of covariates</a></li>
-  <li><a href="#model-evaluation-effects-of-complex-covariate-structures" id="toc-model-evaluation-effects-of-complex-covariate-structures" class="nav-link" data-scroll-target="#model-evaluation-effects-of-complex-covariate-structures">3. Model evaluation: effects of complex covariate structures</a>
+  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting">2. Model fitting</a></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">3. Model evaluation</a>
   <ul class="collapse">
-  <li><a href="#evaluate-interaction-effects" id="toc-evaluate-interaction-effects" class="nav-link" data-scroll-target="#evaluate-interaction-effects">Evaluate interaction effects</a></li>
+  <li><a href="#interaction-effects" id="toc-interaction-effects" class="nav-link" data-scroll-target="#interaction-effects">Interaction effects</a></li>
   <li><a href="#varying-linear-coefficients" id="toc-varying-linear-coefficients" class="nav-link" data-scroll-target="#varying-linear-coefficients">Varying linear coefficients</a></li>
   <li><a href="#replicated-nonlinear-coefficients" id="toc-replicated-nonlinear-coefficients" class="nav-link" data-scroll-target="#replicated-nonlinear-coefficients">Replicated nonlinear coefficients</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#example-2-modeling-in-ghrmodel-with-user-defined-inla-compatible-formulas" id="toc-example-2-modeling-in-ghrmodel-with-user-defined-inla-compatible-formulas" class="nav-link" data-scroll-target="#example-2-modeling-in-ghrmodel-with-user-defined-inla-compatible-formulas">Example 2: Modeling in GHRmodel with user-defined INLA-compatible formulas</a></li>
+  <li><a href="#example-2-inla-compatible-formulas" id="toc-example-2-inla-compatible-formulas" class="nav-link" data-scroll-target="#example-2-inla-compatible-formulas">Example 2: INLA-compatible formulas</a>
+  <ul class="collapse">
+  <li><a href="#model-development-1" id="toc-model-development-1" class="nav-link" data-scroll-target="#model-development-1">1. Model development</a></li>
+  <li><a href="#model-fitting-1" id="toc-model-fitting-1" class="nav-link" data-scroll-target="#model-fitting-1">2. Model fitting</a></li>
+  <li><a href="#model-evaluation-1" id="toc-model-evaluation-1" class="nav-link" data-scroll-target="#model-evaluation-1">3. Model evaluation</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -333,8 +336,16 @@ div.csl-indent {
 <img src="../../figures/GHRexplore/logo_IDExtremes.jpg" align="right" width="18%"> <span> <span> <img src="../../figures/GHRexplore/logo_BSC.png" align="right" width="16%"> 
 <!-- badges: start -->
 <p><a href="https://www.gnu.org/licenses/agpl-3.0.html"><img src="https://img.shields.io/badge/License-AGPL_v3-brightgreen.svg?style=flat" class="img-fluid" alt="License"></a> <a href="https://cran.r-project.org/package=GHRmodel"><img src="https://img.shields.io/cran/v/GHRmodel.png" class="img-fluid" alt="CRAN status"></a> <!-- badges: end --></p>
-<section id="introduction-to-complex-covariate-structures-in-ghrmodel" class="level1">
-<h1>Introduction to complex covariate structures in <strong>GHRmodel</strong></h1>
+<style>
+div.csl-bib-body {
+  font-size: 0.9em;         /* smaller font */
+}
+div.csl-entry {
+  margin-bottom: 0.6em;     /* add space between references */
+}
+</style>
+<section id="overview" class="level1">
+<h1>Overview</h1>
 <p>The <em>GHRmodel_covariates</em> vignette shows how to create INLA-compatible formulas for complex Bayesian spatio-temporal models (including interactions, varying and replicated effects). Models are then fitted using integrated nested Laplace approximations in R (<a href="https://www.r-inla.org/home">R-INLA</a>) (Lindgren et al., 2011).</p>
 <p>This vignette covers:</p>
 <ul>
@@ -352,8 +363,8 @@ div.csl-indent {
 </p>
 </div>
 <p><br> Information regarding installation and a brief summary of the package methodology is included in the vignette <em>GHRmodel Overview</em>, which can be accessed by typing <code>vignette("GHRmodel_overview")</code>.</p>
-<section id="overview-of-ghrmodel-helper-functions-for-writing-inla-compatible-formulas" class="level2">
-<h2 class="anchored" data-anchor-id="overview-of-ghrmodel-helper-functions-for-writing-inla-compatible-formulas">Overview of <strong>GHRmodel</strong> helper functions for writing INLA-compatible formulas</h2>
+<section id="ghrmodel-formula-helper-functions" class="level2">
+<h2 class="anchored" data-anchor-id="ghrmodel-formula-helper-functions">GHRmodel formula helper functions</h2>
 <p>Model formulas in INLA follow a specific structure. The functions below streamline their construction by generating organized lists of INLA-compatible covariate terms.</p>
 <table class="caption-top table">
 <colgroup>
@@ -427,8 +438,8 @@ div.csl-indent {
 <section id="prepare-data" class="level1">
 <h1>0. Prepare data</h1>
 <p>The example dataset contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates. This dataset represents a subset of a larger national dataset that covers the entire territory of Brazil. The subset focuses on a specific region, <em>Mato Grosso do Sul</em>, for the purposes of illustration and computational efficiency. The original full data set, which includes data from all Brazilian microregions, is available within this <a href="https://github.com/drrachellowe/hydromet_dengue">GitHub repository</a> and in <a href="https://doi.org/10.5281/zenodo.4632205">Zenodo</a>.</p>
-<section id="load-libraries" class="level3">
-<h3 class="anchored" data-anchor-id="load-libraries">Load libraries</h3>
+<section id="load-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="load-libraries">Load libraries</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary package dependencies</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)        <span class="co"># Data manipulation</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)        <span class="co"># Data tidying</span></span>
@@ -448,8 +459,8 @@ div.csl-indent {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Load GHRmodel</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GHRmodel)     </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="prepare-the-data-set-for-modeling-in-r-inla" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-the-data-set-for-modeling-in-r-inla">Prepare the data set for modeling in R-INLA</h3>
+<section id="data-pre-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-pre-processing">Data pre-processing</h2>
 <p>Create numeric ID variables for categorical features (such as year, month, or spatial units) that may be included as random effects, in line with R-INLA’s requirements:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load data </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dengue_MS"</span>)</span>
@@ -469,8 +480,8 @@ div.csl-indent {
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">main_climate_f =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(main_climate))  <span class="co"># climate zone numeric ID</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="prepare-data-for-spatial-analysis-in-r-inla" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-data-for-spatial-analysis-in-r-inla">Prepare data for spatial analysis in R-INLA</h3>
+<section id="spatial-data-and-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-data-and-graphs">Spatial data and graphs</h2>
 <p>To perform spatial analysis, polygon geometries must be provided as an <code>sf</code> object. For the <code>dengue_MS</code> data set, the areal polygons are already included in the package in the <code>map_MS</code> object. In <code>map_MS</code>, the <em>code</em> variable corresponds to the <em>micro_code</em> area identifier in the <code>dengue_MS</code> object.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load map included in package</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"map_MS"</span>)</span>
@@ -481,8 +492,9 @@ div.csl-indent {
 </section>
 <section id="pre-process-covariates" class="level2">
 <h2 class="anchored" data-anchor-id="pre-process-covariates">Pre-process covariates</h2>
-<section id="create-lagged-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="create-lagged-covariates">Create lagged covariates</h3>
+</section>
+<section id="lagged-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="lagged-covariates">Lagged covariates</h2>
 <p>Here, we use <code>lag_cov()</code> to generate lagged values for the variables <em>tmin</em> (monthly average daily minimum temperature averaged across each micro-region) and <em>pdsi</em> (Self-calibrated Palmer Drought Severity Index for each micro-region) across 1- to 6-month lags using the <code>lag_cov()</code> function.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">lag_cov</span>(<span class="at">data =</span> df,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>),  <span class="co"># variables to lag </span></span>
@@ -503,7 +515,6 @@ div.csl-indent {
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    21.9    22.7    23.3    23.5    NA        NA</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    17.8    21.9    22.7    23.3    23.5      NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-</section>
 <section id="define-priors" class="level2">
 <h2 class="anchored" data-anchor-id="define-priors">Define priors</h2>
 <p>Bayesian models require priors to be assigned to parameters that the model will estimate. For more details regarding these prior choices, see <em>GHRmodel_overview</em>. For more details about priors in R-INLA, see <a href="https://becarioprecario.bitbucket.io/inla-gitbook/ch-priors.html">this book chapter</a> (Gómez-Rubio, 2020).</p>
@@ -518,13 +529,13 @@ div.csl-indent {
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="example-1-complex-covariate-structures-in-ghrmodel-using-helper-functions" class="level1">
-<h1>Example 1: Complex covariate structures in <strong>GHRmodel</strong> using helper functions</h1>
-<section id="model-development-using-ghrmodel-helper-functions" class="level2">
-<h2 class="anchored" data-anchor-id="model-development-using-ghrmodel-helper-functions">1. Model development using <strong>GHRmodel</strong> helper functions</h2>
+<section id="example-1-ghrmodel-helper-functions" class="level1">
+<h1>Example 1: GHRmodel helper functions</h1>
+<section id="model-development" class="level2">
+<h2 class="anchored" data-anchor-id="model-development">1. Model development</h2>
 <p>In this example we demonstrate how to use <strong>GHRmodel</strong> helper functions to streamline writing INLA-compatible formulas.</p>
-<section id="select-variables-to-include-in-the-model-formulas" class="level3">
-<h3 class="anchored" data-anchor-id="select-variables-to-include-in-the-model-formulas">Select variables to include in the model formulas</h3>
+<section id="select-variables" class="level3">
+<h3 class="anchored" data-anchor-id="select-variables">Select variables</h3>
 <p>Users can specify which variables from the data set to include as covariates using the <code>extract_names()</code> function.</p>
 <p>Here we select lags 1 through 6 for <em>tmin</em> and <em>pdsi</em> as well as the <em>urban</em> (percentage of inhabitants living in urban areas) and <em>main_climate_f</em> (a factor defining the climate zone) variables.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract variable names matching the specified patterns</span></span>
@@ -535,10 +546,10 @@ div.csl-indent {
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"main_climate_f"</span>))</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize output: character vector of covariate names</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cov_names)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  chr [1:14] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  chr [1:14] "tmin.l1" "tmin.l2" "tmin.l3" "tmin.l4" "tmin.l5" "tmin.l6" "pdsi.l1" "pdsi.l2" "pdsi.l3" "pdsi.l4" "pdsi.l5" ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="list-of-linear-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="list-of-linear-covariates">List of linear covariates</h3>
+<section id="linear-covariates" class="level3">
+<h3 class="anchored" data-anchor-id="linear-covariates">Linear covariates</h3>
 <p>The <code>cov_uni()</code> function returns a list where each element contains a single covariate. This structure is suitable for fitting separate univariable models.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate list of single linear covariate names</span></span>
@@ -554,8 +565,8 @@ div.csl-indent {
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "pdsi.l2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="list-of-nonlinear-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="list-of-nonlinear-covariates">List of nonlinear covariates</h3>
+<section id="non-linear-covariates" class="level3">
+<h3 class="anchored" data-anchor-id="non-linear-covariates">Non-linear covariates</h3>
 <p>To include nonlinear covariates in the model, the <code>cov_nl()</code> function generates nonlinear effect terms compatible with the INLA formula structure. The nonlinear transformation is defined using three main arguments that are passed into <code>inla.group()</code>, which bins data into groups (Gómez-Rubio, 2020):</p>
 <ul>
 <li><p>The type of nonlinear effect is controlled by the <code>model</code> argument, which supports <code>"rw1"</code> (random walk of order 1) or <code>"rw2"</code> (random walk of order 2), and defaults to <code>"rw2"</code>.</p></li>
@@ -586,8 +597,8 @@ div.csl-indent {
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(INLA::inla.group(tmin.l2, method='quantile', n=10), model='rw2')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="list-of-nonlinear-covariates-replicated-by-group" class="level3">
-<h3 class="anchored" data-anchor-id="list-of-nonlinear-covariates-replicated-by-group">List of nonlinear covariates replicated by group</h3>
+<section id="non-linear-covariates-replicated-by-group" class="level3">
+<h3 class="anchored" data-anchor-id="non-linear-covariates-replicated-by-group">Non-linear covariates replicated by group</h3>
 <p>If the user wants to replicate the structure of a nonlinear effect across another variable (e.g., administrative unit), the name of the replicating variable should be specified in the <code>replicate</code> argument in <code>cov_nl()</code>. Using this argument, a separate smooth (nonlinear) function will be fitted for each level of the grouping variable, allowing the model to estimate distinct nonlinear effects of the covariate for each group level.</p>
 <p>Here we transform the 1- to 6-month lagged <em>pdsi</em> variables into nonlinear terms using a random walk of order 2 replicated by the <em>main_climate_f</em> variable. This allows the model to estimate distinct nonlinear effects of <em>pdsi</em> for each climate zone, rather than assuming a single, pooled effect across all zones. By setting <code>add = TRUE</code>, the resulting list includes both the original linear terms and their corresponding nonlinear versions.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate list of replicated nonlinear covariate names</span></span>
@@ -606,8 +617,8 @@ div.csl-indent {
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(INLA::inla.group(pdsi.l2, method='quantile', n=10), model='rw2', replicate=main_climate_f)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="list-of-covariates-for-multivariate-models" class="level3">
-<h3 class="anchored" data-anchor-id="list-of-covariates-for-multivariate-models">List of covariates for multivariate models</h3>
+<section id="covariates-for-multivariate-models" class="level3">
+<h3 class="anchored" data-anchor-id="covariates-for-multivariate-models">Covariates for multivariate models</h3>
 <p>The <code>cov_multi()</code> function takes a character vector or a list of character vectors (e.g., output from <code>cov_uni()</code> or <code>cov_nl()</code>) and generates all possible combinations. This is useful for constructing multivariable models where the user wishes to explore joint effects of different covariates.</p>
 <p>Here we generate all two-way combinations of the nonlinear covariates containing “tmin” and “pdsi” listed in the <code>uni_cov_nl_rep</code> object where the lagged <em>pdsi</em> variables were transformed to nonlinear terms replicated by the <em>main_climate_f</em> variable while the lagged <em>tmin</em> variables remained linear. Therefore, the output of the <code>cov_multi()</code> is all possible combinations of replicated nonlinear lagged <em>pdsi</em> variables with linear lagged <em>tmin</em> variables:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of combined predictors, some non linear and replicated</span></span>
@@ -624,8 +635,8 @@ div.csl-indent {
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(INLA::inla.group(pdsi.l2, method='quantile', n=10), model='rw2', replicate=main_climate_f)"</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] "tmin.l1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="add-a-covariate-to-each-element-in-a-list-of-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="add-a-covariate-to-each-element-in-a-list-of-covariates">Add a covariate to each element in a list of covariates</h3>
+<section id="add-a-covariate-to-all-covariate-lists" class="level3">
+<h3 class="anchored" data-anchor-id="add-a-covariate-to-all-covariate-lists">Add a covariate to all covariate lists</h3>
 <p>The <code>cov_add()</code> function appends one or more covariate names to each set of covariates in a list. This is useful for stepwise inclusion of covariates in models or to create lists with covariate combinations.</p>
 <p>Here we want to add the covariate <em>urban</em> to combinations of linear lagged <em>tmin</em> and <em>pdsi</em> covariates:</p>
 <p>First we generate a list of all combinations of the lagged linear <em>tmin</em> and <em>pdsi</em> covariates using <code>cov_multi()</code> :</p>
@@ -654,8 +665,8 @@ div.csl-indent {
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "pdsi.l2" "tmin.l1" "urban"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="list-of-interacting-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="list-of-interacting-covariates">List of interacting covariates</h3>
+<section id="interacting-covariates" class="level3">
+<h3 class="anchored" data-anchor-id="interacting-covariates">Interacting covariates</h3>
 <p>Interaction terms capture the additional effect of two (or more) covariates acting together on the outcome, beyond their individual contributions. For example, a recent dengue modeling study in Barbados found that a three-way interaction among long-lag dry conditions (6-month SPI lagged by 5 months), mid-lag hot conditions (3-month temperature anomaly lagged by 3 months), and short-lag wet conditions (6-month SPI lagged by 1 month) best predicted outbreak risk (Fletcher et al., 2025). This result shows how drought, heat, and rainfall at different lags can cascade together, amplifying dengue outbreak likelihood.</p>
 <p>The function <code>cov_interact</code> creates interaction terms between selected linear covariates. It takes as input a list of covariate combinations (like the output from <code>cov_multi()</code>) and returns interaction terms formatted for use in INLA formulas. If two variables or patterns are selected, it generates all two-way interactions. If three are selected, it generates all pairwise and three-way interactions. <strong>Currently GHRmodel only supports interactions between linear terms</strong>.</p>
 <p>Here we generate all two-way and three-way interactions of lagged linear <em>tmin</em> and <em>pdsi</em> and <em>urban</em>.</p>
@@ -667,15 +678,15 @@ div.csl-indent {
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize output: list of interactions between linear pdsi terms and linear tmin terms</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(interacting_cov, <span class="dv">2</span>)</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "pdsi.l1"               "tmin.l1"               "urban"                 "pdsi.l1:tmin.l1"      </span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] "pdsi.l1:urban"         "tmin.l1:urban"         "pdsi.l1:tmin.l1:urban"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "pdsi.l1"               "tmin.l1"               "urban"                 "pdsi.l1:tmin.l1"       "pdsi.l1:urban"        </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] "tmin.l1:urban"         "pdsi.l1:tmin.l1:urban"</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "pdsi.l2"               "tmin.l1"               "urban"                 "pdsi.l2:tmin.l1"      </span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] "pdsi.l2:urban"         "tmin.l1:urban"         "pdsi.l2:tmin.l1:urban"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "pdsi.l2"               "tmin.l1"               "urban"                 "pdsi.l2:tmin.l1"       "pdsi.l2:urban"        </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] "tmin.l1:urban"         "pdsi.l2:tmin.l1:urban"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="list-of-varying-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="list-of-varying-covariates">List of varying covariates</h3>
+<section id="varying-covariates" class="level3">
+<h3 class="anchored" data-anchor-id="varying-covariates">Varying covariates</h3>
 <p>The <code>cov_varying()</code> function generates spatially or temporally varying linear effect terms compatible with INLA formulas. It modifies covariate names to the INLA-compatible form <code>f(unit, covariate, model = "iid")</code>, where <code>unit</code> is the name of a grouping variable by which the covariate effect will vary (e.g., <em>spat_id</em> or <em>year_id</em>).</p>
 <p>Here we use the <code>multi_cov_lin</code> object (created above) that contains combinations of lagged linear <em>tmin</em> and <em>pdsi</em> covariates. By setting <code>covariates = multi_cov_lin</code> and <code>pattern = "pdsi"</code> in the <code>cov_varying()</code> function, we modify only the lagged <em>pdsi</em> variables, to create varying <em>pdsi</em> effects (slopes) per climate zone (by the <em>main_climate_f</em> variable), while leaving the lagged <em>tmin</em> variables unchanged in linear form. The result is a set of covariate combinations pairing climate zone–specific lagged <em>pdsi</em> variables with linear lagged <em>tmin</em>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of varying univariable predictors</span></span>
@@ -686,12 +697,10 @@ div.csl-indent {
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize output: list of combinations of lagged pdsi varying by main_climate_f and linear tmin terms</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(varying_cov,<span class="dv">2</span>)</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(main_climate_f, pdsi.l1, model = 'iid', constr = FALSE)"</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] "tmin.l1"                                                  </span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(main_climate_f, pdsi.l2, model = 'iid', constr = FALSE)"</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] "tmin.l1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(main_climate_f, pdsi.l1, model = 'iid', constr = FALSE)" "tmin.l1"                                                  </span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "f(main_climate_f, pdsi.l2, model = 'iid', constr = FALSE)" "tmin.l1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="varying-vs.-replicated-effects-in-inla" class="level3">
 <h3 class="anchored" data-anchor-id="varying-vs.-replicated-effects-in-inla">Varying vs.&nbsp;Replicated Effects in INLA</h3>
@@ -741,8 +750,8 @@ div.csl-indent {
 </table>
 <p>Comparison of Replicate and Varying Effects in INLA</p>
 </section>
-<section id="write-inla-compatible-model-formulas-from-a-list-of-covariates" class="level3">
-<h3 class="anchored" data-anchor-id="write-inla-compatible-model-formulas-from-a-list-of-covariates">Write INLA-compatible model formulas from a list of covariates</h3>
+<section id="write-inla-compatible-model-formulas" class="level3">
+<h3 class="anchored" data-anchor-id="write-inla-compatible-model-formulas">Write INLA-compatible model formulas</h3>
 <p>The <code>write_inla_formulas()</code> function simplifies the creation of multiple INLA models by automatically structuring fixed effects, random effects, and interactions.</p>
 <ol type="1">
 <li><strong>Define covariate combinations</strong></li>
@@ -797,8 +806,8 @@ div.csl-indent {
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRformulas" "list"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="model-fitting-from-a-list-of-covariates" class="level2">
-<h2 class="anchored" data-anchor-id="model-fitting-from-a-list-of-covariates">2. Model fitting from a list of covariates</h2>
+<section id="model-fitting" class="level2">
+<h2 class="anchored" data-anchor-id="model-fitting">2. Model fitting</h2>
 <p>To evaluate the performance of multiple covariate model specifications using INLA, we can pass a list of predefined formulas as a <code>GHRformulas</code> object to <code>fit_models()</code>. After fitting, goodness-of-fit metrics can be extracted as a data frame directly through the <code>GHRmodels$mod_gof</code> element.</p>
 <p>This example demonstrates fitting a set of negative binomial models that include different combinations of covariates constructed using <strong>GHRmodel</strong> helper functions, with an offset term to account for population at risk.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -820,8 +829,8 @@ div.csl-indent {
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>model_cov_list_gof <span class="ot">&lt;-</span> model_cov_list<span class="sc">$</span>mod_gof</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="model-evaluation-effects-of-complex-covariate-structures" class="level2">
-<h2 class="anchored" data-anchor-id="model-evaluation-effects-of-complex-covariate-structures">3. Model evaluation: effects of complex covariate structures</h2>
+<section id="model-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="model-evaluation">3. Model evaluation</h2>
 <p>This section explains how to interpret the estimated coefficients from the complex covariate structures created above, including:</p>
 <ul>
 <li><p><strong>Interaction effects</strong></p></li>
@@ -830,8 +839,8 @@ div.csl-indent {
 </ul>
 <p>Output plots return <code>ggplot2</code> or <code>cowplot</code> objects that can be further customized by the user.</p>
 <p>For guidance on evaluating covariates fitted as linear or nonlinear terms, as well as other model assessment tools in the package, see the <em>GHRmodel_overview</em> vignette.</p>
-<section id="evaluate-interaction-effects" class="level3">
-<h3 class="anchored" data-anchor-id="evaluate-interaction-effects">Evaluate interaction effects</h3>
+<section id="interaction-effects" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-effects">Interaction effects</h3>
 <p><code>plot_coef_lin()</code> can be used to evaluate interaction effects between linear covariates (the only interactions currently supported in <strong>GHRmodel</strong>).</p>
 <p>In this plot we observe that there is no significant effect of two or three-way interactions between <em>tmin.l1</em>, <em>pdsi.l1</em> and <em>urban</em> on dengue cases.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot linear effects and their interactions</span></span>
@@ -848,7 +857,7 @@ div.csl-indent {
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effects of linear and interacting covariates"</span>  </span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Title for the plot summarizing what is being visualized</span></span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_covariates_files/figure-gfm/plot interactions-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_covariates_files/figure-gfm/plot interactions-1.png" style="display: block; margin: auto;"></p>
 </section>
 <section id="varying-linear-coefficients" class="level3">
 <h3 class="anchored" data-anchor-id="varying-linear-coefficients">Varying linear coefficients</h3>
@@ -895,13 +904,13 @@ div.csl-indent {
 <p><a name="varying-pdsi-plot"></a></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot linear slopes varying by climate zone. </span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_varying</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_cov_list,               <span class="co"># A list of fitted INLA model objects</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod8"</span>,                       <span class="co"># Select the model with varying slopes</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Blues"</span>,                     <span class="co"># Color palette for the plot (from RColorBrewer)</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"main_climate_f"</span>,               <span class="co"># The grouping variable (factor) for which varying slopes were estimated</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_cov_list, <span class="co"># A list of fitted INLA model objects</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod8"</span>,  <span class="co"># Select the model with varying slopes</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Blues"</span>,   <span class="co"># Color palette for the plot (from RColorBrewer)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"main_climate_f"</span>, <span class="co"># The grouping variable (factor) </span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of PDSI at one-month lag for each climate zone"</span>,  <span class="co"># Plot title</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Main climate zones"</span>,           <span class="co"># Label for the y-axis (groups/climate zones)</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit_label =</span> <span class="fu">c</span>(                        <span class="co"># Map factor levels to descriptive names </span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Main climate zones"</span>,  <span class="co"># Label for the y-axis (groups/climate zones)</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit_label =</span> <span class="fu">c</span>( <span class="co"># Map factor levels to descriptive names </span></span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Tropical Rainforest Climate"</span>, </span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Tropical Monsoon Climate"</span>, </span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Tropical Savanna Climate with Dry Winter"</span>,</span>
@@ -916,33 +925,34 @@ div.csl-indent {
 <p>Here we plot 2 models with replicated effects, the nonlinear term of PDSI at one-month lag replicated by climate zone, with and without an additional term for mean minimum temperature at one-month lag. We observe that the effect of wet conditions on dengue cases is strongest in regions <em>1</em> and <em>4</em>, that is Humid Subtropical Climate and Tropical Rainforest Climate, which aligns with the results obtained from structuring PDSI at 1 month lag as a linear effect with a varying slope by climate (<a href="#varying-pdsi-plot">see plot above</a>). The effects of <em>pdsi.l1</em> do not change when a temperature covariate is added.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PLot replicated nonlinear effects</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_nl</span>(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_cov_list,          <span class="co"># List of fitted INLA model objects</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod3"</span>, <span class="st">"mod6"</span>),       <span class="co"># Select which models to include in the plot</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(                    <span class="co"># Custom display labels for the selected models</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_cov_list, <span class="co"># List of fitted INLA model objects</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod3"</span>, <span class="st">"mod6"</span>), <span class="co"># Select which models to include in the plot</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>( <span class="co"># Custom display labels for the selected models</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod3"</span> <span class="ot">=</span> <span class="st">"pdsi.l1_rep_clim"</span>,    </span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mod6"</span> <span class="ot">=</span> <span class="st">"pdsi.l1_rep_clim + tmin.l1"</span></span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(                    <span class="co"># Rename variables for clearer axis/legend labels</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>( <span class="co"># Rename variables for clearer axis/legend labels</span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"PDSI lag 1"</span></span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"pdsi.l1"</span>,                 <span class="co"># Variable to plot: nonlinear effect of pdsi.l1</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"nonlinear effect of PDSI at one-month lag replicated by main climate"</span>,   <span class="co"># Main plot title</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"PDSI"</span>,                     <span class="co"># X-axis label</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,                  <span class="co"># Color palette for plotting the nonlinear curves</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> <span class="cn">FALSE</span>,                  <span class="co"># Display results in a grid (one plot per covariate-model pair)</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">FALSE</span>,                       <span class="co"># Do not show rug plot for data density along the x-axis</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">histogram =</span> <span class="cn">TRUE</span>,                  <span class="co"># Show histogram of covariate distribution instead of rug plot</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="st">"Climate zone"</span>            <span class="co"># Add legend title</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"pdsi.l1"</span>, <span class="co"># Variable to plot: nonlinear effect of pdsi.l1</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Nonlinear effect of PDSI at one-month lag replicated by main climate"</span>, </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"PDSI"</span>, <span class="co"># X-axis label</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>, <span class="co"># Color palette for plotting the nonlinear curves</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> <span class="cn">FALSE</span>, <span class="co"># Display results in a grid (one plot per covariate-model pair)</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">FALSE</span>,  <span class="co"># Do not show rug plot for data density along the x-axis</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">histogram =</span> <span class="cn">TRUE</span>, <span class="co"># Show histogram of covariate distribution instead of rug plot</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="st">"Climate zone"</span> <span class="co"># Add legend title</span></span>
 <span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="GHRmodel_covariates_files/figure-gfm/plot_coef_nl grid replicated-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p><br></p>
 </section>
 </section>
 </section>
-<section id="example-2-modeling-in-ghrmodel-with-user-defined-inla-compatible-formulas" class="level1">
-<h1>Example 2: Modeling in GHRmodel with user-defined INLA-compatible formulas</h1>
+<section id="example-2-inla-compatible-formulas" class="level1">
+<h1>Example 2: INLA-compatible formulas</h1>
 <p>In some cases, users may wish to define their own INLA-compatible model formulas manually rather than generating them through <strong>GHRmodel</strong> helper functions. This approach offers full flexibility over the model structure, particularly when specifying complex fixed and random effects. When constructing a custom set of models for comparison, it is recommended to place a baseline model (an intercept-only or random effect-only model) as the first entry in the list. This ensures compatibility with the automatic model comparison functionality in <code>fit_models()</code>, which uses the first model as the reference point for computing differences in goodness-of-fit metrics. In addition, all formulas are required to have the same random effect structure for compatibility with <code>as_GHRformulas()</code>.</p>
-<p><strong>1. Model development</strong></p>
+<section id="model-development-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-development-1">1. Model development</h2>
 <p>Below, we provide a user-defined vector of INLA-compatible model formulas and convert it into a standardized <code>GHRformulas</code> object using the <code>as_GHRformulas()</code> function. This object can then be passed to the <code>fit_models()</code> function for model fitting.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert list of user-defined INLA formulas into a GHRformulas object </span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>formulas_user_ghr <span class="ot">&lt;-</span> <span class="fu">as_GHRformulas</span>(<span class="fu">c</span>(</span>
@@ -969,7 +979,9 @@ div.csl-indent {
 <span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize output: GHRformulas object</span></span>
 <span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(formulas_user_ghr)</span>
 <span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRformulas" "list"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>2. Model fitting</strong></p>
+</section>
+<section id="model-fitting-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-fitting-1">2. Model fitting</h2>
 <p>Fit the user-defined model formulas:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined INLA-compatible formulas can be passed into fit_models() as a GHRformulas object</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>model_user <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
@@ -985,7 +997,9 @@ div.csl-indent {
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span>,                      <span class="co"># Display progress bar</span></span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">8</span>                    <span class="co"># Use 8 threads for parallel computation</span></span>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>3. Model evaluation</strong></p>
+</section>
+<section id="model-evaluation-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-evaluation-1">3. Model evaluation</h2>
 <p>The <em>GHRmodel Overview</em> vignette describes the full set of functions available for model evaluation, which can be applied here to assess model performance.</p>
 <p>For example we can evaluate the effect of the linear coefficients using <code>plot_coef_lin()</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot any linear coefficients found in the fitted model results. </span></span>
@@ -994,7 +1008,8 @@ div.csl-indent {
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                      <span class="co"># Exponentiate coefficients to relative risk scale</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Relative Risk (RR)"</span>     <span class="co"># Plot title</span></span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_covariates_files/figure-gfm/plot user model-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="GHRmodel_covariates_files/figure-gfm/plot user model-1.png" style="display: block; margin: auto;"></p>
+</section>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
