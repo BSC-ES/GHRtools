@@ -314,8 +314,6 @@ div.csl-indent {
 
 
 <img src="../../figures/GHRexplore/logo_IDExtremes.jpg" align="right" width="18%"> <span> <span> <img src="../../figures/GHRexplore/logo_BSC.png" align="right" width="16%"> 
-<!-- badges: start -->
-<p><a href="https://www.gnu.org/licenses/agpl-3.0.html"><img src="https://img.shields.io/badge/License-AGPL_v3-brightgreen.svg?style=flat" class="img-fluid" alt="License"></a> <a href="https://cran.r-project.org/package=GHRmodel"><img src="https://img.shields.io/cran/v/GHRmodel.png" class="img-fluid" alt="CRAN status"></a></p>
 <style>
 div.csl-bib-body {
   font-size: 0.9em;         /* smaller font */
@@ -334,6 +332,9 @@ div.csl-entry {
 <h1>Example: DLNMs in GHRmodel</h1>
 <p>In this example, we demonstrate how to use <strong>GHRmodel</strong> to formulate, fit and evaluate DLNM terms within Bayesian hierarchical models in the R-INLA framework. Using the resulting DLNM model estimates, we assess dengue risk across a range of <em>tmin</em> values (monthly average daily minimum temperature averaged across each micro-region) and <em>pdsi</em> values (Self-calibrated Palmer Drought Severity Index for each micro-region) and across 1- to 6-month lags.</p>
 <p>The example dataset contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates. This dataset represents a subset of a larger national dataset that covers the entire territory of Brazil. The subset focuses on a specific region, <em>Mato Grosso do Sul</em>, for the purposes of illustration and computational efficiency. The original full data set, which includes data from all Brazilian microregions, is available within this <a href="https://github.com/drrachellowe/hydromet_dengue">GitHub repository</a> and in <a href="https://doi.org/10.5281/zenodo.4632205">Zenodo</a>.</p>
+<blockquote class="blockquote">
+<p>💡 <strong>Tip</strong>: The examples in this vignette are designed to demonstrate package functionality and should not be interpreted as best-practice guidance for model selection.</p>
+</blockquote>
 <section id="prepare-data" class="level2">
 <h2 class="anchored" data-anchor-id="prepare-data">0. Prepare data</h2>
 <section id="load-libraries" class="level3">
@@ -684,7 +685,7 @@ div.csl-entry {
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Lag"</span>,               <span class="co"># Label for the x-axis (exposure variable)</span></span>
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Relative Risk (RR)"</span> <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
 <span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by temp values-1.png" width="100%" style="display: block; margin: auto;"> <br></p>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by temp values-1.png" style="display: block; margin: auto;"> <br></p>
 <p>Here we visualize the estimated relative risks using <code>type = "heatmap"</code> to examine how the association between temperature and dengue varies jointly across different temperature values and lag periods. The plot reveals that the most pronounced effects occur at a lag of approximately one month: higher minimum temperatures at this lag are associated with an increased risk of dengue, while lower temperatures, around the mean temperature, are linked to a decreased risk.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted dengue risk values against the tmin values and lags</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
