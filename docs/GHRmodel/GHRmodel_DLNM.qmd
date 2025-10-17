@@ -9,10 +9,6 @@ format:
 <img src='/figures/GHRexplore/logo_IDExtremes.jpg' align="right" width="18%" /> <span> <span> <img src='/figures/GHRexplore/logo_BSC.png' align="right" width="16%" /> 
 ```
 
-<!-- badges: start -->
-[![License](https://img.shields.io/badge/License-AGPL_v3-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/agpl-3.0.html)
-[![CRAN status](https://img.shields.io/cran/v/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
-
 <style>
 div.csl-bib-body {
   font-size: 0.9em;         /* smaller font */
@@ -37,7 +33,7 @@ leveraging the functionality of the **dlnm** package (Gasparrini, 2011)
 within **GHRmodel**.
 
 DLNMs extend distributed lag models (DLMs) to capture associations where
-the effect of an exposure (e.g. temperature) on an outcome (e.g. dengue
+the effect of an exposure (e.g. temperature) on an outcome (e.g. dengue
 incidence) is lagged in time. These exposure–lag–response associations
 are represented along two dimensions, exposure and lag, each modelled
 with its own basis function (a mathematical function used to flexibly
@@ -77,6 +73,10 @@ which includes data from all Brazilian microregions, is available within
 this [GitHub
 repository](https://github.com/drrachellowe/hydromet_dengue) and in
 [Zenodo](https://doi.org/10.5281/zenodo.4632205).
+
+> 💡 **Tip**: The examples in this vignette are designed to demonstrate
+> package functionality and should not be interpreted as best-practice
+> guidance for model selection.
 
 ## 0. Prepare data
 
@@ -613,7 +613,7 @@ plot_coef_crosspred(
 )
 ```
 
-<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by temp values-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by temp values-1.png" style="display: block; margin: auto;" />
 <br>
 
 Here we visualize the estimated relative risks using `type = "heatmap"`
