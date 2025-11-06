@@ -4,15 +4,16 @@ format: html
 toc: true
 ---
 
-<!-- badges: start -->
-[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
-[![CRAN status](https://img.shields.io/cran/v/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
-<!-- badges: end -->
-
 ```{=html}
 <img src="/figures/GHRexplore.svg" align="right" width="14%" style="margin-top: -130px; style="margin-top: 0px;>
 <br><br>
 ```
+
+## 0.2.1
+
+* Fixed bug in `plot_correlation()` where negative circles were not showing.
+* Added ellipsis argument to `plot_bivariate()` to increase flexibility.
+* Minor documentation updates.
 
 ## 0.2.0
 
@@ -24,7 +25,6 @@ toc: true
 
 * Fixed tests failing with cowplot 1.2.0.
 * Fixed minor bug in `plot_map()`.
-
 
 ## 0.1.0
 

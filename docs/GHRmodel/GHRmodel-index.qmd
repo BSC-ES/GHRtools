@@ -4,13 +4,8 @@ format: html
 toc: false
 ---
 
-<!-- badges: start -->
-[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
-[![CRAN status](https://img.shields.io/cran/v/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
-<!-- badges: end -->
-
 ```{=html}
-<img src="/figures/GHRmodel.svg" align="right" width="14%" style="margin-top: -130px; style="margin-top: 0px;>
+<img src="/figures/GHRmodel.svg" align="right" width="12%" style="margin-top: -100px; style="margin-top: 0px;>
 <br><br>
 ```
 

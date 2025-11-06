@@ -1,17 +1,12 @@
 ---
-title: "Distributed Lag Nonlinear Models in GHRmodel"
+title: "Distributed Lag Nonlinear Models"
 format: 
   html:
     toc: true
 ---
 
-<!-- badges: start -->
-[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
-[![CRAN status](https://img.shields.io/cran/v/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
-<!-- badges: end -->
-
 ```{=html}
-<img src='/figures/GHRexplore/logo_IDExtremes.jpg' align="right" width="18%" /> <span> <span> <img src='/figures/GHRexplore/logo_BSC.png' align="right" width="16%" /> 
+<img src="/figures/GHRmodel.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
 ```
 
 <style>
