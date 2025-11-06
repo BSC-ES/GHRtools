@@ -8,8 +8,12 @@ format:
 <!-- badges: start -->
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 [![CRAN status](https://img.shields.io/cran/v/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
-[![CRAN downloads total](https://cranlogs.r-pkg.org/badges/grand-total/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
-[![CRAN downloads month](https://cranlogs.r-pkg.org/badges/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
+<a href="https://cran.r-project.org/package=GHRexplore">
+  <img src="https://cranlogs.r-pkg.org/badges/grand-total/GHRexplore" alt="CRAN downloads total">
+</a>
+<a href="https://cran.r-project.org/package=GHRexplore">
+  <img src="https://cranlogs.r-pkg.org/badges/GHRexplore" alt="CRAN downloads month">
+</a>
 <!-- badges: end -->
 
 ```{=html}
