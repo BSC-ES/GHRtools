@@ -6,8 +6,10 @@ format:
 ---
 
 <!-- badges: start -->
-[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 [![CRAN status](https://img.shields.io/cran/v/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
+[![CRAN downloads total](https://cranlogs.r-pkg.org/badges/grand-total/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
+[![CRAN downloads month](https://cranlogs.r-pkg.org/badges/GHRmodel)](https://cran.r-project.org/package=GHRmodel)
 <!-- badges: end -->
 
 
@@ -32,9 +34,9 @@ GHRmodel-specific output objects (in purple), generic output objects (in grey),
 and general functionality. Generic output objects can be provided directly by 
 the user or can be generated using **GHRmodel** helper functions.
 :::
-::: {.column width="5%"}
+::: {.column width="7.5%"}
 :::
-::: {.column width="20%"}
+::: {.column width="17.5%"}
 ```{=html}
 <img src="/figures/GHRmodel.svg" width="100%">
 ```

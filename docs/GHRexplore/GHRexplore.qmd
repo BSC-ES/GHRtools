@@ -6,10 +6,10 @@ format:
 ---
 
 <!-- badges: start -->
-[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+[![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 [![CRAN status](https://img.shields.io/cran/v/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
-[![CRAN downloads total](http://cranlogs.r-pkg.org/badges/grand-total/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
-[![CRAN downloads month](http://cranlogs.r-pkg.org/badges/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
+[![CRAN downloads total](https://cranlogs.r-pkg.org/badges/grand-total/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
+[![CRAN downloads month](https://cranlogs.r-pkg.org/badges/GHRexplore)](https://cran.r-project.org/package=GHRexplore)
 <!-- badges: end -->
 
 ```{=html}
@@ -27,9 +27,9 @@ used visualizations and supports standard data transformations such as temporal
 and spatial aggregations. The package also offers extensive customization options 
 for the resulting figures. Currently available plotting functions include:
 :::
-::: {.column width="5%"}
+::: {.column width="7.5%"}
 :::
-::: {.column width="20%"}
+::: {.column width="17.5%"}
 ```{=html}
 <img src="/figures/GHRexplore.svg" width="100%">
 ```
