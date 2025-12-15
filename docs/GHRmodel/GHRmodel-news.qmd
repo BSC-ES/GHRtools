@@ -5,9 +5,14 @@ toc: true
 ---
 
 ```{=html}
-<img src="/figures/GHRmodel.svg" align="right" width="14%" style="margin-top: -130px; style="margin-top: 0px;>
+<img src="/figures/GHRmodel.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
 <br><br>
 ```
+
+## 0.1.1
+
+* Fixed bug in the colour scale in the function `plot_coef_crosspred()`.
+* Minor updates in the documentation.
 
 ## 0.1.0
 
