@@ -2236,6 +2236,13 @@
     "objectID": "docs/GHRmodel/GHRmodel-news.html#section",
     "href": "docs/GHRmodel/GHRmodel-news.html#section",
     "title": "GHRmodel changelog",
+    "section": "0.1.1",
+    "text": "0.1.1\n\nFixed bug in the colour scale in the function plot_coef_crosspred().\nMinor updates in the documentation."
+  },
+  {
+    "objectID": "docs/GHRmodel/GHRmodel-news.html#section-1",
+    "href": "docs/GHRmodel/GHRmodel-news.html#section-1",
+    "title": "GHRmodel changelog",
     "section": "0.1.0",
     "text": "0.1.0\n\nInitial CRAN submission."
   }
