@@ -1078,6 +1078,13 @@
     "text": "Developers\nGiovenale Moirano, PhD \nBarcelona Supercomputing Center\nGlobal Health Resilience\nCarles Milà, PhD \nBarcelona Supercomputing Center\nGlobal Health Resilience\nAnna B. Kawiecki, PhD \nBarcelona Supercomputing Center\nGlobal Health Resilience\nRachel Lowe, PhD \nBarcelona Supercomputing Center\nGlobal Health Resilience (Group leader)"
   },
   {
+    "objectID": "docs/GHRexplore/GHRexplore-news.html#section",
+    "href": "docs/GHRexplore/GHRexplore-news.html#section",
+    "title": "GHRexplore changelog",
+    "section": "0.2.2",
+    "text": "0.2.2\n\nAdded functions epiyw_to_date() and date_to_epiyw() to convert between dates and epidemiological year-weeks for all days of the week.\nRemoved ISOweek dependency.\nImproved visualization of short time series.\nMinor refactoring and lint."
+  },
+  {
     "objectID": "docs/GHRexplore/GHRexplore-news.html#section-1",
     "href": "docs/GHRexplore/GHRexplore-news.html#section-1",
     "title": "GHRexplore changelog",
