@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,7 +38,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-81db3bc9543b97ff6e1d188ef868d7e2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -208,10 +208,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">0.2.1</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.2.0</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">0.1.1</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">0.1.0</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">0.2.2</a>
+  <ul class="collapse">
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.2.1</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">0.2.0</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">0.1.1</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">0.1.0</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -239,36 +242,45 @@ ul.task-list li input[type="checkbox"] {
 
 <img src="../../figures/GHRexplore.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
 <br><br>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">0.2.1</h2>
+<section id="section" class="level1">
+<h1>0.2.2</h1>
+<ul>
+<li>Added functions <code>epiyw_to_date()</code> and <code>date_to_epiyw()</code> to convert between dates and epidemiological year-weeks for all days of the week.</li>
+<li>Removed ISOweek dependency.</li>
+<li>Improved visualization of short time series.</li>
+<li>Minor refactoring and lint.</li>
+</ul>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">0.2.1</h2>
 <ul>
 <li>Fixed bug in <code>plot_correlation()</code> where negative circles were not showing.</li>
 <li>Added ellipsis argument to <code>plot_bivariate()</code> to increase flexibility.</li>
 <li>Minor documentation updates.</li>
 </ul>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">0.2.0</h2>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">0.2.0</h2>
 <ul>
 <li>New plotting function: <code>plot_timeseries2()</code> for dual-axis time series plots.</li>
 <li>Increased flexibility of <code>plot_map()</code> (line colour, width, alpha).</li>
 <li><em>by_year</em> argument deprecated in <code>plot_map()</code> and substituted by <em>aggregate_time</em>.</li>
 </ul>
 </section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2">0.1.1</h2>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">0.1.1</h2>
 <ul>
 <li>Fixed tests failing with cowplot 1.2.0.</li>
 <li>Fixed minor bug in <code>plot_map()</code>.</li>
 </ul>
 </section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3">0.1.0</h2>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4">0.1.0</h2>
 <ul>
 <li>Initial CRAN submission.</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
