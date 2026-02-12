@@ -274,8 +274,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="cn">NULL</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
@@ -290,6 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>var_label</code>: A 2 character vector with a custom name for the variables.</li>
 <li><code>legend</code>: A character vector with a custom name for the legend.</li>
 <li><code>palette</code>: GHR, RColorBrewer or colorspace palette (e.g.&nbsp;“Purp”). Single R colors in <code>colors()</code> or hex codes can be used when there is no grouping or facets are used. Use “-” before the palette name (e.g., “-Reds”) to reverse it. Defaults to a dark green when <code>area</code> is NULL or when <code>facet</code> is TRUE, otherwise defaults to the “IDE2” palette.</li>
+<li><code>...</code>: Additional arguments to be passed to <code>geom_point</code> or <code>geom_boxplot</code>, e.g.&nbsp;alpha=0.5 and size=2.</li>
 </ul>
 </section>
 <section id="returns" class="level2">
@@ -302,12 +304,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dengue_MS"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter (two numeric variables) - No grouping</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS, </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pop_density"</span>, <span class="st">"tmin"</span>), </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pop_density"</span>, <span class="st">"tmin"</span>),</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">palette =</span> <span class="st">"#d04a2d"</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter (two numeric variables) - Grouping in the same graph</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS,</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pop_density"</span>, <span class="st">"tmin"</span>),</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Pop. density"</span>, <span class="st">"Min temp."</span>),</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">area =</span> <span class="st">"micro_code"</span>)</span>
@@ -316,18 +318,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS,</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pop_density"</span>, <span class="st">"tmin"</span>),</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>               <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Pop. density"</span>, <span class="st">"Min temp."</span>),</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">facet =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">facet =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">free_x_scale =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots (one numeric, one categorical) - No grouping</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS, </span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pop_density"</span>, <span class="st">"biome_name"</span>), </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pop_density"</span>, <span class="st">"biome_name"</span>),</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>               <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Pop. density"</span>, <span class="st">"Min temp."</span>),</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>               <span class="at">palette =</span> <span class="st">"royalblue"</span>)</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots (one numeric, one categorical) - Grouping</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS, </span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"biome_name"</span>, <span class="st">"tmin"</span>), </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"biome_name"</span>, <span class="st">"tmin"</span>),</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>               <span class="at">area =</span> <span class="st">"meso_code"</span>,</span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">palette =</span> <span class="st">"Accent"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
