@@ -70,28 +70,28 @@ plot_heatmap(dengue_MS,
              var_label = "Minimum\ntemp.",
              type = "cov",
              area = "micro_code",
-             aggregate_space = "meso_code",  
+             aggregate_space = "meso_code",
              palette = "Blue-Red")
 
 # Case count heatmap with log scale
 plot_heatmap(dengue_MS,
-             var = "dengue_cases", 
-             time = "date",  
+             var = "dengue_cases",
+             time = "date",
              type = "counts",
-             area = "micro_code",  
-             palette = "Reds", 
-             title = "Dengue counts", 
+             area = "micro_code",
+             palette = "Reds",
+             title = "Dengue counts",
              var_label = "Dengue \ncounts",
-             transform = "log10p1")  
-             
+             transform = "log10p1")
+
 # Case incidence (for 1,000 persons) heatmap with space aggregation
 plot_heatmap(dengue_MS,
-             var = "dengue_cases", 
-             time = "date",          
+             var = "dengue_cases",
+             time = "date",
              type = "inc",
              pop = "population",
              pt = 1000,
-             area = "micro_code", 
-             aggregate_space = "meso_code", 
+             area = "micro_code",
+             aggregate_space = "meso_code",
              palette = "Purp")
 ```

@@ -70,29 +70,29 @@ plot_seasonality(dengue_MS,
                  var_label = "Max temp.",
                  type = "cov",
                  area = "micro_code",
-                 aggregate_space = "region_code") 
+                 aggregate_space = "region_code")
 
 # Plot case counts (log scale) with space aggregation
  plot_seasonality(dengue_MS,
                   var = "dengue_cases",
-                  time = "date",  
+                  time = "date",
                   type = "counts",
                   area = "micro_code",
                   aggregate_space = "meso_code",
                   transform = "log10p1",
-                  var_label = "Monthly Dengue Cases", 
-                  xlab = "Month", 
+                  var_label = "Monthly Dengue Cases",
+                  xlab = "Month",
                   ylab = "Number of cases",
                   free_y_scale = TRUE)
-                  
+
 # Seasonality plot of incidence
 plot_seasonality(dengue_MS,
                  var = "dengue_cases",
-                 time = "date",    
+                 time = "date",
                  type = "inc",
                  pop = "population",
                  area = "micro_code",
-                 pt = 1000, 
+                 pt = 1000,
                  title = "Monthly Dengue Incidence",
                  palette = "Reds")
 ```

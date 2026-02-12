@@ -57,7 +57,7 @@ plot_map(
 - `bins`: Number of bins for categorization of numerical variables. Defaults to NULL (no binning).
 - `bins_method`: Method to compute the bins, only used when `bins` is not NULL. Possible values are "quantile" (default) and "equal".
 - `bins_label`: Optional labels for the bins. They must have the same length as the number of bins. Defaults to NULL (default interval labels).
-- `...`: Additional aesthetics to be passed to geom_sf. Possible values include `colour` (e.g., `colour="black"`), linewidth (e.g., `linewidth=0.1`), linetype (e.g., `linetype=2`), and alpha (e.g., `alpha=0.8`).
+- `...`: Additional arguments to be passed to `geom_sf`. Possible values include `colour` (e.g., `colour="black"`), linewidth (e.g., `linewidth=0.1`), linetype (e.g., `linetype=2`), and alpha (e.g., `alpha=0.8`).
 
 ## Returns
 
@@ -72,51 +72,51 @@ data("dengue_MS")
 data("map_MS")
 
 # Temporal average of a covariate
-plot_map(data = dengue_MS, 
-         var = "tmin",  
-         time = "date",       
+plot_map(data = dengue_MS,
+         var = "tmin",
+         time = "date",
          type = "cov",
-         area = "micro_code",  
-         map = map_MS,         
-         map_area = "code",   
+         area = "micro_code",
+         map = map_MS,
+         map_area = "code",
          aggregate_time = "all",
-         aggregate_time_fun = "mean",         
+         aggregate_time_fun = "mean",
          palette ="Reds",
          var_label= "Min Temp.")
 
 # Categorical covariate
-plot_map(data = dengue_MS, 
-         var = "biome_name",        
-         time = "date",      
-         area = "micro_code", 
+plot_map(data = dengue_MS,
+         var = "biome_name",
+         time = "date",
+         area = "micro_code",
          aggregate_time = "all",
-         map = map_MS,       
-         map_area = "code",  
+         map = map_MS,
+         map_area = "code",
          palette ="Viridis",
          var_label= "Biome")
 
 # Case counts by year (log)
 dengue_MS |>
-  plot_map(var = "dengue_cases",    
-           time = "date",    
+  plot_map(var = "dengue_cases",
+           time = "date",
            type = "counts",
-           area = "micro_code", 
+           area = "micro_code",
            pop = "population",
-           map = map_MS,   
+           map = map_MS,
            map_area = "code",
            palette = "Reds",
            transform = "log10p1")
 
 # Case incidence by year, binned
 plot_map(dengue_MS,
-         var = "dengue_cases", 
+         var = "dengue_cases",
          type = "inc",
          time = "date",
          area = "micro_code",
          pop = "population",
          pt = 1000,
-         map = map_MS, 
+         map = map_MS,
          map_area = "code",
-         bins = 5,   
+         bins = 5,
          palette = "Viridis")
 ```

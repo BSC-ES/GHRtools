@@ -1,0 +1,33 @@
+---
+format: html
+toc: true
+---
+
+# Convert a date to epiyearweek format
+
+## Description
+
+The conversion is done following the ISO 8601 standard, whereby the first week of the year is the one that contains at least four days of the new year. This coincides with the approach taken by `lubridate::epiweek` and `lubridate::isoweek` but may not coincide with other definitions of epidemiological weeks.
+
+```r
+date_to_epiyw(date, weekday = "Monday")
+```
+
+## Arguments
+
+- `date`: A vector of type 'Date'.
+- `weekday`: The weekday that determines the start of the week. Defaults to 'Monday'.
+
+## Returns
+
+The transformed dates to epiyearweek.
+
+## Examples
+
+```r
+# Convert dates in 'dengue_SP' in epiyw
+data(dengue_SP)
+head(dengue_SP$date)
+dengue_SP$epiyw <- date_to_epiyw(as.Date(dengue_SP$date), "Sunday")
+head(dengue_SP$epiyw)
+```

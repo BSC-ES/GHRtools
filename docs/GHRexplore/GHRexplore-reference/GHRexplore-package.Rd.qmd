@@ -23,5 +23,6 @@ Authors:
 
 Useful links:
 
- * [https://earth.bsc.es/gitlab/ghr/ghrexplore](https://earth.bsc.es/gitlab/ghr/ghrexplore)
- * Report bugs at [https://earth.bsc.es/gitlab/ghr/ghrexplore/-/issues](https://earth.bsc.es/gitlab/ghr/ghrexplore/-/issues)
+ * [https://gitlab.earth.bsc.es/ghr/ghrexplore](https://gitlab.earth.bsc.es/ghr/ghrexplore)
+ * [https://bsc-es.github.io/GHRtools/docs/GHRexplore/GHRexplore](https://bsc-es.github.io/GHRtools/docs/GHRexplore/GHRexplore)
+ * Report bugs at [https://gitlab.earth.bsc.es/ghr/ghrexplore/-/issues](https://gitlab.earth.bsc.es/ghr/ghrexplore/-/issues)

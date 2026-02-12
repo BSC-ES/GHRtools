@@ -2,7 +2,7 @@ library(rd2markdown)
 library("tools")
 
 # -------- SETTINGS --------
-pkg <- "GHRmodel"            # Your package name here
+pkg <- "GHRexplore"            # Your package name here
 base_dir <- "docs/reference" # Base folder where everything will go
 rd_files <- Rd_db(pkg)
 

@@ -7,7 +7,7 @@ toc: true
 
 ## Description
 
-Plots time series of two covariates, case counts, or incidence rates in two different axes.
+Plots dual-axis time series of two covariates, case counts, or incidence rates.
 
 ```r
 plot_timeseries2(
@@ -59,11 +59,11 @@ plot_timeseries2(
 
 ## Returns
 
-A ggplot2 time series plot.
+A dual-axis ggplot2 time series plot.
 
 ## See Also
 
-plot_timeseries for single axis time series plots.
+plot_timeseries for single-axis time series plots.
 
 ## Examples
 
@@ -79,7 +79,7 @@ plot_timeseries2(dengue_SP,
                  align = "mean",
                  aggregate_time = "month")
 
-# Plotting case incidence and a covariate with temporal aggregation 
+# Plotting case incidence and a covariate with temporal aggregation
 # and customized colours and labels
 plot_timeseries2(dengue_SP,
                  var = c("cases", "precip_tot"),
@@ -91,7 +91,7 @@ plot_timeseries2(dengue_SP,
                  aggregate_time = "month",
                  palette = c("darkgreen", "royalblue"),
                  alpha = 0.8)
-                 
+
 # Plotting case incidence and a covariate with spatial aggregation
 plot_timeseries2(dengue_MS,
                  var = c("dengue_cases", "pdsi"),

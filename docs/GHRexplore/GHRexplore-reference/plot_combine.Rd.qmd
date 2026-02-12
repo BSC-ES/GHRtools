@@ -70,7 +70,7 @@ plots <- plot_multiple(
   area = "micro_code")
 
 # Combine them with a shared legend
-plot_combine(plot_list = plots, 
+plot_combine(plot_list = plots,
              ncol = 1,
              align = "v",
              combine_legend = TRUE,

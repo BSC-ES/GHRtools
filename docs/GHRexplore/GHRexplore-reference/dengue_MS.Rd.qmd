@@ -47,7 +47,7 @@ A data frame with 2,640 rows and 27 columns:
 
 ## Details
 
-In addition to the dengue counts, the dataset contains a set of environmental, socio-economic and meteo-climatic factors. This dataset is a subset of the original containing observations over the entire Brazil.
+In addition to the dengue counts, the dataset contains environmental, socio-economic and meteo-climatic factors. This dataset is a subset of the original containing observations over the entire Brazil.
 
 ## Source
 
