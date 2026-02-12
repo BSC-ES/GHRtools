@@ -9,7 +9,7 @@ toc: true
 <br><br>
 ```
 
-# 0.2.2
+## 0.2.2
 
 * Added functions `epiyw_to_date()` and `date_to_epiyw()` to convert between dates and 
 epidemiological year-weeks for all days of the week.
