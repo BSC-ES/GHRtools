@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Getting Started with data4health – GHRtools</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../figures/bsc-logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-5831b4ab0d9ac86f0ad68f25a630e6c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">GHRtools</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">data4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/NEWS.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/access_health_data.html">
+ <span class="dropdown-text">Access health data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-clim4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">clim4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-clim4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrexplore" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRexplore</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrexplore">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-vignette.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrmodel" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRmodel</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrmodel">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_covariates.html">
+ <span class="dropdown-text">Covariate structures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_DLNM.html">
+ <span class="dropdown-text">DLNMs in GHRmodel</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrpredict" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRpredict</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrpredict">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRpredict/GHRpredict.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience" target="_blank"> 
+<span class="menu-text">About GHR</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#who-is-this-vignette-for" id="toc-who-is-this-vignette-for" class="nav-link" data-scroll-target="#who-is-this-vignette-for">Who is this vignette for?</a></li>
+  <li><a href="#data-requirements" id="toc-data-requirements" class="nav-link" data-scroll-target="#data-requirements">Data requirements</a></li>
+  </ul></li>
+  <li><a href="#the-data4health-workflow" id="toc-the-data4health-workflow" class="nav-link" data-scroll-target="#the-data4health-workflow">The data4health workflow</a>
+  <ul class="collapse">
+  <li><a href="#loading-data-with-d4h_load" id="toc-loading-data-with-d4h_load" class="nav-link" data-scroll-target="#loading-data-with-d4h_load">1. Loading data with <code>d4h_load()</code></a></li>
+  <li><a href="#cleaning-data-with-d4h_clean" id="toc-cleaning-data-with-d4h_clean" class="nav-link" data-scroll-target="#cleaning-data-with-d4h_clean">2. Cleaning data with <code>d4h_clean()</code></a></li>
+  <li><a href="#filtering-data-with-d4h_filter" id="toc-filtering-data-with-d4h_filter" class="nav-link" data-scroll-target="#filtering-data-with-d4h_filter">3. Filtering data with <code>d4h_filter()</code></a></li>
+  <li><a href="#aggregating-data-with-d4h_aggregate" id="toc-aggregating-data-with-d4h_aggregate" class="nav-link" data-scroll-target="#aggregating-data-with-d4h_aggregate">4. Aggregating data with <code>d4h_aggregate()</code></a></li>
+  <li><a href="#saving-results-with-d4h_save" id="toc-saving-results-with-d4h_save" class="nav-link" data-scroll-target="#saving-results-with-d4h_save">5. Saving results with <code>d4h_save()</code></a></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Getting Started with data4health</h1>
+<p class="subtitle lead">A Practical Workflow for Health Data Wrangling</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<img src="../../figures/data4health.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>The <strong>data4health</strong> package streamlines the typical epidemiological data workflow: loading raw surveillance or clinical files, cleaning and standardising them, filtering the cases of interest, aggregating case counts over space and time, and finally saving the results for downstream analysis or reporting. It is designed to help users with the most common challenges encountered during health data wrangling, such as inconsistent column names, missing values, fragmented reporting periods, and the need for spatiotemporal aggregation.</p>
+<p>The <strong>data4health</strong> package is designed to work in tandem with other packages of the 4health suite:</p>
+<ul>
+<li><strong>clim4health</strong>, which focuses on climate data,</li>
+<li><strong>socio4health</strong>, which focuses on socio-economic data,</li>
+<li><strong>land4health</strong>, which focuses on land-use data,</li>
+<li><strong>drone4health</strong>, which focuses on drone data,</li>
+<li><strong>cube4health</strong>, which helps to create datacubes.</li>
+</ul>
+<p>Together, these packages support the integration of environmental, social, and health data into a unified analytical workflow. More information about the toolkit can be found at the <a href="https://harmonize-tools.github.io/">HARMONIZE website</a>.</p>
+<p>This vignette walks you through a complete worked example using synthetic dengue surveillance data to provide an overview of the <strong>data4health</strong> package workflow and its core functions.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data4health)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="who-is-this-vignette-for" class="level2">
+<h2 class="anchored" data-anchor-id="who-is-this-vignette-for">Who is this vignette for?</h2>
+<p>This vignette is written for:</p>
+<ul>
+<li>Public health professionals working with surveillance data</li>
+<li>Data analysts supporting health departments</li>
+<li>Researchers handling epidemiological datasets</li>
+<li>Data scientists who are new to health data structures</li>
+</ul>
+<p>No prior knowledge of epidemiology is required, but basic familiarity with R and data frames is assumed.</p>
+</section>
+<section id="data-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="data-requirements">Data requirements</h2>
+<p>For the workflows shown in this package, the input data must be organized as a line list dataset. A “line list” is a standard format in public health surveillance. It is simply a spreadsheet where each row represents one individual case (for example, one patient with dengue), and each column contains information about that individual (such as age, sex, location, and date of symptom onset).</p>
+<p>In this vignette we work with a synthetic dataset that was simulated to mirror health data that public health authorities collect when monitoring infectious diseases:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(example_dataset)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      Agrabah   100089    LOC-3 1959-01-17 2024-07-14    F           1            N          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      Agrabah   100002    LOC-5 2022-01-01 2023-01-24    F           1            N          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      Motunui   100038    LOC-7 1974-01-13 2023-12-20    F           1            N          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Monstropolis   100009    LOC-6 1956-01-18 2024-09-02    M           1            N          Negative                  &lt;NA&gt;        3</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     Zootopia   100056   LOC-16 1962-01-16 2023-08-01    M           1            N          Positive Contacto domiciliario        3</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    Atlantica   100075   LOC-13 2022-01-01 2024-10-28    M           1            S           Pending                  &lt;NA&gt;     &lt;NA&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The dataset includes the following variables:</p>
+<ul>
+<li><p>NAME_GEO: Name of the geographic area (e.g., city or district) where the case was reported</p></li>
+<li><p>CODE_GEO: Numeric geographic code corresponding to the area</p></li>
+<li><p>LOCALCOD: Local administrative code</p></li>
+<li><p>DATE_BRTHD: Date of birth of the individual</p></li>
+<li><p>DATE_INI: Date of symptom onset (when the illness began)</p></li>
+<li><p>SEXO: Sex of the individual (M = Male, F = Female)</p></li>
+<li><p>DENGUE_TYPE: Clinical classification of dengue severity (coded numerically)</p></li>
+<li><p>HOSPITALISED: Whether the patient was hospitalised (S = Yes, N = No)</p></li>
+<li><p>RESULT_LABORATORY: Laboratory test result (Positive, Negative, or Pending)</p></li>
+<li><p>NOTES: Free-text notes (may contain additional comments)</p></li>
+<li><p>SEROTYPE: Dengue virus serotype (when available)</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="the-data4health-workflow" class="level1">
+<h1>The data4health workflow</h1>
+<pre><code>d4h_load()  →  d4h_clean()  →  d4h_filter()  →  d4h_aggregate()  →  d4h_save()</code></pre>
+<p>Each step produces a plain <code>data.frame</code> that you can inspect, subset, or pass directly into the next function. You can choose to use the full pipeline or just choose the functions that fit your needs.</p>
+<p>The full workflow can be executed in one go, or you can choose to execute each step separately and inspect the intermediate results before moving on to the next step. This flexibility allows you to tailor the workflow to your specific needs and data.</p>
+<section id="loading-data-with-d4h_load" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data-with-d4h_load">1. Loading data with <code>d4h_load()</code></h2>
+<p><code>d4h_load()</code> accepts a path to either a single file or a character vector of paths and binds the results into one dataframe.</p>
+<p>Supported formats include <code>.csv</code>, <code>.rds</code>, Excel (both <code>.xls</code> / <code>.xlsx</code>), <code>.json</code>, <code>.dbf</code> and <code>.dbc</code>. This package contains a few example datasets in different formats for you to load and test the function with. You can see all examples by passing the <code>d4h_example</code> function with no arguments:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_example</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "example_dataset_2023.rds" "example_dataset_2024.rds" "example_dataset.csv"      "example_dataset.dbc"      "example_dataset.json"     "example_dataset.xlsx"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The example below shows how to <strong>load any file</strong> with <code>d4h_load()</code>. The function will automatically detect the file format and load it accordingly.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>csv_path <span class="ot">&lt;-</span> <span class="fu">d4h_example</span>(<span class="st">"example_dataset.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">d4h_load</span>(csv_path))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        Arendelle   100097   LOC-12 1994-01-08 2024-05-06    F           1            N          Negative                  &lt;NA&gt;        1</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        Arendelle   100008   LOC-15 1955-01-18 2023-07-05    M           3            N          Positive Contacto domiciliario       NA</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          Agrabah   100072   LOC-16 2021-01-01 2023-06-05    F           1            N          Positive         Imported case        1</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4          Agrabah   100003    LOC-7 1975-01-13 2023-05-14    F           1            S          Positive                  &lt;NA&gt;       NA</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Radiator Springs   100081   LOC-13 1945-01-20 2024-06-05    M           1            N          Negative                  &lt;NA&gt;       NA</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6        Arendelle   100010    LOC-9 1970-01-14 2024-04-19    F           1            N          Positive                  &lt;NA&gt;       NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It is also possible to <strong>load multiple files</strong> at once, as long as the column names are consistent across files. The function will automatically bind the rows together into one data frame.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rds2023_path <span class="ot">&lt;-</span> <span class="fu">d4h_example</span>(<span class="st">"example_dataset_2023.rds"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rds2024_path <span class="ot">&lt;-</span> <span class="fu">d4h_example</span>(<span class="st">"example_dataset_2024.rds"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to check that both files were loaded correctly,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># we will check the number of rows of each file</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">d4h_load</span>(rds2023_path))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 259</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">d4h_load</span>(rds2024_path))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 241</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># the number of rows corresponds to the sum of the rows in both files:</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">d4h_load</span>(<span class="fu">c</span>(rds2023_path, rds2024_path)))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 2 file(s).</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 500</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the case of <strong>loading Excel files with multiple sheets</strong>, you can specify the sheet name to load. If not specified, the function will load the first sheet by default.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>xlsx_path <span class="ot">&lt;-</span> <span class="fu">d4h_example</span>(<span class="st">"example_dataset.xlsx"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_load</span>(xlsx_path)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ⚠ The Excel file contains the following sheets: year2023, year2024. Since no sheet was specified, the first one was loaded.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 259 × 11</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    NAME_GEO     CODE_GEO LOCALCOD DATE_BRTHD          DATE_INI            SEXO  DENGUE_TYPE HOSPITALISED RESULT_LABORATORY NOTES                 SEROTYPE</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;             &lt;chr&gt;                 &lt;chr&gt;   </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Arendelle      100008 LOC-15   1955-01-18 00:00:00 2023-07-05 00:00:00 M     3           N            Positive          Contacto domiciliario &lt;NA&gt;    </span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Agrabah        100072 LOC-16   2021-01-01 00:00:00 2023-06-05 00:00:00 F     1           N            Positive          Imported case         1       </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Agrabah        100003 LOC-7    1975-01-13 00:00:00 2023-05-14 00:00:00 F     1           S            Positive          &lt;NA&gt;                  &lt;NA&gt;    </span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Zootopia       100017 LOC-7    1956-01-18 00:00:00 2023-04-03 00:00:00 F     1           N            Positive          &lt;NA&gt;                  &lt;NA&gt;    </span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 &lt;NA&gt;           100081 LOC-16   1997-01-07 00:00:00 2023-05-19 00:00:00 M     1           S            Positive          Contacto domiciliario 1       </span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Monstropolis   100068 LOC-13   2006-01-05 00:00:00 2023-07-11 00:00:00 M     2           N            Positive          &lt;NA&gt;                  &lt;NA&gt;    </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Atlantica      100085 LOC-1    1962-01-16 00:00:00 2023-07-12 00:00:00 M     2           N            Positive          &lt;NA&gt;                  &lt;NA&gt;    </span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Arendelle      100037 LOC-10   1955-01-18 00:00:00 2023-02-17 00:00:00 &lt;NA&gt;  1           N            Positive          Imported case         3       </span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Atlantica      100097 LOC-2    1967-01-15 00:00:00 2023-04-13 00:00:00 F     1           N            Positive          &lt;NA&gt;                  &lt;NA&gt;    </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Motunui        100005 LOC-11   2001-01-06 00:00:00 2023-09-21 00:00:00 M     3           N            Positive          &lt;NA&gt;                  &lt;NA&gt;    </span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 249 more rows</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># as you can see all dates in DATE_INI, are from 2023</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You will see that the function automatically alerts you that there are multiple sheets in the Excel file and that it is loading the first sheet by default. If you want to load a specific sheet, you can specify the sheet name as follows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_load</span>(xlsx_path, <span class="at">sheet =</span> <span class="st">"year2024"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 241 × 11</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    NAME_GEO         CODE_GEO LOCALCOD DATE_BRTHD          DATE_INI            SEXO  DENGUE_TYPE HOSPITALISED RESULT_LABORATORY NOTES         SEROTYPE</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;   </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Arendelle          100097 LOC-12   1994-01-08 00:00:00 2024-05-06 00:00:00 F     1           N            Negative          &lt;NA&gt;          1       </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Radiator Springs   100081 LOC-13   1945-01-20 00:00:00 2024-06-05 00:00:00 M     1           N            Negative          &lt;NA&gt;          &lt;NA&gt;    </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Arendelle          100010 LOC-9    1970-01-14 00:00:00 2024-04-19 00:00:00 F     1           N            Positive          &lt;NA&gt;          &lt;NA&gt;    </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Zootopia           100040 LOC-3    1973-01-13 00:00:00 2024-10-18 00:00:00 F     1           N            Positive          Imported case &lt;NA&gt;    </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Motunui            100027 LOC-1    1958-01-17 00:00:00 2024-08-20 00:00:00 F     1           S            Positive          &lt;NA&gt;          3       </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Motunui            100062 LOC-6    1980-01-12 00:00:00 2024-01-27 00:00:00 F     1           N            Negative          &lt;NA&gt;          3       </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Arendelle          100088 LOC-20   1964-01-16 00:00:00 2024-08-22 00:00:00 M     1           N            Negative          &lt;NA&gt;          &lt;NA&gt;    </span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Motunui            100039 LOC-13   1971-01-14 00:00:00 2024-04-03 00:00:00 M     3           N            Positive          Imported case &lt;NA&gt;    </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Monstropolis       100019 LOC-15   1982-01-11 00:00:00 2024-02-29 00:00:00 M     1           N            Positive          &lt;NA&gt;          &lt;NA&gt;    </span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Monstropolis       100084 LOC-11   1985-01-10 00:00:00 2024-05-18 00:00:00 M     2           N            Positive          &lt;NA&gt;          &lt;NA&gt;    </span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 231 more rows</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># now, all dates in DATE_INI are from 2024</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>d4h_load()</code> checks whether the file contains a header or not. However you can force the function to treat the first row as a header or as data by using the <code>header</code> parameter.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">d4h_load</span>(rds2023_path)) <span class="co"># the function automatically detects the header</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     Arendelle   100008   LOC-15 1955-01-18 2023-07-05    M           3            N          Positive Contacto domiciliario     &lt;NA&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       Agrabah   100072   LOC-16 2021-01-01 2023-06-05    F           1            N          Positive         Imported case        1</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       Agrabah   100003    LOC-7 1975-01-13 2023-05-14    F           1            S          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8      Zootopia   100017    LOC-7 1956-01-18 2023-04-03    F           1            N          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10         &lt;NA&gt;   100081   LOC-16 1997-01-07 2023-05-19    M           1            S          Positive Contacto domiciliario        1</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 Monstropolis   100068   LOC-13 2006-01-05 2023-07-11    M           2            N          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># forcing the first row as header</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">d4h_load</span>(rds2023_path, <span class="at">header =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     Arendelle   100008   LOC-15 1955-01-18 2023-07-05    M           3            N          Positive Contacto domiciliario     &lt;NA&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       Agrabah   100072   LOC-16 2021-01-01 2023-06-05    F           1            N          Positive         Imported case        1</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       Agrabah   100003    LOC-7 1975-01-13 2023-05-14    F           1            S          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8      Zootopia   100017    LOC-7 1956-01-18 2023-04-03    F           1            N          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10         &lt;NA&gt;   100081   LOC-16 1997-01-07 2023-05-19    M           1            S          Positive Contacto domiciliario        1</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 Monstropolis   100068   LOC-13 2006-01-05 2023-07-11    M           2            N          Positive                  &lt;NA&gt;     &lt;NA&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># forcing the first row to be included in the data</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">d4h_load</span>(rds2023_path, <span class="at">header =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ⚠ A header will be  introduced. Make sure to give it meaningful columnnames using the rename_columns parameters of d4h_clean().</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully loaded 1 file(s).</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Column_1 Column_2 Column_3   Column_4 Column_5 Column_6    Column_7     Column_8          Column_9             Column_10 Column_11</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       &lt;NA&gt; CODE_GEO LOCALCOD DATE_BRTHD DATE_INI     SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES  SEROTYPE</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  Arendelle   100008   LOC-15      -5462    19543        M           3            N          Positive Contacto domiciliario      &lt;NA&gt;</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    Agrabah   100072   LOC-16      18628    19513        F           1            N          Positive         Imported case         1</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    Agrabah   100003    LOC-7       1838    19491        F           1            S          Positive                  &lt;NA&gt;      &lt;NA&gt;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8   Zootopia   100017    LOC-7      -5097    19450        F           1            N          Positive                  &lt;NA&gt;      &lt;NA&gt;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10      &lt;NA&gt;   100081   LOC-16       9868    19496        M           1            S          Positive Contacto domiciliario         1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For more information about <code>d4h_load()</code> and its parameters, see <code>?d4h_load</code>.</p>
+<hr>
+</section>
+<section id="cleaning-data-with-d4h_clean" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-data-with-d4h_clean">2. Cleaning data with <code>d4h_clean()</code></h2>
+<p>Here we show a selection of use cases. <code>d4h_clean()</code> handles the most common pre-processing tasks in one call, applying each step in the order listed below. This means later steps can reference outputs from earlier ones — for example, a renamed column can already be referred to by its new name within the same call.</p>
+<p><strong>Column selection</strong></p>
+<p>Depending on the number of columns in your data and the analysis you plan to do, you can use one of two parameters:</p>
+<ul>
+<li><code>cols_to_remove</code>: only specifying columns which you want to eliminate from your data. This is useful when you want to keep most of your columns and only want to remove a few of them.</li>
+<li><code>cols_to_include</code>: only specifying columns which you want to keep in your data. This is useful when you have many columns and you only want to keep a few of them.</li>
+</ul>
+<p>Currently, the dataset contains the following columns:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(example_dataset)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "NAME_GEO"          "CODE_GEO"          "LOCALCOD"          "DATE_BRTHD"        "DATE_INI"          "SEXO"              "DENGUE_TYPE"       "HOSPITALISED"      "RESULT_LABORATORY" "NOTES"             "SEROTYPE"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In our example, we want to remove the <code>CODE_GEO</code>, <code>LOCALCOD</code>, and <code>NOTES</code> columns, which are not relevant for our analysis.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(<span class="at">data =</span> example_dataset,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">cols_to_remove =</span> <span class="fu">c</span>(<span class="st">"CODE_GEO"</span>, <span class="st">"LOCALCOD"</span>, <span class="st">"NOTES"</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Removing columns completed successfully: The following columns were removed from your dataset: CODE_GEO, LOCALCOD, NOTES.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you check the column names of dengue_clean, you will see that the columns have been removed:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dengue_clean)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "NAME_GEO"          "DATE_BRTHD"        "DATE_INI"          "SEXO"              "DENGUE_TYPE"       "HOSPITALISED"      "RESULT_LABORATORY" "SEROTYPE"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Column renaming</strong></p>
+<p>You can either <strong>apply a rule to all column names</strong>, the options are:</p>
+<ul>
+<li>lower: all to lowercase</li>
+<li>upper: all to uppercase</li>
+<li>no_spaces: replace all spaces by underscores</li>
+</ul>
+<p>If you want to change all column names to lowercase, you can use the following code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(<span class="at">data =</span> dengue_clean,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rename_columns =</span> <span class="st">"lower"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Renaming columns completed successfully.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now, the column names of dengue_clean are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dengue_clean)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "name_geo"          "date_brthd"        "date_ini"          "sexo"              "dengue_type"       "hospitalised"      "result_laboratory" "serotype"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you want to <strong>rename column names to new names</strong>, you can use the following code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(<span class="at">data =</span> dengue_clean,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rename_columns =</span> <span class="fu">c</span>(<span class="at">name_geo   =</span> <span class="st">"region"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">date_brthd =</span> <span class="st">"birthday_date"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">date_ini =</span> <span class="st">"onset_date"</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Renaming columns completed successfully.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now the column names are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dengue_clean)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "region"            "birthday_date"     "onset_date"        "sexo"              "dengue_type"       "hospitalised"      "result_laboratory" "serotype"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Missing value filtering</strong></p>
+<p>Now we have to start to think about what variables are essential for our analysis. For example, if we want to do a time series analysis of dengue cases by region, we need to have a known onset date and a known region for each case.</p>
+<p>You can check for missing values in each column using:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(dengue_clean))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            region     birthday_date        onset_date              sexo       dengue_type      hospitalised result_laboratory          serotype </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                20                 0                 0                26                22                26                31               376</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>As you can see <em>onset_date</em> is complete but <code>region</code> has 20 missing values. If we want to drop these rows with missing values in these key variables, we can use the <code>remove_rows_missing</code> parameter in <code>d4h_clean()</code>. The following will drop any row that has a missing value in either <code>onset_date</code> or <code>region</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(<span class="at">data =</span> dengue_clean,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">remove_rows_missing =</span> <span class="fu">c</span>(<span class="st">"onset_date"</span>, <span class="st">"region"</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Removing rows with missing values completed successfully.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Removed 20 rows due to missing entries.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The function always gives an indication of how many rows were removed. We can double-check this by running:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dengue_clean)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 480</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Sparse-column removal</strong></p>
+<p>Some columns may have a high proportion of missing values, which may reduce their usefulness for analysis. You can find the percentage of missing values with the following code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">is.na</span>(dengue_clean)) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            region     birthday_date        onset_date              sexo       dengue_type      hospitalised result_laboratory          serotype </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          0.000000          0.000000          0.000000          5.208333          4.166667          5.208333          5.833333         74.375000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In our example, the <code>serotype</code> column has 74.375% missing values.</p>
+<p>You can choose to drop any column that has more than a certain percentage of missing values using the <code>threshold_remove</code> parameter. For example, the following will drop any column that has more than 50% missing values.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(<span class="at">data =</span> dengue_clean, <span class="at">threshold_remove =</span> <span class="dv">50</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ The following columns were removed from your dataset  because they contain more missing data than the  established threshold of 50 : serotype</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>As usual, the message printed in the console directly lets you know which columns were removed.</p>
+<p><strong>Category-recoding</strong></p>
+<p>Sometimes categorical variables are coded using abbreviations or numeric codes that are not human-readable (for example, ‘M’ instead of ‘Male’). You can use the <code>rename_categories</code> parameter to recode these values to more meaningful labels.</p>
+<p>For example, the following will recode the <code>sex</code> variable from “M” and “F” to “Male” and “Female”, the <code>dengue_type</code> variable from “1”, “2”, “3” to “Dengue without warning signs”, “Dengue with warning signs”, and “Severe dengue”, and the <code>hospitalised</code> variable from “S” and “N” to “Yes” and “No”.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(<span class="at">data =</span> dengue_clean,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rename_categories =</span> <span class="fu">list</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sexo           =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Male"</span>,   <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"Female"</span>),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">dengue_type   =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Dengue without warning signs"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Dengue with warning signs"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Severe dengue"</span>),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">hospitalised  =</span> <span class="fu">c</span>(<span class="st">"S"</span> <span class="ot">=</span> <span class="st">"Yes"</span>,    <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"No"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                          ))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Renaming categories completed successfully.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Date/time derivation</strong></p>
+<p>In epidemiology, time aggregation is essential because disease trends are typically analysed by epidemiological week, month, or year rather than by individual dates. In this package, we currently consider three timescales (epiweek, month, year) and two formats to represent time: date format (e.g., <code>2023-01-01</code>) and number format (e.g., <code>2023-01</code>).</p>
+<p>The same date can be represented in different formats. In the table below you can see the different representations of the same date (<code>2026-02-19</code>) in different formats and timescales:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>date</th>
+<th>number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>epiweek</td>
+<td>15.02.2026</td>
+<td>2026-07</td>
+</tr>
+<tr class="even">
+<td>month</td>
+<td>01.02.2026</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>year</td>
+<td>01.01.2026</td>
+<td>2026</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: The epiweek number is always given in combination with a year since the epidemiological weeks sometimes can have overlap, e.g.&nbsp;the first of January of 2026, corresponds to the epiweek 53 of the year 2025. If you need more information on epiweeks please check ISO 8601.</em></p>
+<p>Please note that the start date of the week is by default set to Sunday as a European standard. You can change the start date by adding the parameter <code>week_start</code>.</p>
+<p>There are several functions to transform date columns from one to another:</p>
+<ul>
+<li><code>date_to_weekdate</code>: converts a date column to the date of the first day of the epiweek</li>
+<li><code>date_to_weeknumber</code>: converts a date column to the epiweek number (e.g., 2026-07)</li>
+<li><code>date_to_monthdate</code>: converts a date column to date of the first day of the month</li>
+<li><code>date_to_monthnumber</code>: converts a date column to the month number (e.g., 2 for February)</li>
+<li><code>date_to_yearnumber</code>: converts a date column to the year number (e.g.,
+<ol start="2026" type="1">
+<li></li>
+</ol></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(<span class="at">data =</span> dengue_clean,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_weekdate =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_weeknumber =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_monthdate =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_monthnumber =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_yearnumber =</span> <span class="st">"onset_date"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to weekdate completed successfully: New column 'onset_date_weekdate' was created.</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to weeknumber completed successfully: New column 'onset_date_epiyw' was created.</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to monthdate completed successfully: New column 'onset_date_monthdate' was created.</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to monthnumber completed successfully: New column 'onset_date_monthnumber' was created.</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to yearnumber completed successfully: New column 'onset_date_year' was created.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can see the results for one case here:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dengue_clean[<span class="dv">1</span>, ]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    region birthday_date onset_date   sexo                  dengue_type hospitalised result_laboratory onset_date_weekdate onset_date_epiyw onset_date_monthdate onset_date_monthnumber onset_date_year</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Agrabah    1959-01-17 2024-07-14 Female Dengue without warning signs           No          Positive          2024-07-14          2024-29           2024-07-01                      7            2024</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Clean in one step</strong></p>
+<p>It is also possible to execute <code>d4h_clean()</code> only once with all the parameters at once, as in the example below:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dengue_clean <span class="ot">&lt;-</span> <span class="fu">d4h_clean</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> example_dataset,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols_to_remove     =</span> <span class="fu">c</span>(<span class="st">"CODE_GEO"</span>, <span class="st">"LOCALCOD"</span>, <span class="st">"NOTES"</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">rename_columns =</span> <span class="fu">c</span>(</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">DATE_BRTHD         =</span> <span class="st">"birthdate"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DATE_INI         =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">NAME_GEO            =</span> <span class="st">"region"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">SEXO              =</span> <span class="st">"sex"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">DENGUE_TYPE       =</span> <span class="st">"dengue_type"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">HOSPITALISED     =</span> <span class="st">"hospitalised"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">RESULT_LABORATORY     =</span> <span class="st">"lab_result"</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">SEROTYPE      =</span> <span class="st">"serotype"</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">remove_rows_missing =</span> <span class="fu">c</span>(<span class="st">"onset_date"</span>, <span class="st">"region"</span>),</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold_remove    =</span> <span class="dv">50</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">rename_categories   =</span> <span class="fu">list</span>(</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex               =</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="st">"Male"</span>,   <span class="at">F =</span> <span class="st">"Female"</span>),</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">dengue_type       =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Dengue without warning signs"</span>,</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Dengue with warning signs"</span>,</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Severe dengue"</span>),</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">hospitalised      =</span> <span class="fu">c</span>(<span class="at">S =</span> <span class="st">"Yes"</span>,    <span class="at">N =</span> <span class="st">"No"</span>)),</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_to_weekdate    =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_to_weeknumber  =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_to_monthdate   =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_to_monthnumber =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_to_yearnumber  =</span> <span class="st">"onset_date"</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Renaming columns completed successfully.</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Removing columns completed successfully: The following columns were removed from your dataset: CODE_GEO, LOCALCOD, NOTES.</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Removing rows with missing values completed successfully.</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Removed 20 rows due to missing entries.</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Renaming categories completed successfully.</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to weekdate completed successfully: New column 'onset_date_weekdate' was created.</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to weeknumber completed successfully: New column 'onset_date_epiyw' was created.</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to monthdate completed successfully: New column 'onset_date_monthdate' was created.</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to monthnumber completed successfully: New column 'onset_date_monthnumber' was created.</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Transforming date to yearnumber completed successfully: New column 'onset_date_year' was created.</span></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ The following columns were removed from your dataset  because they contain more missing data than the  established threshold of 50 : serotype</span></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="co"># the resulting dataframe</span></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dengue_clean)</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         region  birthdate onset_date    sex                  dengue_type hospitalised lab_result onset_date_weekdate onset_date_epiyw onset_date_monthdate onset_date_monthnumber onset_date_year</span></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      Agrabah 1959-01-17 2024-07-14 Female Dengue without warning signs           No   Positive          2024-07-14          2024-29           2024-07-01                      7            2024</span></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      Agrabah 2022-01-01 2023-01-24 Female Dengue without warning signs           No   Positive          2023-01-22          2023-04           2023-01-01                      1            2023</span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      Motunui 1974-01-13 2023-12-20 Female Dengue without warning signs           No   Positive          2023-12-17          2023-51           2023-12-01                     12            2023</span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Monstropolis 1956-01-18 2024-09-02   Male Dengue without warning signs           No   Negative          2024-09-01          2024-36           2024-09-01                      9            2024</span></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     Zootopia 1962-01-16 2023-08-01   Male Dengue without warning signs           No   Positive          2023-07-30          2023-31           2023-08-01                      8            2023</span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    Atlantica 2022-01-01 2024-10-28   Male Dengue without warning signs          Yes    Pending          2024-10-27          2024-44           2024-10-01                     10            2024</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>After cleaning, every row has a known onset date and sex, column names follow a consistent lower-case convention, and several derived time columns are ready for aggregation.</p>
+<p>For more information about <code>d4h_clean()</code> and its parameters, see <code>?d4h_clean</code>.</p>
+<hr>
+</section>
+<section id="filtering-data-with-d4h_filter" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-data-with-d4h_filter">3. Filtering data with <code>d4h_filter()</code></h2>
+<p><code>d4h_filter()</code> can be used to filter the dataset by any column you choose. Depending on the column type, different filter conditions are available:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column type</th>
+<th>Conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>numeric</td>
+<td><code>over</code>, <code>under</code>, <code>between</code>, <code>equal</code></td>
+</tr>
+<tr class="even">
+<td>Date</td>
+<td><code>after</code>, <code>before</code>, <code>during</code></td>
+</tr>
+<tr class="odd">
+<td>character</td>
+<td><code>include</code>, <code>exclude</code>, <code>match</code>, <code>starts</code>, <code>ends</code></td>
+</tr>
+</tbody>
+</table>
+<p>To use <code>d4h_filter</code>, pass the column name you want to filter by as an argument, and the value of each argument is a list which contains the filter criteria.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dengue_filtered <span class="ot">&lt;-</span> <span class="fu">d4h_filter</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_clean,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lab_result =</span> <span class="fu">list</span>(<span class="at">include =</span> <span class="st">"Positive"</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">onset_date =</span> <span class="fu">list</span>(<span class="at">during =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2023-01-01"</span>, <span class="st">"2023-12-31"</span>))),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">region     =</span> <span class="fu">list</span>(<span class="at">exclude =</span> <span class="st">"Arendelle"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Successfully filtered the dataset.</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dengue_filtered)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 84</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For more information about <code>d4h_filter()</code> and its parameters, see <code>?d4h_filter</code>.</p>
+<hr>
+</section>
+<section id="aggregating-data-with-d4h_aggregate" class="level2">
+<h2 class="anchored" data-anchor-id="aggregating-data-with-d4h_aggregate">4. Aggregating data with <code>d4h_aggregate()</code></h2>
+<p><code>d4h_aggregate()</code> aggregates by counting the number of cases within defined groups (for example, the number of dengue cases per week and per region). This step transforms individual-level data into summary statistics suitable for reporting, visualisation, or modelling. For example, instead of analysing 500 individual patient records, you might analyse 52 weekly case counts. It also supports additional stratification variables via <code>add_col</code>, and can fill in zero-count cells for missing time-space combinations with <code>all_times</code> and <code>all_spaces</code>.</p>
+<p><strong>Simple spatio-temporal aggregation</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>weekly_by_region <span class="ot">&lt;-</span> <span class="fu">d4h_aggregate</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data      =</span> dengue_filtered,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_col  =</span> <span class="st">"onset_date_weekdate"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">space_col =</span> <span class="st">"region"</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Aggregation completed successfully.</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weekly_by_region)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   onset_date_weekdate  region cases</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          2023-01-08 Agrabah     1</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          2023-01-22 Agrabah     1</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          2023-03-05 Agrabah     1</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4          2023-03-19 Agrabah     1</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5          2023-03-26 Agrabah     1</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6          2023-04-02 Agrabah     1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Monthly counts stratified by dengue severity</strong></p>
+<p>This is the typical input format for an epidemic curve or a time-series model.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>monthly_by_type <span class="ot">&lt;-</span> <span class="fu">d4h_aggregate</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data      =</span> dengue_filtered,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_col  =</span> <span class="st">"onset_date_monthdate"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">space_col =</span> <span class="st">"region"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">add_col   =</span> <span class="st">"dengue_type"</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Aggregation completed successfully.</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(monthly_by_type, <span class="dv">12</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    onset_date_monthdate  region                  dengue_type cases</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1            2023-01-01 Agrabah    Dengue with warning signs     0</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2            2023-01-01 Agrabah Dengue without warning signs     1</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3            2023-01-01 Agrabah                Severe dengue     1</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4            2023-02-01 Agrabah    Dengue with warning signs     0</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5            2023-02-01 Agrabah Dengue without warning signs     0</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6            2023-02-01 Agrabah                Severe dengue     0</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7            2023-03-01 Agrabah    Dengue with warning signs     1</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8            2023-03-01 Agrabah Dengue without warning signs     1</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9            2023-03-01 Agrabah                Severe dengue     1</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10           2023-04-01 Agrabah    Dengue with warning signs     1</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11           2023-04-01 Agrabah Dengue without warning signs     1</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12           2023-04-01 Agrabah                Severe dengue     0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Ensuring a complete time series</strong></p>
+<p>In surveillance data, weeks with zero reported cases are often not explicitly recorded. This can lead to misleading analyses if missing weeks are interpreted as missing data rather than true zero counts. Pass a full date sequence via <code>all_times</code> so that the aggregated output contains explicit zero rows rather than silently missing weeks.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>all_weeks <span class="ot">&lt;-</span> <span class="fu">seq</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="fu">as.Date</span>(<span class="st">"2023-01-01"</span>),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">to   =</span> <span class="fu">as.Date</span>(<span class="st">"2023-12-31"</span>),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by   =</span> <span class="st">"week"</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>weekly_complete <span class="ot">&lt;-</span> <span class="fu">d4h_aggregate</span>(</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data       =</span> dengue_filtered,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_col   =</span> <span class="st">"onset_date_weekdate"</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">space_col  =</span> <span class="st">"region"</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">all_times  =</span> all_weeks,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">all_spaces =</span> <span class="fu">c</span>(<span class="st">"Lima"</span>, <span class="st">"Cusco"</span>, <span class="st">"Loreto"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✅ Aggregation completed successfully.</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm zeros are present</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(weekly_complete<span class="sc">$</span>cases <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 159</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For more information about d4h_aggregate() and its parameters, see <code>?d4h_aggregate</code>.</p>
+<hr>
+</section>
+<section id="saving-results-with-d4h_save" class="level2">
+<h2 class="anchored" data-anchor-id="saving-results-with-d4h_save">5. Saving results with <code>d4h_save()</code></h2>
+<p><code>d4h_save()</code> writes a <code>data.frame</code> to disk. The parameters are:</p>
+<ul>
+<li>data: the <code>data.frame</code> to save</li>
+<li>name: the name you want the file to have If you omit <code>name</code>, the file name will automatically include a timestamp (current date and time).</li>
+<li>format: to indicate in what format the data should be saved. Supported formats are <code>"csv"</code>, <code>"csv2"</code>, <code>"rds"</code>, <code>"xls"</code>, <code>"dbf"</code>, and <code>"json"</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the weekly aggregation as a CSV for sharing</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_save</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> weekly_complete,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name   =</span> <span class="st">"dengue_weekly_2023"</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the cleaned individual-level data as RDS for fast reloading in R</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_save</span>(</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> dengue_filtered,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">name   =</span> <span class="st">"dengue_analysis_clean"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"rds"</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Save for teams that use Excel</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_save</span>(</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> monthly_by_type,</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">name   =</span> <span class="st">"dengue_monthly_by_type"</span>,</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"xls"</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For more information about d4h_save() and its parameters, see <code>?d4h_save</code>.</p>
+<hr>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>
+<p>Together, these five functions form a concise and readable data-processing pipeline. Using the base R pipe (<code>|&gt;</code>, available since R 4.1) the full workflow above can be written as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_load</span>(csv_path)                <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">d4h_clean</span>(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols_to_remove     =</span> <span class="fu">c</span>(<span class="st">"CODE_GEO"</span>, <span class="st">"LOCALCOD"</span>, <span class="st">"NOTES"</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">rename_columns     =</span> <span class="fu">c</span>(</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">DATE_BRTHD        =</span> <span class="st">"birthdate"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">DATE_INI          =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">NAME_GEO          =</span> <span class="st">"region"</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">SEXO              =</span> <span class="st">"sex"</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">DENGUE_TYPE       =</span> <span class="st">"dengue_type"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">HOSPITALISED      =</span> <span class="st">"hospitalised"</span>,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">RESULT_LABORATORY =</span> <span class="st">"lab_result"</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">SEROTYPE          =</span> <span class="st">"serotype"</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">remove_rows_missing =</span> <span class="fu">c</span>(<span class="st">"onset_date"</span>, <span class="st">"region"</span>),</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">threshold_remove    =</span> <span class="dv">50</span>,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">rename_categories   =</span> <span class="fu">list</span>(</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">sex               =</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="st">"Male"</span>,   <span class="at">F =</span> <span class="st">"Female"</span>),</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">dengue_type       =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Dengue without warning signs"</span>,</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Dengue with warning signs"</span>,</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Severe dengue"</span>),</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">hospitalised      =</span> <span class="fu">c</span>(<span class="at">S =</span> <span class="st">"Yes"</span>,    <span class="at">N =</span> <span class="st">"No"</span>)),</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_weekdate    =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_weeknumber  =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_monthdate   =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_monthnumber =</span> <span class="st">"onset_date"</span>,</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_to_yearnumber  =</span> <span class="st">"onset_date"</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>  )                                              <span class="sc">|&gt;</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">d4h_filter</span>(</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">lab_result =</span> <span class="fu">list</span>(<span class="at">include =</span> <span class="st">"Positive"</span>),</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">onset_date =</span> <span class="fu">list</span>(<span class="at">during =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2023-01-01"</span>, <span class="st">"2023-12-31"</span>))),</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">region     =</span> <span class="fu">list</span>(<span class="at">exclude =</span> <span class="st">"Arendelle"</span>)</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>  )                                              <span class="sc">|&gt;</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">d4h_aggregate</span>(</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_col   =</span> <span class="st">"onset_date_weekdate"</span>,</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">space_col  =</span> <span class="st">"region"</span>,</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">all_times  =</span> all_weeks,</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">all_spaces =</span> <span class="fu">c</span>(<span class="st">"Lima"</span>, <span class="st">"Cusco"</span>, <span class="st">"Loreto"</span>)</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>  )                                              <span class="sc">|&gt;</span></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">d4h_save</span>(<span class="at">name =</span> <span class="st">"dengue_weekly_confirmed"</span>, <span class="at">format =</span> <span class="st">"csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The workflow is concise and readable, making it easy to follow the process from data loading to final output. Each step is clearly defined and can be easily modified or extended as needed.</p>
+<p>Once you have executed the full workflow, you will have a cleaned, filtered, and aggregated dataset that is ready for analysis or reporting. We recommend the following next steps:</p>
+<ul>
+<li>Climate data processing via <a href="https://bsc-es.github.io/GHRtools/docs/clim4health/clim4health.html">clim4health</a></li>
+<li>Data exploration via <a href="https://cran.r-project.org/package=GHRexplore">GHRexplore</a></li>
+<li>Modelling via <a href="https://cran.r-project.org/package=GHRmodel">GHRmodel</a></li>
+<li>Predicting via GHRpredict (coming soon!)</li>
+</ul>
+<p>The <strong>data4health</strong> package is designed to be flexible and adaptable to different types of health data and analysis needs. We encourage you to explore the documentation and experiment with the functions to see how they can best serve your specific use case. If you have any needs that are not currently met by the package, please feel free to reach out to us with suggestions for new features or improvements. We are committed to making this toolkit as useful and user-friendly as possible for the health data community.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/BSC-ES\.github\.io\/GHRtools\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, GHR</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

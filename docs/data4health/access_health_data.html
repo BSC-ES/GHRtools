@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>How to access Health Data – GHRtools</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../figures/bsc-logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-5831b4ab0d9ac86f0ad68f25a630e6c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">GHRtools</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">data4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/NEWS.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/access_health_data.html">
+ <span class="dropdown-text">Access health data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-clim4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">clim4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-clim4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrexplore" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRexplore</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrexplore">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-vignette.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrmodel" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRmodel</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrmodel">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_covariates.html">
+ <span class="dropdown-text">Covariate structures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_DLNM.html">
+ <span class="dropdown-text">DLNMs in GHRmodel</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrpredict" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRpredict</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrpredict">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRpredict/GHRpredict.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience" target="_blank"> 
+<span class="menu-text">About GHR</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">How to access Health Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<img src="../../figures/data4health.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
+<p>This guide explains how to download and work with public health surveillance data from Brazil, Colombia, Peru, and the Dominican Republic. Each section walks you through the available methods, from R packages to direct downloads, so you can get to analysis as quickly as possible.</p>
+<p>If you would like another country to be included, please let us know by opening an issue in our GitHub repository.</p>
+<p><br></p>
+<details open="">
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇧🇷 Brasil
+</summary>
+<p>Brazil’s health surveillance data is managed by the <a href="https://datasus.saude.gov.br/">Department of Informatics of the Unified Health System</a> (DATASUS). Four methods are available for accessing anonymised, individual-level records. If you only need summary statistics rather than raw data, the <a href="https://datasus.saude.gov.br/informacoes-de-saude-tabnet/">DataSUS tabnet</a> web interface lets you build and export custom tables without any programming.</p>
+<p>The earliest year available depends on when a disease was introduced and when notification became mandatory. Disease could be available from 2000 onwards</p>
+<p>If you need data from earlier years, nominal data, or data from SIVEP, you must request it from the Ministry of Health through the e-SIC portal. Nominal data require ethical committee approval in most cases.</p>
+<details>
+<summary>
+Method 1: R package microdatasus
+</summary>
+<p>Microdatasus is an <a href="https://github.com/rfsaldanha/microdatasus">R package</a> package is the most convenient way to download and preprocess DATASUS data directly in R.</p>
+<p><strong>Installing the package</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"devtools"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"microdatasus"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rfsaldanha/microdatasus"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microdatasus)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Downloading data</strong></p>
+<p>Use <code>fetch_datasus()</code> to download data. You must specify:</p>
+<ul>
+<li>The temporal extent (<code>year_start</code>, <code>month_start</code>, <code>year_end</code>, <code>month_end</code>)</li>
+<li>The spatial extent (federative units)</li>
+<li>The disease (health information system)</li>
+<li>The variables (default downloads all)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>chik <span class="ot">&lt;-</span> <span class="fu">fetch_datasus</span>(<span class="at">year_start =</span> <span class="dv">2017</span>, <span class="at">year_end =</span> <span class="dv">2019</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">information_system =</span> <span class="st">"SINAN-CHIKUNGUNYA"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mal  <span class="ot">&lt;-</span> <span class="fu">fetch_datasus</span>(<span class="at">year_start =</span> <span class="dv">2004</span>, <span class="at">year_end =</span> <span class="dv">2006</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">information_system =</span> <span class="st">"SINAN-MALARIA"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>den  <span class="ot">&lt;-</span> <span class="fu">fetch_datasus</span>(<span class="at">year_start =</span> <span class="dv">2011</span>, <span class="at">year_end =</span> <span class="dv">2013</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">information_system =</span> <span class="st">"SINAN-DENGUE"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>zika <span class="ot">&lt;-</span> <span class="fu">fetch_datasus</span>(<span class="at">year_start =</span> <span class="dv">2016</span>, <span class="at">year_end =</span> <span class="dv">2021</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">information_system =</span> <span class="st">"SINAN-ZIKA"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Preprocessing data</strong></p>
+<p>Each disease has a dedicated preprocessing function that tidies the raw data for analysis. These functions:</p>
+<ul>
+<li>Assign human-readable labels to categorical fields (e.g., CS_RACA becomes Branca, Preta, Amarela instead of 1, 2, 3)</li>
+<li>Converts variables to the correct formats</li>
+<li>convert the age variable NU_IDADE_N into separate, easy-to-use columns: IDADEminutos, IDADEhoras, IDADEdias, IDADEmeses, and IDADEanos.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>chik2 <span class="ot">&lt;-</span> <span class="fu">process_sinan_chikungunya</span>(chik)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mal2  <span class="ot">&lt;-</span> <span class="fu">process_sinan_malaria</span>(mal)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>den2  <span class="ot">&lt;-</span> <span class="fu">process_sinan_dengue</span>(den)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>zika2 <span class="ot">&lt;-</span> <span class="fu">process_sinan_zika</span>(zika)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Your data is now ready for analysis.</p>
+</details>
+<details>
+<summary>
+Method 2: FTP access
+</summary>
+<p>DATASUS also shares its data via FTP, which you can access using any FTP client. <a href="https://wiki.filezilla-project.org/Client_Installation#Choosing_the_right_download">FileZilla</a> is a free and widely used option. Connect using these settings:</p>
+<ul>
+<li><strong>Host:</strong> ftp.datasus.gov.br</li>
+<li><strong>Remote site:</strong> /dissemin/publicos/SINAN/</li>
+</ul>
+<p>Once connected, navigate into the DADOS folder. You will find two subfolders:</p>
+<ul>
+<li><strong>FINAIS:</strong> revised, finalised historical data</li>
+<li><strong>PRELIM:</strong> preliminary, unrevised data for the most recent year(s)</li>
+</ul>
+<p>If a dataset appears in FINAIS, it will not appear in PRELIM. Navigate to the disease folder of interest, then download the file for the year you need.</p>
+<p><img src="../man/figures/Filezilla_SINAN.png" align="center" width="70%" alt="Filezilla screenshot"></p>
+</details>
+<details>
+<summary>
+Method 3: DATASUS website and command line
+</summary>
+<p>The Ministry of Health provides a <a href="https://datasus.saude.gov.br/transferencia-de-arquivos/">web interface</a> for browsing available files. Fill in the fields as follows:</p>
+<ul>
+<li><strong>Fonte:</strong> SINAN - Sistema de Informações de Agravos de Notificação</li>
+<li><strong>Modalidade:</strong> Dados</li>
+<li><strong>Tipo de Arquivo:</strong> Select the disease of interest</li>
+<li><strong>Ano:</strong> Select the desired years</li>
+<li><strong>UF:</strong> BR</li>
+</ul>
+<p>Click Enviar to generate the file list. To download a file, right-click it, copy the link address, and run the following in your terminal (substituting the correct URL and destination path):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://ftp.datasus.gov.br/dissemin/publicos/SINAN/DADOS/PRELIM/DENGBR21.dbc <span class="at">-P</span> /path/to/save/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<details>
+<summary>
+Method 4: Python package PySUS
+</summary>
+<p>If you prefer Python, <a href="https://pysus.readthedocs.io/en/latest/">PySUS</a> provides equivalent functionality for downloading DATASUS data.</p>
+<p><strong>Installing PySUS</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install libffi-dev</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip install PySUS</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install geocoder</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Downloading data</strong></p>
+<p>Optionally, set a persistent cache directory so downloaded files are saved to a location of your choice:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PYSUS_CACHEPATH</span><span class="op">=</span><span class="st">'/home/me/desired/path/.pysus'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then, in Python:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysus.preprocessing.sinan <span class="im">import</span> SINAN</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>SINAN.list_diseases()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>SINAN.get_available_years(<span class="st">'zika'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> SINAN.download(<span class="dv">2019</span>, <span class="st">'Zika'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Downloaded files are saved as parquet files in the specified folder.</p>
+</details>
+</details>
+<p><br></p>
+<details open="">
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇨🇴 Colombia
+</summary>
+<p>Colombia’s national public health surveillance system, <a href="https://portalsivigila.ins.gov.co/">Sistema Nacional de Vigilancia en Salud Pública</a> (SIVIGILA) is coordinated by the <a href="https://www.ins.gov.co/Paginas/Inicio.aspx">Instituto Nacional de Salud</a> in collaboration with the Ministerio de Salud y Protección Social. It collects, analyses, and disseminates information on health events that may affect the population, supporting public health planning and response across the country.</p>
+<p>SIVIGILA’s reporting network includes thousands of healthcare providers who report on more than one hundred monitored conditions, enabling authorities to track disease trends and detect outbreaks.</p>
+<p>The SIVIGILA microdata portal publishes aggregated data at municipality resolution, without georeferencing or sensitive clinical data. Publication is typically delayed by 6 to 10 months. A <a href="https://portalsivigila.ins.gov.co/">public dashboard</a> is also available with a shorter delay, but it is less stable and harder to extract data from programmatically.</p>
+<p>Two methods are available for accessing Colombia’s surveillance data.</p>
+<details>
+<summary>
+Method 1: Manual download via SIVIGILA
+</summary>
+<p><img src="../man/figures/SIVIGILA.png" align="center" width="100%" alt="SIVIGILA screenshot"></p>
+<p>Visit the <a href="https://portalsivigila.ins.gov.co/Paginas/Buscador.aspx">Buscador de microdatos</a> and follow these steps:</p>
+<ol type="1">
+<li>In “Seleccione el evento de interés”, choose the disease or health event you want.</li>
+<li>In “Seleccione año”, choose the year.</li>
+<li>Click “Buscar” to generate the dataset.</li>
+</ol>
+<p>If this is your first time using the portal, you may be asked for your name and the reason for the data request. Complete the form to proceed. Once the results appear, download the dataset as an Excel file.</p>
+</details>
+<details>
+<summary>
+Method 2: R package sivirep
+</summary>
+<p>The <a href="https://epiverse-trace.github.io/sivirep/">sivirep</a> package makes it easy to download SIVIGILA surveillance data directly in R.</p>
+<p><strong>Installing sivirep</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sivirep"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">"https://epiverse-trace.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sivirep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Downloading data</strong></p>
+<p>List all available diseases and health events:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>events <span class="ot">&lt;-</span> <span class="fu">list_events</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(events)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Download data for a specific event using <code>import_data_event()</code>. For example, to download Zika data for 2023:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">import_data_event</span>(<span class="at">nombre_event =</span> <span class="st">"Zika"</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">years =</span> <span class="dv">2023</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ruta_dir =</span> <span class="st">"."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</details>
+<p><br></p>
+<details open="">
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇵🇪 Peru
+</summary>
+<p>Peru’s public health surveillance system is managed by the <a href="https://www.dge.gob.pe/portalnuevo/">Centro Nacional de Epidemiología, Prevención y Control de Enfermedades</a> (CDC Peru). Data are collected through RENACE (Red Nacional de Epidemiología), a nationwide reporting network of over 10,000 health facilities. Cases of notifiable diseases are reported through this network, allowing national authorities to monitor trends and guide public health interventions. Data are made available through two main channels.</p>
+<details>
+<summary>
+Method 1: Datos abiertos
+</summary>
+<p>Go to <a href="https://www.gob.pe/datosabiertos">National Platform of Open Data</a> (PNDA) and search for your disease of interest.</p>
+<p>At the bottom of the page you will find the file available for download.</p>
+</details>
+</details>
+<p><br></p>
+<details open="">
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇩🇴 Dominican Republic
+</summary>
+<p>Surveillance data in the Dominican Republic is managed by the <a href="https://epidemiologia.gob.do/">Dirección de Epidemiología</a> (DIEPI), the national epidemiology directorate within the Ministry of Public Health. DIEPI operates SINAVE (Sistema Nacional de Vigilancia Epidemiológica), the national surveillance system covering individual reporting of all notifiable diseases.</p>
+<p>While microdata are not publicly available, DIEPI publishes <a href="https://epidemiologia.gob.do/documentos-epidemiologicos/boletines-semanales/">weekly epidemiological bulletins</a> with aggregated surveillance data, which may be sufficient for some purposes.</p>
+<p>To request access to line-list data, you will need to contact DIEPI directly through their website or via the Ministry of Public Health (<a href="https://www.msp.gob.do">msp.gob.do</a>).</p>
+</details>
+</main></div>
+
+
+
+ <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/BSC-ES\.github\.io\/GHRtools\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+ <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, GHR</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

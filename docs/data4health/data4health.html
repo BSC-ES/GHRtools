@@ -2,23 +2,64 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>data4health – GHRtools</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -33,15 +74,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../figures/bsc-logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-81db3bc9543b97ff6e1d188ef868d7e2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5831b4ab0d9ac86f0ad68f25a630e6c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,6 +143,24 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../../docs/data4health/data4health.html">
  <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/NEWS.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/access_health_data.html">
+ <span class="dropdown-text">Access health data</span></a>
   </li>  
     </ul>
   </li>
@@ -203,9 +261,23 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it</a></li>
+  <li><a href="#roadmap" id="toc-roadmap" class="nav-link" data-scroll-target="#roadmap">Roadmap:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#organizations" id="toc-organizations" class="nav-link" data-scroll-target="#organizations">Organizations</a></li>
+  <li><a href="#developers" id="toc-developers" class="nav-link" data-scroll-target="#developers">Developers</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -214,7 +286,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -226,11 +298,139 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Under construction.</p>
+<!-- badges: start -->
+<p><a href="https://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-brightgreen.svg" class="img-fluid" alt="License: AGPL v3"></a> <a href="https://cran.r-project.org/package=data4health"><img src="https://img.shields.io/cran/v/data4health.png" class="img-fluid" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=data4health"> <img src="https://cranlogs.r-pkg.org/badges/grand-total/data4health" alt="CRAN downloads total"> </a> <a href="https://cran.r-project.org/package=data4health"> <img src="https://cranlogs.r-pkg.org/badges/data4health" alt="CRAN downloads month"> </a> <!-- badges: end --></p>
+<img src="../../figures/data4health/harmonize_banner_nobg.png" align="right" width="18%"> <span> <span> <img src="../../figures/data4health/BSC_logo.png" align="right" width="16%"> 
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<div class="columns">
+<div class="column" style="width:75%;">
+<p><em>data4health</em> is a tool developed as part of the HARMONIZE project to facilitate the cleaning, filtering, and aggregation of health data at customised spatiotemporal resolutions. Originally designed for data from Brazil, Colombia, the Dominican Republic, and Peru, the tool is adaptable for any linelist health data.</p>
+<p>The R package offers two modes of operation based on the user’s coding experience:</p>
+<ul>
+<li>
+For users with <b>coding experience</b>: A wide range of functions can be directly used within R.
+</li>
+<li>
+For <b>non-coding users</b>: A graphical user interface (GUI) guides users through the data processing pipeline in an intuitive, user-friendly way.
+</li>
+</ul>
+</div><div class="column" style="width:7.5%;">
+
+</div><div class="column" style="width:17.5%;">
+<img src="../../figures/data4health.svg" width="100%">
+</div>
+</div>
+<p><img src="../../figures/data4health/flowchart.svg" alt="data4health flowchart" width="100%"></p>
+<p>Key features of the R Package:</p>
+<ul>
+<li>
+Instructions on how to access health data
+</li>
+<li>
+Functions for cleaning and preprocessing health data
+</li>
+<li>
+Spatial harmonisation, allowing aggregation to any coarser administrative unit
+</li>
+<li>
+Temporal harmonisation, enabling aggregation to epidemiological weeks, months or years
+</li>
+<li>
+Data visualization capabilities
+</li>
+<li>
+Output as a .csv file, formatted to meet user-specified requirements
+</li>
+</ul>
+<p></p>
+</section>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>The latest version of the data4health package is hosted on CRAN and can by installed using the following commands:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"data4health"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data4health)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="how-to-use-it" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-it">How to use it</h2>
+<p>There are two main functionalities of data4health.</p>
+<p>For <strong>code-experienced users</strong>, a series of functions to support health data analysis are provided that users can implement to simplify their existing data pipeline. An overview over how to make use of them can be found in the Overview vignette.</p>
+<p>Users with <strong>less code experience</strong> can employ the graphic user interface to clean and aggregate their data in a user-friendly way by typing the following command and waiting for the a browser window to open:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">d4h_ui</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="roadmap">Roadmap:</h2>
+<p>Future functionalities of data4health include:</p>
+<ul>
+<li>d4h_clean_helper function: gives suggestions about how to best clean the data, e.g.&nbsp;proposes misspelled categories, which columns to transform, etc.</li>
+<li>report function: allows the user to produce interactive/static reports of the aggregated health data</li>
+</ul>
+<p>If you have any needs, or suggestions for new functions or new functionalities of current functions, please do not hesitate to create an issue. See CONTRIBUTING.md for details on how to contribute or get in touch.</p>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="package-website" class="level4">
+<h4 class="anchored" data-anchor-id="package-website">Package website</h4>
+<p>The <a href="https://bsc-es.github.io/GHRtools/docs/data4health/data4health.html">data4health website</a> includes detailed guides for each function, example workflows using reported disease cases and instructions on how to access health data.</p>
+</section>
+<section id="project-website" class="level4">
+<h4 class="anchored" data-anchor-id="project-website">Project website</h4>
+<p><a href="https://www.harmonize-tools.org/">HARMONIZE</a> is an international consortium co-creating cost-effective and reproducible digital tools for stakeholders in hotspots affected by a changing climate in Latin America &amp; the Caribbean (LAC), including cities, small islands, highlands, and the Amazon rainforest.</p>
+<p>The HARMONIZE digital toolkits will allow local researchers and users, including national disease control programs, to link, interrogate and use multi-scale spatiotemporal data, to understand the links between environmental change and infectious disease risk in their local context, and to build robust early warning and response systems in low-resource settings.</p>
+<p>The project offers resources and <a href="https://harmonize-tools.github.io/">tools</a> developed in conjunction with different teams from Brazil, Colombia, Dominican Republic, Peru and Spain.</p>
+</section>
+<section id="other-harmonize-tools" class="level4">
+<h4 class="anchored" data-anchor-id="other-harmonize-tools">Other HARMONIZE tools</h4>
+<p>Within HARMONIZE, each data category has its own digital toolkit to allow local researchers and users, to prepare, interrogate and eventually merge the data spatially and temporally, to understand the links between environmental change and infectious disease risk in their local context, and to build robust early warning and response systems in low-resource settings. The other HARMONIZE toolkits include:</p>
+<ul>
+<li>
+<a href="https://github.com/harmonize-tools/clim4health">clim4health</a>
+</li>
+<li>
+<a href="https://github.com/harmonize-tools/socio4health">socio4health</a>
+</li>
+<li>
+<a href="https://github.com/harmonize-tools/land4health">land4health</a>
+</li>
+<li>
+<a href="https://github.com/harmonize-tools/drone4health">drone4health</a>
+</li>
+<li>
+<a href="https://github.com/Harmonize-Brazil/cube4health">cube4health</a>
+</li>
+</ul>
+</section>
+</section>
+<section id="organizations" class="level2">
+<h2 class="anchored" data-anchor-id="organizations">Organizations</h2>
+<table>
+<tbody><tr>
+<td>
+<a href="https://www.bsc.es/"> <img src="https://imgs.search.brave.com/t_FUOTCQZmDh3ddbVSX1LgHYq4mzCxvVA8U_YHywMTc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zb21t/YS5lcy93cC1jb250/ZW50L3VwbG9hZHMv/MjAyMi8wNC9CU0Mt/Ymx1ZS1zbWFsbC5q/cGc" alt="BSC logo" width="120"> </a>
+</td>
+<td>
+<strong>GHR</strong><br> Global Health Resilience
+</td>
+</tr>
+</tbody></table>
+</section>
+<section id="developers" class="level2">
+<h2 class="anchored" data-anchor-id="developers">Developers</h2>
+<p><strong><a href="https://www.bsc.es/luhrsen-daniela-sofie">Daniela Lührsen</a></strong> <a href="https://orcid.org/0009-0002-6340-5964" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center (BSC), Spain</p>
+<p><strong><a href="https://www.bsc.es/martins-lana-raquel">Raquel Martins Lana, PhD</a></strong> <a href="https://orcid.org/0000-0002-7573-1364" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center (BSC), Spain</p>
+<p><strong><a href="https://www.bsc.es/mila-garcia-carles">Carles Milà, PhD</a></strong> <a href="https://orcid.org/0000-0003-0470-0760" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center (BSC), Spain</p>
+<p><strong><a href="https://www.bsc.es/lowe-rachel">Rachel Lowe, PhD</a></strong> <a href="https://orcid.org/0000-0003-3939-7343" style="margin-left: 15px;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="width: 16px; height: 16px;"></a><br>
+Barcelona Supercomputing Center (BSC), Spain<br>
+Catalan Institution for Research and Advanced Studies (ICREA), Spain</p>
+</section></span></span></main></div>
 
 
 
-</main> <!-- /main -->
+
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -631,7 +831,7 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-</div> <!-- /content -->
+ <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
