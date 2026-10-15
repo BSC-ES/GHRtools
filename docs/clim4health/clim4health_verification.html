@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Verification function – GHRtools</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../figures/bsc-logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-5831b4ab0d9ac86f0ad68f25a630e6c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">GHRtools</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">data4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/access_health_data.html">
+ <span class="dropdown-text">Access health data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-clim4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">clim4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-clim4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_s2dv_cubes.html">
+ <span class="dropdown-text">s2dv_cube objects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_get.html">
+ <span class="dropdown-text">Get function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_downscaling.html">
+ <span class="dropdown-text">Downscaling function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_verification.html">
+ <span class="dropdown-text">Verification function</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrexplore" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRexplore</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrexplore">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-vignette.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrmodel" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRmodel</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrmodel">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_covariates.html">
+ <span class="dropdown-text">Covariate structures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_DLNM.html">
+ <span class="dropdown-text">DLNMs in GHRmodel</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrpredict" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRpredict</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrpredict">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRpredict/GHRpredict.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience" target="_blank"> 
+<span class="menu-text">About GHR</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#load-the-package-and-sample-data" id="toc-load-the-package-and-sample-data" class="nav-link" data-scroll-target="#load-the-package-and-sample-data">0. Load the package and sample data</a></li>
+  <li><a href="#key-c4h_verify-arguments" id="toc-key-c4h_verify-arguments" class="nav-link" data-scroll-target="#key-c4h_verify-arguments">1. Key c4h_verify arguments</a></li>
+  <li><a href="#verification-metrics" id="toc-verification-metrics" class="nav-link" data-scroll-target="#verification-metrics">2. Verification metrics</a>
+  <ul class="collapse">
+  <li><a href="#statistical-significance" id="toc-statistical-significance" class="nav-link" data-scroll-target="#statistical-significance">Statistical Significance</a></li>
+  </ul></li>
+  <li><a href="#example-skill-assessment" id="toc-example-skill-assessment" class="nav-link" data-scroll-target="#example-skill-assessment">3. Example skill assessment</a>
+  <ul class="collapse">
+  <li><a href="#choosing-arguments-in-c4h_verify" id="toc-choosing-arguments-in-c4h_verify" class="nav-link" data-scroll-target="#choosing-arguments-in-c4h_verify">Choosing arguments in c4h_verify</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Verification function</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<img src="../../figures/clim4health.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
+<br><br>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This vignette provides an introduction to the <code>c4h_verify()</code> function, used for forecast verification. Forecast verification is an important step in evaluating the performance of climate forecasts, especially relevant in the development of climate-related early warning systems, since a forecast with poor skill may not provide reliable information to users. Verification involves comparing forecasted values (from a hindcast) to observed values (e.g.&nbsp;from reanalysis) to assess the performance of the prediction system at a given location, time, and leadtime. It is often necessary to <em>downscale</em> the hindcast to the same spatial resolution as the observations before performing the verification, which can be done using <code>c4h_downscale()</code>.</p>
+<p>Within this vignette, the different verification metrics are described, and examples of how to use the function are provided.</p>
+</section>
+<section id="load-the-package-and-sample-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-package-and-sample-data">0. Load the package and sample data</h2>
+<p>First, let’s load the package.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(clim4health)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s load some sample data that we can use to demonstrate the verification methods.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hcst_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/hindcast/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>hcst_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(hcst_path, <span class="st">"/"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>hcst <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(hcst_path,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">leadtime_month =</span> <span class="st">"all"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ext =</span> <span class="st">"nc"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>rean_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/reanalysis/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>rean_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(rean_path, <span class="st">"/"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>rean <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(rean_path,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                 <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ext =</span> <span class="st">"nc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Look at the dimensions of the observed and hindcast datasets (recall we can use <code>dim(rean$data)</code> or <code>rean$dims</code>). We can see that <code>rean</code> has more latitude and longitude points, despite covering the same area - it has <em>higher spatial resolution.</em></p>
+<p>First, we need to downscale the hindcast to the same spatial resolution as the observations. In the same step, let’s convert to degrees Celsius.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hcst <span class="ot">&lt;-</span> <span class="fu">c4h_convert_units</span>(hcst, <span class="at">to =</span> <span class="st">"celsius"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rean <span class="ot">&lt;-</span> <span class="fu">c4h_convert_units</span>(rean, <span class="at">to =</span> <span class="st">"celsius"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dwn <span class="ot">&lt;-</span> <span class="fu">c4h_downscale</span>(<span class="st">"Intbc"</span>, <span class="at">exp =</span> hcst, <span class="at">obs =</span> rean,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method_remap =</span> <span class="st">"bilinear"</span>, <span class="at">method_bc =</span> <span class="st">"evmos"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>💡 <strong>Note</strong>: Instead of downscaling, you could also spatially aggregate the hindcast and reanalysis data using <code>c4h_space()</code> to obtain the same spatial resolution, before calculating any skill metrics.</p>
+</blockquote>
+<p>Let’s explore the functionality of <code>c4h_verify()</code> and the different verification metrics that can be calculated, before applying them in examples.</p>
+</section>
+<section id="key-c4h_verify-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="key-c4h_verify-arguments">1. Key c4h_verify arguments</h2>
+<p><code>c4h_verify()</code> takes many input parameters depending on the skill metrics to be calculated. The following are the key input arguments:</p>
+<ol type="1">
+<li><code>exp</code>: an <code>s2dv_cube</code> object containing the experimental data.</li>
+<li><code>obs</code>: an <code>s2dv_cube</code> object containing the observational data.</li>
+<li><code>metrics</code>: a character vector identifying the verification metrics to be calculated.</li>
+</ol>
+<p>Depending on the metrics chosen, additional optional arguments may be selected, which will be discussed below.</p>
+</section>
+<section id="verification-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="verification-metrics">2. Verification metrics</h2>
+<p>There are many widely-used metrics to assess the quality of a forecast product. These typically compare the hindcasts and observations to see when the hindcast makes reasonable predictions of the observed values. The following are optional metrics that may be calculated within <code>c4h_verify()</code> and are selected using the <code>metrics</code> parameter.</p>
+<p>The metrics are calculated by comparing forecast ensemble member predictions to observations.</p>
+<section id="bss---brier-skill-score" class="level4">
+<h4 class="anchored" data-anchor-id="bss---brier-skill-score"><code>"BSS"</code> - Brier Skill Score</h4>
+<p>This is a skill score for binary or categorical outcomes (for example, does a forecast successfully predict above normal temperatures?). The <strong>Brier Score (BS)</strong> measures the mean squared error between forecast probabilities and actual outcomes, and the associated <strong>skill score (BSS)</strong> compares the forecast’s BS to a reference forecast BS (often the climatology).</p>
+<p><strong>In the example of predicting above-median temperatures in a given month:</strong></p>
+<ol type="1">
+<li>The median temperature for a given month is the 50th percentile temperature across all the years of the observations. Temperatures are classified as “above-median” if they exceed this average.</li>
+<li>The climatological reference forecast assigns a 50% probability to above-median temperatures every time (since by definition half of all observed values lie above the median). The BSS measures how much better the ensemble forecast is compared to always predicting this 50% probability.</li>
+<li>Comparing the Brier Scores of the forecast to the climatological reference:
+<ul>
+<li>BSS<sub>forecast</sub> = 1: perfect forecast - all ensemble members predict above-median temperatures on every occasion when the event (observed temperature above the median) occurs, and no ensemble members predict it when it does not occur</li>
+<li>BSS<sub>forecast</sub> = 0: no added skill over climatology — the forecast performs no better than always predicting a 50% probability</li>
+<li>BSS<sub>forecast</sub> &lt; 0: the forecast performs worse than climatology and provides no useful additional information. For example, for a given observed “above-median” month, perhaps only 10% of ensemble members predict above-median temperatures.</li>
+</ul></li>
+</ol>
+<p>Two commonly used thresholds for BSS are BSS10 and BSS90: these define the categories as the 10th and 90th percentiles respectively. They are useful to assess whether the forecast correctly predicts extremes.</p>
+<p>For example, BSS90 assesses whether the forecast can predict when temperatures exceed the 90th percentile threshold (the 90th percentile is the value that 90% of the observed temperatures fall below). In this case:</p>
+<ol type="1">
+<li>The 90th percentile temperature for a given month is calculated by considering the observed temperature distribution for that month across all years of the observations. The climatological reference forecast assigns a 10% probability to above-90th-percentile temperatures every time (since by definition only 10% of observed values exceed this threshold). The BSS90 measures how much better the ensemble forecast is compared to always predicting this 10% probability.</li>
+<li>Comparing the Brier Scores of the forecast to the climatological reference:
+<ul>
+<li>BSS<sub>forecast</sub> = 1: perfect forecast — all ensemble members predict above-90th-percentile temperatures on every occasion when the event occurs, and no ensemble members predict it when it does not</li>
+<li>BSS<sub>forecast</sub> = 0.5: added skill over climatology - the forecast performs better than always predicting a 10% probability</li>
+<li>BSS<sub>forecast</sub> = 0: no added skill over climatology — the forecast performs no better than always predicting a 10% probability</li>
+<li>BSS<sub>forecast</sub> &lt; 0: the forecast performs worse than climatology and provides no useful additional information. For example, for a given observed above-90th-percentile month, perhaps only 2% of ensemble members predict above-90th-percentile temperatures.</li>
+</ul></li>
+</ol>
+</section>
+<section id="rpss---ranked-probability-skill-score" class="level4">
+<h4 class="anchored" data-anchor-id="rpss---ranked-probability-skill-score"><code>"RPSS"</code> - Ranked Probability Skill Score</h4>
+<p>This skill score is based on the <strong>Ranked Probability Score (RPS)</strong>, which extends the Brier Score (and associated skill) to multiple ordered categories. For example, you may wish to assess a forecast’s ability to predict below-normal, near-normal and above-normal temperatures, where above-normal corresponds to temperatures over the 66th percentile, and below-normal to those below the 33rd.</p>
+<ol type="1">
+<li>The climatology by definition correctly categorises temperatures as “above normal” 33% of the time, “near normal” 33% of the time, and “below normal” 33% of the time. The RPSS measures how much better the ensemble forecast is compared to always predicting this uniform 33%/33%/33% distribution across categories.</li>
+<li>Comparing the Ranked Probability Scores of the forecast to the climatological reference:
+<ul>
+<li>RPSS<sub>forecast</sub> = 1: perfect forecast — the ensemble assigns 100% probability to the correct temperature category every time (every ensemble member predicts the correct observed category on every occasion)</li>
+<li>RPSS<sub>forecast</sub> = 0: no added skill over climatology — the forecast performs no better than always predicting an equal probability across all three categories</li>
+<li>RPSS<sub>forecast</sub> &lt; 0: the forecast performs worse than climatology and provides no useful additional information. For example, the ensemble may systematically assign high probability to the wrong category.</li>
+</ul></li>
+</ol>
+</section>
+<section id="crpss---continuous-ranked-probability-skill-score" class="level4">
+<h4 class="anchored" data-anchor-id="crpss---continuous-ranked-probability-skill-score"><code>"CRPSS"</code> - Continuous Ranked Probability Skill Score</h4>
+<p>The <strong>Continuous Ranked Probability Score (CRPS)</strong> measures the integrated squared difference between the forecast’s cumulative probability distribution and the observed value, represented as a step function. It differs from the BS and RPS in that it considers the full continuous probability distribution rather than discrete categories. The <strong>Continuous Ranked Probability Skill Score (CRPSS)</strong> compares the CRPS of a forecast to that of a reference (often climatology).</p>
+<ol type="1">
+<li>CRPSS values:
+<ul>
+<li>CRPSS<sub>forecast</sub> = 1: perfect forecast — the forecast probability distribution perfectly matches the observed value every time (i.e.&nbsp;every ensemble member predicts the observed value on every occasion - a highly unlikely scenario!)</li>
+<li>CRPSS<sub>forecast</sub> = 0: no added skill over climatology — the forecast performs no better than the climatological probability distribution</li>
+<li>CRPSS<sub>forecast</sub> &lt; 0: the forecast performs worse than climatology and provides no useful additional information.</li>
+</ul></li>
+</ol>
+</section>
+<section id="absbiasss---absolute-bias-skill-score" class="level4">
+<h4 class="anchored" data-anchor-id="absbiasss---absolute-bias-skill-score"><code>"AbsBiasSS"</code> - Absolute Bias Skill Score</h4>
+<p><strong>Absolute bias (AbsBias)</strong> measures the absolute difference between the mean forecast value (over ensemble members) and the mean observed value (the climatological mean). Its associated skill score <strong>(AbsBiasSS)</strong> compares the forecast AbsBias with that of a climatological reference.</p>
+</section>
+<section id="mse---mean-squared-error" class="level4">
+<h4 class="anchored" data-anchor-id="mse---mean-squared-error"><code>"MSE"</code> - Mean Squared Error</h4>
+<p>The average of the squared differences between forecast ensemble mean and observed values. The lower the value, the smaller the errors. Large errors contribute more to the MSE because of the squared transformation.</p>
+</section>
+<section id="msss---mean-squared-error-skill-score" class="level4">
+<h4 class="anchored" data-anchor-id="msss---mean-squared-error-skill-score"><code>"MSSS"</code> - Mean Squared Error Skill Score</h4>
+<p>The skill score associated with the MSE.</p>
+<ol type="1">
+<li>As before, MSSS values for a forecast when compared to a reference (climatology):
+<ul>
+<li>MSSS<sub>forecast</sub> = 1: a perfect forecast</li>
+<li>MSSS<sub>forecast</sub> = 0: the forecast performs as well as the climatology with no additional skill</li>
+<li>MSSS<sub>forecast</sub> &lt; 0: the forecast performs worse than the climatology.</li>
+</ul></li>
+</ol>
+</section>
+<section id="rmse---root-mean-squared-error" class="level4">
+<h4 class="anchored" data-anchor-id="rmse---root-mean-squared-error"><code>"RMSE"</code> - Root Mean Squared Error</h4>
+<p>The square root of the MSE, returned in the same units as the original forecast and observation values. The lower the value, the smaller the errors. Large errors are still weighted more heavily due to the squaring step, but the square root makes the result more interpretable than the MSE.</p>
+</section>
+<section id="rmsss---root-mean-square-skill-score" class="level4">
+<h4 class="anchored" data-anchor-id="rmsss---root-mean-square-skill-score"><code>"RMSSS"</code> - Root Mean Square Skill Score</h4>
+<p>The skill score associated with the Root Mean Squared Error (RMSE), which is the square root of the MSE.</p>
+</section>
+<section id="rocss---relative-operating-characteristic-skill-score" class="level4">
+<h4 class="anchored" data-anchor-id="rocss---relative-operating-characteristic-skill-score"><code>"ROCSS"</code> - Relative Operating Characteristic Skill Score</h4>
+<p>The <strong>Relative Operating Characteristic Skill Score (ROCSS)</strong> assesses the discriminatory ability of a forecast. It is based on the ROC curve, which plots the Hit Rate against the False Alarm Rate across multiple probability thresholds:</p>
+<ul>
+<li><em>Hit Rate</em>: the forecast predicts the event, and it occurs</li>
+<li><em>False Alarm Rate</em>: the forecast predicts the event, but it does not occur</li>
+</ul>
+<p>For a binary event such as “temperature above mean” and a probabilistic forecast, a probability threshold is applied to convert the forecast into a binary prediction (e.g.&nbsp;“predict the event if more than 50% of ensemble members predict it”). By varying this threshold, a Hit Rate and False Alarm Rate are calculated at each value, and the ROC curve is plotted comparing these (example below).</p>
+<blockquote class="blockquote">
+<p>💡 <strong>Note</strong>: In the context of statistical modelling (for example, of disease cases), the Hit Rate is the same as the sensitivity, and the False Alarm Rate is the same as <code>1 - specificity</code>.</p>
+</blockquote>
+<ul>
+<li><p>A “good” forecast has a high hit rate and low false alarm rate, so lies above the diagonal</p></li>
+<li><p>A random forecast performs no better than chance, producing equal hit and false alarm rates at every threshold, and so lies on the diagonal</p></li>
+<li><p>A “bad” forecast has a higher false alarm rate than hit rate, so lies below the diagonal.</p></li>
+</ul>
+<p>To calculate the ROCSS, we calculate the area under the curve (AUC), which ranges from 0 to 1 where a higher value indicates better discrimination. The <strong>ROCSS = 2*AUC - 1</strong>, giving:</p>
+<ul>
+<li><p>ROCSS = 1: perfect discrimination — at some probability threshold, the forecast achieves a hit rate of 100% and a false alarm rate of 0%</p></li>
+<li><p>ROCSS = 0: no discrimination — the forecast performs no better than chance</p></li>
+<li><p>ROCSS &lt; 0: worse than random — the forecast has a higher false alarm rate than hit rate, and would perform better if predictions were reversed.</p></li>
+</ul>
+</section>
+<section id="statistical-significance" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-significance">Statistical Significance</h3>
+<p>For skill scores where significance testing is applicable (BSS, RPSS, CRPSS, MSSS, RMSSS, ROCSS), a p-value is calculated to assess whether the forecast skill is significantly different from zero (i.e.&nbsp;significantly better or worse than climatology). A significance threshold of α = 0.05 is applied by default, meaning that a skill score is considered statistically significant if there is less than a 5% probability that the observed skill arose by chance.</p>
+<ul>
+<li>A skill score marked as significant (p &lt; 0.05) suggests that the forecast has genuine skill beyond climatology, and the result is unlikely to be due to random variation</li>
+<li>A skill score that is not significant (p ≥ 0.05) does not necessarily mean the forecast has no skill — it may reflect insufficient sample size (e.g.&nbsp;a short hindcast period) rather than a truly unskillful forecast.</li>
+</ul>
+<blockquote class="blockquote">
+<p>💡 <strong>Note</strong>: Significance testing is not typically applied to raw error metrics (MSE, RMSE, AbsBias) since these are not expressed relative to a reference and do not have a natural null hypothesis of zero.</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="example-skill-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="example-skill-assessment">3. Example skill assessment</h2>
+<p>Using the data loaded and downscaled above, let’s perform an example skill assessment. In this example, we have only loaded 3 years of data for each leadtime, which means that we do not have a lot of information to assess whether the hindcast is skillful or not. However, the general process is (for gridded data):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>skill <span class="ot">&lt;-</span> <span class="fu">c4h_verify</span>(<span class="at">exp =</span> dwn<span class="sc">$</span>exp, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">obs =</span> dwn<span class="sc">$</span>obs,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"BSS"</span>, <span class="st">"CRPSS"</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">brier_thresholds =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The output of <code>c4h_verify</code> is a list of lists. The outer list contains the names of the metrics, and the inner contains the value of the metric and its significance, if applicable. In the above, we calculated the Brier Skill Score (BSS) at the 10th and 90th percentiles and Continuous Ranked Probability Skill Score (CRPSS), so we can find them in the list as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(skill)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Within each metric, we save the value and the significance (by default alpha = 0.05). Looking at the dimensions of the outputs, note that the <code>sdate</code> dimension will now always have length 1, because the skill is calculated by assessing statistical relationships across the start dates.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(skill<span class="sc">$</span>BSS10)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(skill<span class="sc">$</span>BSS10<span class="sc">$</span>bss<span class="sc">$</span>dims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>💡 <strong>Note</strong>: Because we have loaded so little data, the significance of all our metrics is FALSE. If we were to load more data, we would see that our hindcast has significant skill in some locations or for some dates.</p>
+</blockquote>
+<p>Each value and significance is an <code>s2dv_cube</code> object. They can be plotted using <code>c4h_plotskill()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plotskill</span>(skill<span class="sc">$</span>BSS10<span class="sc">$</span>bss, skill<span class="sc">$</span>BSS10<span class="sc">$</span>sign, <span class="at">ensemble =</span> <span class="cn">TRUE</span>, <span class="at">boundaries =</span> <span class="st">"countries"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="choosing-arguments-in-c4h_verify" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-arguments-in-c4h_verify">Choosing arguments in c4h_verify</h3>
+<p>There are many optional arguments in <code>c4h_verify()</code> that the user can specify to tailor their skill assessment. Currently, we recommend using the default values for most of these, but here we provide some guidance on how to choose them.</p>
+<blockquote class="blockquote">
+<p>💡 <strong>Note</strong>: Currently, <code>c4h_verify()</code> applies arguments across all metrics (except for a minority of cases, explained below). This is why it is recommended to use the default values. In future, it will be possible to specify arguments for specific metrics.</p>
+</blockquote>
+<section id="ref" class="level4">
+<h4 class="anchored" data-anchor-id="ref"><code>ref</code></h4>
+<p>This argument should include an optional s2dv_cube containing a reference forecast to be used in the skill score calculations. If not provided, the climatological forecast is used as the reference forecast. In this case, the skill scores are then calculated by comparing the forecast provided in <code>exp</code> to the climatology of a forecast provided in <code>ref</code> - you would thus expect the skill scores to be 0 everywhere if using the same forecast in <code>exp</code> and <code>ref</code>.</p>
+</section>
+<section id="brier_thresholds" class="level4">
+<h4 class="anchored" data-anchor-id="brier_thresholds"><code>brier_thresholds</code></h4>
+<p>This argument is only relevant if “BSS” is included in <code>metrics</code>. It is a numeric vector of thresholds to be applied to calculate different Brier Skill Scores. The default is <code>c(0.1, 0.9)</code>, which corresponds to the BSS10 and BSS90 respectively. You could specify other thresholds, for example <code>c(0.33, 0.66)</code> to calculate the BSS33 and BSS66, which would correspond to the 33rd and 66th percentiles respectively. In this case, you would then be assessing the forecast’s ability to predict below-normal and above-normal values respectively.</p>
+</section>
+<section id="prob_thresholds" class="level4">
+<h4 class="anchored" data-anchor-id="prob_thresholds"><code>prob_thresholds</code></h4>
+<p><code>prob_thresholds</code> acts similarly to <code>brier_thresholds</code>, but it is used when “RPSS” or “ROCSS” is in <code>metrics</code>. The default is <code>c(1/3, 2/3)</code>, which corresponds to assessing the ability of the forecast to predict below-normal, normal, and above-normal values simultaneously. You could specify other thresholds, such as <code>c(0.2, 0.4, 0.6, 0.8)</code> to assess the forecast’s ability to predict values in the 5 categories defined by the quintiles.</p>
+</section>
+<section id="sig_method-and-sig_method.type" class="level4">
+<h4 class="anchored" data-anchor-id="sig_method-and-sig_method.type"><code>sig_method</code> and <code>sig_method.type</code></h4>
+<p><code>sig_method</code> indicates the method used to calculate significance. The default is different for different metrics. For “BSS”, “RPSS”, “CRPSS”, and “AbsBiasSS”, the default is <code>"RandomWalk"</code>. For “MSSS” and “RMSSS”, the default is “one-sided Fisher”. <code>"Diebold-Mariano"</code> is also possible for “RPSS” and “BSS”.</p>
+<p><code>sig_method.type</code> indicates the type of test to be applied if using a Random Walk <code>sig_method</code>. The default is <code>"two.sided.approx"</code>, which assesses whether <code>exp</code> and <code>ref</code> are significantly different in skill with a two-sided test using an approximation. Other options include <code>"two.sided"</code>, which uses an exact two-sided test, and <code>"greater"</code> or <code>"less"</code>. <code>"greater"</code> assesses whether <code>exp</code> shows significantly better skill than <code>ref</code> with a one-sided test for negatively-oriented scores (scores where lower values are better), while <code>"less"</code> assesses whether <code>exp</code> shows significantly better skill than <code>ref</code> with a one-sided test for positively-oriented scores (scores where higher values are better). Examples of negatively-oriented scores are “RPS” and “RMSE”, and examples of positively-oriented scores are “ROC”. Thus, if you wish to assess skill using a one-sided test, you could set <code>sig_method.type = "greater"</code> for calculating “RPSS” and “RMSSS”, and <code>sig_method.type = "less"</code> for calculating “ROCSS”. More details can be found in the documentation of <code>s2dv::RandomWalkTest()</code>.</p>
+</section>
+<section id="alpha" class="level4">
+<h4 class="anchored" data-anchor-id="alpha"><code>alpha</code></h4>
+<p>This is the significance level to be applied in the significance testing of the skill scores. The default is 0.05. This value is applied across all metrics, but in some specific cases, the value will be incompatible with a chosen significance test, and the default will be applied. In such cases, a warning is issued!</p>
+</section>
+<section id="ncores" class="level4">
+<h4 class="anchored" data-anchor-id="ncores"><code>ncores</code></h4>
+<p>This is the number of cores to be used in the parallelisation of the skill score calculations. The default is 1, so no parallelisation is applied. If you have a large dataset and want to speed up the calculations, you can increase this value. An error will be returned if you specify a value higher than the number of cores available on your machine.</p>
+</section>
+<section id="n.eff" class="level4">
+<h4 class="anchored" data-anchor-id="n.eff"><code>N.eff</code></h4>
+<p>This argument specifies the effective sample size to use in the significance testing for metrics “BSS”, “RPSS”, “CRPSS”, or “RMSSS”. The default is NA, which uses the effective number of independent observations calculated from the data using s2dv::Eno().</p>
+</section>
+<section id="indices_for_clim" class="level4">
+<h4 class="anchored" data-anchor-id="indices_for_clim"><code>indices_for_clim</code></h4>
+<p>This is a vector of the indices to be taken along the <code>sdate</code> dimension for computing the thresholds between probabilistic categories. If NULL (default), the whole time period is used. If you wanted to specify the probability thresholds based only on the first 10 years of the data, you could set <code>indices_for_clim = 1:10</code>. This argument is only relevant if “BSS”, “RPSS”, “CRPSS”, or “ROCSS” is in <code>metrics</code>.</p>
+</section>
+<section id="cross.val-and-clim.cross.val" class="level4">
+<h4 class="anchored" data-anchor-id="cross.val-and-clim.cross.val"><code>cross.val</code> and <code>clim.cross.val</code></h4>
+<p>These arguments are logical values (TRUE/FALSE) that indicate whether to apply cross-validation (i.e.&nbsp;excluding values) in the calculation of the probability categories. It is recommended to use their default values (FALSE, TRUE, respectively).</p>
+</section>
+<section id="weights_exp-and-weights_ref" class="level4">
+<h4 class="anchored" data-anchor-id="weights_exp-and-weights_ref"><code>weights_exp</code> and <code>weights_ref</code></h4>
+<p>This is an array to use to weight the forecast/reference ensemble members in the probability category calculations. The default is NULL, which means that no weighting is applied. This is recommended.</p>
+</section>
+<section id="comp_dim-and-limits" class="level4">
+<h4 class="anchored" data-anchor-id="comp_dim-and-limits"><code>comp_dim</code> and <code>limits</code></h4>
+<p><code>comp_dim</code> refers to the dimension along which to only take into account complete data. That is to say, data is removed along <code>comp_dim</code> if there is at least one NA between <code>limits</code>, where the argument <code>limits</code> specifies the range of indices along <code>comp_dim</code> to be considered. It is recommended to use the default values for these arguments, which means that no data is removed.</p>
+</section>
+<section id="conf" class="level4">
+<h4 class="anchored" data-anchor-id="conf"><code>conf</code></h4>
+<p>If “MSE” or “RMSE” is in <code>metrics</code>, <code>conf</code> specifies whether or not to return the confidence intervals. By default, they are returned (<code>conf = TRUE</code>).</p>
+</section>
+<section id="na.rm" class="level4">
+<h4 class="anchored" data-anchor-id="na.rm"><code>na.rm</code></h4>
+<p>By default, this is FALSE, meaning that NA values are not removed in the calculations of “BSS”, “RPSS”, or “AbsBiasSS”. If any NA value is present, then the function will return NA there.</p>
+</section>
+<section id="sign-and-pval" class="level4">
+<h4 class="anchored" data-anchor-id="sign-and-pval"><code>sign</code> and <code>pval</code></h4>
+<p>For the metrics “MSSS” and “RMSSS”, <code>sign</code> and <code>pval</code> specify whether or not to compute the statistical significance and p-values of the test Ho: (R)MSSS = 0. By default, <code>sign</code> is TRUE and <code>pval</code> is FALSE. The default is that the significance is returned (TRUE/FALSE), but the p-values used to calculate this are not).</p>
+</section>
+<section id="rocss_cat" class="level4">
+<h4 class="anchored" data-anchor-id="rocss_cat"><code>rocss_cat</code></h4>
+<p>This argument should be an integer indicating the category to be returned when calculating “ROCSS”. The default is 1, which corresponds to the first category defined by <code>prob_thresholds</code>. With the default <code>prob_thresholds = c(1/3, 2/3)</code>, this corresponds to the first category (i.e.&nbsp;below normal). If you wanted to calculate the ROCSS for the second category (i.e.&nbsp;normal), you would set <code>rocss_cat = 2</code>. It is currently only possible to return one category at a time.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/BSC-ES\.github\.io\/GHRtools\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, GHR</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

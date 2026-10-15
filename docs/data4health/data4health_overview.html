@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Reference</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../docs/data4health/NEWS.html">
+    <a class="dropdown-item" href="../../docs/data4health/data4health-news.html">
  <span class="dropdown-text">Changelog</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
@@ -172,6 +172,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../docs/clim4health/clim4health.html">
  <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_s2dv_cubes.html">
+ <span class="dropdown-text">s2dv_cube objects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_get.html">
+ <span class="dropdown-text">Get function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_downscaling.html">
+ <span class="dropdown-text">Downscaling function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_verification.html">
+ <span class="dropdown-text">Verification function</span></a>
   </li>  
     </ul>
   </li>
@@ -307,8 +341,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <img src="../../figures/data4health.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
-<section id="overview" class="level1">
-<h1>Overview</h1>
+<br><br>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The <strong>data4health</strong> package streamlines the typical epidemiological data workflow: loading raw surveillance or clinical files, cleaning and standardising them, filtering the cases of interest, aggregating case counts over space and time, and finally saving the results for downstream analysis or reporting. It is designed to help users with the most common challenges encountered during health data wrangling, such as inconsistent column names, missing values, fragmented reporting periods, and the need for spatiotemporal aggregation.</p>
 <p>The <strong>data4health</strong> package is designed to work in tandem with other packages of the 4health suite:</p>
 <ul>
@@ -321,8 +356,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Together, these packages support the integration of environmental, social, and health data into a unified analytical workflow. More information about the toolkit can be found at the <a href="https://harmonize-tools.github.io/">HARMONIZE website</a>.</p>
 <p>This vignette walks you through a complete worked example using synthetic dengue surveillance data to provide an overview of the <strong>data4health</strong> package workflow and its core functions.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data4health)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="who-is-this-vignette-for" class="level2">
-<h2 class="anchored" data-anchor-id="who-is-this-vignette-for">Who is this vignette for?</h2>
+<section id="who-is-this-vignette-for" class="level3">
+<h3 class="anchored" data-anchor-id="who-is-this-vignette-for">Who is this vignette for?</h3>
 <p>This vignette is written for:</p>
 <ul>
 <li>Public health professionals working with surveillance data</li>
@@ -332,8 +367,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>No prior knowledge of epidemiology is required, but basic familiarity with R and data frames is assumed.</p>
 </section>
-<section id="data-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="data-requirements">Data requirements</h2>
+<section id="data-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="data-requirements">Data requirements</h3>
 <p>For the workflows shown in this package, the input data must be organized as a line list dataset. A “line list” is a standard format in public health surveillance. It is simply a spreadsheet where each row represents one individual case (for example, one patient with dengue), and each column contains information about that individual (such as age, sex, location, and date of symptom onset).</p>
 <p>In this vignette we work with a synthetic dataset that was simulated to mirror health data that public health authorities collect when monitoring infectious diseases:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(example_dataset)</span>

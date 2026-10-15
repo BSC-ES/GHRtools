@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>s2dv_cube objects – GHRtools</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../figures/bsc-logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-5831b4ab0d9ac86f0ad68f25a630e6c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">GHRtools</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">data4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/data4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/data4health/access_health_data.html">
+ <span class="dropdown-text">Access health data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-clim4health" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">clim4health</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-clim4health">    
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_s2dv_cubes.html">
+ <span class="dropdown-text">s2dv_cube objects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_get.html">
+ <span class="dropdown-text">Get function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_downscaling.html">
+ <span class="dropdown-text">Downscaling function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/clim4health/clim4health_verification.html">
+ <span class="dropdown-text">Verification function</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrexplore" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRexplore</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrexplore">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRexplore/GHRexplore-vignette.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrmodel" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRmodel</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrmodel">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-index.html">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel-news.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Vignettes</li>
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_overview.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_covariates.html">
+ <span class="dropdown-text">Covariate structures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRmodel/GHRmodel_DLNM.html">
+ <span class="dropdown-text">DLNMs in GHRmodel</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ghrpredict" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">GHRpredict</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ghrpredict">    
+        <li>
+    <a class="dropdown-item" href="../../docs/GHRpredict/GHRpredict.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience" target="_blank"> 
+<span class="menu-text">About GHR</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#load-the-package" id="toc-load-the-package" class="nav-link" data-scroll-target="#load-the-package">0. Load the package</a></li>
+  <li><a href="#forecasts-hindcasts-and-reanalyses" id="toc-forecasts-hindcasts-and-reanalyses" class="nav-link" data-scroll-target="#forecasts-hindcasts-and-reanalyses">1. Forecasts, hindcasts, and reanalyses</a></li>
+  <li><a href="#climate-data-in-clim4health" id="toc-climate-data-in-clim4health" class="nav-link" data-scroll-target="#climate-data-in-clim4health">2. Climate data in clim4health</a>
+  <ul class="collapse">
+  <li><a href="#loading-multi-dimensional-data-with-c4h_load" id="toc-loading-multi-dimensional-data-with-c4h_load" class="nav-link" data-scroll-target="#loading-multi-dimensional-data-with-c4h_load">Loading multi-dimensional data with <strong>c4h_load</strong></a></li>
+  <li><a href="#loading-example-data" id="toc-loading-example-data" class="nav-link" data-scroll-target="#loading-example-data">Loading example data</a></li>
+  <li><a href="#exploring-the-loaded-data" id="toc-exploring-the-loaded-data" class="nav-link" data-scroll-target="#exploring-the-loaded-data">Exploring the loaded data</a></li>
+  <li><a href="#data-dimensions-in-clim4health" id="toc-data-dimensions-in-clim4health" class="nav-link" data-scroll-target="#data-dimensions-in-clim4health">Data dimensions in clim4health</a></li>
+  </ul></li>
+  <li><a href="#exploring-the-s2dv_cube-structure" id="toc-exploring-the-s2dv_cube-structure" class="nav-link" data-scroll-target="#exploring-the-s2dv_cube-structure">Exploring the s2dv_cube structure</a></li>
+  <li><a href="#constructing-an-s2dv_cube-from-scratch" id="toc-constructing-an-s2dv_cube-from-scratch" class="nav-link" data-scroll-target="#constructing-an-s2dv_cube-from-scratch">3. Constructing an s2dv_cube from scratch</a>
+  <ul class="collapse">
+  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data">1. Load the data</a></li>
+  <li><a href="#reshape-the-data" id="toc-reshape-the-data" class="nav-link" data-scroll-target="#reshape-the-data">2. Reshape the data</a></li>
+  <li><a href="#add-dimensions-coordinates-and-attributes" id="toc-add-dimensions-coordinates-and-attributes" class="nav-link" data-scroll-target="#add-dimensions-coordinates-and-attributes">3. Add dimensions, coordinates, and attributes</a></li>
+  <li><a href="#create-the-s2dv_cube-object" id="toc-create-the-s2dv_cube-object" class="nav-link" data-scroll-target="#create-the-s2dv_cube-object">4. Create the s2dv_cube object</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">s2dv_cube objects</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<img src="../../figures/clim4health.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
+<br><br>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This vignette provides an introduction to the <code>s2dv_cube</code>, which is the data format used within <strong>clim4health</strong>. It discusses different types of climate data, why an <code>s2dv_cube</code> object is useful to explore these, and how to construct your own <code>s2dv_cube</code>.</p>
+</section>
+<section id="load-the-package" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-package">0. Load the package</h2>
+<p>First, let’s load the package.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(clim4health)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="forecasts-hindcasts-and-reanalyses" class="level2">
+<h2 class="anchored" data-anchor-id="forecasts-hindcasts-and-reanalyses">1. Forecasts, hindcasts, and reanalyses</h2>
+<p>When using subseasonal to decadal predictions, we use <em>hindcasts</em> to assess the skill of the predictions.</p>
+<ol type="1">
+<li><strong>Forecasts:</strong> a prediction of weather or climate conditions in the future, initialised now, using current or recent atmospheric/oceanic initial conditions.</li>
+<li><strong>Hindcasts:</strong> a forecast which uses initial conditions from the past. This generates a prediction of past climate. We use these to compare how <em>skillful</em> the model is at predicting the actual observed value, by comparing the predictions to the observations.</li>
+</ol>
+<blockquote class="blockquote">
+<p>💡 <strong>2-dimensional time?</strong> Consider a seasonal forecast that we issue <em>today</em> (for example, in early July 2026), for the next three months (July, August, and September 2026). To assess the skill of this forecast, we need to compare how every forecast issued in July of previous years (e.g.&nbsp;1994 to 2016 - a standard reference period) performed at predicting the observed conditions in the following three months (July, August, and September of each year). To do this, we need to load the hindcasts issued in every July of the reference period. To this end, we load the data with a <strong>two-dimensional time structure</strong>, where the first time dimension corresponds to the forecast initialisation date (or start date - July of each year), and the second time dimension corresponds to the forecast lead time (July, August, and September of the given year). A hindcast might look like:</p>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Forecast Start Date</th>
+<th style="text-align: left;">Lead Time 1</th>
+<th style="text-align: left;">Lead Time 2</th>
+<th style="text-align: left;">Lead Time 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">July 1994</td>
+<td style="text-align: left;">July 1994</td>
+<td style="text-align: left;">August 1994</td>
+<td style="text-align: left;">September 1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">July 1995</td>
+<td style="text-align: left;">July 1995</td>
+<td style="text-align: left;">August 1995</td>
+<td style="text-align: left;">September 1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">July 2016</td>
+<td style="text-align: left;">July 2016</td>
+<td style="text-align: left;">August 2016</td>
+<td style="text-align: left;">September 2016</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1: Hindcast structure, for forecasts issued in July. Note that Lead Time 1 corresponds to the same month as the forecast initialisation date (the forecast is issued at the beginning of the month, and provides information for that same month).</p>
+<p>To compare the hindcast with the observed conditions, we also need to load the observed data for the same time period. Often, we use <em>reanalysis</em> data, or we can also use direct observations from weather stations if available, to explore more local climate conditions.</p>
+<ol start="3" type="1">
+<li><strong>Reanalysis:</strong> a dataset that combines direct observations with a climate model to produce a complete and physically-consistent dataset of past climate conditions. Reanalysis data is often used as a proxy for observed conditions when direct observations are not available, or to provide a more complete picture of past climate conditions.</li>
+</ol>
+<blockquote class="blockquote">
+<p>💡 <strong>Tip</strong>: We can also load our observational data with a <strong>two-dimensional time structure</strong> to align it with the hindcast data.</p>
+</blockquote>
+</section>
+<section id="climate-data-in-clim4health" class="level2">
+<h2 class="anchored" data-anchor-id="climate-data-in-clim4health">2. Climate data in clim4health</h2>
+<p>In this section, we introduce the datasets that are used within the <strong>clim4health</strong> package. In <strong>clim4health</strong>, we load and manipulate data using the <code>s2dv_cube</code> object, a type of data structure able to handle complex multi-dimensional climate data. Briefly, the <code>s2dv_cube</code> is a named list of the data, its dimensions, coordinates, and any additional attributes. How to explore the cube structure and its attributes is described below.</p>
+<section id="loading-multi-dimensional-data-with-c4h_load" class="level3">
+<h3 class="anchored" data-anchor-id="loading-multi-dimensional-data-with-c4h_load">Loading multi-dimensional data with <strong>c4h_load</strong></h3>
+<p>The loading function in <strong>clim4health</strong> is <code>c4h_load()</code>, and takes the following input parameters:</p>
+<ul>
+<li><p><code>path</code> A string to the folder containing the files to be loaded, or a vector of specific file paths.</p></li>
+<li><p><code>variable</code> The variable that you want to load.</p></li>
+<li><p><code>year</code> A vector of years, e.g.&nbsp;<code>1994:2016</code>. Default is all years found in the specified path.</p></li>
+<li><p><code>month</code> A vector of months, e.g.&nbsp;<code>c(1,2)</code> for January and February. Default is all months (<code>1:12</code>).</p></li>
+<li><p><code>day</code> A vector of days in the month, e.g.&nbsp;<code>c(1, 2, 3)</code> for the first three days of each month. Default is all days.</p></li>
+<li><p><code>time</code> A vector of hours (<code>0:23</code>). Only needed when datasets are hourly. Default is all hours.</p></li>
+<li><p><code>leadtime_month</code> A vector of months for the forecast leadtime. e.g.&nbsp;<code>c(1, 2)</code> for February and March for data initialised in February. Default is <code>"all"</code>. If <code>"all"</code> for hindcast and forecast data, all leadtime months will be loaded. If <code>"all"</code> for reanalysis or station data, data will be loaded as a time series in the <code>time</code> dimension, and the <code>sdate</code> dimension will be set to 1.</p></li>
+<li><p><code>ext</code> File extension. Options include <code>"nc"</code>, <code>".nc"</code>, <code>"csv"</code>, and <code>".csv"</code>.</p></li>
+<li><p><code>bbox</code> A vector of coordinates to subset the data spatially. In order: <code>c(lat_max, lon_min, lat_min, lon_max)</code>.</p></li>
+</ul>
+<p>We use the parameters <code>year</code>, <code>month</code>, <code>day</code>, <code>time</code>, and <code>leadtime_month</code> to specify the time period and time dimensions of the data we want to load. To load data in the <strong>sdate</strong> or <strong>time</strong> dimension:</p>
+<ul>
+<li><p><strong>sdate</strong>: <code>year</code>, <code>month</code>, <code>day</code>, and <code>time</code> correspond to all the start dates that you want to load. To load data for January and February for the years 2010 to 2016, you would select <code>year = 2010:2016</code> and <code>month = 1:2</code>.</p></li>
+<li><p><strong>time</strong>: <code>leadtime_month</code> corresponds to the forecast lead time and tells clim4health how many months to load in the <strong>time</strong> dimension. To load our hindcast data issued only in January for the forecast months of January, February and March, for the years 1994 to 2016, we would select <code>year = 1994:2016</code>, <code>month = 1</code>, and <code>leadtime_month = 1:3</code>. Note that this exact specification would result in a 2D time structure as given in the table above (Section 1).</p></li>
+</ul>
+</section>
+<section id="loading-example-data" class="level3">
+<h3 class="anchored" data-anchor-id="loading-example-data">Loading example data</h3>
+<p>Consider our seasonal forecast example. We will load the forecast data for January, February, and March 2025, and the corresponding hindcast data for January, February, and March of previous years (2010 to 2012). We will also load the reanalysis data for the same time period. In a full analysis, the reference period should be much longer (typically 1994 to 2016). All of these datasets will be stored as <code>s2dv_cube</code> objects.</p>
+<section id="the-forecast-data-is-stored-with-dimensions" class="level4">
+<h4 class="anchored" data-anchor-id="the-forecast-data-is-stored-with-dimensions">The forecast data is stored with dimensions</h4>
+<ul>
+<li><p><strong>sdate</strong>: the forecast initialisation date (or start date - so January 2025).</p></li>
+<li><p><strong>time</strong>: the forecast lead time (so January, February and March of 2025).</p></li>
+<li><p><strong>ensemble</strong>: the ensemble members of the forecast model.</p></li>
+<li><p><strong>latitude</strong> and <strong>longitude</strong>: the spatial dimensions of the data.</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fcst_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/forecast/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fcst_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(fcst_path, <span class="st">"/"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the forecast data</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(fcst_path,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">year =</span> <span class="dv">2025</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">leadtime_month =</span> <span class="st">"all"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ext =</span> <span class="st">"nc"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">c4h_convert_units</span>(forecast, <span class="at">to =</span> <span class="st">"celsius"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-hindcast-data-is-stored-with-dimensions" class="level4">
+<h4 class="anchored" data-anchor-id="the-hindcast-data-is-stored-with-dimensions">The hindcast data is stored with dimensions</h4>
+<ul>
+<li><p><strong>sdate</strong>: the forecast initialisation date (or start date - so January of each year from 1994 to 2016).</p></li>
+<li><p><strong>time</strong>: the forecast lead time (so January, February and March of each year).</p></li>
+<li><p><strong>ensemble</strong>: the ensemble members of the hindcast model.</p></li>
+<li><p><strong>latitude</strong> and <strong>longitude</strong>: the spatial dimensions of the data.</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hindcast_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/hindcast/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>hindcast_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(hindcast_path, <span class="st">"/"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the hindcast data</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>hindcast <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(hindcast_path,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ext =</span> <span class="st">"nc"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>hindcast <span class="ot">&lt;-</span> <span class="fu">c4h_convert_units</span>(hindcast, <span class="at">to =</span> <span class="st">"celsius"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-reanalysis-data-is-stored-with-dimensions" class="level4">
+<h4 class="anchored" data-anchor-id="the-reanalysis-data-is-stored-with-dimensions">The reanalysis data is stored with dimensions</h4>
+<ul>
+<li><p><strong>time</strong>: the time dimension (so January, February and March of each year from 1994 to 2016).</p></li>
+<li><p><strong>latitude</strong> and <strong>longitude</strong>: the spatial dimensions of the data.</p></li>
+</ul>
+<p>👉 We have to reshape and load the reanalysis data to have the same dimensions as the hindcast data (i.e.&nbsp;with dimensions of <code>sdate</code> and <code>time</code>) to be able to compare the two datasets.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reanalysis_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/reanalysis/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>reanalysis_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(reanalysis_path, <span class="st">"/"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the reanalysis data</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>reanalysis <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(reanalysis_path,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ext =</span> <span class="st">"nc"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>reanalysis <span class="ot">&lt;-</span> <span class="fu">c4h_convert_units</span>(reanalysis, <span class="at">to =</span> <span class="st">"celsius"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="exploring-the-loaded-data" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-loaded-data">Exploring the loaded data</h3>
+<p><code>c4h_load()</code> will return an <code>s2dv_cube</code> object. We can explore the structure of this object to understand how the data is stored and how to manipulate it.</p>
+<p>An <code>s2dv_cube</code> is a named list of the data, its dimensions, coordinates, and any additional attributes. Given our <code>s2dv_cube</code> object called <code>forecast</code> containing forecast data, the list elements contained within <code>forecast</code> are:</p>
+<ol type="1">
+<li><code>forecast$data</code>: a multi-dimensional array containing one or more variables, such as temperature and pressure.</li>
+<li><code>forecast$dims</code>: a named vector of the dimensions of <code>forecast$data</code> containing the names of the dimensions and their lengths.</li>
+<li><code>forecast$coords</code>: a named list of the coordinates of the array. For example, if a variable is stored on dimensions of latitude, longitude, and time, then <code>forecast$coords</code> will contain the values of each of these coordinates. In some cases, only indices will be stored in the coordinates, such as in the case of the <em>time</em> dimension, where the actual dates are stored in the attributes (see below).</li>
+<li><code>forecast$attrs</code>: a named list of all available metadata. It includes metadata for each variable, and common shared attributes between variables.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"print forecast class"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(forecast)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"print dimensions of the stored data"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(forecast<span class="sc">$</span>data)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"print the names of the list elements in forecast"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(forecast)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"print a summary of the data stored in forecast"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(forecast<span class="sc">$</span>data)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"print extended information about the list elements in forecast"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(forecast)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="data-dimensions-in-clim4health" class="level3">
+<h3 class="anchored" data-anchor-id="data-dimensions-in-clim4health">Data dimensions in clim4health</h3>
+<p><strong>clim4health</strong> enforces the following dimensions for its <code>s2dv_cube</code> objects:</p>
+<ul>
+<li><p><strong>dataset</strong> - the datasets that are loaded.</p></li>
+<li><p><strong>var</strong> - the variables that are loaded, e.g.&nbsp;temperature, precipitation, etc.</p></li>
+<li><p><strong>sdate</strong> - the forecast initialisation or start dates.</p></li>
+<li><p><strong>time</strong> - the forecast lead time.</p></li>
+<li><p><strong>ensemble</strong> - the model ensemble members.</p></li>
+<li><p>one or two spatial dimensions, either:</p>
+<ul>
+<li><p><strong>latitude</strong> and <strong>longitude</strong> for gridded data</p></li>
+<li><p><strong>area</strong> for polygon data, e.g.&nbsp;administrative areas such as states or provinces</p></li>
+<li><p><strong>location</strong> for point data, e.g.&nbsp;weather station data</p></li>
+</ul></li>
+</ul>
+<blockquote class="blockquote">
+<p>💡 <strong>Tip</strong>: the dimension <strong>dataset</strong> will always have length 1 in clim4health cases. It only exists because it is required for package dependencies in the downscaling and skill functions.</p>
+</blockquote>
+<p>To better understand how dates are handled in <strong>clim4health</strong>, take a look at the <em>attributes</em> of the <code>s2dv_cube</code>. For example, all <code>s2dv_cubes</code> loaded via <strong>clim4health</strong> will contain a <code>Dates</code> attribute.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(forecast<span class="sc">$</span>attrs<span class="sc">$</span>Dates)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(forecast<span class="sc">$</span>attrs<span class="sc">$</span>Dates))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(forecast<span class="sc">$</span>attrs<span class="sc">$</span>Dates[, <span class="dv">1</span>]) <span class="co"># to obtain the forecast start dates</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(forecast<span class="sc">$</span>coords<span class="sc">$</span>sdate) <span class="co"># start dates are also stored as a coordinate</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We can plot the <code>s2dv_cube</code> objects using the function <code>c4h_plot</code>. The plotting function will search the available dimensions in the data cube and plot maps for each of them. This is problematic for the forecast object, which has three time points and 51 ensemble members, which would mean a total of 153 maps! We can do several things, first, simply select the time points and ensemble members we are interested in:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(forecast, <span class="at">time =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">ensemble =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="exploring-the-s2dv_cube-structure" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-s2dv_cube-structure">Exploring the s2dv_cube structure</h2>
+<p>We have discussed the dimensions of clim4health <code>s2dv_cube</code> objects, but many different <em>attributes</em> are stored within the <code>s2dv_cube</code> which can be useful. Let’s take a general look at what information is stored in an <code>s2dv_cube</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(forecast)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre lang="markdown">forecast$
+│
+├── data                    # Array with named dimensions containing the data       
+│
+├── dims                    # Named vector of the dimensions of the data array
+│
+├── coords$                 # Named list of the coordinates of the data array 
+│   ├── dataset                # Index of the dataset(s) loaded
+│   ├── var                    # Name(s) of the variable(s) loaded
+│   ├── sdate                  # Index of the forecast initialisation or start
+│   │                            dates
+│   ├── time                   # Index of the forecast lead time
+│   ├── ensemble               # Index of the model ensemble members
+│   ├── latitude               # Values of the latitude coordinates
+│   └── longitude              # Values of the longitude coordinates
+│
+└── attrs$                  # Named list of all attributes and metadata
+    ├── Dates                  # 2-dimensional array of dates (sdate and time)
+    ├── Variable               # Named list of variable information
+    │   ├── varName               # Character vector of variable name(s), equal
+    │   │                           to coords$var
+    │   └── metadata              # Named list of metadata for all variables
+    │       ├── variable             # Character vector of variable name(s)
+    │       ├── units                # Named vector of variable unit(s)
+    │       └── source_files         # Character vector of the source file(s)
+    │                                  for each variable
+    └── source_files           # Character vector of all source files used to
+                                 load the data
+</pre>
+<p>For example, to access the units of a given variable, you can type <code>forecast$attrs$Variable$metadata$units</code>. Equivalently, the function <code>c4h_convert_units()</code> looks in this location to find the units of the variable(s), so you can access the same information by typing <code>c4h_convert_units(forecast)</code>.</p>
+</section>
+<section id="constructing-an-s2dv_cube-from-scratch" class="level2">
+<h2 class="anchored" data-anchor-id="constructing-an-s2dv_cube-from-scratch">3. Constructing an s2dv_cube from scratch</h2>
+<p>Suppose you have climate data in csv format, and you want to convert it into an <code>s2dv_cube</code> to be able to use it with the functions in <strong>clim4health</strong>. Given the diverse nature of climate data, there is no one-size-fits-all approach to converting data into an <code>s2dv_cube</code>, but the following steps can be used as a general guide.</p>
+<section id="load-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-the-data">1. Load the data</h3>
+<p>Let’s load the example csv file stored in clim4health using another method.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>csv_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/stations/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_in <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(csv_path, <span class="st">"/temp_vallecauca.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Take a look at the structure of the data to understand how it is stored and what information is available.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data_in))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We see that this data contains columns called <code>station_code</code>, <code>lat</code>, <code>lon</code>, <code>date</code>, <code>temp_mean</code>, <code>temp_min</code>, and <code>temp_max</code>.</p>
+<blockquote class="blockquote">
+<p>💡 <strong>Tip</strong>: At this point, you could also filter your data by requirements such as relevant dates, latitudes, longitudes, and variables.</p>
+</blockquote>
+</section>
+<section id="reshape-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="reshape-the-data">2. Reshape the data</h3>
+<p>First, let’s extract the coordinates at which our data will be stored.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># these will be used to match values in the data_in object</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>locations_long <span class="ot">&lt;-</span> data_in<span class="sc">$</span>station_code</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>lats_long <span class="ot">&lt;-</span> data_in<span class="sc">$</span>lat</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>lons_long <span class="ot">&lt;-</span> data_in<span class="sc">$</span>lon</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># these will be our unique coordinates for the s2dv_cube</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>locations <span class="ot">&lt;-</span> <span class="fu">unique</span>(locations_long)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>lats <span class="ot">&lt;-</span> <span class="fu">unique</span>(lats_long[<span class="fu">match</span>(locations, locations_long)])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>lons <span class="ot">&lt;-</span> <span class="fu">unique</span>(lons_long[<span class="fu">match</span>(locations, locations_long)])</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># extract dates in a time series format (sdate = 1, time = length of dates)</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>dates_long <span class="ot">&lt;-</span> data_in<span class="sc">$</span>date</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">unique</span>(dates_long)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># we can choose specific date ranges if desired</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> dates[<span class="fu">which</span>(lubridate<span class="sc">::</span><span class="fu">month</span>(dates) <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)]</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># set up final coordinates</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>ensemble <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"temp_mean"</span>, <span class="st">"temp_min"</span>, <span class="st">"temp_max"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now, we need to match the values in the data frame to the coordinates we have just extracted, and reshape the data into a multi-dimensional array with the correct dimensions.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an empty array with the correct dimensions</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="at">dataset =</span> <span class="dv">1</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">var =</span> <span class="fu">length</span>(var),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sdate =</span> <span class="dv">1</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">time =</span> <span class="fu">length</span>(dates),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">ensemble =</span> <span class="fu">length</span>(ensemble),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">location =</span> <span class="fu">length</span>(locations)))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># fill the array with the values from the data frame, matching the coordinates</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(var)) {</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  var_name <span class="ot">&lt;-</span> var[i]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_along</span>(locations)) {</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    location_name <span class="ot">&lt;-</span> locations[j]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (k <span class="cf">in</span> <span class="fu">seq_along</span>(dates)) {</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      date_value <span class="ot">&lt;-</span> dates[k]</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>      value <span class="ot">&lt;-</span> data_in[locations_long <span class="sc">==</span> location_name <span class="sc">&amp;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                       dates_long <span class="sc">==</span> date_value, var_name]</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>      <span class="co"># only fill the array if there is a value in the data frame</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">length</span>(value) <span class="sc">!=</span> <span class="dv">0</span>) {</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        data_array[<span class="dv">1</span>, i, <span class="dv">1</span>, k, <span class="dv">1</span>, j] <span class="ot">&lt;-</span> value</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>💡 <strong>Tip</strong>: Here we loop over dimensions to explicitly show how the new array is filled, but it can be more efficiently filled in case there are more locations or dates. Similarly, we set sdate to have length 1 here, but you can also add a loop over this too.</p>
+</blockquote>
+</section>
+<section id="add-dimensions-coordinates-and-attributes" class="level3">
+<h3 class="anchored" data-anchor-id="add-dimensions-coordinates-and-attributes">3. Add dimensions, coordinates, and attributes</h3>
+<p>Now that we have reshaped the data, we need to add the dimensions, coordinates, and attributes to create the full <code>s2dv_cube</code> object.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>new_dims <span class="ot">&lt;-</span> <span class="fu">dim</span>(data_array)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>new_coords <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">dataset =</span> <span class="dv">1</span>,                     <span class="co"># index</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">var =</span> var,                       <span class="co"># variable names</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sdate =</span> <span class="dv">1</span>,                       <span class="co"># index</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">time =</span> <span class="fu">seq_along</span>(dates),         <span class="co"># index</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ensemble =</span> ensemble,             <span class="co"># index</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">location =</span> <span class="fu">seq_along</span>(locations)) <span class="co"># index</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>new_attrs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Dates =</span> <span class="fu">array</span>(dates, <span class="at">dim =</span> <span class="fu">c</span>(<span class="at">sdate =</span> <span class="dv">1</span>, <span class="at">time =</span> <span class="fu">length</span>(dates))),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">list</span>(<span class="at">varName =</span> var,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metadata =</span> <span class="fu">list</span>(<span class="at">variable =</span> var,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">units =</span> <span class="fu">c</span>(<span class="at">temp_mean =</span> <span class="st">"degrees C"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">temp_min =</span> <span class="st">"degrees C"</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">temp_max =</span> <span class="st">"degrees C"</span>),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">source_files =</span> <span class="st">"inst/extdata/stations/temp_vallecauca.csv"</span>)),</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">source_files =</span> <span class="st">"inst/extdata/stations/temp_vallecauca.csv"</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># in the case of station data, we also need to add the latitude and longitude coordinates to the attributes</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>new_attrs<span class="sc">$</span>location <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">longitude =</span> lons,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>                           <span class="at">latitude =</span> lats)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co"># we also need to ensure the Dates attribute is a POSIXct object</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>new_attrs<span class="sc">$</span>Dates <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(new_attrs<span class="sc">$</span>Dates)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(new_attrs<span class="sc">$</span>Dates) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">sdate =</span> <span class="dv">1</span>, <span class="at">time =</span> <span class="fu">length</span>(dates))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>💡 <strong>Warning</strong>: Converting to POSIXct objects can flatten your dates array, so make sure you double check both the values of the dates array and its dimension!</p>
+</blockquote>
+</section>
+<section id="create-the-s2dv_cube-object" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-s2dv_cube-object">4. Create the s2dv_cube object</h3>
+<p>Finally, we can create the <code>s2dv_cube</code> object. There are two ways to do this. The first is simply to manually create the list and set its class, and the second is to use the function <code>s2dv_cube()</code> from the package <strong>CSTools</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># method 1: manually create the list and set its class</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>s2dv_cube_manual <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">data =</span> data_array,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">dims =</span> new_dims,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">coords =</span> new_coords,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">attrs =</span> new_attrs)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(s2dv_cube_manual) <span class="ot">&lt;-</span> <span class="st">"s2dv_cube"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># method 2: use the function s2dv_cube() from CSTools</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>s2dv_cube_function <span class="ot">&lt;-</span> CSTools<span class="sc">::</span><span class="fu">s2dv_cube</span>(data_array,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">coords =</span> new_coords,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">varName =</span> var,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">metadata =</span> new_attrs<span class="sc">$</span>Variable<span class="sc">$</span>metadata,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Dates =</span> new_attrs<span class="sc">$</span>Dates,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">source_files =</span> new_attrs<span class="sc">$</span>source_files)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We have successfully created our own <code>s2dv_cube</code> object from a csv file, and we can now use this object with the functions in <strong>clim4health</strong>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/BSC-ES\.github\.io\/GHRtools\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, GHR</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
