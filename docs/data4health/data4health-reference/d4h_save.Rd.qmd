@@ -1,0 +1,66 @@
+---
+format: html
+toc: true
+---
+
+# Save files in desired data type
+
+## Description
+
+The 'd4h_save()' function saves dataframes to your local disk. It supports various file formats, including 'csv', 'rds', 'xlsx', 'json', 'dbc' and 'dbf'.
+
+```r
+d4h_save(data, name = NULL, format = "csv")
+```
+
+## Arguments
+
+- `data`: data.frame that will be saved.
+- `name`: The name of the output file. If no argument is passed, it will received the name "data4health_" followed by the date and time.
+- `format`: Possible options are: "csv", "dbf", "rds", "xlsx", "csv2". Default is csv.
+
+## Returns
+
+None.
+
+## Examples
+
+```r
+## Not run:
+
+# save as 'csv' (default)
+d4h_save(
+  data = example_dataset,
+  name = "dengue_export",
+  format = "csv"
+)
+
+# save as 'rds'
+d4h_save(
+  data = example_dataset,
+  name = "dengue_export",
+  format = "rds"
+)
+
+# save as 'xlsx' file
+d4h_save(
+  data = example_dataset,
+  name = "dengue_export",
+  format = "xlsx"
+)
+
+# save as 'dbf'
+d4h_save(
+  data = example_dataset,
+  name = "dengue_export",
+  format = "dbf"
+)
+
+# save as 'csv2' (semicolon separator)
+d4h_save(
+  data = example_dataset,
+  name = "dengue_export",
+  format = "csv2"
+)
+## End(Not run)
+```

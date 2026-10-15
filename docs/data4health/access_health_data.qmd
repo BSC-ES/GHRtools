@@ -1,0 +1,345 @@
+---
+title: "How to access Health Data"
+format: html
+toc: true
+---
+
+```{=html}
+<img src="/figures/data4health.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
+```
+
+This guide explains how to download and work with public health
+surveillance data from Brazil, Colombia, Peru, and the Dominican
+Republic. Each section walks you through the available methods, from R
+packages to direct downloads, so you can get to analysis as quickly as
+possible.
+
+If you would like another country to be included, please let us know by
+opening an issue in our GitHub repository.
+
+<br>
+
+<details open>
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇧🇷 Brasil
+</summary>
+
+Brazil’s health surveillance data is managed by the [Department of
+Informatics of the Unified Health System](https://datasus.saude.gov.br/)
+(DATASUS). Four methods are available for accessing anonymised,
+individual-level records. If you only need summary statistics rather
+than raw data, the [DataSUS
+tabnet](https://datasus.saude.gov.br/informacoes-de-saude-tabnet/) web
+interface lets you build and export custom tables without any
+programming.
+
+The earliest year available depends on when a disease was introduced and
+when notification became mandatory. Disease could be available from 2000
+onwards
+
+If you need data from earlier years, nominal data, or data from SIVEP,
+you must request it from the Ministry of Health through the e-SIC
+portal. Nominal data require ethical committee approval in most cases.
+
+<details>
+<summary>
+Method 1: R package microdatasus
+</summary>
+
+Microdatasus is an [R
+package](https://github.com/rfsaldanha/microdatasus) package is the most
+convenient way to download and preprocess DATASUS data directly in R.
+
+**Installing the package**
+
+``` r
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+library(devtools)
+
+if (!requireNamespace("microdatasus", quietly = TRUE)) {
+  devtools::install_github("rfsaldanha/microdatasus")
+}
+library(microdatasus)
+```
+
+**Downloading data**
+
+Use `fetch_datasus()` to download data. You must specify:
+
+- The temporal extent (`year_start`, `month_start`, `year_end`,
+  `month_end`)
+- The spatial extent (federative units)
+- The disease (health information system)
+- The variables (default downloads all)
+
+``` r
+chik <- fetch_datasus(year_start = 2017, year_end = 2019,
+                      information_system = "SINAN-CHIKUNGUNYA")
+mal  <- fetch_datasus(year_start = 2004, year_end = 2006,
+                      information_system = "SINAN-MALARIA")
+den  <- fetch_datasus(year_start = 2011, year_end = 2013,
+                      information_system = "SINAN-DENGUE")
+zika <- fetch_datasus(year_start = 2016, year_end = 2021,
+                      information_system = "SINAN-ZIKA")
+```
+
+**Preprocessing data**
+
+Each disease has a dedicated preprocessing function that tidies the raw
+data for analysis. These functions:
+
+- Assign human-readable labels to categorical fields (e.g., CS_RACA
+  becomes Branca, Preta, Amarela instead of 1, 2, 3)
+- Converts variables to the correct formats
+- convert the age variable NU_IDADE_N into separate, easy-to-use
+  columns: IDADEminutos, IDADEhoras, IDADEdias, IDADEmeses, and
+  IDADEanos.
+
+``` r
+chik2 <- process_sinan_chikungunya(chik)
+mal2  <- process_sinan_malaria(mal)
+den2  <- process_sinan_dengue(den)
+zika2 <- process_sinan_zika(zika)
+```
+
+Your data is now ready for analysis.
+
+</details>
+<details>
+<summary>
+Method 2: FTP access
+</summary>
+
+DATASUS also shares its data via FTP, which you can access using any FTP
+client.
+[FileZilla](https://wiki.filezilla-project.org/Client_Installation#Choosing_the_right_download)
+is a free and widely used option. Connect using these settings:
+
+- **Host:** ftp.datasus.gov.br
+- **Remote site:** /dissemin/publicos/SINAN/
+
+Once connected, navigate into the DADOS folder. You will find two
+subfolders:
+
+- **FINAIS:** revised, finalised historical data
+- **PRELIM:** preliminary, unrevised data for the most recent year(s)
+
+If a dataset appears in FINAIS, it will not appear in PRELIM. Navigate
+to the disease folder of interest, then download the file for the year
+you need.
+
+<img src='../man/figures/Filezilla_SINAN.png' align="center" width="70%" alt="Filezilla screenshot" />
+
+</details>
+<details>
+<summary>
+Method 3: DATASUS website and command line
+</summary>
+
+The Ministry of Health provides a [web
+interface](https://datasus.saude.gov.br/transferencia-de-arquivos/) for
+browsing available files. Fill in the fields as follows:
+
+- **Fonte:** SINAN - Sistema de Informações de Agravos de Notificação
+- **Modalidade:** Dados
+- **Tipo de Arquivo:** Select the disease of interest
+- **Ano:** Select the desired years
+- **UF:** BR
+
+Click Enviar to generate the file list. To download a file, right-click
+it, copy the link address, and run the following in your terminal
+(substituting the correct URL and destination path):
+
+``` bash
+wget ftp://ftp.datasus.gov.br/dissemin/publicos/SINAN/DADOS/PRELIM/DENGBR21.dbc -P /path/to/save/
+```
+
+</details>
+<details>
+<summary>
+Method 4: Python package PySUS
+</summary>
+
+If you prefer Python, [PySUS](https://pysus.readthedocs.io/en/latest/)
+provides equivalent functionality for downloading DATASUS data.
+
+**Installing PySUS**
+
+``` bash
+sudo apt install libffi-dev
+sudo pip install PySUS
+pip install geocoder
+```
+
+**Downloading data**
+
+Optionally, set a persistent cache directory so downloaded files are
+saved to a location of your choice:
+
+``` bash
+export PYSUS_CACHEPATH='/home/me/desired/path/.pysus'
+```
+
+Then, in Python:
+
+``` python
+from pysus.preprocessing.sinan import SINAN
+
+SINAN.list_diseases()
+SINAN.get_available_years('zika')
+
+df = SINAN.download(2019, 'Zika')
+```
+
+Downloaded files are saved as parquet files in the specified folder.
+
+</details>
+</details>
+
+<br>
+
+<details open>
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇨🇴 Colombia
+</summary>
+
+Colombia’s national public health surveillance system, [Sistema Nacional
+de Vigilancia en Salud Pública](https://portalsivigila.ins.gov.co/)
+(SIVIGILA) is coordinated by the [Instituto Nacional de
+Salud](https://www.ins.gov.co/Paginas/Inicio.aspx) in collaboration with
+the Ministerio de Salud y Protección Social. It collects, analyses, and
+disseminates information on health events that may affect the
+population, supporting public health planning and response across the
+country.
+
+SIVIGILA’s reporting network includes thousands of healthcare providers
+who report on more than one hundred monitored conditions, enabling
+authorities to track disease trends and detect outbreaks.
+
+The SIVIGILA microdata portal publishes aggregated data at municipality
+resolution, without georeferencing or sensitive clinical data.
+Publication is typically delayed by 6 to 10 months. A [public
+dashboard](https://portalsivigila.ins.gov.co/) is also available with a
+shorter delay, but it is less stable and harder to extract data from
+programmatically.
+
+Two methods are available for accessing Colombia’s surveillance data.
+
+<details>
+<summary>
+Method 1: Manual download via SIVIGILA
+</summary>
+
+<img src='../man/figures/SIVIGILA.png' align="center" width="100%" alt="SIVIGILA screenshot"/>
+
+Visit the [Buscador de
+microdatos](https://portalsivigila.ins.gov.co/Paginas/Buscador.aspx) and
+follow these steps:
+
+1.  In “Seleccione el evento de interés”, choose the disease or health
+    event you want.
+2.  In “Seleccione año”, choose the year.
+3.  Click “Buscar” to generate the dataset.
+
+If this is your first time using the portal, you may be asked for your
+name and the reason for the data request. Complete the form to proceed.
+Once the results appear, download the dataset as an Excel file.
+
+</details>
+<details>
+<summary>
+Method 2: R package sivirep
+</summary>
+
+The [sivirep](https://epiverse-trace.github.io/sivirep/) package makes
+it easy to download SIVIGILA surveillance data directly in R.
+
+**Installing sivirep**
+
+``` r
+install.packages(
+  "sivirep",
+  repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org")
+)
+library(sivirep)
+```
+
+**Downloading data**
+
+List all available diseases and health events:
+
+``` r
+events <- list_events()
+knitr::kable(events)
+```
+
+Download data for a specific event using `import_data_event()`. For
+example, to download Zika data for 2023:
+
+``` r
+data <- import_data_event(nombre_event = "Zika",
+                          years = 2023,
+                          ruta_dir = ".")
+```
+
+</details>
+</details>
+
+<br>
+
+<details open>
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇵🇪 Peru
+</summary>
+
+Peru’s public health surveillance system is managed by the [Centro
+Nacional de Epidemiología, Prevención y Control de
+Enfermedades](https://www.dge.gob.pe/portalnuevo/) (CDC Peru). Data are
+collected through RENACE (Red Nacional de Epidemiología), a nationwide
+reporting network of over 10,000 health facilities. Cases of notifiable
+diseases are reported through this network, allowing national
+authorities to monitor trends and guide public health interventions.
+Data are made available through two main channels.
+
+<details>
+<summary>
+Method 1: Datos abiertos
+</summary>
+
+Go to [National Platform of Open Data](https://www.gob.pe/datosabiertos)
+(PNDA) and search for your disease of interest.
+
+At the bottom of the page you will find the file available for download.
+
+</details>
+</details>
+
+<br>
+
+<details open>
+<summary style="font-size: 1.4rem; font-weight: 400;">
+🇩🇴 Dominican Republic
+</summary>
+
+Surveillance data in the Dominican Republic is managed by the [Dirección
+de Epidemiología](https://epidemiologia.gob.do/) (DIEPI), the national
+epidemiology directorate within the Ministry of Public Health. DIEPI
+operates SINAVE (Sistema Nacional de Vigilancia Epidemiológica), the
+national surveillance system covering individual reporting of all
+notifiable diseases.
+
+While microdata are not publicly available, DIEPI publishes [weekly
+epidemiological
+bulletins](https://epidemiologia.gob.do/documentos-epidemiologicos/boletines-semanales/)
+with aggregated surveillance data, which may be sufficient for some
+purposes.
+
+To request access to line-list data, you will need to contact DIEPI
+directly through their website or via the Ministry of Public Health
+([msp.gob.do](https://www.msp.gob.do)).
+
+</details>
+
+</div>

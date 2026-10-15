@@ -1,0 +1,20 @@
+---
+title: "data4health changelog"
+format: html
+toc: true
+---
+
+```{=html}
+<img src="/figures/data4health.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
+<br><br>
+```
+
+## 0.1.1
+
+* Minor changes for resubmission.
+
+## 0.1.0
+
+* Initial CRAN submission.
+
+

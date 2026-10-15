@@ -1,0 +1,36 @@
+---
+title: "data4health reference"
+format: html
+toc: false
+---
+
+```{=html} 
+<img src="/figures/data4health.svg" align="right" width="12%" style="margin-top: -100px; style="margin-top: 0px;>
+<br><br>
+```
+
+- [`d4h_aggregate`](data4health-reference/d4h_aggregate.Rd.qmd): The 'd4h_aggregate()' function aggregates health data
+ by specified spatial and temporal columns.
+
+- [`d4h_clean`](data4health-reference/d4h_clean.Rd.qmd): 'd4h_clean()' performs basic data
+ cleaning operations on health-related datasets.
+
+- [`d4h_example`](data4health-reference/d4h_example.Rd.qmd): The 'data4health' package includes some example files in
+ its  inst/extdata  directory.
+
+- [`d4h_filter`](data4health-reference/d4h_filter.Rd.qmd): The 'data4health' package provides a function for filtering
+ dataframes.
+
+- [`d4h_load`](data4health-reference/d4h_load.Rd.qmd): The 'd4h_load()' function loads files into the R environment.
+
+- [`d4h_save`](data4health-reference/d4h_save.Rd.qmd): The 'd4h_save()' function saves dataframes to your local
+ disk.
+
+- [`d4h_ui`](data4health-reference/d4h_ui.Rd.qmd): The 'd4h_ui()' function opens the data4health user interface
+ in a web browser.
+
+- [`data4health-package`](data4health-reference/data4health-package.Rd.qmd): Provides a streamlined workflow for cleaning, transforming, filtering, aggregating, and exporting epidemiological line list data.
+
+- [`example_dataset`](data4health-reference/example_dataset.Rd.qmd): A simulated dataset of 500 dengue notification records including
+ demographic, geographic, clinical, and laboratory information.
+

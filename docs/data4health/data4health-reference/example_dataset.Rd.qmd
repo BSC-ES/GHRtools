@@ -1,0 +1,34 @@
+---
+format: html
+toc: true
+---
+
+# Simulated dengue surveillance dataset
+
+## Description
+
+A simulated dataset of 500 dengue notification records including demographic, geographic, clinical, and laboratory information.
+
+## Format
+
+A data frame with 500 rows and 11 variables:
+
+- **NAME_GEO**: Character. Name of the geographic area. May be missing.
+- **CODE_GEO**: Integer. Numeric geographic code.
+- **LOCALCOD**: Character. Local health unit code (e.g., "LOC-1").
+- **DATE_BRTHD**: Date. Patient's date of birth.
+- **DATE_INI**: Date. Date of symptom onset.
+- **SEXO**: Character. Sex ("M", "F"). May be missing.
+- **DENGUE_TYPE**: Character. Dengue classification code ("1", "2", "3"). May be missing.
+- **HOSPITALISED**: Character. Hospitalisation status ("S" = Yes, "N" = No). May be missing.
+- **RESULT_LABORATORY**: Character. Laboratory result ("Positive", "Negative", "Pending"). May be missing.
+- **NOTES**: Character. Epidemiological notes (e.g., "Imported case"). May be missing.
+- **SEROTYPE**: Character. Dengue virus serotype ("1"–"4"). Frequently missing.
+
+## Details
+
+The dataset was simulated for demonstration and testing purposes. Missing values were introduced to resemble real-world surveillance data. Generated using random sampling with `set.seed(42)`. See `data-raw/example_dataset.R` for full reproducible code.
+
+## Source
+
+Simulated data generated within the package.

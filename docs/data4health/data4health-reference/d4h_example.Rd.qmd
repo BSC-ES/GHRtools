@@ -1,0 +1,29 @@
+---
+format: html
+toc: true
+---
+
+# Get path to data4health example datasets
+
+## Description
+
+The 'data4health' package includes some example files in its `inst/extdata` directory. This function to access them. Use it without parameter to retrieve a list of all examples files, and then again to retrieve the path to your specific file.
+
+```r
+d4h_example(path = NULL)
+```
+
+## Arguments
+
+- `path`: Name of file. If `NULL`, the example files will be listed.
+
+## Returns
+
+If `path` is `NULL`, a character vector of available example file names. If `path` is provided, the full file path to that example file.
+
+## Examples
+
+```r
+d4h_example()
+d4h_example("example_dataset.xlsx")
+```

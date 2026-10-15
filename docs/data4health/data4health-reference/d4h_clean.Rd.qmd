@@ -1,0 +1,114 @@
+---
+format: html
+toc: true
+---
+
+# Clean the health data
+
+## Description
+
+'d4h_clean()' performs basic data cleaning operations on health-related datasets. Among others, it handles missing values, column renaming, date transformations, and outlier detection.
+
+```r
+d4h_clean(
+  data,
+  cols_to_remove = NULL,
+  cols_to_include = NULL,
+  threshold_remove = NULL,
+  remove_rows_missing = NULL,
+  rename_columns = NULL,
+  rename_categories = NULL,
+  week_to_date = NULL,
+  month_to_date = NULL,
+  date_to_weekdate = NULL,
+  date_to_weeknumber = NULL,
+  week_start = "Sunday",
+  date_to_monthdate = NULL,
+  date_to_monthnumber = NULL,
+  date_to_yearnumber = NULL,
+  ...
+)
+```
+
+## Arguments
+
+- `data`: A data.frame containing your health data.
+- `cols_to_remove`: Columns to be removed.
+- `cols_to_include`: Columns to be included.
+- `threshold_remove`: Numerical from 0-100. Columns with a higher percentage of missing values than this will be excluded.
+- `remove_rows_missing`: Character vector of variables where empty or NA entries should be deleted from the table.
+- `rename_columns`: Either "lower" to transform all column to lower case, "upper" to transform all column names in upper case, "no_spaces" to replace all spaces by underscores or a named character vector of current column names and how to rename them.
+- `rename_categories`: A named list where each name is a column and the value is a named vector containing the current and new name.
+- `week_to_date`: `week_to_date` must be NULL or a character vector specifying where epiweek information is stored. It can the name of a column containing year and week combined, in 'YYYY-MM' format, or the names of two columns, where the first contains the year and the second contains the week. A new column with the original column name and the appendix "_weekdate" will be created. The start of the week can be set by using parameter "week_start". Default is "Sunday".
+- `month_to_date`: `month_to_date` must be NULL or a character vector specifying where the month and year information is stored. It can the name of a column containing year and month combined, in 'YYYY-MM' format, or the names of two columns, where the first contains the year and the second contains the month. A new column with the original column name and the appendix "_monthdate" will be created.
+- `date_to_weekdate`: column name that contains the date to be transformed. Returns the first day of the week in dateformat. A new column with the original column name and the appendix "_weekdate" will be created. The start of the week can be set by using parameter "week_start". Default is "Sunday".
+- `date_to_weeknumber`: column name that contains the date to be transformed. Returns a column with the week number. A new column with the original column name and the appendix "_epiyw" will be created. The start of the week can be set by using parameter "week_start". Default is "Sunday".
+- `week_start`: The day which indicates the start of the week. Default is "Sunday".
+- `date_to_monthdate`: Which column should be transformed to the date of the first day of the month? A new column named with the original column name and the appendix "_monthdate" will be created.
+- `date_to_monthnumber`: Which column should be transformed to the number of the month (i.e. 1-12)? A new column named with the original column name and the appendix "_monthnumber" will be created.
+- `date_to_yearnumber`: Which column should be transformed to year? A new column named with the original column name and the appendix "_year" will be created".
+- `...`: Reserved for internal use. If you misspell an argument name, the function will return a helpful error message suggesting the correct one.
+
+## Returns
+
+A data.frame with the cleaned data.
+
+## Examples
+
+```r
+# basic cleaning
+head(example_dataset)
+
+# rename all columns to lower case
+clean_lower <- d4h_clean(
+  data = example_dataset,
+  rename_columns = "lower"
+)
+colnames(example_dataset)
+colnames(clean_lower)
+
+# remove selected columns
+clean_removed <- d4h_clean(
+  data = example_dataset,
+  cols_to_remove = c("NOTES", "LOCALCOD")
+)
+colnames(example_dataset)
+colnames(clean_removed)
+
+# remove rows with missing sex
+clean_no_missing_sex <- d4h_clean(
+  data = example_dataset,
+  remove_rows_missing = "SEXO"
+)
+nrow(example_dataset)
+nrow(clean_no_missing_sex)
+
+# remove variables with more than 50% missing values
+clean_threshold <- d4h_clean(
+  data = example_dataset,
+  threshold_remove = 50
+)
+colnames(example_dataset)
+colnames(clean_threshold)
+
+# transform DATE_INI to epidemiological week variables
+clean_epiweek <- d4h_clean(
+  data = example_dataset,
+  date_to_weekdate = "DATE_INI",
+  date_to_weeknumber = "DATE_INI"
+)
+colnames(clean_epiweek)
+head(clean_epiweek[, c("DATE_INI_weekdate", "DATE_INI_epiyw")])
+
+# transform DATE_INI to month and year variables
+clean_month_year <- d4h_clean(
+  data = example_dataset,
+  date_to_monthdate = "DATE_INI",
+  date_to_monthnumber = "DATE_INI",
+  date_to_yearnumber = "DATE_INI"
+)
+colnames(clean_month_year)
+head(clean_month_year[, c("DATE_INI_monthdate",
+                          "DATE_INI_monthnumber",
+                          "DATE_INI_year")])
+```

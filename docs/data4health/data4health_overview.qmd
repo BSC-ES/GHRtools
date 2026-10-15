@@ -1,0 +1,816 @@
+---
+title: "Getting Started with data4health"
+subtitle: "A Practical Workflow for Health Data Wrangling"
+format: html
+toc: true
+---
+
+```{=html}
+<img src="/figures/data4health.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
+```
+
+# Overview
+
+The **data4health** package streamlines the typical epidemiological data
+workflow: loading raw surveillance or clinical files, cleaning and
+standardising them, filtering the cases of interest, aggregating case
+counts over space and time, and finally saving the results for
+downstream analysis or reporting. It is designed to help users with the
+most common challenges encountered during health data wrangling, such as
+inconsistent column names, missing values, fragmented reporting periods,
+and the need for spatiotemporal aggregation.
+
+The **data4health** package is designed to work in tandem with other
+packages of the 4health suite:
+
+- **clim4health**, which focuses on climate data,
+- **socio4health**, which focuses on socio-economic data,
+- **land4health**, which focuses on land-use data,
+- **drone4health**, which focuses on drone data,
+- **cube4health**, which helps to create datacubes.
+
+Together, these packages support the integration of environmental,
+social, and health data into a unified analytical workflow. More
+information about the toolkit can be found at the [HARMONIZE
+website](https://harmonize-tools.github.io/).
+
+This vignette walks you through a complete worked example using
+synthetic dengue surveillance data to provide an overview of the
+**data4health** package workflow and its core functions.
+
+``` r
+library(data4health)
+```
+
+## Who is this vignette for?
+
+This vignette is written for:
+
+- Public health professionals working with surveillance data
+- Data analysts supporting health departments
+- Researchers handling epidemiological datasets
+- Data scientists who are new to health data structures
+
+No prior knowledge of epidemiology is required, but basic familiarity
+with R and data frames is assumed.
+
+## Data requirements
+
+For the workflows shown in this package, the input data must be
+organized as a line list dataset. A “line list” is a standard format in
+public health surveillance. It is simply a spreadsheet where each row
+represents one individual case (for example, one patient with dengue),
+and each column contains information about that individual (such as age,
+sex, location, and date of symptom onset).
+
+In this vignette we work with a synthetic dataset that was simulated to
+mirror health data that public health authorities collect when
+monitoring infectious diseases:
+
+``` r
+head(example_dataset)
+#>       NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE
+#> 1      Agrabah   100089    LOC-3 1959-01-17 2024-07-14    F           1            N          Positive                  <NA>     <NA>
+#> 2      Agrabah   100002    LOC-5 2022-01-01 2023-01-24    F           1            N          Positive                  <NA>     <NA>
+#> 3      Motunui   100038    LOC-7 1974-01-13 2023-12-20    F           1            N          Positive                  <NA>     <NA>
+#> 4 Monstropolis   100009    LOC-6 1956-01-18 2024-09-02    M           1            N          Negative                  <NA>        3
+#> 5     Zootopia   100056   LOC-16 1962-01-16 2023-08-01    M           1            N          Positive Contacto domiciliario        3
+#> 6    Atlantica   100075   LOC-13 2022-01-01 2024-10-28    M           1            S           Pending                  <NA>     <NA>
+```
+
+The dataset includes the following variables:
+
+- NAME_GEO: Name of the geographic area (e.g., city or district) where
+  the case was reported
+
+- CODE_GEO: Numeric geographic code corresponding to the area
+
+- LOCALCOD: Local administrative code
+
+- DATE_BRTHD: Date of birth of the individual
+
+- DATE_INI: Date of symptom onset (when the illness began)
+
+- SEXO: Sex of the individual (M = Male, F = Female)
+
+- DENGUE_TYPE: Clinical classification of dengue severity (coded
+  numerically)
+
+- HOSPITALISED: Whether the patient was hospitalised (S = Yes, N = No)
+
+- RESULT_LABORATORY: Laboratory test result (Positive, Negative, or
+  Pending)
+
+- NOTES: Free-text notes (may contain additional comments)
+
+- SEROTYPE: Dengue virus serotype (when available)
+
+------------------------------------------------------------------------
+
+# The data4health workflow
+
+    d4h_load()  →  d4h_clean()  →  d4h_filter()  →  d4h_aggregate()  →  d4h_save()
+
+Each step produces a plain `data.frame` that you can inspect, subset, or
+pass directly into the next function. You can choose to use the full
+pipeline or just choose the functions that fit your needs.
+
+The full workflow can be executed in one go, or you can choose to
+execute each step separately and inspect the intermediate results before
+moving on to the next step. This flexibility allows you to tailor the
+workflow to your specific needs and data.
+
+## 1. Loading data with `d4h_load()`
+
+`d4h_load()` accepts a path to either a single file or a character
+vector of paths and binds the results into one dataframe.
+
+Supported formats include `.csv`, `.rds`, Excel (both `.xls` / `.xlsx`),
+`.json`, `.dbf` and `.dbc`. This package contains a few example datasets
+in different formats for you to load and test the function with. You can
+see all examples by passing the `d4h_example` function with no
+arguments:
+
+``` r
+d4h_example()
+#> [1] "example_dataset_2023.rds" "example_dataset_2024.rds" "example_dataset.csv"      "example_dataset.dbc"      "example_dataset.json"     "example_dataset.xlsx"
+```
+
+The example below shows how to **load any file** with `d4h_load()`. The
+function will automatically detect the file format and load it
+accordingly.
+
+``` r
+csv_path <- d4h_example("example_dataset.csv")
+head(d4h_load(csv_path))
+#> ✅ Successfully loaded 1 file(s).
+#>           NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE
+#> 1        Arendelle   100097   LOC-12 1994-01-08 2024-05-06    F           1            N          Negative                  <NA>        1
+#> 2        Arendelle   100008   LOC-15 1955-01-18 2023-07-05    M           3            N          Positive Contacto domiciliario       NA
+#> 3          Agrabah   100072   LOC-16 2021-01-01 2023-06-05    F           1            N          Positive         Imported case        1
+#> 4          Agrabah   100003    LOC-7 1975-01-13 2023-05-14    F           1            S          Positive                  <NA>       NA
+#> 5 Radiator Springs   100081   LOC-13 1945-01-20 2024-06-05    M           1            N          Negative                  <NA>       NA
+#> 6        Arendelle   100010    LOC-9 1970-01-14 2024-04-19    F           1            N          Positive                  <NA>       NA
+```
+
+It is also possible to **load multiple files** at once, as long as the
+column names are consistent across files. The function will
+automatically bind the rows together into one data frame.
+
+``` r
+rds2023_path <- d4h_example("example_dataset_2023.rds")
+rds2024_path <- d4h_example("example_dataset_2024.rds")
+
+# to check that both files were loaded correctly,
+# we will check the number of rows of each file
+nrow(d4h_load(rds2023_path))
+#> ✅ Successfully loaded 1 file(s).
+#> [1] 259
+nrow(d4h_load(rds2024_path))
+#> ✅ Successfully loaded 1 file(s).
+#> [1] 241
+
+# the number of rows corresponds to the sum of the rows in both files:
+nrow(d4h_load(c(rds2023_path, rds2024_path)))
+#> ✅ Successfully loaded 2 file(s).
+#> [1] 500
+```
+
+In the case of **loading Excel files with multiple sheets**, you can
+specify the sheet name to load. If not specified, the function will load
+the first sheet by default.
+
+``` r
+xlsx_path <- d4h_example("example_dataset.xlsx")
+d4h_load(xlsx_path)
+#> ⚠ The Excel file contains the following sheets: year2023, year2024. Since no sheet was specified, the first one was loaded.
+#> ✅ Successfully loaded 1 file(s).
+#> # A tibble: 259 × 11
+#>    NAME_GEO     CODE_GEO LOCALCOD DATE_BRTHD          DATE_INI            SEXO  DENGUE_TYPE HOSPITALISED RESULT_LABORATORY NOTES                 SEROTYPE
+#>    <chr>           <dbl> <chr>    <dttm>              <dttm>              <chr> <chr>       <chr>        <chr>             <chr>                 <chr>   
+#>  1 Arendelle      100008 LOC-15   1955-01-18 00:00:00 2023-07-05 00:00:00 M     3           N            Positive          Contacto domiciliario <NA>    
+#>  2 Agrabah        100072 LOC-16   2021-01-01 00:00:00 2023-06-05 00:00:00 F     1           N            Positive          Imported case         1       
+#>  3 Agrabah        100003 LOC-7    1975-01-13 00:00:00 2023-05-14 00:00:00 F     1           S            Positive          <NA>                  <NA>    
+#>  4 Zootopia       100017 LOC-7    1956-01-18 00:00:00 2023-04-03 00:00:00 F     1           N            Positive          <NA>                  <NA>    
+#>  5 <NA>           100081 LOC-16   1997-01-07 00:00:00 2023-05-19 00:00:00 M     1           S            Positive          Contacto domiciliario 1       
+#>  6 Monstropolis   100068 LOC-13   2006-01-05 00:00:00 2023-07-11 00:00:00 M     2           N            Positive          <NA>                  <NA>    
+#>  7 Atlantica      100085 LOC-1    1962-01-16 00:00:00 2023-07-12 00:00:00 M     2           N            Positive          <NA>                  <NA>    
+#>  8 Arendelle      100037 LOC-10   1955-01-18 00:00:00 2023-02-17 00:00:00 <NA>  1           N            Positive          Imported case         3       
+#>  9 Atlantica      100097 LOC-2    1967-01-15 00:00:00 2023-04-13 00:00:00 F     1           N            Positive          <NA>                  <NA>    
+#> 10 Motunui        100005 LOC-11   2001-01-06 00:00:00 2023-09-21 00:00:00 M     3           N            Positive          <NA>                  <NA>    
+#> # ℹ 249 more rows
+
+# as you can see all dates in DATE_INI, are from 2023
+```
+
+You will see that the function automatically alerts you that there are
+multiple sheets in the Excel file and that it is loading the first sheet
+by default. If you want to load a specific sheet, you can specify the
+sheet name as follows:
+
+``` r
+d4h_load(xlsx_path, sheet = "year2024")
+#> ✅ Successfully loaded 1 file(s).
+#> # A tibble: 241 × 11
+#>    NAME_GEO         CODE_GEO LOCALCOD DATE_BRTHD          DATE_INI            SEXO  DENGUE_TYPE HOSPITALISED RESULT_LABORATORY NOTES         SEROTYPE
+#>    <chr>               <dbl> <chr>    <dttm>              <dttm>              <chr> <chr>       <chr>        <chr>             <chr>         <chr>   
+#>  1 Arendelle          100097 LOC-12   1994-01-08 00:00:00 2024-05-06 00:00:00 F     1           N            Negative          <NA>          1       
+#>  2 Radiator Springs   100081 LOC-13   1945-01-20 00:00:00 2024-06-05 00:00:00 M     1           N            Negative          <NA>          <NA>    
+#>  3 Arendelle          100010 LOC-9    1970-01-14 00:00:00 2024-04-19 00:00:00 F     1           N            Positive          <NA>          <NA>    
+#>  4 Zootopia           100040 LOC-3    1973-01-13 00:00:00 2024-10-18 00:00:00 F     1           N            Positive          Imported case <NA>    
+#>  5 Motunui            100027 LOC-1    1958-01-17 00:00:00 2024-08-20 00:00:00 F     1           S            Positive          <NA>          3       
+#>  6 Motunui            100062 LOC-6    1980-01-12 00:00:00 2024-01-27 00:00:00 F     1           N            Negative          <NA>          3       
+#>  7 Arendelle          100088 LOC-20   1964-01-16 00:00:00 2024-08-22 00:00:00 M     1           N            Negative          <NA>          <NA>    
+#>  8 Motunui            100039 LOC-13   1971-01-14 00:00:00 2024-04-03 00:00:00 M     3           N            Positive          Imported case <NA>    
+#>  9 Monstropolis       100019 LOC-15   1982-01-11 00:00:00 2024-02-29 00:00:00 M     1           N            Positive          <NA>          <NA>    
+#> 10 Monstropolis       100084 LOC-11   1985-01-10 00:00:00 2024-05-18 00:00:00 M     2           N            Positive          <NA>          <NA>    
+#> # ℹ 231 more rows
+
+# now, all dates in DATE_INI are from 2024
+```
+
+`d4h_load()` checks whether the file contains a header or not. However
+you can force the function to treat the first row as a header or as data
+by using the `header` parameter.
+
+``` r
+head(d4h_load(rds2023_path)) # the function automatically detects the header
+#> ✅ Successfully loaded 1 file(s).
+#>        NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE
+#> 2     Arendelle   100008   LOC-15 1955-01-18 2023-07-05    M           3            N          Positive Contacto domiciliario     <NA>
+#> 3       Agrabah   100072   LOC-16 2021-01-01 2023-06-05    F           1            N          Positive         Imported case        1
+#> 4       Agrabah   100003    LOC-7 1975-01-13 2023-05-14    F           1            S          Positive                  <NA>     <NA>
+#> 8      Zootopia   100017    LOC-7 1956-01-18 2023-04-03    F           1            N          Positive                  <NA>     <NA>
+#> 10         <NA>   100081   LOC-16 1997-01-07 2023-05-19    M           1            S          Positive Contacto domiciliario        1
+#> 11 Monstropolis   100068   LOC-13 2006-01-05 2023-07-11    M           2            N          Positive                  <NA>     <NA>
+
+# forcing the first row as header
+head(d4h_load(rds2023_path, header = TRUE)) 
+#> ✅ Successfully loaded 1 file(s).
+#>        NAME_GEO CODE_GEO LOCALCOD DATE_BRTHD   DATE_INI SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES SEROTYPE
+#> 2     Arendelle   100008   LOC-15 1955-01-18 2023-07-05    M           3            N          Positive Contacto domiciliario     <NA>
+#> 3       Agrabah   100072   LOC-16 2021-01-01 2023-06-05    F           1            N          Positive         Imported case        1
+#> 4       Agrabah   100003    LOC-7 1975-01-13 2023-05-14    F           1            S          Positive                  <NA>     <NA>
+#> 8      Zootopia   100017    LOC-7 1956-01-18 2023-04-03    F           1            N          Positive                  <NA>     <NA>
+#> 10         <NA>   100081   LOC-16 1997-01-07 2023-05-19    M           1            S          Positive Contacto domiciliario        1
+#> 11 Monstropolis   100068   LOC-13 2006-01-05 2023-07-11    M           2            N          Positive                  <NA>     <NA>
+
+# forcing the first row to be included in the data
+head(d4h_load(rds2023_path, header = FALSE))
+#> ⚠ A header will be  introduced. Make sure to give it meaningful columnnames using the rename_columns parameters of d4h_clean().
+#> ✅ Successfully loaded 1 file(s).
+#>     Column_1 Column_2 Column_3   Column_4 Column_5 Column_6    Column_7     Column_8          Column_9             Column_10 Column_11
+#> 1       <NA> CODE_GEO LOCALCOD DATE_BRTHD DATE_INI     SEXO DENGUE_TYPE HOSPITALISED RESULT_LABORATORY                 NOTES  SEROTYPE
+#> 2  Arendelle   100008   LOC-15      -5462    19543        M           3            N          Positive Contacto domiciliario      <NA>
+#> 3    Agrabah   100072   LOC-16      18628    19513        F           1            N          Positive         Imported case         1
+#> 4    Agrabah   100003    LOC-7       1838    19491        F           1            S          Positive                  <NA>      <NA>
+#> 8   Zootopia   100017    LOC-7      -5097    19450        F           1            N          Positive                  <NA>      <NA>
+#> 10      <NA>   100081   LOC-16       9868    19496        M           1            S          Positive Contacto domiciliario         1
+```
+
+For more information about `d4h_load()` and its parameters, see
+`?d4h_load`.
+
+------------------------------------------------------------------------
+
+## 2. Cleaning data with `d4h_clean()`
+
+Here we show a selection of use cases. `d4h_clean()` handles the most
+common pre-processing tasks in one call, applying each step in the order
+listed below. This means later steps can reference outputs from earlier
+ones — for example, a renamed column can already be referred to by its
+new name within the same call.
+
+**Column selection**
+
+Depending on the number of columns in your data and the analysis you
+plan to do, you can use one of two parameters:
+
+- `cols_to_remove`: only specifying columns which you want to eliminate
+  from your data. This is useful when you want to keep most of your
+  columns and only want to remove a few of them.
+- `cols_to_include`: only specifying columns which you want to keep in
+  your data. This is useful when you have many columns and you only want
+  to keep a few of them.
+
+Currently, the dataset contains the following columns:
+
+``` r
+colnames(example_dataset)
+#>  [1] "NAME_GEO"          "CODE_GEO"          "LOCALCOD"          "DATE_BRTHD"        "DATE_INI"          "SEXO"              "DENGUE_TYPE"       "HOSPITALISED"      "RESULT_LABORATORY" "NOTES"             "SEROTYPE"
+```
+
+In our example, we want to remove the `CODE_GEO`, `LOCALCOD`, and
+`NOTES` columns, which are not relevant for our analysis.
+
+``` r
+dengue_clean <- d4h_clean(data = example_dataset,
+                          cols_to_remove = c("CODE_GEO", "LOCALCOD", "NOTES"))
+#> ✅ Removing columns completed successfully: The following columns were removed from your dataset: CODE_GEO, LOCALCOD, NOTES.
+```
+
+If you check the column names of dengue_clean, you will see that the
+columns have been removed:
+
+``` r
+colnames(dengue_clean)
+#> [1] "NAME_GEO"          "DATE_BRTHD"        "DATE_INI"          "SEXO"              "DENGUE_TYPE"       "HOSPITALISED"      "RESULT_LABORATORY" "SEROTYPE"
+```
+
+**Column renaming**
+
+You can either **apply a rule to all column names**, the options are:
+
+- lower: all to lowercase
+- upper: all to uppercase
+- no_spaces: replace all spaces by underscores
+
+If you want to change all column names to lowercase, you can use the
+following code:
+
+``` r
+dengue_clean <- d4h_clean(data = dengue_clean,
+                          rename_columns = "lower")
+#> ✅ Renaming columns completed successfully.
+```
+
+Now, the column names of dengue_clean are:
+
+``` r
+colnames(dengue_clean)
+#> [1] "name_geo"          "date_brthd"        "date_ini"          "sexo"              "dengue_type"       "hospitalised"      "result_laboratory" "serotype"
+```
+
+If you want to **rename column names to new names**, you can use the
+following code:
+
+``` r
+dengue_clean <- d4h_clean(data = dengue_clean,
+                          rename_columns = c(name_geo   = "region",
+                                            date_brthd = "birthday_date",
+                                            date_ini = "onset_date"))
+#> ✅ Renaming columns completed successfully.
+```
+
+Now the column names are:
+
+``` r
+colnames(dengue_clean)
+#> [1] "region"            "birthday_date"     "onset_date"        "sexo"              "dengue_type"       "hospitalised"      "result_laboratory" "serotype"
+```
+
+**Missing value filtering**
+
+Now we have to start to think about what variables are essential for our
+analysis. For example, if we want to do a time series analysis of dengue
+cases by region, we need to have a known onset date and a known region
+for each case.
+
+You can check for missing values in each column using:
+
+``` r
+colSums(is.na(dengue_clean))
+#>            region     birthday_date        onset_date              sexo       dengue_type      hospitalised result_laboratory          serotype 
+#>                20                 0                 0                26                22                26                31               376
+```
+
+As you can see *onset_date* is complete but `region` has 20 missing
+values. If we want to drop these rows with missing values in these key
+variables, we can use the `remove_rows_missing` parameter in
+`d4h_clean()`. The following will drop any row that has a missing value
+in either `onset_date` or `region`.
+
+``` r
+dengue_clean <- d4h_clean(data = dengue_clean,
+                          remove_rows_missing = c("onset_date", "region"))
+#> ✅ Removing rows with missing values completed successfully.
+#>    Removed 20 rows due to missing entries.
+```
+
+The function always gives an indication of how many rows were removed.
+We can double-check this by running:
+
+``` r
+nrow(dengue_clean)
+#> [1] 480
+```
+
+**Sparse-column removal**
+
+Some columns may have a high proportion of missing values, which may
+reduce their usefulness for analysis. You can find the percentage of
+missing values with the following code:
+
+``` r
+colMeans(is.na(dengue_clean)) * 100
+#>            region     birthday_date        onset_date              sexo       dengue_type      hospitalised result_laboratory          serotype 
+#>          0.000000          0.000000          0.000000          5.208333          4.166667          5.208333          5.833333         74.375000
+```
+
+In our example, the `serotype` column has 74.375% missing values.
+
+You can choose to drop any column that has more than a certain
+percentage of missing values using the `threshold_remove` parameter. For
+example, the following will drop any column that has more than 50%
+missing values.
+
+``` r
+dengue_clean <- d4h_clean(data = dengue_clean, threshold_remove = 50)
+#> ✅ The following columns were removed from your dataset  because they contain more missing data than the  established threshold of 50 : serotype
+```
+
+As usual, the message printed in the console directly lets you know
+which columns were removed.
+
+**Category-recoding**
+
+Sometimes categorical variables are coded using abbreviations or numeric
+codes that are not human-readable (for example, ‘M’ instead of ‘Male’).
+You can use the `rename_categories` parameter to recode these values to
+more meaningful labels.
+
+For example, the following will recode the `sex` variable from “M” and
+“F” to “Male” and “Female”, the `dengue_type` variable from “1”, “2”,
+“3” to “Dengue without warning signs”, “Dengue with warning signs”, and
+“Severe dengue”, and the `hospitalised` variable from “S” and “N” to
+“Yes” and “No”.
+
+``` r
+dengue_clean <- d4h_clean(data = dengue_clean,
+                          rename_categories = list(
+                            sexo           = c("M" = "Male",   "F" = "Female"),
+                            dengue_type   = c("1" = "Dengue without warning signs",
+                                              "2" = "Dengue with warning signs",
+                                              "3" = "Severe dengue"),
+                            hospitalised  = c("S" = "Yes",    "N" = "No")
+                          ))
+#> ✅ Renaming categories completed successfully.
+```
+
+**Date/time derivation**
+
+In epidemiology, time aggregation is essential because disease trends
+are typically analysed by epidemiological week, month, or year rather
+than by individual dates. In this package, we currently consider three
+timescales (epiweek, month, year) and two formats to represent time:
+date format (e.g., `2023-01-01`) and number format (e.g., `2023-01`).
+
+The same date can be represented in different formats. In the table
+below you can see the different representations of the same date
+(`2026-02-19`) in different formats and timescales:
+
+|         | date       | number  |
+|---------|------------|---------|
+| epiweek | 15.02.2026 | 2026-07 |
+| month   | 01.02.2026 | 2       |
+| year    | 01.01.2026 | 2026    |
+
+*Note: The epiweek number is always given in combination with a year
+since the epidemiological weeks sometimes can have overlap, e.g. the
+first of January of 2026, corresponds to the epiweek 53 of the year
+2025. If you need more information on epiweeks please check ISO 8601.*
+
+Please note that the start date of the week is by default set to Sunday
+as a European standard. You can change the start date by adding the
+parameter `week_start`.
+
+There are several functions to transform date columns from one to
+another:
+
+- `date_to_weekdate`: converts a date column to the date of the first
+  day of the epiweek
+- `date_to_weeknumber`: converts a date column to the epiweek number
+  (e.g., 2026-07)
+- `date_to_monthdate`: converts a date column to date of the first day
+  of the month
+- `date_to_monthnumber`: converts a date column to the month number
+  (e.g., 2 for February)
+- `date_to_yearnumber`: converts a date column to the year number (e.g.,
+  2026)
+
+``` r
+dengue_clean <- d4h_clean(data = dengue_clean,
+    date_to_weekdate = "onset_date",
+    date_to_weeknumber = "onset_date",
+    date_to_monthdate = "onset_date",
+    date_to_monthnumber = "onset_date",
+    date_to_yearnumber = "onset_date"
+)
+#> ✅ Transforming date to weekdate completed successfully: New column 'onset_date_weekdate' was created.
+#> ✅ Transforming date to weeknumber completed successfully: New column 'onset_date_epiyw' was created.
+#> ✅ Transforming date to monthdate completed successfully: New column 'onset_date_monthdate' was created.
+#> ✅ Transforming date to monthnumber completed successfully: New column 'onset_date_monthnumber' was created.
+#> ✅ Transforming date to yearnumber completed successfully: New column 'onset_date_year' was created.
+```
+
+You can see the results for one case here:
+
+``` r
+dengue_clean[1, ]
+#>    region birthday_date onset_date   sexo                  dengue_type hospitalised result_laboratory onset_date_weekdate onset_date_epiyw onset_date_monthdate onset_date_monthnumber onset_date_year
+#> 1 Agrabah    1959-01-17 2024-07-14 Female Dengue without warning signs           No          Positive          2024-07-14          2024-29           2024-07-01                      7            2024
+```
+
+**Clean in one step**
+
+It is also possible to execute `d4h_clean()` only once with all the
+parameters at once, as in the example below:
+
+``` r
+dengue_clean <- d4h_clean(
+  data = example_dataset,
+  cols_to_remove     = c("CODE_GEO", "LOCALCOD", "NOTES"),
+  rename_columns = c(
+    DATE_BRTHD         = "birthdate",
+    DATE_INI         = "onset_date",
+    NAME_GEO            = "region",
+    SEXO              = "sex",
+    DENGUE_TYPE       = "dengue_type",
+    HOSPITALISED     = "hospitalised",
+    RESULT_LABORATORY     = "lab_result",
+    SEROTYPE      = "serotype"
+  ),
+  remove_rows_missing = c("onset_date", "region"),
+  threshold_remove    = 50,
+  rename_categories   = list(
+    sex               = c(M = "Male",   F = "Female"),
+    dengue_type       = c("1" = "Dengue without warning signs",
+                          "2" = "Dengue with warning signs",
+                          "3" = "Severe dengue"),
+    hospitalised      = c(S = "Yes",    N = "No")),
+  date_to_weekdate    = "onset_date",
+  date_to_weeknumber  = "onset_date",
+  date_to_monthdate   = "onset_date",
+  date_to_monthnumber = "onset_date",
+  date_to_yearnumber  = "onset_date"
+)
+#> ✅ Renaming columns completed successfully.
+#> ✅ Removing columns completed successfully: The following columns were removed from your dataset: CODE_GEO, LOCALCOD, NOTES.
+#> ✅ Removing rows with missing values completed successfully.
+#>    Removed 20 rows due to missing entries.
+#> ✅ Renaming categories completed successfully.
+#> ✅ Transforming date to weekdate completed successfully: New column 'onset_date_weekdate' was created.
+#> ✅ Transforming date to weeknumber completed successfully: New column 'onset_date_epiyw' was created.
+#> ✅ Transforming date to monthdate completed successfully: New column 'onset_date_monthdate' was created.
+#> ✅ Transforming date to monthnumber completed successfully: New column 'onset_date_monthnumber' was created.
+#> ✅ Transforming date to yearnumber completed successfully: New column 'onset_date_year' was created.
+#> ✅ The following columns were removed from your dataset  because they contain more missing data than the  established threshold of 50 : serotype
+
+# the resulting dataframe
+head(dengue_clean)
+#>         region  birthdate onset_date    sex                  dengue_type hospitalised lab_result onset_date_weekdate onset_date_epiyw onset_date_monthdate onset_date_monthnumber onset_date_year
+#> 1      Agrabah 1959-01-17 2024-07-14 Female Dengue without warning signs           No   Positive          2024-07-14          2024-29           2024-07-01                      7            2024
+#> 2      Agrabah 2022-01-01 2023-01-24 Female Dengue without warning signs           No   Positive          2023-01-22          2023-04           2023-01-01                      1            2023
+#> 3      Motunui 1974-01-13 2023-12-20 Female Dengue without warning signs           No   Positive          2023-12-17          2023-51           2023-12-01                     12            2023
+#> 4 Monstropolis 1956-01-18 2024-09-02   Male Dengue without warning signs           No   Negative          2024-09-01          2024-36           2024-09-01                      9            2024
+#> 5     Zootopia 1962-01-16 2023-08-01   Male Dengue without warning signs           No   Positive          2023-07-30          2023-31           2023-08-01                      8            2023
+#> 6    Atlantica 2022-01-01 2024-10-28   Male Dengue without warning signs          Yes    Pending          2024-10-27          2024-44           2024-10-01                     10            2024
+```
+
+After cleaning, every row has a known onset date and sex, column names
+follow a consistent lower-case convention, and several derived time
+columns are ready for aggregation.
+
+For more information about `d4h_clean()` and its parameters, see
+`?d4h_clean`.
+
+------------------------------------------------------------------------
+
+## 3. Filtering data with `d4h_filter()`
+
+`d4h_filter()` can be used to filter the dataset by any column you
+choose. Depending on the column type, different filter conditions are
+available:
+
+| Column type | Conditions                                      |
+|-------------|-------------------------------------------------|
+| numeric     | `over`, `under`, `between`, `equal`             |
+| Date        | `after`, `before`, `during`                     |
+| character   | `include`, `exclude`, `match`, `starts`, `ends` |
+
+To use `d4h_filter`, pass the column name you want to filter by as an
+argument, and the value of each argument is a list which contains the
+filter criteria.
+
+``` r
+dengue_filtered <- d4h_filter(
+  data = dengue_clean,
+  lab_result = list(include = "Positive"),
+  onset_date = list(during = as.Date(c("2023-01-01", "2023-12-31"))),
+  region     = list(exclude = "Arendelle")
+)
+#> ✅ Successfully filtered the dataset.
+
+nrow(dengue_filtered)
+#> [1] 84
+```
+
+For more information about `d4h_filter()` and its parameters, see
+`?d4h_filter`.
+
+------------------------------------------------------------------------
+
+## 4. Aggregating data with `d4h_aggregate()`
+
+`d4h_aggregate()` aggregates by counting the number of cases within
+defined groups (for example, the number of dengue cases per week and per
+region). This step transforms individual-level data into summary
+statistics suitable for reporting, visualisation, or modelling. For
+example, instead of analysing 500 individual patient records, you might
+analyse 52 weekly case counts. It also supports additional
+stratification variables via `add_col`, and can fill in zero-count cells
+for missing time-space combinations with `all_times` and `all_spaces`.
+
+**Simple spatio-temporal aggregation**
+
+``` r
+weekly_by_region <- d4h_aggregate(
+  data      = dengue_filtered,
+  time_col  = "onset_date_weekdate",
+  space_col = "region"
+)
+#> ✅ Aggregation completed successfully.
+
+head(weekly_by_region)
+#>   onset_date_weekdate  region cases
+#> 1          2023-01-08 Agrabah     1
+#> 2          2023-01-22 Agrabah     1
+#> 3          2023-03-05 Agrabah     1
+#> 4          2023-03-19 Agrabah     1
+#> 5          2023-03-26 Agrabah     1
+#> 6          2023-04-02 Agrabah     1
+```
+
+**Monthly counts stratified by dengue severity**
+
+This is the typical input format for an epidemic curve or a time-series
+model.
+
+``` r
+monthly_by_type <- d4h_aggregate(
+  data      = dengue_filtered,
+  time_col  = "onset_date_monthdate",
+  space_col = "region",
+  add_col   = "dengue_type"
+)
+#> ✅ Aggregation completed successfully.
+
+head(monthly_by_type, 12)
+#>    onset_date_monthdate  region                  dengue_type cases
+#> 1            2023-01-01 Agrabah    Dengue with warning signs     0
+#> 2            2023-01-01 Agrabah Dengue without warning signs     1
+#> 3            2023-01-01 Agrabah                Severe dengue     1
+#> 4            2023-02-01 Agrabah    Dengue with warning signs     0
+#> 5            2023-02-01 Agrabah Dengue without warning signs     0
+#> 6            2023-02-01 Agrabah                Severe dengue     0
+#> 7            2023-03-01 Agrabah    Dengue with warning signs     1
+#> 8            2023-03-01 Agrabah Dengue without warning signs     1
+#> 9            2023-03-01 Agrabah                Severe dengue     1
+#> 10           2023-04-01 Agrabah    Dengue with warning signs     1
+#> 11           2023-04-01 Agrabah Dengue without warning signs     1
+#> 12           2023-04-01 Agrabah                Severe dengue     0
+```
+
+**Ensuring a complete time series**
+
+In surveillance data, weeks with zero reported cases are often not
+explicitly recorded. This can lead to misleading analyses if missing
+weeks are interpreted as missing data rather than true zero counts. Pass
+a full date sequence via `all_times` so that the aggregated output
+contains explicit zero rows rather than silently missing weeks.
+
+``` r
+all_weeks <- seq(
+  from = as.Date("2023-01-01"),
+  to   = as.Date("2023-12-31"),
+  by   = "week"
+)
+
+weekly_complete <- d4h_aggregate(
+  data       = dengue_filtered,
+  time_col   = "onset_date_weekdate",
+  space_col  = "region",
+  all_times  = all_weeks,
+  all_spaces = c("Lima", "Cusco", "Loreto")
+)
+#> ✅ Aggregation completed successfully.
+
+# confirm zeros are present
+sum(weekly_complete$cases == 0)
+#> [1] 159
+```
+
+For more information about d4h_aggregate() and its parameters, see
+`?d4h_aggregate`.
+
+------------------------------------------------------------------------
+
+## 5. Saving results with `d4h_save()`
+
+`d4h_save()` writes a `data.frame` to disk. The parameters are:
+
+- data: the `data.frame` to save
+- name: the name you want the file to have If you omit `name`, the file
+  name will automatically include a timestamp (current date and time).
+- format: to indicate in what format the data should be saved. Supported
+  formats are `"csv"`, `"csv2"`, `"rds"`, `"xls"`, `"dbf"`, and
+  `"json"`.
+
+``` r
+# Save the weekly aggregation as a CSV for sharing
+d4h_save(
+  data   = weekly_complete,
+  name   = "dengue_weekly_2023"
+)
+
+# Save the cleaned individual-level data as RDS for fast reloading in R
+d4h_save(
+  data   = dengue_filtered,
+  name   = "dengue_analysis_clean",
+  format = "rds"
+)
+
+# Save for teams that use Excel
+d4h_save(
+  data   = monthly_by_type,
+  name   = "dengue_monthly_by_type",
+  format = "xls"
+)
+```
+
+For more information about d4h_save() and its parameters, see
+`?d4h_save`.
+
+------------------------------------------------------------------------
+
+## Putting it all together
+
+Together, these five functions form a concise and readable
+data-processing pipeline. Using the base R pipe (`|>`, available since R
+4.1) the full workflow above can be written as:
+
+``` r
+d4h_load(csv_path)                |>
+  d4h_clean(
+    cols_to_remove     = c("CODE_GEO", "LOCALCOD", "NOTES"),
+    rename_columns     = c(
+      DATE_BRTHD        = "birthdate",
+      DATE_INI          = "onset_date",
+      NAME_GEO          = "region",
+      SEXO              = "sex",
+      DENGUE_TYPE       = "dengue_type",
+      HOSPITALISED      = "hospitalised",
+      RESULT_LABORATORY = "lab_result",
+      SEROTYPE          = "serotype"
+    ),
+    remove_rows_missing = c("onset_date", "region"),
+    threshold_remove    = 50,
+    rename_categories   = list(
+      sex               = c(M = "Male",   F = "Female"),
+      dengue_type       = c("1" = "Dengue without warning signs",
+                            "2" = "Dengue with warning signs",
+                            "3" = "Severe dengue"),
+      hospitalised      = c(S = "Yes",    N = "No")),
+    date_to_weekdate    = "onset_date",
+    date_to_weeknumber  = "onset_date",
+    date_to_monthdate   = "onset_date",
+    date_to_monthnumber = "onset_date",
+    date_to_yearnumber  = "onset_date"
+  )                                              |>
+  d4h_filter(
+    lab_result = list(include = "Positive"),
+    onset_date = list(during = as.Date(c("2023-01-01", "2023-12-31"))),
+    region     = list(exclude = "Arendelle")
+  )                                              |>
+  d4h_aggregate(
+    time_col   = "onset_date_weekdate",
+    space_col  = "region",
+    all_times  = all_weeks,
+    all_spaces = c("Lima", "Cusco", "Loreto")
+  )                                              |>
+  d4h_save(name = "dengue_weekly_confirmed", format = "csv")
+```
+
+The workflow is concise and readable, making it easy to follow the
+process from data loading to final output. Each step is clearly defined
+and can be easily modified or extended as needed.
+
+Once you have executed the full workflow, you will have a cleaned,
+filtered, and aggregated dataset that is ready for analysis or
+reporting. We recommend the following next steps:
+
+- Climate data processing via
+  [clim4health](https://bsc-es.github.io/GHRtools/docs/clim4health/clim4health.html)
+- Data exploration via
+  [GHRexplore](https://cran.r-project.org/package=GHRexplore)
+- Modelling via [GHRmodel](https://cran.r-project.org/package=GHRmodel)
+- Predicting via GHRpredict (coming soon!)
+
+The **data4health** package is designed to be flexible and adaptable to
+different types of health data and analysis needs. We encourage you to
+explore the documentation and experiment with the functions to see how
+they can best serve your specific use case. If you have any needs that
+are not currently met by the package, please feel free to reach out to
+us with suggestions for new features or improvements. We are committed
+to making this toolkit as useful and user-friendly as possible for the
+health data community.

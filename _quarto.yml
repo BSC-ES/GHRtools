@@ -17,6 +17,16 @@ website:
         menu:
           - text: Overview
             href: docs/data4health/data4health.qmd
+          - text: Reference
+            href: docs/data4health/data4health-index.qmd
+          - text: Changelog
+            href: docs/data4health/NEWS.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/data4health/data4health_overview.qmd   
+          - text: Access health data
+            href: docs/data4health/access_health_data.qmd
       - text: "clim4health"
         menu:
           - text: Overview

@@ -1,0 +1,27 @@
+---
+format: html
+toc: true
+---
+
+# Opens the data4health user interface
+
+## Description
+
+The 'd4h_ui()' function opens the data4health user interface in a web browser. It provides an interactive environment for users to explore and manipulate health-related datasets. The interface allows for data cleaning, filtering, aggregation, and visualization, making it easier to work with epidemiological line list data.
+
+```r
+d4h_ui()
+```
+
+## Returns
+
+Called for its side effects. Opens the Shiny app in the browser.
+
+## Examples
+
+```r
+if(interactive()){
+   # open the data4health user interface
+   d4h_ui()
+}
+```

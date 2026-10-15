@@ -1,0 +1,33 @@
+---
+format: html
+toc: true
+---
+
+# data4health: A Practical Workflow for Health Data Wrangling
+
+## Description
+
+Provides a streamlined workflow for cleaning, transforming, filtering, aggregating, and exporting epidemiological line list data. The package is designed for public health surveillance and clinical datasets where each row represents an individual case. It supports common data-wrangling tasks and multi-format data import/export (e.g., 'csv', 'rds', 'xlsx', 'json', 'dbf'). The functions are designed to be combined into a clear and reproducible pipeline while remaining flexible enough for use in standalone data-processing steps. 'data4health' is part of the '4health' toolkit, which integrates health, climate, land-use, and socioeconomic data workflows. More information on the '4health' tools can be found on the HARMONIZE website [https://harmonize-tools.org/toolkits](https://harmonize-tools.org/toolkits).
+
+## Author(s)
+
+Maintainer : Daniela Lührsen daniela.luhrsen@bsc.es ([ORCID](https://orcid.org/0009-0002-6340-5964))
+
+Authors:
+
+ * Daniela Lührsen daniela.luhrsen@bsc.es ([ORCID](https://orcid.org/0009-0002-6340-5964))
+ * Carles Milà carles.milagarcia@bsc.es ([ORCID](https://orcid.org/0000-0003-0470-0760))
+ * Raquel Lana raquel.lana@bsc.es ([ORCID](https://orcid.org/0000-0002-7573-1364))
+ * Rachel Lowe rachel.lowe@bsc.es ([ORCID](https://orcid.org/0000-0003-3939-7343))
+
+Other contributors:
+
+ * Mark Adler (Author of src/blast.c) [copyright holder]
+ * Daniela Petruzalek (Author of src/dbc2dbf.c, see github.com/danicat/read.dbc) [copyright holder]
+
+## See Also
+
+Useful links:
+
+ * [https://bsc-es.github.io/GHRtools/docs/data4health/data4health.html](https://bsc-es.github.io/GHRtools/docs/data4health/data4health.html)
+ * Report bugs at [https://gitlab.earth.bsc.es/ghr/data4health/-/issues](https://gitlab.earth.bsc.es/ghr/data4health/-/issues)

@@ -1,0 +1,74 @@
+---
+format: html
+toc: true
+---
+
+# Filter the health data
+
+## Description
+
+The 'data4health' package provides a function for filtering dataframes. It allows users to filter data based on various conditions and column types.
+
+```r
+d4h_filter(data, ...)
+```
+
+## Arguments
+
+- `data`: The dataframe to be filtered.
+- `...`: Any columns that you want to be filtered. Each columns should be passed with a list including the filter condition and the filter values. Filter conditions depend on the column type:
+    
+     * numeric = "over", "under", "between", "equal"
+     * Date = "after", "before", "during",
+     * character = "include", "exclude", “match”, “starts”, “ends”
+
+## Returns
+
+A filtered dataframe.
+
+## Examples
+
+```r
+## View the first rows
+head(example_dataset)
+
+# filter numeric variable (CODE_GEO greater than 100050)
+filtered_numeric <- d4h_filter(
+  example_dataset,
+  CODE_GEO = list(over = 100050)
+)
+
+# filter Date variable (cases after Jan 1, 2024)
+filtered_date_after <- d4h_filter(
+  example_dataset,
+  DATE_INI = list(after = as.Date("2024-01-01"))
+)
+
+# filter Date variable between two dates
+filtered_date_between <- d4h_filter(
+  example_dataset,
+  DATE_INI = list(
+    between = as.Date(c("2023-06-01", "2023-12-31"))
+  )
+)
+
+# filter character variable (include only Positive results)
+filtered_positive <- d4h_filter(
+  example_dataset,
+  RESULT_LABORATORY = list(include = "Positive")
+)
+
+# exclude specific geographic areas
+filtered_exclude_geo <- d4h_filter(
+  example_dataset,
+  NAME_GEO = list(exclude = c("Agrabah", "Atlantica"))
+)
+
+# combine multiple filters
+filtered_combined <- d4h_filter(
+  example_dataset,
+  RESULT_LABORATORY = list(include = "Positive"),
+  HOSPITALISED = list(include = "S"),
+  DATE_INI = list(after = as.Date("2024-01-01"))
+)
+```

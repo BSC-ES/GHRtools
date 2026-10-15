@@ -1,0 +1,57 @@
+---
+format: html
+toc: true
+---
+
+# Load the health data
+
+## Description
+
+The 'd4h_load()' function loads files into the R environment. It supports various file formats, including 'csv', 'rds', 'xls', 'xlsx', 'json', 'dbc' and 'dbf'. Multiple files can be passed as long as there is column name consistency across multiple files.
+
+```r
+d4h_load(input_file, sheet = NULL, header = NULL)
+```
+
+## Arguments
+
+- `input_file`: Complete path to the input file.
+- `sheet`: The name(s) of the 'xlsx'/ 'xls' sheet(s) to be loaded. Optional.
+- `header`: The user can indicate whether the file has a header or not. If not, a header will be introduced with generic column names (column_1, column_2, etc). If this parameter is not passed the function will try to detect automatically. Optional.
+
+## Returns
+
+A data.frame with the loaded data.
+
+## Examples
+
+```r
+# load single files of different formats
+# json
+json_path <- d4h_example("example_dataset.json")
+head(d4h_load(json_path))
+
+# csv
+csv_path <- d4h_example("example_dataset.csv")
+head(d4h_load(csv_path))
+
+# load multiple files with the same columns
+rds2023_path <- d4h_example("example_dataset_2023.rds")
+rds2024_path <- d4h_example("example_dataset_2024.rds")
+head(d4h_load(rds2023_path))
+head(d4h_load(rds2024_path))
+
+# you can see that the two datasets have the same columns
+# thus they can be loaded together
+rds <- d4h_load(c(rds2023_path, rds2024_path))
+head(rds)
+nrow(rds) # the number of rows is the sum of the two datasets
+
+# load an 'xlsx' file and specify the sheet to be loaded
+xlsx_path <- d4h_example("example_dataset.xlsx")
+d4h_load(xlsx_path)
+# the function will automatically detect if there are multiple sheets and
+# load the first one, if you want a different one you can specify it with
+# the sheet argument
+head(d4h_load(xlsx_path, sheet = "year2024"))
+```

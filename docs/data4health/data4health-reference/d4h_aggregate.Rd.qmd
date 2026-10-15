@@ -1,0 +1,86 @@
+---
+format: html
+toc: true
+---
+
+# Aggregate the health data
+
+## Description
+
+The 'd4h_aggregate()' function aggregates health data by specified spatial and temporal columns. It can also include additional columns for aggregation. The function supports filling in missing combinations of spatial and temporal values, ensuring a complete dataset for analysis.
+
+```r
+d4h_aggregate(
+  data,
+  space_col = NULL,
+  time_col = NULL,
+  all_spaces = NULL,
+  all_times = NULL,
+  add_col = NULL,
+  ...
+)
+```
+
+## Arguments
+
+- `data`: The dataframe to be aggregated. It can be a dataframe from the R environment, or a filepath (accepted formats are csv, xls, xlsx, dbf, and dbc).
+- `space_col`: The name of the column, or a vector of column names, to use for spatial aggregation. If two or more columns are passed (e.g. the region name and the region code), they must be in 1-to-1 correspondence — each code maps to exactly one region name. If they are inconsistent, only the first column is used. When `all_spaces` is also provided, its values must match the format of the first column in `space_col`.
+- `time_col`: The name of the column, or a vector of column names, to use for temporal aggregation. If two or more columns are passed (e.g. an epiweek column and a date of the first day whithin said epiweek column), they must be in 1-to-1 correspondence — each date maps to exactly one epiweek. If they are inconsistent, only the first column is used. When `all_times` is also provided, its values must match the format of the first column in `time_col`.
+- `all_spaces`: A vector with all area codes/names. If all_spaces is not passed, and there is a missing area in the raw data, it will also be missing in the resultant dataset. Optional.
+- `all_times`: A vector with all continuous dates. If all_times is not passed, and there is a missing timestep in the raw data, it will also be missing in the resultant dataset. Optional.
+- `add_col`: Any other columns that should be aggregated.
+- `...`: Reserved for internal use. If you misspell an argument name, the function will return a helpful error message suggesting the correct one.
+
+## Returns
+
+An aggregated dataframe.
+
+## Examples
+
+```r
+# aggregate number of cases by geographic area
+agg_space <- d4h_aggregate(
+  data = example_dataset,
+  space_col = "NAME_GEO"
+)
+
+# aggregate number of cases by date of symptom onset
+agg_time <- d4h_aggregate(
+  data = example_dataset,
+  time_col = "DATE_INI"
+)
+
+# aggregate by geographic area and date
+agg_space_time <- d4h_aggregate(
+  data = example_dataset,
+  space_col = "NAME_GEO",
+  time_col = "DATE_INI"
+)
+
+# aggregate by space, time, and an additional column (e.g. sex)
+agg_with_sex <- d4h_aggregate(
+  data = example_dataset,
+  space_col = "NAME_GEO",
+  time_col = "DATE_INI",
+  add_col = "SEXO"
+)
+
+# ensure all areas are present in output (even if zero cases)
+agg_complete_space <- d4h_aggregate(
+  data = example_dataset,
+  space_col = "NAME_GEO",
+  all_spaces = c("Arendelle", "Monstropolis", "Radiator Springs",
+                 "Atlantica", "Zootopia", "Agrabah", "Motunui")
+)
+
+# ensure all dates in a sequence are present
+all_dates <- seq(min(example_dataset$DATE_INI, na.rm = TRUE),
+                 max(example_dataset$DATE_INI, na.rm = TRUE),
+                 by = "day")
+
+agg_complete_time <- d4h_aggregate(
+  data = example_dataset,
+  time_col = "DATE_INI",
+  all_times = all_dates
+)
+```
