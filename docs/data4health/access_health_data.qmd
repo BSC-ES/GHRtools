@@ -130,7 +130,7 @@ If a dataset appears in FINAIS, it will not appear in PRELIM. Navigate
 to the disease folder of interest, then download the file for the year
 you need.
 
-<img src='../man/figures/Filezilla_SINAN.png' align="center" width="70%" alt="Filezilla screenshot" />
+<img src='/figures/data4health/Filezilla_SINAN.png' align="center" width="70%" alt="Filezilla screenshot" />
 
 </details>
 <details>
@@ -232,7 +232,7 @@ Two methods are available for accessing Colombia’s surveillance data.
 Method 1: Manual download via SIVIGILA
 </summary>
 
-<img src='../man/figures/SIVIGILA.png' align="center" width="100%" alt="SIVIGILA screenshot"/>
+<img src='/figures/data4health/SIVIGILA.png' align="center" width="100%" alt="SIVIGILA screenshot"/>
 
 Visit the [Buscador de
 microdatos](https://portalsivigila.ins.gov.co/Paginas/Buscador.aspx) and
