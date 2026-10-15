@@ -7,9 +7,10 @@ toc: true
 
 ```{=html}
 <img src="/figures/data4health.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
+<br><br>
 ```
 
-# Overview
+## Overview
 
 The **data4health** package streamlines the typical epidemiological data
 workflow: loading raw surveillance or clinical files, cleaning and
@@ -42,7 +43,7 @@ synthetic dengue surveillance data to provide an overview of the
 library(data4health)
 ```
 
-## Who is this vignette for?
+### Who is this vignette for?
 
 This vignette is written for:
 
@@ -54,7 +55,7 @@ This vignette is written for:
 No prior knowledge of epidemiology is required, but basic familiarity
 with R and data frames is assumed.
 
-## Data requirements
+### Data requirements
 
 For the workflows shown in this package, the input data must be
 organized as a line list dataset. A “line list” is a standard format in

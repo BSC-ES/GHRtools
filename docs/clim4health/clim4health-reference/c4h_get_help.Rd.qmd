@@ -1,0 +1,36 @@
+---
+format: html
+toc: true
+---
+
+# Displays a list of available climate datasets, variables and parameters.
+
+## Description
+
+Displays a list of available climate datasets that can downloaded from the Copernicus Climate Data Store using c4h_get , as well as information about the available variables and parameters.
+
+```r
+c4h_get_help(dataset, parameter)
+```
+
+## Arguments
+
+- `dataset`: If dataset is provided, then the list of required parameters for that dataset will be returned. If no dataset is provided, a list of available datasets will be returned.
+- `parameter`: If parameter is provided, a list with all possible options for that parameter is returned. If no parameter is provided then then the list of required parameters for the given dataset will be returned
+
+## Returns
+
+Prints a list of either available climate datasets, required parameters or options to the console.
+
+## See Also
+
+c4h_get to download climate data.
+
+## Examples
+
+```r
+c4h_get_help()
+c4h_get_help("reanalysis-era5-land")
+c4h_get_help("reanalysis-era5-land", "product_type")
+c4h_get_help("reanalysis-era5-land", "variable")
+```

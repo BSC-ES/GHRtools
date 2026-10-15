@@ -1,0 +1,44 @@
+---
+format: html
+toc: true
+---
+
+# c4h_save
+
+## Description
+
+Save **s2dv_cube** objects used in `clim4health` functions to disk.
+
+```r
+c4h_save(data, path, drop = FALSE)
+```
+
+## Arguments
+
+- `data`: The **s2dv_cube** object to be saved.
+- `path`: A string indicating the path to save the file. The driver to save the file will be deduced based on the file extension. See details for a list of available extensions for each **s2dv_cube** data type.
+- `drop`: Logical. If TRUE, dimensions with only one value will be dropped when saving. If FALSE (default), they will be retained. Ignored when saving netCDF files.
+
+## Details
+
+The list of available extensions is the following:
+
+- **Gridded data**: 'nc', 'tif', 'csv'.
+- **Areal data**: 'gpkg', 'shp'.
+- **Point data**: 'csv'.
+
+Note that when saving **s2dv_cube** objects an internal conversion using c4h_convert is applied.
+
+## Returns
+
+None.
+
+## Examples
+
+```r
+fcst_path <- system.file("extdata", "forecast", package = "clim4health")
+fcst <- c4h_load(fcst_path, variable = "t2m", ext = 'nc')
+
+c4h_save(fcst, "out.nc")
+file.remove("out.nc")
+```

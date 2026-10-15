@@ -1,0 +1,96 @@
+---
+format: html
+toc: true
+---
+
+# c4h_get
+
+## Description
+
+Download netCDF climate data from the Copernicus Climate Data Store.
+
+```r
+c4h_get(
+  pat,
+  dataset,
+  product_type,
+  variable,
+  year,
+  month = 1:12,
+  day = 1:31,
+  time = 0,
+  bbox,
+  leadtime_month,
+  originating_centre,
+  system,
+  outname = paste0("cds"),
+  outpath = getwd()
+)
+```
+
+## Arguments
+
+- `pat`: Your personal acces token (PAT). You can find your PAT in your CDS profile after logging in.
+- `dataset`: The name of the dataset you want to load. Available datasets can be found via c4h_get_help .
+- `product_type`: The product type that you want to load. Available variables can be found via c4h_get_help .
+- `variable`: The variable that you want to load. Available variables can be found via c4h_get_help .
+- `year`: A vector of years, starting in 1950.
+- `month`: A vector of months. e.g. c(1,2) for January and February. Default is all months.
+- `day`: A vector of days in the month. Default is all days.
+- `time`: A vector of hours (0-23) in UTC time, only needed when datasets are hourly. Note that you may need to convert your local time zone to UTC to get the correct time points. Default is 0 (midnight UTC).
+- `bbox`: A vector of coordinates. (in order: North, West, South, East).
+- `leadtime_month`: A vector of months for the forecast leadtime. e.g. c(1,2) for January and February. Default is all months.
+- `originating_centre`: The originating centre of the forecast if parameter `dataset` is "seasonal-monthly-single-levels". Options are "ecmwf", "ukmo", "meteo_france", "dwd", "cmcc", "ncep", "jma", "eccc", and "bom". There is no default value for this parameter.
+- `system`: Model identifier of the forecast if parameter `dataset` is "seasonal-monthly-single-levels". Options are 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 21, 22, 35, 51, 600, 601, 602, 603, 604, 605, 610. Valid options depend on the value of originating_centre. There is no default value for this parameter.
+- `outname`: The name stem of the resultant netcdf file.
+- `outpath`: The path where the resultant netcdf file should be saved. Default is the current working directory.
+
+## Returns
+
+A netcdf file or files.
+
+## See Also
+
+c4h_get_help to get help about the available datasets and parameters used in `c4h_get`.
+
+## Examples
+
+```r
+## Not run:
+
+# Download ERA5 land 2m temperature reanalysis data
+c4h_get(pat = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        dataset = "reanalysis-era5-land-monthly-means",
+        product_type = "monthly_averaged_reanalysis",
+        variable = "2m_temperature",
+        year = c(2010, 2011, 2012),
+        month = c(4, 5),
+        bbox = c(33, -93, -23, -17),
+        outname = "era5land")
+
+# Download 2m temperature system 51 ECMWF monthly seasonal forecasts
+# to be used as forecasts and hindcasts respectively.
+c4h_get(pat = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        dataset = "seasonal-monthly-single-levels",
+        originating_centre = c("ecmwf"),
+        system = c("51"),
+        variable = c("2m_temperature"),
+        product_type = c("monthly_mean"),
+        year = c(2010, 2011, 2012),
+        month = 4,
+        leadtime_month = 1:3,
+        bbox = c(33, -93, -23, -17),
+        outname = "hindcast")
+c4h_get(pat = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        dataset = "seasonal-monthly-single-levels",
+        originating_centre = c("ecmwf"),
+        system = c("51"),
+        variable = c("2m_temperature"),
+        product_type = c("monthly_mean"),
+        year = 2024,
+        month = 4,
+        leadtime_month = 1:3,
+        bbox = c(33, -93, -23, -17),
+        outname = "forecast")
+## End(Not run)
+```

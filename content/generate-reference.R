@@ -2,7 +2,7 @@ library(rd2markdown)
 library("tools")
 
 # -------- SETTINGS --------
-pkg <- "data4health"            # Your package name here
+pkg <- "clim4health"            # Your package name here
 base_dir <- "docs/reference" # Base folder where everything will go
 rd_files <- Rd_db(pkg)
 

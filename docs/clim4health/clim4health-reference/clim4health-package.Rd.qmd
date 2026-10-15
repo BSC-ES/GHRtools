@@ -1,0 +1,33 @@
+---
+format: html
+toc: true
+---
+
+# clim4health: Post-Processing of Climate Data for Health Applications
+
+## Description
+
+Obtain, transform and export climate data including reanalyses, (seasonal) forecasts and hindcasts, and weather stations for their use in epidemiological analyses. It is organised in three sequential blocks, input (download and load data), transform (downscaling, verification, spatiotemporal aggregation and threshold-based indicators) and output (visualising and exporting data). Downscaling methods include those described in Duzenli et al. (2026) and verification methods are based on those in Manubens et al. (2018) .
+
+## Author(s)
+
+Maintainer : Carles Milà carles.milagarcia@bsc.es ([ORCID](https://orcid.org/0000-0003-0470-0760))
+
+Authors:
+
+ * Carles Milà carles.milagarcia@bsc.es ([ORCID](https://orcid.org/0000-0003-0470-0760))
+ * Emily Ball emily.ball@bsc.es ([ORCID](https://orcid.org/0000-0002-3002-4068))
+ * Alba Llabrés ([ORCID](https://orcid.org/0000-0003-2144-675X))
+ * Raul Capellan
+ * Rebeca Nunes ([ORCID](https://orcid.org/0009-0009-8738-0985))
+ * Daniela Lührsen ([ORCID](https://orcid.org/0009-0002-6340-5964))
+ * Anna B. Kawiecki ([ORCID](https://orcid.org/0000-0002-0499-2612))
+ * Rachel Lowe ([ORCID](https://orcid.org/0000-0003-3939-7343))
+
+## See Also
+
+Useful links:
+
+ * [https://gitlab.earth.bsc.es/ghr/clim4health](https://gitlab.earth.bsc.es/ghr/clim4health)
+ * [https://bsc-es.github.io/GHRtools/docs/clim4health/clim4health](https://bsc-es.github.io/GHRtools/docs/clim4health/clim4health)
+ * Report bugs at [https://gitlab.earth.bsc.es/ghr/clim4health/-/issues](https://gitlab.earth.bsc.es/ghr/clim4health/-/issues)

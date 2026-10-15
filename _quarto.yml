@@ -20,7 +20,7 @@ website:
           - text: Reference
             href: docs/data4health/data4health-index.qmd
           - text: Changelog
-            href: docs/data4health/NEWS.qmd
+            href: docs/data4health/data4health-news.qmd
           - text: "------"
           - text: "Vignettes"
           - text: Getting started
@@ -31,6 +31,24 @@ website:
         menu:
           - text: Overview
             href: docs/clim4health/clim4health.qmd
+          - text: Reference
+            href: docs/clim4health/clim4health-index.qmd
+          - text: Changelog
+            href: docs/clim4health/clim4health-news.qmd
+          - text: "------"
+          - text: "Vignettes"
+          - text: Getting started
+            href: docs/clim4health/clim4health_overview.qmd    
+          - text: Glossary
+            href: docs/clim4health/clim4health_glossary.qmd
+          - text: s2dv_cube objects
+            href: docs/clim4health/clim4health_s2dv_cubes.qmd 
+          - text: Get function
+            href: docs/clim4health/clim4health_get.qmd 
+          - text: Downscaling function
+            href: docs/clim4health/clim4health_downscaling.qmd 
+          - text: Verification function
+            href: docs/clim4health/clim4health_verification.qmd 
       - text: "GHRexplore"
         menu:
           - text: Overview

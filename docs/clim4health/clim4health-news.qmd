@@ -1,0 +1,15 @@
+---
+title: "clim4health changelog"
+format: html
+toc: true
+---
+
+```{=html}
+<img src="/figures/clim4health.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
+<br><br>
+```
+
+
+## 0.1.0
+
+* Initial CRAN submission.
