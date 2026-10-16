@@ -11,8 +11,14 @@ format:
 ---
 <div class="full-banner">
 ```{=html}
-<center><img src="figures/mosaic4.png" width="35%"></center>
-``` 
+<div class="mosaic">
+  <img src="figures/mosaic_tile1.png" alt="data4health">
+  <img src="figures/mosaic_tile2.png" alt="clim4health">
+  <img src="figures/mosaic_tile3.png" alt="GHRexplore">
+  <img src="figures/mosaic_tile4.png" alt="GHRmodel">
+  <img src="figures/mosaic_tile5.png" alt="GHRpredict">
+</div>
+```
 </div>
 
 <br> <br>
