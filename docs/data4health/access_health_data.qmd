@@ -21,7 +21,7 @@ opening an issue in our GitHub repository.
 
 <details open>
 <summary style="font-size: 1.4rem; font-weight: 400;">
-🇧🇷 Brasil
+🇧🇷 Brazil
 </summary>
 
 Brazil’s health surveillance data is managed by the [Department of
