@@ -85,8 +85,14 @@ website:
         href: https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience
         target: _blank
   page-footer: 
-    background: "#554387"
-    left: "Copyright 2026, GHR" 
+    background: "#f5f5f5"
+    left: "Copyright 2026, GHR"
+    right: |
+      <div class="footer-logos">
+        <a href="https://www.bsc.es" target="_blank"><img src="/figures/bsc-logo.png" alt="BSC"></a>
+        <a href="https://www.bsc.es/es/research-and-development/projects/idextremes-digital-technology-development-award-climate-sensitive" target="_blank"><img src="/figures/IDExtremes-logo.png" alt="IDExtremes"></a>
+        <a href="https://harmonize-tools.org" target="_blank"><img src="/figures/harmonize-logo.png" alt="HARMONIZE"></a>
+      </div>
 
 format:
   html:
