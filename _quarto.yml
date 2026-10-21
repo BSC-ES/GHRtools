@@ -5,7 +5,7 @@ website:
   title: "GHRtools"
   back-to-top-navigation: false
   search: true
-  favicon: "figures/bsc-logo.png"
+  favicon: "figures/bsc-small.png"
   navbar:
     title: "GHRtools"
     background: "#f5f5f5"
