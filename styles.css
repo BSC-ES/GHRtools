@@ -175,9 +175,13 @@ h1 {
 .footer-logos img[aria-label="HARMONIZE"] {
   height: 28.8px;  /* 10% smaller */
 }
+.footer-logos img[aria-label="Wellcome"] {
+  height: 50px;  /* 40% larger */
+}
 @media (max-width: 576px) {
   .footer-logos,
   .footer-logos p { gap: 0.75rem; }
   .footer-logos img { height: 20px; }
   .footer-logos img[aria-label="HARMONIZE"] { height: 18px; }
+  .footer-logos img[aria-label="Wellcome"] { height: 28px; }
 }
