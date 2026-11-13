@@ -19,7 +19,7 @@ GHR_palettes()
 
 ## Arguments
 
-- `palette`: Name of the GHR, RcolorBrewer or colorspace palette. Use "-" before the palette name (e.g., "-Reds") to reverse it. A vector of custom colors is also possible.
+- `palette`: Name of the GHR, RColorBrewer or colorspace palette. Use "-" before the palette name (e.g., "-Reds") to reverse it. A vector of custom colors is also possible.
 - `ncols`: Number of colors to sample.
 
 ## Details
@@ -28,7 +28,7 @@ See all available options by running `GHR_palettes()`, `RColorBrewer::display.br
 
 ## Returns
 
-GHR_palette() returns the function that generates the color palette and the attribute 'na_color'.
+GHR_palette() returns the function that generates the color palette.
 
 GHR_palettes() returns a plot with the custom GHR palettes.
 

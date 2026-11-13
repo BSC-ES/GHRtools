@@ -1,0 +1,40 @@
+---
+format: html
+toc: true
+---
+
+# check_consecutive
+
+## Description
+
+Verifies whether time values in a dataset are consecutive based on the detected time interval (e.g., daily, weekly, monthly, yearly). If a `unit` column is specified, the check is performed within each unit.
+
+```r
+check_consecutive(data, time, unit = NULL, strict = FALSE, area = NULL)
+```
+
+## Arguments
+
+- `data`: A data frame containing the dataset. Must include the time variable and optionally a unit variable.
+- `time`: A string representing the name of the column in `data` that contains time values. The column should be in "yyyy-mm-dd" format or any format recognizable by `as.Date()`.
+- `unit`: (Optional) A single character representing the name of the columns in `data` that identifies the different unit for which a time series is available, typically a spatial unit. If provided, the check will be performed separately within each unit.
+- `strict`: If FALSE (default) return a warning, if TRUE return an error.
+- `area`: Deprecated, use `unit` instead.
+
+## Details
+
+Different time intervals per unit are not allowed.
+
+## Returns
+
+If strict = FALSE, returns a logical value: `TRUE` if all time values are consecutive, and `FALSE` otherwise. If `strict = TRUE`, the function throws an error if the check is not met.
+
+## Examples
+
+```r
+df <- data.frame(
+  date = seq(as.Date("2020-01-01"), by = "day", length.out = 10),
+  cases = 1:10
+)
+check_consecutive(df, time = "date")
+```

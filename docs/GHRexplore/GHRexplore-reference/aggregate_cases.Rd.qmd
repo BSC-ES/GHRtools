@@ -7,18 +7,19 @@ toc: true
 
 ## Description
 
-Aggregates a data frame containing disease cases in space and/or time.
+Aggregates a data frame containing disease cases in space and/or time and provides case counts and incidence aggregations.
 
 ```r
 aggregate_cases(
-  data = NULL,
-  cases = NULL,
-  pop = NULL,
-  time = NULL,
-  area = NULL,
+  data,
+  cases,
+  pop,
+  time,
+  unit = NULL,
   pt = 1e+05,
   aggregate_space = NULL,
-  aggregate_time = NULL
+  aggregate_time = NULL,
+  area = NULL
 )
 ```
 
@@ -28,11 +29,33 @@ aggregate_cases(
 - `cases`: Name of the variable that identifies the cases.
 - `pop`: Name of the variable that identifies the population.
 - `time`: Name of the variable that identifies the temporal dimension. The values must be in date format ("yyyy-mm-dd") representing the day of observation for daily data, the first day of the week for weekly, or the first day of the month for monthly observations.
-- `area`: Name of variable that identifies the different locations (e.g., areal units) for which a time series is available.
+- `unit`: Optional name of the variable that identifies the different units for which a time series is available, typically a spatial unit.
 - `pt`: Scale of the person-time (default 100,000) for incidence rates.
-- `aggregate_space`: Name of variable used to define spatial aggregation groups.
+- `aggregate_space`: Name of variable used to define spatial aggregation groups that contain the different units.
 - `aggregate_time`: Temporal scale used to perform temporal aggregation. Options are: "week" (ISO 8601), "month", "year".
+- `area`: Deprecated, use `unit` instead.
+
+## Details
+
+The temporal aggregation requires a number of time points depending on the time scale, e.g. from days to weeks it will require 7 points. Otherwise, it will return NA.
 
 ## Returns
 
-A data frame with the aggregated cases.
+A data frame with the aggregated cases and disease incidence.
+
+## Examples
+
+```r
+# Load data
+data("dengue_MS")
+
+# Aggregate cases spatially from 'micro' to 'meso'
+aggregate_cases(
+  dengue_MS,
+  time = "date",
+  cases = "dengue_cases",
+  pop = "population",
+  unit = "micro_code",
+  aggregate_space = "meso_name"
+)
+```

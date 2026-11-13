@@ -1,0 +1,35 @@
+---
+format: html
+toc: true
+---
+
+# get_time_interval
+
+## Description
+
+This function determines the time interval (e.g., daily, weekly, monthly, yearly) of a dataset based on the differences between the first two time points.
+
+```r
+get_time_interval(data, time, unit = NULL, area = NULL)
+```
+
+## Arguments
+
+- `data`: an object of class 'data.frame' containing equally spaced time series data (daily, weekly, monthly data) for one or multiple spatial units.
+- `time`: A string representing the name of the column in `data` that contains time information. The column should be in "yyyy-mm-dd" format.
+- `unit`: (Optional) A string representing the names of the columns in `data` that identifies the different units for which a time series is available, typically a spatial unit. Required if `data` contains multiple units.
+- `area`: Deprecated, use `unit` instead.
+
+## Returns
+
+A character string indicating the time interval of the dataset. Possible values: "day", "week", "month", "year", or "unknown".
+
+## Examples
+
+```r
+df <- data.frame(
+  date = seq(as.Date("2020-01-01"), by = "week", length.out = 10),
+  cases = 1:10
+)
+get_time_interval(df, time = "date")
+```

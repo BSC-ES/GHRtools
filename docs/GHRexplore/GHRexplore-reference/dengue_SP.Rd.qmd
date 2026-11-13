@@ -3,29 +3,30 @@ format: html
 toc: true
 ---
 
-# Dengue cases in **Sao Paulo**
+# Dengue cases from the "São Paulo" state of Brazil
 
 ## Description
 
-Data frame containing the weekly number of notified dengue cases in the municipality of **Sao Paulo**, as well as a set of climatic covariates.
+The `dengue_SP` example data set reports the weekly number of notified dengue cases in the municipality of São Paulo together with climatic covariates. Data was sourced from Infodengue (see source below).
 
 ```r
-data(dengue_SP)
+dengue_SP
 ```
 
 ## Format
 
-A data frame with 678 rows and 8 columns:
+A data frame with 624 rows and 9 columns:
 
-- **date**: First day of the week in date format.
-- **geocode**: Unique ID code for Sao Paulo microregion.
-- **cases**: Number of notified dengue cases.
-- **year**: Year (2010 - 2022).
-- **temp_med**: Weekly average daily mean temperature.
-- **precip_tot**: Weekly cumulative precipitation.
-- **enso**: El Niño-Southern Oscillation index.
-- **pop**: Number of inhabitants.
+- **`date`**: First day of the week, in date format ("%Y-%m-%d")
+- **`geocode`**: IBGE municipality code for the city of São Paulo
+- **`cases`**: Number of notified dengue cases
+- **`year`**: Year 2010 - 2021
+- **`temp_med`**: Weekly average daily mean temperature
+- **`precip_tot`**: Weekly cumulative precipitation
+- **`enso`**: El Niño-Southern Oscillation Index
+- **`pop`**: Number of inhabitants
+- **`pop100000`**: Population divided by 100000.
 
 ## Source
 
-[https://info.dengue.mat.br/services/api](https://info.dengue.mat.br/services/api)
+[Infodengue API](https://info.dengue.mat.br/services/api)

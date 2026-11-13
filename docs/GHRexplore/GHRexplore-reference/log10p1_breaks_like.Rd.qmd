@@ -1,0 +1,35 @@
+---
+format: html
+toc: true
+---
+
+# log10p1_breaks_like
+
+## Description
+
+Breaks and label generator for log10p1_trans
+
+```r
+log10p1_breaks_like(x)
+```
+
+## Arguments
+
+- `x`: the numeric vector for which labels are computed
+
+## Returns
+
+A numeric vector of breaks (powers of 10, preceded by 0 if `x` contains values below 1).
+
+## Examples
+
+```r
+log10p1_breaks_like(c(0, 5, 2000))
+log10p1_breaks_like(c(3, 50, 800))
+
+library(ggplot2)
+df <- data.frame(x = 1:5, y = c(0, 3, 30, 300, 3000))
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  scale_y_continuous(trans = log10p1_trans, breaks = log10p1_breaks_like)
+```

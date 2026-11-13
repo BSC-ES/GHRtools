@@ -67,13 +67,16 @@ plots <- plot_multiple(
   pop = "population",
   var_label = c("Max Temp", "Min Temp", "PDSI"),
   time = "date",
-  area = "micro_code")
+  unit = "micro_code"
+)
 
 # Combine them with a shared legend
-plot_combine(plot_list = plots,
-             ncol = 1,
-             align = "v",
-             combine_legend = TRUE,
-             combine_xaxis = TRUE,
-             rel_widths_l = c(7,1))
+plot_combine(
+  plot_list = plots,
+  ncol = 1,
+  align = "v",
+  combine_legend = TRUE,
+  combine_xaxis = TRUE,
+  rel_widths_l = c(7, 1)
+)
 ```

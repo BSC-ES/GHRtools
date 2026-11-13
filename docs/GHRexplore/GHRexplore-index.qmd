@@ -15,25 +15,37 @@ toc: false
 - [`GHRexplore-package`](GHRexplore-reference/GHRexplore-package.Rd.qmd): A collection of commonly used visualizations of temporal and spatio-temporal health data including case counts, incidence rates, and covariates.
 
 - [`aggregate_cases`](GHRexplore-reference/aggregate_cases.Rd.qmd): Aggregates a data frame containing disease cases in space and/or
- time.
+ time and provides case counts and incidence aggregations.
 
 - [`aggregate_cov`](GHRexplore-reference/aggregate_cov.Rd.qmd): Aggregates a data frame containing a covariate of interest in
  space and/or time.
+
+- [`animate_map`](GHRexplore-reference/animate_map.Rd.qmd): Produces an animation of a choropleth map optionally
+ complemented by a synchronised time series plot.
+
+- [`check_consecutive`](GHRexplore-reference/check_consecutive.Rd.qmd): Verifies whether time values in a dataset are consecutive based on the
+ detected time interval (e.
 
 - [`date_to_epiyw`](GHRexplore-reference/date_to_epiyw.Rd.qmd): The conversion is done following the ISO 8601 standard,
  whereby the first week of the year is the one that contains at
  least four days of the new year.
 
-- [`dengue_MS`](GHRexplore-reference/dengue_MS.Rd.qmd): Monthly number of notified dengue cases by
- municipality in the  Mato Grosso do Sul  state of Brazil and a set
- of spatial and spatio-temporal covariates.
+- [`dengue_MS`](GHRexplore-reference/dengue_MS.Rd.qmd): The  dengue_MS  example data set contains monthly counts of notified
+ dengue cases by microregion, along with a range of spatial and
+ spatiotemporal covariates (e.
 
-- [`dengue_SP`](GHRexplore-reference/dengue_SP.Rd.qmd): Data frame containing the weekly number of notified dengue cases in
- the municipality of  Sao Paulo , as well as a set of climatic covariates.
+- [`dengue_SP`](GHRexplore-reference/dengue_SP.Rd.qmd): The  dengue_SP  example data set reports the weekly number of notified dengue
+ cases in the municipality of São Paulo together with climatic covariates.
 
 - [`epiyw_to_date`](GHRexplore-reference/epiyw_to_date.Rd.qmd): The conversion is done following the ISO 8601 standard,
  whereby the first week of the year is the one that contains at least
- four days of the  new year.
+ four days of the new year.
+
+- [`get_time_interval`](GHRexplore-reference/get_time_interval.Rd.qmd): This function determines the time interval (e.
+
+- [`log10p1_breaks_like`](GHRexplore-reference/log10p1_breaks_like.Rd.qmd): Breaks and label generator for log10p1_trans
+
+- [`log10p1_trans`](GHRexplore-reference/log10p1_trans.Rd.qmd): Transform to execute a log10(x+1) scale transformation
 
 - [`map_MS`](GHRexplore-reference/map_MS.Rd.qmd): Administrative boundaries (polygon geometries) of the 11 municipalities
  in  Mato Grosso do Sul  (Brazil) to be used with the  dengue_MS  data set.
@@ -46,6 +58,9 @@ toc: false
 - [`plot_compare`](GHRexplore-reference/plot_compare.Rd.qmd): Combines multiple plots of several variables in a single graph.
 
 - [`plot_correlation`](GHRexplore-reference/plot_correlation.Rd.qmd): Plots a correlation matrix of a series of variables.
+
+- [`plot_crosscorrelation`](GHRexplore-reference/plot_crosscorrelation.Rd.qmd): Plots the correlation between one time series and lagged
+ versions of another across a range of lags.
 
 - [`plot_heatmap`](GHRexplore-reference/plot_heatmap.Rd.qmd): Plots temporal heatmaps of covariates, case counts, or
  incidence rates.

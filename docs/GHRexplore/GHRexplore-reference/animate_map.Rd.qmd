@@ -1,0 +1,107 @@
+---
+format: html
+toc: true
+---
+
+# Choropleth map animation
+
+## Description
+
+Produces an animation of a choropleth map optionally complemented by a synchronised time series plot.
+
+```r
+animate_map(
+  data,
+  var,
+  time,
+  unit = NULL,
+  map,
+  filename,
+  type = "cov",
+  pop = NULL,
+  pt = 1e+05,
+  map_unit = NULL,
+  aggregate_time = NULL,
+  aggregate_time_fun = "mean",
+  transform = "identity",
+  title = NULL,
+  var_label = NULL,
+  palette = NULL,
+  centering = NULL,
+  bins = NULL,
+  bins_method = "quantile",
+  bins_label = NULL,
+  fps = 1,
+  out_width = 600,
+  out_height = 600,
+  ts_include = FALSE,
+  ts_color = "#168c81",
+  ts_title = NULL,
+  coordgrid = FALSE,
+  ...,
+  area = NULL,
+  map_area = NULL
+)
+```
+
+## Arguments
+
+- `data`: Data frame containing equally spaced (daily, weekly, monthly) covariate or case observations for one or multiple locations.
+- `var`: Name of the column identifying the variable to be plotted.
+- `time`: Name of the variable that identifies the temporal dimension of the data frame. Its values must be in date format ("yyyy-mm-dd") representing the day of observation for daily data, the first day of the week for weekly, or the first day of the month for monthly observations.
+- `unit`: Name of the variable that identifies the different units for which a time series is available, typically a spatial unit.
+- `map`: `sf` object corresponding to the spatial unit specified in 'unit'.
+- `filename`: Path indicating the filename where the resulting gif animation should be saved.
+- `type`: Character that specifies the type of variable in `var`. Possible values include 'cov' (covariate, default), 'counts' (case counts), and 'inc' (case incidence). If `type='inc'`, `pop` is required.
+- `pop`: Character identifying the variable name for population. Only needed if `type='inc'`.
+- `pt`: Scale of the person-time (default 100,000) for incidence rates.
+- `map_unit`: Name of the variable that identifies the different units in the map object. If not specified, it assumes the same name as in `unit`.
+- `aggregate_time`: Temporal scale for visualization and aggregation. Options include "year", "month", "week".
+- `aggregate_time_fun`: Character indicating the function to be used in the aggregation over time for `type="cov"`. Options are "mean" (default), "median", "sum". For case counts and incidence, "sum" is always applied.
+- `transform`: Character, defaults to "identity" (i.e., no transformation). Transforms the color ramp for better visualization. Useful options include "log10p1" `log10(x+1)` for case counts and incidence with 0s, or any of the in-built ggplot2 options such as "log10" `log10(x)`, "log1p" `log(x+1)`, and "sqrt" `sqrt(x)` (check all possible options using `?scale_y_continuous`). I also applies to the optional time series plot.
+- `title`: Optional title of the plot.
+- `var_label`: Character with a custom name for the case or covariate variable.
+- `palette`: GHR, RColorBrewer or colorspace palette. Use "-" before the palette name (e.g., "-Reds") to reverse it.
+- `centering`: Numerical or "median", defaults to NULL. If set, it centers the palette on that value.
+- `bins`: Number of bins for categorization of numerical variables. Defaults to NULL (no binning).
+- `bins_method`: Method to compute the bins, only used when `bins` is not NULL. Possible values are "quantile" (default) and "equal".
+- `bins_label`: Optional labels for the bins. They must have the same length as the number of bins. Defaults to NULL (default interval labels).
+- `fps`: Animation frames per second, defaults to 1.
+- `out_width`: Horizontal size in pixels for the map gif.
+- `out_height`: Vertical size in pixels for the map gif.
+- `ts_include`: If TRUE, include a time series with the average value of the covariate across all units (type='cov'), the total number of cases (type='counts') or total incidence (type='inc'). See [Details](#details).
+- `ts_color`: Color for the progress bar of the time series plot. See details.
+- `ts_title`: Optional title for the time series plot. Defaults to NULL (no title). Only used when `ts_include=TRUE`.
+- `coordgrid`: Boolean indicating whether the coordinate grid should be included in the visualization. Defaults to FALSE.
+- `...`: Additional aesthetics to be passed to geom_sf. Possible values include `colour` (e.g., `colour="black"`), linewidth (e.g., `linewidth=0.1`), linetype (e.g., `linetype=2`), and alpha (e.g., `alpha=0.8`).
+- `area`: Deprecated, use `unit` instead.
+- `map_area`: Deprecated, use `map_unit` instead.
+
+## Details
+
+The `magick` package is used to merge the two gifs when `ts_include=TRUE`, which may run into memory issues. Please reduce the number of time points, perform a temporal aggregation, or reduce the gif size if that happens.
+
+## Returns
+
+Invisibly returns the path to the saved gif file; called for its side effect of writing the animation to disk.
+
+## Examples
+
+```r
+library("sf")
+data("dengue_MS")
+data("map_MS")
+
+# Animation of monthly minimum temperature in 2002
+animate_map(
+  data = dengue_MS[dengue_MS$year == 2002, ],
+  var = "tmin",
+  time = "date",
+  unit = "micro_code",
+  map = map_MS,
+  map_unit = "code",
+  type = "cov",
+  var_label = "Min Temp",
+  filename = tempfile(fileext = ".gif")
+)
+```

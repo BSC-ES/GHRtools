@@ -48,12 +48,13 @@ as heatmaps.
 * `plot_seasonality`: Plots yearly time series to detect seasonal patterns of 
 covariates, case counts or incidence rates. 
 * `plot_correlation`: Plots a correlation matrix of a series of variables.
+* `plot_crosscorrelation`: Plots correlation metrics between two lagged time series.
 * `plot_map`: Plots a choropleth map of covariates, case counts or incidence rates. 
+* `animate_map`: Produces an animation of a choropleth map optionally complemented by a synchronised time series plot.
 * `plot_bivariate`: Plots a bivariate plot of two numerical and/or categorical variables.
 * `plot_multiple`, `plot_combine` and `plot_compare`: Used to generate graphs of 
 several variables at the same time.
-* `epiyw_to_date` and `date_to_epiyw`: Functions to convert between dates and 
-epidemiological year-weeks for any day of the week.
+* `epiyw_to_date` and `date_to_epiyw`: Functions to convert between dates and epidemiological year-weeks for any day of the week.
 
 **GHRexplore** is one of the packages developed by the
 [Global Health Resilience](https://www.bsc.es/discover-bsc/organisation/research-departments/global-health-resilience) (GHR)

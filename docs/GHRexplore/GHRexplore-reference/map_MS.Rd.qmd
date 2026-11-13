@@ -3,7 +3,7 @@ format: html
 toc: true
 ---
 
-# Municipality boundaries of **Mato Grosso do Sul**
+# Administrative boundaries of **Mato Grosso do Sul**
 
 ## Description
 

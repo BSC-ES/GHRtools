@@ -302,7 +302,7 @@ probability thresholds:
 
 For a binary event such as “temperature above mean” and a probabilistic
 forecast, a probability threshold is applied to convert the forecast
-into a binary prediction (e.g. “predict the event if more than 50% of
+into a binary prediction (e.g. “predict the event if more than 50% of
 ensemble members predict it”). By varying this threshold, a Hit Rate and
 False Alarm Rate are calculated at each value, and the ROC curve is
 plotted comparing these (example below).

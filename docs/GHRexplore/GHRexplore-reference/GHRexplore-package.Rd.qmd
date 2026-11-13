@@ -15,6 +15,7 @@ Maintainer : Carles Milà carles.milagarcia@bsc.es ([ORCID](https://orcid.org/00
 
 Authors:
 
+ * Carles Milà carles.milagarcia@bsc.es ([ORCID](https://orcid.org/0000-0003-0470-0760))
  * Giovenale Moirano ([ORCID](https://orcid.org/0000-0001-8748-3321))
  * Anna B. Kawiecki ([ORCID](https://orcid.org/0000-0002-0499-2612))
  * Rachel Lowe ([ORCID](https://orcid.org/0000-0003-3939-7343)) [copyright holder]
@@ -25,4 +26,4 @@ Useful links:
 
  * [https://gitlab.earth.bsc.es/ghr/ghrexplore](https://gitlab.earth.bsc.es/ghr/ghrexplore)
  * [https://bsc-es.github.io/GHRtools/docs/GHRexplore/GHRexplore](https://bsc-es.github.io/GHRtools/docs/GHRexplore/GHRexplore)
- * Report bugs at [https://gitlab.earth.bsc.es/ghr/ghrexplore/-/issues](https://gitlab.earth.bsc.es/ghr/ghrexplore/-/issues)
+ * Report bugs at [https://gitlab.earth.bsc.es/ghr/ghrexplore/-/work_items](https://gitlab.earth.bsc.es/ghr/ghrexplore/-/work_items)

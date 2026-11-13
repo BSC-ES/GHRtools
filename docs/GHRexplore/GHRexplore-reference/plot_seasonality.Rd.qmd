@@ -17,7 +17,7 @@ plot_seasonality(
   type = "cov",
   pop = NULL,
   pt = 1e+05,
-  area = NULL,
+  unit = NULL,
   aggregate_space = NULL,
   aggregate_time = "month",
   aggregate_space_fun = "mean",
@@ -28,7 +28,8 @@ plot_seasonality(
   ylab = NULL,
   xlab = NULL,
   free_y_scale = FALSE,
-  palette = "IDE1"
+  palette = "IDE1",
+  area = NULL
 )
 ```
 
@@ -40,9 +41,9 @@ plot_seasonality(
 - `type`: Character that specifies the type of variable in `var`. Possible values include 'cov' (covariate, default), 'counts' (case counts), and 'inc' (case incidence). If `type='inc'`, `pop` is required.
 - `pop`: Character identifying the variable name for population. Only needed if `type='inc'`.
 - `pt`: Scale of the person-time (default 100,000) for incidence rates.
-- `area`: Name of variable that identifies the different locations (e.g., areal units) for which a time series is available.
-- `aggregate_space`: Name of variable used to define spatial aggregation groups.
-- `aggregate_time`: Temporal scale used to perform temporal aggregation. Options are: "week" (ISO 8601), "month", "year".
+- `unit`: Name of the variable that identifies the different units for which a time series is available, typically a spatial unit.
+- `aggregate_space`: Name of variable used to define spatial aggregation groups that contain the different units.
+- `aggregate_time`: Temporal scale used to perform temporal aggregation. Options are: "week" (ISO 8601) or "month".
 - `aggregate_space_fun`: Character indicating the function to be used in the aggregation over space for `type="cov"`. Options are "mean" (default), "median", "sum". For case counts and incidence, "sum" is always applied.
 - `aggregate_time_fun`: Character indicating the function to be used in the aggregation over time for `type="cov"`. Options are "mean" (default), "median", "sum". For case counts and incidence, "sum" is always applied.
 - `transform`: Character, defaults to "identity" (i.e., no transformation). Transforms the y-axis for better visualization. Useful options include "log10p1" `log10(x+1)` for case counts and incidence with 0s, or any of the in-built ggplot2 options such as "log10" `log10(x)`, "log1p" `log(x+1)`, and "sqrt" `sqrt(x)` (check all possible options using `?scale_y_continuous`).
@@ -52,6 +53,7 @@ plot_seasonality(
 - `xlab`: Label for the x-axis.
 - `free_y_scale`: If TRUE, the y-axis scale is free in each facet.
 - `palette`: GHR, RColorBrewer or colorspace palette. Use "-" before the palette name (e.g., "-Reds") to reverse it.
+- `area`: Deprecated, use `unit` instead.
 
 ## Returns
 
@@ -64,35 +66,41 @@ A ggplot2 seasonality plot.
 data("dengue_MS")
 
 # Seasonality plot of a covariate with space aggregation
-plot_seasonality(dengue_MS,
-                 var = "tmax",
-                 time = "date",
-                 var_label = "Max temp.",
-                 type = "cov",
-                 area = "micro_code",
-                 aggregate_space = "region_code")
+plot_seasonality(
+  dengue_MS,
+  var = "tmax",
+  time = "date",
+  var_label = "Max temp.",
+  type = "cov",
+  unit = "micro_code",
+  aggregate_space = "region_code"
+)
 
 # Plot case counts (log scale) with space aggregation
- plot_seasonality(dengue_MS,
-                  var = "dengue_cases",
-                  time = "date",
-                  type = "counts",
-                  area = "micro_code",
-                  aggregate_space = "meso_code",
-                  transform = "log10p1",
-                  var_label = "Monthly Dengue Cases",
-                  xlab = "Month",
-                  ylab = "Number of cases",
-                  free_y_scale = TRUE)
+plot_seasonality(
+  dengue_MS,
+  var = "dengue_cases",
+  time = "date",
+  type = "counts",
+  unit = "micro_code",
+  aggregate_space = "meso_code",
+  transform = "log10p1",
+  var_label = "Monthly Dengue Cases",
+  xlab = "Month",
+  ylab = "Number of cases",
+  free_y_scale = TRUE
+)
 
 # Seasonality plot of incidence
-plot_seasonality(dengue_MS,
-                 var = "dengue_cases",
-                 time = "date",
-                 type = "inc",
-                 pop = "population",
-                 area = "micro_code",
-                 pt = 1000,
-                 title = "Monthly Dengue Incidence",
-                 palette = "Reds")
+plot_seasonality(
+  dengue_MS,
+  var = "dengue_cases",
+  time = "date",
+  type = "inc",
+  pop = "population",
+  unit = "micro_code",
+  pt = 1000,
+  title = "Monthly Dengue Incidence",
+  palette = "Reds"
+)
 ```

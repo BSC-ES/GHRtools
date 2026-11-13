@@ -20,7 +20,7 @@ epiyw_to_date(epiyw, weekday = "Monday")
 
 ## Returns
 
-The converted epiyearweeks to dates.
+The dates corresponding to each epiyearweek.
 
 ## Examples
 

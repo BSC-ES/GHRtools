@@ -9,6 +9,18 @@ toc: true
 <br><br>
 ```
 
+## 0.3.0
+
+* New function: `plot_crosscorrelation()`: correlation metrics between two time series, one lagged.
+* New function: `animate_map()`: animated choropleth map (added new suggests dependencies for that).
+* The *area* argument is soft-deprecated in favour of *unit* across all plotting functions.
+* Updated vignette with the new changes.
+* Possibility to display coordinate grids in `plot_map()`.
+* The default alignment of all plot titles has changed to left-align.
+* Export internal functions needed in new versions of GHRmodel and GHRpredict packages.
+* Major internal refactoring, improved error messages, and more defensive checks.
+* The `dengue_SP` example data set now covers 2010-2021 (624 weekly observations).
+
 ## 0.2.2
 
 * Added functions `epiyw_to_date()` and `date_to_epiyw()` to convert between dates and 

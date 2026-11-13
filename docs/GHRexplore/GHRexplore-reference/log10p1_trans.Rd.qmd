@@ -1,0 +1,31 @@
+---
+format: html
+toc: true
+---
+
+# log10p1_trans
+
+## Description
+
+Transform to execute a log10(x+1) scale transformation
+
+```r
+log10p1_trans
+```
+
+## Returns
+
+A transformation object of class `transform` (see `scales::new_transform()`) with `transform` and `inverse` functions, to be used in the `trans` or `transform` argument of ggplot2 scales.
+
+## Examples
+
+```r
+log10p1_trans$transform(c(0, 9, 99))
+log10p1_trans$inverse(c(0, 1, 2))
+
+library(ggplot2)
+df <- data.frame(x = 1:5, y = c(0, 3, 30, 300, 3000))
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  scale_y_continuous(trans = log10p1_trans)
+```

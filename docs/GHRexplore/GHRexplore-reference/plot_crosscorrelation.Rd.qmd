@@ -1,0 +1,104 @@
+---
+format: html
+toc: true
+---
+
+# Cross-correlation function (CCF) plot for two time series
+
+## Description
+
+Plots the correlation between one time series and lagged versions of another across a range of lags.
+
+```r
+plot_crosscorrelation(
+  data,
+  var,
+  time,
+  type = c("cov", "cov"),
+  method = "pearson",
+  lags = 0:9,
+  pop = NULL,
+  unit = NULL,
+  aggregate_space = NULL,
+  aggregate_space_fun = "mean",
+  facet = FALSE,
+  title = NULL,
+  var_label = NULL,
+  legend = NULL,
+  ylab = NULL,
+  xlab = NULL,
+  palette = NULL,
+  area = NULL
+)
+```
+
+## Arguments
+
+- `data`: Data frame containing equally spaced (daily, weekly, monthly) covariate or disease case observations for one or multiple locations.
+- `var`: A character vector of length 2 identifying the variables to be included. The second variable is the one that is lagged.
+- `time`: Name of the variable that identifies the temporal dimension of the data frame. Its values must be in date format ("yyyy-mm-dd") representing the day of observation for daily data, the first day of the week for weekly, or the first day of the month for monthly observations.
+- `type`: A character vector of length 2 that specifies the types of variable in `var`. Possible values include 'cov' (covariate, default), 'counts' (case counts), and 'inc' (case incidence). If `type='inc'`, `pop` is required.
+- `method`: Correlation method. Options include "pearson" (default), "spearman" or "kendall".
+- `lags`: Numerical vector indicating the lags at which the cross-correlation should be computed. The second variable in 'var' will be lagged.
+- `pop`: Character identifying the variable name for population. Only needed if `type='inc'`.
+- `unit`: Name of the variable that identifies the different units for which a time series is available, typically a spatial unit.
+- `aggregate_space`: Name of variable used to define spatial aggregation groups that contain the different units.
+- `aggregate_space_fun`: Character indicating the function to be used in the aggregation over space for `type="cov"`. Options are "mean" (default), "median", "sum". For case counts and incidence, "sum" is always applied.
+- `facet`: If TRUE a separate time series for each space unit is plotted in different facets.
+- `title`: Optional title of the plot.
+- `var_label`: A character vector of length 2 with custom names for 'var' (in the same order).
+- `legend`: Character with a custom name for the legend.
+- `ylab`: Label for the y-axis.
+- `xlab`: Label for the x-axis.
+- `palette`: GHR, RColorBrewer or colorspace palette. Use "-" before the palette name (e.g., "-Reds") to reverse it.
+- `area`: Deprecated, use `unit` instead.
+
+## Details
+
+Correlations are computed after deleting missing rows in the lag data so that every correlation is computed with the same observations.
+
+## Returns
+
+A ggplot2 cross-correlation plot.
+
+## Examples
+
+```r
+# Load data
+data("dengue_MS")
+data("dengue_SP")
+
+# Cross-correlation (Pearson) between dengue counts and enso (single unit)
+plot_crosscorrelation(
+  data = dengue_SP,
+  var = c("cases", "enso"),
+  type = c("counts", "cov"),
+  time = "date"
+)
+
+# Cross-correlation (Spearman) between dengue inc and tmax for multiple areas
+plot_crosscorrelation(
+  data = dengue_MS,
+  var = c("dengue_cases", "tmax"),
+  type = c("inc", "cov"),
+  pop = "population",
+  time = "date",
+  unit = "micro_name",
+  method = "spearman"
+)
+
+# Cross-correlation (Kendall) between dengue inc and pdsi for multiple areas
+# aggregated by mesoregion, faceted, with custom labels
+plot_crosscorrelation(
+  data = dengue_MS,
+  var = c("dengue_cases", "pdsi"),
+  type = c("inc", "cov"),
+  pop = "population",
+  time = "date",
+  unit = "micro_name",
+  method = "kendall",
+  aggregate_space = "meso_name",
+  facet = TRUE,
+  title = "Cross-correlation for meso areas"
+)
+```
