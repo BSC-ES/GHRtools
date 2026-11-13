@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,14 +74,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../figures/bsc-small.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-95ffedb14a21d521d4d59f16ae640ee8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-b2bb0a5172a6491ce04ba805d6ff2451.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,19 +115,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">GHRtools</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -284,6 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -292,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -332,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -380,12 +381,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="clim4health-structure" class="level2">
 <h2 class="anchored" data-anchor-id="clim4health-structure">clim4health structure</h2>
-<div class="figure" style="text-align: center">
-<img src="https://gitlab.earth.bsc.es/ghr/clim4health/-/blob/main/inst/figures/clim4health_function_order.svg?ref_type=heads" alt="Figure 1: Structure of the **clim4health** package, outlining its functions and general functionality." width="100%">
-<p class="caption">
-Figure 1: Structure of the <strong>clim4health</strong> package, outlining its functions and general functionality.
-</p>
+<p><br></p>
+<div data-align="center">
+<p><img src="../../figures/clim4health/clim4health_function_order.svg" width="100%"></p>
 </div>
+<p><br></p>
 <p>This vignette outlines one full example workflow using the <strong>clim4health</strong> package. The process is organized into three key stages: obtaining input data, transforming and processing the data, and preparing outputs.</p>
 <section id="obtain-input-data" class="level3">
 <h3 class="anchored" data-anchor-id="obtain-input-data">1. Obtain input data</h3>
@@ -394,6 +394,37 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <li><p>downloading data from the CDS using <code>c4h_get()</code>, and then loading it using <code>c4h_load()</code>.</p></li>
 <li><p>loading data from a local file and transforming it into an s2dv_cube either manually or using <code>CSTools::s2dv_cube()</code>. The <code>clim4health_s2dv_cubes</code> vignette provides a worked example of how to do this for weather station data.</p></li>
 </ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>c4h_get_help()</code></td>
+<td style="text-align: left;">List the available datasets and variables that can be downloaded from the CDS via clim4health.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>c4h_get()</code></td>
+<td style="text-align: left;">Download data from the CDS.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>c4h_load()</code></td>
+<td style="text-align: left;">Load climate data into an s2dv_cube object, either data downloaded using <code>c4h_get()</code> or data from a local csv file.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>c4h_convert_units()</code></td>
+<td style="text-align: left;">Print or convert the units of a variable in an s2dv_cube object.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1: Overview of functions to prepare input data for clim4health.</p>
 <p>To use the rest of the <strong>clim4health</strong> functions, the data must be in an s2dv_cube format with the following dimensions:</p>
 <ul>
 <li><p><strong>dataset</strong> - the datasets that are loaded.</p></li>
@@ -416,11 +447,81 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <section id="transform-and-process-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="transform-and-process-the-data">2. Transform and process the data</h3>
 <p>There are several functions available to transform and process the data, which can be applied in any order depending on the required output. These include:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>c4h_space()</code></td>
+<td style="text-align: left;">Spatially aggregate gridded data to administrative areas.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>c4h_time()</code></td>
+<td style="text-align: left;">Temporal aggregation to a desired time resolution.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>c4h_downscale()</code></td>
+<td style="text-align: left;">Downscale, calibrate and bias adjust climate data.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>c4h_verify()</code></td>
+<td style="text-align: left;">Perform a forecast verification and quality assessment of forecast skill.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>c4h_index()</code></td>
+<td style="text-align: left;">Mask climate data by applying thresholds to the data.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>c4h_collapse()</code></td>
+<td style="text-align: left;">Collapse the data to a single value across one or more dimensions, e.g.&nbsp;calculating the ensemble mean or maximum value across time.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 2: Overview of functions to transform and process data for clim4health.</p>
 <p>For the more complex functions <code>c4h_downscale()</code> and <code>c4h_verify()</code>, vignettes are available (<code>clim4health_downscaling</code> and <code>clim4health_verification</code>) which provide more detailed information about the methodologies available and relevant choices of input arguments.</p>
 </section>
 <section id="prepare-outputs" class="level3">
 <h3 class="anchored" data-anchor-id="prepare-outputs">3. Prepare outputs</h3>
 <p>Once the data has been transformed and processed as required, the user can choose to plot the data, or convert it to a different data type, and save it.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>c4h_plot()</code></td>
+<td style="text-align: left;">Plot aspects of the data.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>c4h_plotskill()</code></td>
+<td style="text-align: left;">Plot forecast skill and its significance.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>c4h_convert()</code></td>
+<td style="text-align: left;">Convert the data from s2dv_cube to a different data type, including areal, tabular, or raster.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>c4h_save()</code></td>
+<td style="text-align: left;">Save the transformed data.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 3: Overview of functions to visualise and output data for clim4health.</p>
 </section>
 </section>
 <section id="clim4health-workflow" class="level1">
@@ -457,7 +558,7 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <h2 class="anchored" data-anchor-id="loading-inspecting-and-preprocessing-data">1. Loading, inspecting, and preprocessing data</h2>
 <section id="dataset-description" class="level3">
 <h3 class="anchored" data-anchor-id="dataset-description">Dataset description</h3>
-<p>The data used in this example are the monthly mean 2m temperature forecast (issued in January 2025 for 3 months lead time) from ECMWF’s System 5.1 seasonal forecast, its corresponding hindcast, as well as reanalysis data from ERA5Land covering the same hindcast period (2010-2012).</p>
+<p>The data used in this example are the monthly mean 2m temperature forecast (issued in January 2025 for 3 months lead time) from ECMWF’s System 5.1 seasonal forecast, its corresponding hindcast, as well as reanalysis data from ERA5Land covering the same hindcast period (2010-2013).</p>
 <blockquote class="blockquote">
 <p>📝 <strong>NOTE</strong>: in reality, a much longer hindcast period is required to downscale and verify seasonal forecasts, but a short period is used here for demonstration purposes.</p>
 </blockquote>
@@ -465,41 +566,55 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fcst_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/forecast/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fcst_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(fcst_path, <span class="st">"/"</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>fcst <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(fcst_path,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">year =</span> <span class="dv">2025</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">month =</span> <span class="dv">1</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">leadtime_month =</span> <span class="st">"all"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ext =</span> <span class="st">"nc"</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the values of the forecast data</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fcst<span class="sc">$</span>data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>fcst <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  fcst_path,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2025</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">leadtime_month =</span> <span class="st">"all"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ext =</span> <span class="st">"nc"</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the values of the forecast data</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fcst<span class="sc">$</span>data)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   287.5   290.6   295.3   294.5   298.6   300.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We can also load the hindcast and reanalysis data, which should be initialized in the same month as the forecast (e.g.&nbsp;January), but for previous years. The hindcast and reanalysis should have the same time period for the downscaling and verifications steps.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the hindcast data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>hindcast_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/hindcast/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>hindcast_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(hindcast_path, <span class="st">"/"</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>hcst <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(hindcast_path,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">month =</span> <span class="dv">1</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ext =</span> <span class="st">"nc"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>reanalysis_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/reanalysis/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>reanalysis_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(reanalysis_path, <span class="st">"/"</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the reanalysis data</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>rean <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(reanalysis_path,</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                 <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                 <span class="at">month =</span> <span class="dv">1</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                 <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ext =</span> <span class="st">"nc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>hcst <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  hindcast_path,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2013</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ext =</span> <span class="st">"nc"</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>reanalysis_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/reanalysis/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>reanalysis_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(reanalysis_path, <span class="st">"/"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the reanalysis data</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>rean <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  reanalysis_path,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"t2m"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2013</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">ext =</span> <span class="st">"nc"</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Print the dimensions of the hindcast and reanalysis data, to compare with the forecast.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fcst<span class="sc">$</span>dims)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hcst<span class="sc">$</span>dims)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rean<span class="sc">$</span>dims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dataset       var     sdate      time  ensemble  latitude longitude </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         1         1         1         3        51         5         5</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hcst<span class="sc">$</span>dims)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dataset       var     sdate      time  ensemble  latitude longitude </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         1         1         4         3        25         5         5</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rean<span class="sc">$</span>dims)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dataset       var     sdate      time  ensemble  latitude longitude </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         1         1         4         3         1        51        51</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Follow the <code>clim4health_s2dv_cubes</code> vignette for more information on the structure of the clim4health s2dv_cube objects, as well as details about the types of climate data used here.</p>
 </section>
 <section id="data-preprocessing" class="level3">
@@ -514,7 +629,8 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>rean <span class="ot">&lt;-</span> <span class="fu">c4h_convert_units</span>(rean, <span class="at">to =</span> <span class="st">"celsius"</span>, <span class="at">var =</span> <span class="st">"t2m"</span>, <span class="at">from =</span> <span class="st">"K"</span>)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the new units</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c4h_convert_units</span>(fcst, <span class="at">var =</span> <span class="st">"t2m"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c4h_convert_units</span>(fcst, <span class="at">var =</span> <span class="st">"t2m"</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p>📝 <strong>NOTE</strong>: If you are using monthly mean data from CDS, take care with units, in particular for variables such as precipitation. For example, the precipitation variable to be downloaded from the ERA5-Land monthly mean dataset is called <code>total_precipitation</code>, and the data is stored in units of <code>m</code>. However, this does not refer to <em>monthly</em> total precipitation. Instead, it is the <em>monthly mean of the daily</em> total precipitation. In this case, you would also need to perform an additional transformation to obtain the monthly sum precipitation. Unfortunately, <strong>clim4health</strong> cannot differentiate between the identical units of <code>m</code>, and so you would have to make this conversion manually (by typing <code>output_data$data &lt;- output_data$data * 30.44</code>).</p>
 </blockquote>
@@ -523,11 +639,14 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <h3 class="anchored" data-anchor-id="plot-the-raw-data">Plot the raw data</h3>
 <p>We can use <code>c4h_plot()</code> to plot the forecast, hindcast, and reanalysis data to visualize the raw data.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the forecast data</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(fcst, <span class="at">var =</span> <span class="st">"t2m"</span>, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the hindcast data</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(hcst, <span class="at">var =</span> <span class="st">"t2m"</span>, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the reanalysis data</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(rean, <span class="at">var =</span> <span class="st">"t2m"</span>, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(fcst, <span class="at">var =</span> <span class="st">"t2m"</span>, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_raw_data 1-1.png" alt="" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the hindcast data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(hcst, <span class="at">var =</span> <span class="st">"t2m"</span>, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_raw_data 2-1.png" alt="" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the reanalysis data</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(rean, <span class="at">var =</span> <span class="st">"t2m"</span>, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_raw_data 2-2.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 </section>
 <section id="processing-the-data" class="level2">
@@ -536,24 +655,32 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <section id="spatial-aggregation" class="level3">
 <h3 class="anchored" data-anchor-id="spatial-aggregation">Spatial aggregation</h3>
 <p>Typically, climate data is stored on grids of latitude and longitude, particularly if it comes from a climate model or reanalysis. However, for health impact studies, we often want to aggregate the data to administrative areas such as municipalities, states, or provinces, so that it can be aligned with recorded health data. We can use the <code>c4h_space()</code> function to spatially aggregate the gridded data to these administrative areas.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the sf package to read in spatial data</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Region municipalities</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>munip_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"areas"</span>, <span class="st">"munip_vallecauca.gpkg"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>munip <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(munip_path)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Spatial aggregation</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>hcst_aggr <span class="ot">&lt;-</span> <span class="fu">c4h_space</span>(hcst, munip)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>rean_aggr <span class="ot">&lt;-</span> <span class="fu">c4h_space</span>(rean, munip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the sf package to read in spatial data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Region municipalities</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>munip_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"extdata"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"areas"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"munip_vallecauca.gpkg"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"clim4health"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>munip <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(munip_path)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Spatial aggregation</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>hcst_aggr <span class="ot">&lt;-</span> <span class="fu">c4h_space</span>(hcst, munip)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>rean_aggr <span class="ot">&lt;-</span> <span class="fu">c4h_space</span>(rean, munip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The climate datasets <code>hcst_aggr</code>, and <code>rean_aggr</code> are now aggregated to the same spatial areas, and, instead of containing <code>latitude</code> and <code>longitude</code> dimensions, they now contain an <code>area</code> dimension, which corresponds to the municipalities.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hcst_aggr<span class="sc">$</span>dims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hcst_aggr<span class="sc">$</span>dims)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dataset      var    sdate     time ensemble     area </span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        1        1        4        3       25       42</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We can plot the aggregated data in the same way as the gridded data, as <code>c4h_space()</code> stores the corresponding polygon geometries in <code>cube$attrs$area</code> in the output s2dv_cube <code>cube</code>, and <code>c4h_plot()</code> can utilize these geometries for visualization.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the aggregated hindcast data</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(hcst_aggr, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the aggregated reanalysis data</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(rean_aggr, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the aggregated hindcast data</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(hcst_aggr, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_aggregated_data-1.png" alt="" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the aggregated reanalysis data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(rean_aggr, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_aggregated_data-2.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="downscaling" class="level3">
 <h3 class="anchored" data-anchor-id="downscaling">Downscaling</h3>
@@ -569,12 +696,14 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <li><p><code>exp_cor</code>: the experimental data to which the bias adjustment parameters will be applied (generally speaking, the forecast data). If it is NULL, the bias adjustment parameters will be applied to <code>exp</code> instead. This is useful if the user wants to apply the bias adjustment parameters to a different dataset (e.g.&nbsp;forecast data) than the one used to calculate the bias adjustment parameters (e.g.&nbsp;hindcast data).</p></li>
 </ul>
 <p>First, let’s downscale the forecast data.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cal <span class="ot">&lt;-</span> <span class="fu">c4h_downscale</span>(<span class="at">downscale_function =</span> <span class="st">"Intbc"</span>, <span class="co"># downscaling method</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">obs =</span> rean,                   <span class="co"># observational data, used to bias adjust the experiment</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">exp =</span> hcst,                   <span class="co"># the experimental data to calculate the bias adjustment parameters</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">exp_cor =</span> fcst,               <span class="co"># the experimental data to which the bias adjustment parameters will be applied</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method_bc =</span> <span class="st">"bias"</span>,           <span class="co"># for "Intbc", the bias correction method to use</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method_remap =</span> <span class="st">"bilinear"</span>)    <span class="co"># the method to remap the data to the new grid</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cal <span class="ot">&lt;-</span> <span class="fu">c4h_downscale</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">downscale_function =</span> <span class="st">"Intbc"</span>, <span class="co"># downscaling method</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs =</span> rean, <span class="co"># observational data, used to bias adjust the experiment</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> hcst, <span class="co"># the experimental data to calculate the bias adjustment parameters</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp_cor =</span> fcst, <span class="co"># the experimental data to which the bias adjustment parameters will be applied</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method_bc =</span> <span class="st">"bias"</span>, <span class="co"># for "Intbc", the bias correction method to use</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method_remap =</span> <span class="st">"bilinear"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>) <span class="co"># the method to remap the data to the new grid</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p>📝 <strong>NOTE</strong>: you may see warnings when running <code>c4h_downscale()</code>. These are completely normal. For example, if you are using ERA5-Land reanalysis near the ocean, you will have many NA values, which may generate warnings.</p>
 </blockquote>
@@ -587,17 +716,21 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <p>📝 <strong>NOTE</strong>: in many cases, <code>cal$obs</code> will be the same as <code>rean_aggr</code> (the input <code>obs</code>), but there are certain cases where it may differ. See the <code>clim4health_downscaling</code> vignette for more information.</p>
 </blockquote>
 <p>We can also downscale the hindcast data, which is used in the verification step to assess the skill of the forecast model. In this case, we leave the <code>exp_cor</code> parameter as NULL.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cal_hcst <span class="ot">&lt;-</span> <span class="fu">c4h_downscale</span>(<span class="at">downscale_function =</span> <span class="st">"Intbc"</span>,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">obs =</span> rean,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">exp =</span> hcst,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method_bc =</span> <span class="st">"bias"</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method_remap =</span> <span class="st">"bilinear"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">loocv =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cal_hcst <span class="ot">&lt;-</span> <span class="fu">c4h_downscale</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">downscale_function =</span> <span class="st">"Intbc"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs =</span> rean,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> hcst,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method_bc =</span> <span class="st">"bias"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method_remap =</span> <span class="st">"bilinear"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">loocv =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Plot the downscaled forecast and hindcast data to visualise the results of the downscaling.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the downscaled forecast data</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(cal<span class="sc">$</span>exp, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the downscaled hindcast data</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(cal_hcst<span class="sc">$</span>exp, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the downscaled forecast data</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(cal<span class="sc">$</span>exp, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_downscaled_data 1-1.png" alt="" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the downscaled hindcast data</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(cal_hcst<span class="sc">$</span>exp, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_downscaled_data 2-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="verification-and-postprocessing" class="level3">
 <h3 class="anchored" data-anchor-id="verification-and-postprocessing">Verification and postprocessing</h3>
@@ -606,15 +739,18 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <p>📝 <strong>NOTE</strong>: there are many different ways to perform a skill assessment or verification. See the <code>clim4health_verification</code> vignette for more information.</p>
 </blockquote>
 <p><code>c4h_verify()</code> requires the user to specify a selection of metrics using the parameter <code>metrics</code>, as well the experimental data (<code>exp</code>) and the observational data (<code>obs</code>). Further parameters can be specified depending on the selected metrics. The possible metrics to select are explored in detail in the <code>clim4health_verification</code> vignette, but for this example, we will calculate the Continuous Ranked Probability Skill Score (CRPSS) of the forecast model compared to a reference forecast of climatology.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>skill <span class="ot">&lt;-</span> <span class="fu">c4h_verify</span>(<span class="at">exp =</span> cal_hcst<span class="sc">$</span>exp,   <span class="co"># the experimental data (downscaled hindcast data)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">obs =</span> cal_hcst<span class="sc">$</span>obs,   <span class="co"># the observational data (downscaled hindcast data)</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"CRPSS"</span>)) <span class="co"># the desired metrics to calculate</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>skill <span class="ot">&lt;-</span> <span class="fu">c4h_verify</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> cal_hcst<span class="sc">$</span>exp, <span class="co"># the experimental data (downscaled hindcast data)</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs =</span> cal_hcst<span class="sc">$</span>obs, <span class="co"># the observational data (downscaled hindcast data)</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"CRPSS"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>) <span class="co"># the desired metrics to calculate</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>c4h_verify()</code> returns a list of lists, where each element of the outer list corresponds to a metric, and each element of the inner list contains both the values of the metric, its significance, and in some cases additional information such as the upper and lower confidence intervals.</p>
 <p>For example, <code>skill</code> contains only one element, <code>skill$CRPSS</code>, which is a list containing the values of CRPSS in <code>skill$CRPSS$crpss</code> and the significance of the CRPSS values in <code>skill$CRPSS$sign</code>. We can plot the skill of the forecast model using <code>c4h_plotskill()</code>. This differs from <code>c4h_plot()</code> in that it is specifically designed to plot skill scores, and can add a layer to the plot to indicate the significance of the skill values.</p>
 <p>We can also explore the significance of the skill values by adding a layer to the plot using the <code>sign</code> parameter.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plotskill</span>(skill<span class="sc">$</span>CRPSS<span class="sc">$</span>crpss, <span class="at">sign =</span> skill<span class="sc">$</span>CRPSS<span class="sc">$</span>sign)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plotskill</span>(skill<span class="sc">$</span>CRPSS<span class="sc">$</span>crpss, <span class="at">sign =</span> skill<span class="sc">$</span>CRPSS<span class="sc">$</span>sign)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/plot_skill_significance-1.png" alt="" style="display: block; margin: auto;"></p>
 <blockquote class="blockquote">
-<p>📝 <strong>NOTE</strong>: in this case, there are no significant values! Don’t panic. This is because we only loaded three years of data to compare the hindcast and reanalysis, which is not enough to produce any significant result.</p>
+<p>📝 <strong>NOTE</strong>: in this case, there are no significant values! Don’t panic. This is because we only loaded four years of data to compare the hindcast and reanalysis, which is not enough to produce any significant result.</p>
 </blockquote>
 </section>
 <section id="masking-data" class="level3">
@@ -628,11 +764,9 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <li><p><code>closed</code>: whether the interval should be open or closed (i.e.&nbsp;if the threshold limits should be included in the valid interval or not).</p></li>
 </ul>
 <p>For example, we can apply <code>c4h_index()</code> to the downscaled forecast data to identify only grid cells where the temperature exceeds 20ºC, and then we can plot this masked dataset.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">c4h_index</span>(<span class="at">data =</span> cal<span class="sc">$</span>exp,</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">return_mask =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lower_threshold =</span> <span class="dv">20</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(mask, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">c4h_index</span>(<span class="at">data =</span> cal<span class="sc">$</span>exp, <span class="at">return_mask =</span> <span class="cn">FALSE</span>, <span class="at">lower_threshold =</span> <span class="dv">20</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_plot</span>(mask, <span class="at">ensemble =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="clim4health_overview_files/figure-gfm/apply_mask-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="aggregating-data-temporally" class="level3">
 <h3 class="anchored" data-anchor-id="aggregating-data-temporally">Aggregating data temporally</h3>
@@ -646,36 +780,45 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <li><p><code>week_start</code>: if <code>time_aggregation</code> is <code>"weekly"</code>, the day on which the week starts, e.g.&nbsp;<code>"Monday"</code>.</p></li>
 </ul>
 <p>Let’s load some daily station data to demonstrate this function.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>station_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/stations/"</span>,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>station_data <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(station_path, <span class="at">variable =</span> <span class="st">"temp_mean"</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ext =</span> <span class="st">"csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>station_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/stations/"</span>, <span class="at">package =</span> <span class="st">"clim4health"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>station_data <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(station_path, <span class="at">variable =</span> <span class="st">"temp_mean"</span>, <span class="at">ext =</span> <span class="st">"csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Since we have not specified any desired dates in our <code>c4h_load()</code> function, all available data from the csv file has been loaded into the <code>time</code> dimension, and the <code>sdate</code> dimension has length 1.</p>
 <p>We can use <code>c4h_time()</code> to aggregate the data to obtain weekly mean daily-mean temperatures, by applying the mean function across the <code>time</code> dimension.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>weekly_data <span class="ot">&lt;-</span> <span class="fu">c4h_time</span>(<span class="at">data =</span> station_data,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">time_aggregation =</span> <span class="st">"weekly"</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dim_aggregation =</span> <span class="st">"time"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">week_start =</span> <span class="st">"Monday"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>weekly_data <span class="ot">&lt;-</span> <span class="fu">c4h_time</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> station_data,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_aggregation =</span> <span class="st">"weekly"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dim_aggregation =</span> <span class="st">"time"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">week_start =</span> <span class="st">"Monday"</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If we wanted to obtain a climatology, we could load the data with years in the <code>sdate</code> dimension, and then apply <code>c4h_time()</code> to calculate the mean across the <code>sdate</code> dimension.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>station_data <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(station_path, <span class="at">variable =</span> <span class="st">"temp_mean"</span>,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ext =</span> <span class="st">"csv"</span>, <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>, <span class="at">month =</span> <span class="dv">1</span>, <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(station_data<span class="sc">$</span>dims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>station_data</code> now contains the <code>sdate</code> dimension with length 93, which corresponds to the 93 start dates specified (year = 3 x month = 1 x day = 31), and <code>time</code> dimension with length 12, which corresponds to the 12 leadtime months specified. We can apply <code>c4h_time()</code> to calculate the mean across the <code>sdate</code> dimension to obtain a climatology (one value for each month).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>yearly_stat <span class="ot">&lt;-</span> <span class="fu">c4h_time</span>(<span class="at">data =</span> station_data,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">time_aggregation =</span> <span class="st">"yearly"</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dim_aggregation =</span> <span class="st">"sdate"</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fun =</span> <span class="st">"mean"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>station_data <span class="ot">&lt;-</span> <span class="fu">c4h_load</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  station_path,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"temp_mean"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ext =</span> <span class="st">"csv"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2013</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">month =</span> <span class="dv">1</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">leadtime_month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(station_data<span class="sc">$</span>dims)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dataset      var    sdate     time ensemble location </span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        1        1      124       12        1       10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>station_data</code> now contains the <code>sdate</code> dimension with length 124, which corresponds to the 124 start dates specified (year = 4 x month = 1 x day = 31), and <code>time</code> dimension with length 12, which corresponds to the 12 leadtime months specified. We can apply <code>c4h_time()</code> to calculate the mean across the <code>sdate</code> dimension to obtain a climatology (one value for each month).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>yearly_stat <span class="ot">&lt;-</span> <span class="fu">c4h_time</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> station_data,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_aggregation =</span> <span class="st">"yearly"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dim_aggregation =</span> <span class="st">"sdate"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fun =</span> <span class="st">"mean"</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="collapsing-data-across-a-dimension" class="level3">
 <h3 class="anchored" data-anchor-id="collapsing-data-across-a-dimension">Collapsing data across a dimension</h3>
 <p>Climate data is generally multi-dimensional, and sometimes it can be useful to collapse the data across one or more dimensions to obtain a single value. For example, we may want to calculate the ensemble median or mean across all ensemble members, or the mean value across years (using the <code>sdate</code> dimension). We can use <code>c4h_collapse()</code> to do this.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>climatology <span class="ot">&lt;-</span> <span class="fu">c4h_collapse</span>(<span class="at">data =</span> yearly_stat,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">dim =</span> <span class="st">"sdate"</span>,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fun =</span> <span class="st">"mean"</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(climatology<span class="sc">$</span>dims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>climatology <span class="ot">&lt;-</span> <span class="fu">c4h_collapse</span>(<span class="at">data =</span> yearly_stat, <span class="at">dim =</span> <span class="st">"sdate"</span>, <span class="at">fun =</span> <span class="st">"mean"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(climatology<span class="sc">$</span>dims)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dataset      var    sdate     time ensemble location </span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        1        1        1       12        1       10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We now have our climatology data, which has one value for each month.</p>
 </section>
 </section>
@@ -685,16 +828,18 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
 <section id="convert-data-from-an-s2dv_cube-to-a-different-data-type" class="level3">
 <h3 class="anchored" data-anchor-id="convert-data-from-an-s2dv_cube-to-a-different-data-type">Convert data from an s2dv_cube to a different data type</h3>
 <p>Once all the desired processing has been done, you can convert the data from an s2dv_cube to a different data type using <code>c4h_convert()</code>. It takes an s2dv_cube as input, and a string containing the desired output type - SpatRaster objects (<code>"terra"</code>), stars (<code>"stars"</code>), data frames (<code>"data.frame"</code>), or polygon objects (<code>"sf"</code>). You may also choose to use the flags <code>crs</code> to identify the coordinate reference system for the output and <code>drop</code> to remove any singleton dimensions.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>csv_out <span class="ot">&lt;-</span> <span class="fu">c4h_convert</span>(<span class="at">data =</span> climatology, <span class="at">output_format =</span> <span class="st">"data.frame"</span>, <span class="at">drop =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>terra_out <span class="ot">&lt;-</span> <span class="fu">c4h_convert</span>(<span class="at">data =</span> cal<span class="sc">$</span>exp, <span class="at">output_format =</span> <span class="st">"terra"</span>)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>polygons_out <span class="ot">&lt;-</span> <span class="fu">c4h_convert</span>(<span class="at">data =</span> cal<span class="sc">$</span>exp, <span class="at">output_format =</span> <span class="st">"sf"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>csv_out <span class="ot">&lt;-</span> <span class="fu">c4h_convert</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> climatology,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_format =</span> <span class="st">"data.frame"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop =</span> <span class="cn">TRUE</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>terra_out <span class="ot">&lt;-</span> <span class="fu">c4h_convert</span>(<span class="at">data =</span> cal<span class="sc">$</span>exp, <span class="at">output_format =</span> <span class="st">"terra"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>polygons_out <span class="ot">&lt;-</span> <span class="fu">c4h_convert</span>(<span class="at">data =</span> cal<span class="sc">$</span>exp, <span class="at">output_format =</span> <span class="st">"sf"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="save-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="save-the-data">Save the data</h3>
 <p>Finally, you can save the data using <code>c4h_save()</code>. This function allows you to save the processed data in a variety of formats, determined by the requested file extension. Valid file extensions include <code>"nc"</code>, <code>"tif"</code>, <code>"csv"</code>, <code>"gpkg"</code>, and <code>"shp"</code>, depending on whether the data to be saved is gridded, areal, or point data.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_save</span>(climatology, <span class="at">path =</span> <span class="st">"path_to_file.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c4h_save</span>(climatology, <span class="at">path =</span> <span class="st">"path_to_file.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p>📝 <strong>NOTE</strong>: We recommend using <code>c4h_save()</code> at the end of your analysis, when the data is in its final format. If you think you will want to apply further <strong>clim4health</strong> functions later, we recommend saving an intermediate file using <code>saveRDS()</code> and loading it later using <code>readRDS()</code>.</p>
 </blockquote>
@@ -783,7 +928,8 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -792,8 +938,69 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -807,6 +1014,7 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -969,44 +1177,54 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1104,6 +1322,9 @@ Figure 1: Structure of the <strong>clim4health</strong> package, outlining its f
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

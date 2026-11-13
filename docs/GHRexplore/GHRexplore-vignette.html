@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,14 +74,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../figures/bsc-small.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-95ffedb14a21d521d4d59f16ae640ee8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-b2bb0a5172a6491ce04ba805d6ff2451.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,19 +115,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">GHRtools</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -284,6 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -292,17 +293,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
-  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#data-requirements" id="toc-data-requirements" class="nav-link" data-scroll-target="#data-requirements">Data requirements</a></li>
   <li><a href="#covariates-case-counts-and-incidence-rates" id="toc-covariates-case-counts-and-incidence-rates" class="nav-link" data-scroll-target="#covariates-case-counts-and-incidence-rates">Covariates, case counts, and incidence rates</a></li>
   <li><a href="#spatial-and-temporal-aggregations" id="toc-spatial-and-temporal-aggregations" class="nav-link" data-scroll-target="#spatial-and-temporal-aggregations">Spatial and temporal aggregations</a></li>
   <li><a href="#color-palettes" id="toc-color-palettes" class="nav-link" data-scroll-target="#color-palettes">Color palettes</a></li>
-  </ul></li>
   <li><a href="#plot-types" id="toc-plot-types" class="nav-link" data-scroll-target="#plot-types">Plot types</a>
   <ul class="collapse">
   <li><a href="#time-series" id="toc-time-series" class="nav-link" data-scroll-target="#time-series">Time series</a></li>
@@ -312,13 +311,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">Map</a></li>
   <li><a href="#bivariate" id="toc-bivariate" class="nav-link" data-scroll-target="#bivariate">Bivariate</a></li>
   <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
+  <li><a href="#cross-correlation" id="toc-cross-correlation" class="nav-link" data-scroll-target="#cross-correlation">Cross-correlation</a></li>
+  <li><a href="#map-animation" id="toc-map-animation" class="nav-link" data-scroll-target="#map-animation">Map animation</a></li>
   <li><a href="#compare" id="toc-compare" class="nav-link" data-scroll-target="#compare">Compare</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -340,60 +341,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <img src="../../figures/GHRexplore.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
-<section id="overview" class="level1">
-<h1>Overview</h1>
-<p><strong>GHRexplore</strong> is an R package for exploratory analysis of temporal and spatiotemporal health data including case counts, incidence rates, and covariates. It provides commonly used visualizations and supports data transformations such as temporal and spatial aggregations. The package also offers extensive customization options for the resulting figures. The output of all functions is a ggplot2 object that can be further modified if needed.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p><strong>GHRexplore</strong> is an R package for exploratory analysis of temporal and spatiotemporal health data including case counts, incidence rates, and covariates. It provides commonly used visualizations and supports data transformations such as temporal and spatial aggregations. The package also offers extensive customization options for the resulting figures. The output of all functions is a <code>ggplot2</code> object that can be further modified if needed.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load GHRexplore</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GHRexplore)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Other necessary libraries for the vignette</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="data-requirements" class="level2">
 <h2 class="anchored" data-anchor-id="data-requirements">Data requirements</h2>
-<p>The data must be a long-format data frame containing a regularly spaced time series (e.g., daily, weekly, monthly) of a single or several spatial units. In this data frame, the time and optional space identifiers must be included as columns.</p>
+<p>The data must be a long-format data frame containing a regularly spaced time series (e.g., daily, weekly, monthly) of a single or several spatial units. In this data frame, the time and optional spatial unit identifiers must be included as columns.</p>
 <p>As an example, we can have a look at the <code>dengue_MS</code> dataset included in the package, which includes data on dengue cases from the <em>Mato Grosso do Sul</em> state in Brazil as well as a set of relevant covariates.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dengue_MS"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dengue_MS)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 2,640</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 27</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ micro_code      &lt;dbl&gt; 50001, 50002, 50003, 50004, 50005, 50006, 50007, 50008, 50009, 50010, 50011, 50001, 50002, 50003, 50004,…</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ micro_name      &lt;chr&gt; "Baixo Pantanal", "Aquidauana", "Alto Taquari", "Campo Grande", "Cassilândia", "Paranaíba", "Três Lagoas…</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ micro_name_ibge &lt;chr&gt; "BAIXO PANTANAL", "AQUIDAUANA", "ALTO TAQUARI", "CAMPO GRANDE", "CASSILÂNDIA", "PARANAÍBA", "TRÊS LAGOAS…</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ meso_code       &lt;dbl&gt; 5001, 5001, 5002, 5002, 5003, 5003, 5003, 5003, 5004, 5004, 5004, 5001, 5001, 5002, 5002, 5003, 5003, 50…</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ meso_name       &lt;chr&gt; "Pantanais Sul Mato-Grossense", "Pantanais Sul Mato-Grossense", "Centro Norte De Mato Grosso Do Sul", "C…</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_code      &lt;dbl&gt; 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, …</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_name      &lt;chr&gt; "Mato Grosso Do Sul", "Mato Grosso Do Sul", "Mato Grosso Do Sul", "Mato Grosso Do Sul", "Mato Grosso Do …</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ region_code     &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ region_name     &lt;chr&gt; "Centre-West", "Centre-West", "Centre-West", "Centre-West", "Centre-West", "Centre-West", "Centre-West",…</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ biome_code      &lt;dbl&gt; 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 6, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 6, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 6, 3, 3,…</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ biome_name      &lt;chr&gt; "Pantanal", "Pantanal", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Ce…</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ecozone_code    &lt;dbl&gt; 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 8, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 8, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 8, 3, 3,…</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ecozone_name    &lt;chr&gt; "Pantanal", "Pantanal", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Cerrado", "Ce…</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ main_climate    &lt;chr&gt; "AW", "AM", "AW", "AM", "AM", "AW", "AM", "AW", "AF", "CFA", "CFA", "AW", "AM", "AW", "AM", "AM", "AW", …</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ month           &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4,…</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year            &lt;dbl&gt; 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 20…</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ time            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4,…</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dengue_cases    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ population      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pop_density     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tmax            &lt;dbl&gt; 34.28429, 33.15394, 32.31370, 31.23787, 31.19907, 32.12062, 31.67418, 31.42584, 33.35522, 31.53561, 31.5…</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tmin            &lt;dbl&gt; 24.00583, 23.43257, 22.61425, 21.82709, 21.29000, 21.85358, 22.03971, 21.71142, 23.22608, 21.63477, 21.5…</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pdsi            &lt;dbl&gt; -1.2329962, -1.8564967, -0.7201829, -2.3979688, -0.2056521, -1.5016941, -2.4826837, -3.2662439, -3.05362…</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ urban           &lt;dbl&gt; 88.31, 72.36, 84.51, 94.71, 87.29, 85.58, 84.16, 78.50, 78.59, 81.81, 73.65, 88.31, 72.36, 84.51, 94.71,…</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ water_network   &lt;dbl&gt; 88.78, 79.59, 84.29, 88.13, 86.48, 65.80, 83.69, 81.68, 80.51, 77.45, 76.66, 88.78, 79.59, 84.29, 88.13,…</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ water_shortage  &lt;dbl&gt; 0.0000, 0.1528, 0.0437, 0.1855, 0.3201, 0.1921, 0.0524, 0.2444, 0.1247, 0.2095, 0.1419, 0.0000, 0.1528, …</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ date            &lt;date&gt; 2000-01-01, 2000-01-01, 2000-01-01, 2000-01-01, 2000-01-01, 2000-01-01, 2000-01-01, 2000-01-01, 2000-01…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In this data frame, the <em>date</em> column contains the temporal identifier (in this case, we have monthly data where the variable <em>date</em> represents the first day of the month) and the spatial unit identifier is <em>micro_code</em>.</p>
-<p>Since we have data for several spatial units, it is useful to have the polygon geometries of the areas (e.g., a geopackage, shapefile o geojson file), loaded as an <code>sf</code> object, in order to plot cartographic representations. The <code>sf</code> object must also contain the area unit identifier to be able to link the geometries with the data frame.</p>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 28</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ micro_code      &lt;dbl&gt; 50001, 50002, 50003, 50004, 50005, 50006, 50007, 50008…</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ micro_name      &lt;chr&gt; "Baixo Pantanal", "Aquidauana", "Alto Taquari", "Campo…</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ micro_name_ibge &lt;chr&gt; "BAIXO PANTANAL", "AQUIDAUANA", "ALTO TAQUARI", "CAMPO…</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ meso_code       &lt;dbl&gt; 5001, 5001, 5002, 5002, 5003, 5003, 5003, 5003, 5004, …</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ meso_name       &lt;chr&gt; "Pantanais Sul Mato-Grossense", "Pantanais Sul Mato-Gr…</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_code      &lt;dbl&gt; 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50…</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_name      &lt;chr&gt; "Mato Grosso Do Sul", "Mato Grosso Do Sul", "Mato Gros…</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ region_code     &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, …</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ region_name     &lt;chr&gt; "Centre-West", "Centre-West", "Centre-West", "Centre-W…</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ biome_code      &lt;dbl&gt; 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 6, 3, 3, 2, 2, 2, 2, 2, …</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ biome_name      &lt;chr&gt; "Pantanal", "Pantanal", "Cerrado", "Cerrado", "Cerrado…</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ecozone_code    &lt;dbl&gt; 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 8, 3, 3, 2, 2, 2, 2, 2, …</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ecozone_name    &lt;chr&gt; "Pantanal", "Pantanal", "Cerrado", "Cerrado", "Cerrado…</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ main_climate    &lt;chr&gt; "AW", "AM", "AW", "AM", "AM", "AW", "AM", "AW", "AF", …</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ month           &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, …</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year            &lt;dbl&gt; 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, …</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ time            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, …</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dengue_cases    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ population      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pop_density     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tmax            &lt;dbl&gt; 34.28429, 33.15394, 32.31370, 31.23787, 31.19907, 32.1…</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tmin            &lt;dbl&gt; 24.00583, 23.43257, 22.61425, 21.82709, 21.29000, 21.8…</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pdsi            &lt;dbl&gt; -1.2329962, -1.8564967, -0.7201829, -2.3979688, -0.205…</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ urban           &lt;dbl&gt; 88.31, 72.36, 84.51, 94.71, 87.29, 85.58, 84.16, 78.50…</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ water_network   &lt;dbl&gt; 88.78, 79.59, 84.29, 88.13, 86.48, 65.80, 83.69, 81.68…</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ water_shortage  &lt;dbl&gt; 0.0000, 0.1528, 0.0437, 0.1855, 0.3201, 0.1921, 0.0524…</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ date            &lt;date&gt; 2000-01-01, 2000-01-01, 2000-01-01, 2000-01-01, 2000-…</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pop100000       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In this data frame, the <em>date</em> column contains the temporal identifier (in this case, we have monthly data where the variable <em>date</em> represents the first day of the month) and the spatial unit identifier is <em>micro_code</em>. These variable names should be specified in the <code>time</code> and <code>unit</code> arguments, respectively.</p>
+<p>Since we have data for several spatial units, it is useful to have the polygon geometries of the units (e.g., a geopackage, shapefile or geojson file), loaded as an <code>sf</code> object, in order to plot cartographic representations. The <code>sf</code> object must also contain the unit identifier to be able to link the geometries with the data frame.</p>
 <p>For the <code>dengue_MS</code>, the geometries are already included in the package in the <code>map_MS</code> object:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"map_MS"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(map_MS)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 11</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 2</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ code     &lt;dbl&gt; 50001, 50002, 50003, 50004, 50005, 50006, 50007, 50008, 50009, 50010, 50011</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-55.60618 -..., MULTIPOLYGON (((-55.39862 -..., MULTIPOLYGON (((-53.68353 -..., MULTIPOLYGON ((…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In <code>map_MS</code>, the <em>code</em> variable corresponds to the <em>micro_code</em> area identifier in the <code>dengue_MS</code> object.</p>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ code     &lt;dbl&gt; 50001, 50002, 50003, 50004, 50005, 50006, 50007, 50008, 50009…</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-55.60618 -..., MULTIPOLYGON (((…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In <code>map_MS</code>, the <em>code</em> variable corresponds to the <em>micro_code</em> unit identifier in the <code>dengue_MS</code> object.</p>
 <blockquote class="blockquote">
 <p>💡 <strong>Tip</strong>: If you don’t have geometries for your data, a good place to look for them is <a href="https://gadm.org/">GADM</a>, <a href="https://www.naturalearthdata.com/">natural earth</a>, or <a href="https://www.geoboundaries.org/">GeoBoundaries</a>.</p>
 </blockquote>
@@ -406,207 +409,413 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="spatial-and-temporal-aggregations" class="level2">
 <h2 class="anchored" data-anchor-id="spatial-and-temporal-aggregations">Spatial and temporal aggregations</h2>
 <p>Most <strong>GHRexplore</strong> functions support temporal and spatial aggregations from finer to coarser resolution. For example, you can aggregate daily to weekly data, or aggregate small regions to larger regions.</p>
-<p>Temporal and spatial aggregations are performed using the arguments <code>aggregate_time</code> and <code>aggregate_space</code>, respectively. For covariates (<code>type='cov'</code>), the aggregation function can be specified using <code>aggregate_space_fun</code> and <code>aggregate_time_fun</code> (options include mean (default), median, and sum). For case counts and incidence, the aggregation function is fixed to be the sum of cases.</p>
+<p>Temporal and spatial aggregations are performed using the arguments <code>aggregate_time</code> and <code>aggregate_space</code>, respectively. For covariates (<code>type='cov'</code>), the aggregation function can be specified using <code>aggregate_space_fun</code> and <code>aggregate_time_fun</code> (options include mean (default), median, and sum). For case counts and incidence, the aggregation function is fixed to be the sum of cases and the mean of the population.</p>
 </section>
 <section id="color-palettes" class="level2">
 <h2 class="anchored" data-anchor-id="color-palettes">Color palettes</h2>
 <p>In <strong>GHRexplore</strong>, color is controlled by the <code>palette</code> argument. We included a few in-house palettes that are used as defaults depending on the plot type:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GHR_palettes</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/IDE palettes-1.png" style="display: block; margin: auto;"></p>
+<p><img src="GHRexplore-vignette_files/figure-gfm/IDE palettes-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>In addition to these, all color palettes included in the packages <code>RColorBrewer</code> and <code>colorspace</code> can also be used. All available options can be checked by running <code>RColorBrewer::display.brewer.all()</code> and <code>colorspace::hcl_palettes(plot=TRUE)</code>.</p>
 <p>As a few examples, the ‘Blues’ palette can be useful when plotting precipitation-related variables, ‘Greens’ when plotting vegetation-related variables, or ‘Blue-Red’ when displaying temperature. When a single color is needed, a color in <code>colors()</code> or a hex code can also be specified. In addition, the user can provide custom palettes using a vector of hex codes to the palette argument.</p>
 <blockquote class="blockquote">
 <p>💡 <strong>Tip</strong>: Palettes can be reversed by preceding them with a minus sign, e.g.&nbsp;‘-IDE1’.</p>
 </blockquote>
 </section>
-</section>
 <section id="plot-types" class="level1">
 <h1>Plot types</h1>
 <section id="time-series" class="level2">
 <h2 class="anchored" data-anchor-id="time-series">Time series</h2>
-<p><code>plot_timeseries</code> produces time series plots of covariates, case counts, or incidence rates. It allows for spatial and temporal aggregations, plotting single or multiple time series of different areas simultaneously (using facets or colors), y-axis transformations, and axis and title labeling.</p>
-<p>We start by plotting the time series data for minimum temperature (note <code>type="cov"</code>) for all the 11 areas in <code>dengue_MS</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(dengue_MS, <span class="at">var =</span> <span class="st">"tmin"</span>, <span class="at">type =</span> <span class="st">"cov"</span>, </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts1-1.png" style="display: block; margin: auto;"></p>
-<p>Since 11 areas are quite a lot for a single graph, we can use <code>facet = TRUE</code> to display them in different panels:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(dengue_MS, <span class="at">var =</span> <span class="st">"tmin"</span>, <span class="at">type =</span> <span class="st">"cov"</span>, <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">facet =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-1.png" style="display: block; margin: auto;"></p>
-<p>Another possible strategy is to keep the 11 areas, but highlight the one we are interested in using the <code>highlight</code> argument by setting it to the area identifier we want to highlight:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(dengue_MS, <span class="at">var =</span> <span class="st">"tmin"</span>, <span class="at">type =</span> <span class="st">"cov"</span>, <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">highlight =</span> <span class="st">"50001"</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">title =</span> <span class="st">"Micro code 50001"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts3-1.png" style="display: block; margin: auto;"></p>
+<p><code>plot_timeseries</code> produces time series plots of covariates, case counts, or incidence rates. It allows for spatial and temporal aggregations, plotting single or multiple time series of different units simultaneously (using facets or colors), y-axis transformations, and axis and title labeling.</p>
+<p>We start by plotting the time series data for minimum temperature (note <code>type="cov"</code>) for all the 11 spatial units in <code>dengue_MS</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts1-1.png" alt="" style="display: block; margin: auto;"></p>
+<p>Since 11 spatial units are quite a lot for a single graph, we can use <code>facet = TRUE</code> to display them in different panels:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-1.png" alt="" style="display: block; margin: auto;"></p>
+<p>Another possible strategy is to keep the 11 units, but highlight the one we are interested in using the <code>highlight</code> argument by setting it to the unit identifier we want to highlight:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">highlight =</span> <span class="st">"50001"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Micro code 50001"</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts3-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>As an alternative option, we could also aggregate to a coarser spatial unit by using an aggregation function. Here, we aggregate to meso areas using the <code>aggregate_space</code> argument. Since <code>type="cov"</code>, it will aggregate temperatures using the mean as a default.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(dengue_MS, <span class="at">var =</span> <span class="st">"tmin"</span>, <span class="at">type =</span> <span class="st">"cov"</span>, <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts4-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"Minimum temp."</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts4-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>After temperature, we move on to plotting dengue counts (note <code>type="counts"</code>) aggregating to meso areas using <code>aggregate_space</code>, which applies a sum function by default when <code>type="counts"</code>. Given the right-skewed distribution of the counts, we scale the y axis using a <code>log10(x+1)</code> transformation:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(dengue_MS, <span class="at">var =</span> <span class="st">"dengue_cases"</span>, <span class="at">type =</span> <span class="st">"counts"</span>,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">transform =</span> <span class="st">"log10p1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts5-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"dengue_cases"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"counts"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="st">"log10p1"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts5-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>In a similar fashion, we can also plot incidence rates (note <code>type="inc"</code> and the defined <code>pop</code> argument) aggregating to meso areas using <code>aggregate_space</code>, which for <code>type="inc"</code> it first sums the cases per area, and then computes the incidence rates. We set the scale of the incidence rate (<code>pt</code> argument) to 1,000 persons, and scale the y axis using a <code>log10(x+1)</code> transformation:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(dengue_MS, <span class="at">var =</span> <span class="st">"dengue_cases"</span>, <span class="at">type =</span> <span class="st">"inc"</span>, <span class="at">pop =</span> <span class="st">"population"</span>,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">pt =</span> <span class="dv">1000</span>, <span class="at">transform =</span> <span class="st">"log10p1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts6-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"dengue_cases"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"inc"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pt =</span> <span class="dv">1000</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="st">"log10p1"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts6-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="dual-axis-time-series" class="level2">
 <h2 class="anchored" data-anchor-id="dual-axis-time-series">Dual-axis time series</h2>
-<p><code>plot_timeseries2</code> produces two-axis time series plots of covariates, case counts, or incidence rates. Similarly to <code>plot_timeseries</code>, it allows for spatial and temporal aggregations, plotting single or multiple time series of different areas simultaneously using facets, and axis and title labeling. The main difference between the two time series functions is that, in <code>plot_timeseries2</code> the arguments <code>var</code>, <code>type</code> and optionally <code>var_label</code> and <code>ylab</code> need to be of length 2, corresponding to the left and right axes respectively.</p>
+<p><code>plot_timeseries2</code> produces two-axis time series plots of covariates, case counts, or incidence rates. Similarly to <code>plot_timeseries</code>, it allows for spatial and temporal aggregations, plotting single or multiple time series of different spatial units simultaneously using facets, and axis and title labeling. The main difference between the two time series functions is that, in <code>plot_timeseries2</code> the arguments <code>var</code>, <code>type</code> and optionally <code>var_label</code> and <code>ylab</code> need to be of length 2, corresponding to the left and right axes respectively.</p>
 <p>We start by plotting the time series data for two covariates (note <code>type=c("cov", "cov")</code>): maximum temperature and PDSI. We choose to align the two axis by forcing the mean of the two variables to be aligned:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(dengue_MS,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"cov"</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">time =</span> <span class="st">"date"</span>, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">area =</span> <span class="st">"micro_code"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">align =</span> <span class="st">"mean"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-1-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"cov"</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">"mean"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-1-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>We now improve on this by performing spatial aggregation into larger <em>meso</em> areas and specifying custom colours and labels:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(dengue_MS,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>),</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"cov"</span>),</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">time =</span> <span class="st">"date"</span>, </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">area =</span> <span class="st">"micro_code"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"tomato"</span>, <span class="st">"royalblue"</span>),</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Maximum temp."</span>, <span class="st">"PDSI"</span>),</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">align =</span> <span class="st">"mean"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-2-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"cov"</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"tomato"</span>, <span class="st">"royalblue"</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Maximum temp."</span>, <span class="st">"PDSI"</span>),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">"mean"</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-2-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>One of the most interesting applications of <code>plot_timeseries2</code> is to visualize in the same graph disease cases and a candidate predictor. We do that in the following example, where we visualize dengue incidence and maximum temperature (note <code>type=c("inc", "cov")</code> and the <code>pop</code> argument):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(dengue_MS,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>, <span class="st">"pdsi"</span>),</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"inc"</span>, <span class="st">"cov"</span>),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">pop =</span> <span class="st">"population"</span>, </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">time =</span> <span class="st">"date"</span>, </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">area =</span> <span class="st">"micro_code"</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-3-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>, <span class="st">"pdsi"</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"inc"</span>, <span class="st">"cov"</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-3-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>Similarly, we can visualize case counts together with a covariate (note <code>type=c("counts", "cov")</code>).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(dengue_MS,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>, <span class="st">"pdsi"</span>),</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"counts"</span>, <span class="st">"cov"</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">time =</span> <span class="st">"date"</span>, </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">area =</span> <span class="st">"micro_code"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-4-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_timeseries2</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>, <span class="st">"pdsi"</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"counts"</span>, <span class="st">"cov"</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/ts2-4-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="heatmap" class="level2">
 <h2 class="anchored" data-anchor-id="heatmap">Heatmap</h2>
-<p><code>plot_heatmap</code> plots time series heatmaps of covariates, case counts, or incidence rates. Years are displayed on the y axis and weeks or months on the x axis. The function allows for spatial and temporal aggregations, plotting single or multiple time series for different areas simultaneously (using facets), color transformations, and axis and title labeling.</p>
+<p><code>plot_heatmap</code> plots time series heatmaps of covariates, case counts, or incidence rates. Years are displayed on the y axis and weeks or months on the x axis. The function allows for spatial and temporal aggregations, plotting single or multiple time series for different spatial units simultaneously (using facets), color transformations, and axis and title labeling.</p>
 <p>In this first example, we plot the variable (note <code>type="cov"</code>) PDSI (Palmer Drought Severity Index) aggregated at the meso code level. We use a suitable palette for drought and we center it at zero:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_heatmap</span>(dengue_MS, <span class="at">var =</span> <span class="st">"pdsi"</span>, <span class="at">type =</span> <span class="st">"cov"</span>, <span class="at">var_label =</span> <span class="st">"PDSI"</span>,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>, <span class="at">palette =</span> <span class="st">"-Vik"</span>, <span class="at">centering =</span> <span class="dv">0</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/heatmap1-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_heatmap</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"pdsi"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"PDSI"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-Vik"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">centering =</span> <span class="dv">0</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/heatmap1-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>In this second example, we plot dengue incidence rates (note <code>type="inc"</code> and <code>pop</code> arguments) at the meso code level and apply a transformation to the color gradient to have a better contrast.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_heatmap</span>(dengue_MS, <span class="at">var =</span> <span class="st">"dengue_cases"</span>, <span class="at">type =</span> <span class="st">"inc"</span>, <span class="at">pop =</span> <span class="st">"population"</span>,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">title=</span> <span class="st">"Monthly Incidence"</span>, <span class="at">transform =</span> <span class="st">"log10p1"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/heatmap2-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_heatmap</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"dengue_cases"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"inc"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Monthly Incidence"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="st">"log10p1"</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/heatmap2-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="seasonality" class="level2">
 <h2 class="anchored" data-anchor-id="seasonality">Seasonality</h2>
-<p><code>plot_seasonality</code> produces yearly time series of covariates, case counts, or incidence rates to explore seasonality patterns. Months/weeks are shown on the x axis, the magnitude of the variable on the y axis, and years are represented as colors. The function allows for spatial and temporal aggregations, plotting single or multiple time series of different areas simultaneously (using facets), axis transformations, and axis and title labeling.</p>
+<p><code>plot_seasonality</code> produces yearly time series of covariates, case counts, or incidence rates to explore seasonality patterns. Months/weeks are shown on the x axis, the magnitude of the variable on the y axis, and years are represented as colors. The function allows for spatial and temporal aggregations, plotting single or multiple time series of different units simultaneously (using facets), axis transformations, and axis and title labeling.</p>
 <p>In this example, we explore the seasonal patterns of minimum temperature aggregated at the meso code level.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_seasonality</span>(dengue_MS, <span class="at">var =</span> <span class="st">"tmin"</span>, <span class="at">var_label =</span> <span class="st">"Minimum temperature"</span>,</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="st">"cov"</span>, <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>,   </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/seasonality-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_seasonality</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"Minimum temperature"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/seasonality-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="map" class="level2">
 <h2 class="anchored" data-anchor-id="map">Map</h2>
-<p><code>plot_map</code> plots choropleth maps of covariates, case counts, or incidence rates. In this function, we also need to supply the sf object containing the polygon geometries in the <code>map</code> argument. We can use the <code>map_area</code> argument to specify the column in the <code>sf</code> object that contains the area identifiers to be merged to the <code>area</code> column of the data frame specified in <code>data</code>.</p>
-<p><code>plot_map</code> allows for temporal aggregations (by year or across all years), color transformations, centering and binning (current options include quantiles and equal area), as well as title labeling. It can plot both numerical and categorical variables.</p>
+<p><code>plot_map</code> plots choropleth maps of covariates, case counts, or incidence rates. In this function, we also need to supply the sf object containing the polygon geometries in the <code>map</code> argument. We can use the <code>map_unit</code> argument to specify the column in the <code>sf</code> object that contains the unit identifiers to be merged to the <code>unit</code> column of the data frame specified in <code>data</code>.</p>
+<p><code>plot_map</code> allows for temporal aggregations (by year or across all years), color transformations, centering and binning (current options include quantiles and equal interval), as well as title labeling. It can plot both numerical and categorical variables.</p>
 <p>In this first example, we plot average urbanicity levels (note <code>type="cov"</code>) over the entire study period while using an inverted palette:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map</span>(<span class="at">data =</span> dengue_MS, <span class="at">var =</span> <span class="st">"urban"</span>,  <span class="at">time =</span> <span class="st">"date"</span>, </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="st">"cov"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>,  <span class="at">map =</span> map_MS, </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">map_area =</span> <span class="st">"code"</span>, <span class="at">aggregate_time =</span> <span class="st">"all"</span>, </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">var_label=</span> <span class="st">"Urbanicity"</span>, <span class="at">palette =</span> <span class="st">"-Heat"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/map1-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"urban"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> map_MS,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_unit =</span> <span class="st">"code"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_time =</span> <span class="st">"all"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"Urbanicity"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-Heat"</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/map1-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>We now plot case incidence per 1,000 persons (note <code>type="inc"</code> and <code>pt=1000</code>) for every year (<code>aggregate_time = "year"</code>) and binning into 5 categories using the quantile method (see <code>bins</code> and <code>bins_method</code> arguments).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map</span>(dengue_MS, <span class="at">var =</span> <span class="st">"dengue_cases"</span>, <span class="at">type =</span> <span class="st">"inc"</span>, <span class="at">pop =</span> <span class="st">"population"</span>, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">pt =</span> <span class="dv">1000</span>, <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>,  </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">map =</span> map_MS, <span class="at">map_area =</span> <span class="st">"code"</span>, <span class="at">aggregate_time =</span> <span class="st">"year"</span>, </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">bins =</span> <span class="dv">5</span>, <span class="at">bins_method =</span> <span class="st">"quantile"</span>, <span class="at">palette =</span> <span class="st">"-Rocket"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/map2-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"dengue_cases"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"inc"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pt =</span> <span class="dv">1000</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> map_MS,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_unit =</span> <span class="st">"code"</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_time =</span> <span class="st">"year"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">bins =</span> <span class="dv">5</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">bins_method =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-Rocket"</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/map2-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>Lastly, here is one example with the categorical, time-invariant <em>biome</em> covariate:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map</span>(<span class="at">data =</span> dengue_MS, <span class="at">var =</span> <span class="st">"biome_name"</span>, <span class="at">type =</span> <span class="st">"cov"</span>,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">time =</span> <span class="st">"date"</span>, <span class="at">area =</span> <span class="st">"micro_code"</span>, <span class="at">aggregate_time =</span> <span class="st">"all"</span>, </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">map =</span> map_MS, <span class="at">map_area =</span> <span class="st">"code"</span>, <span class="at">var_label=</span> <span class="st">"Biome"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/map3-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"biome_name"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_time =</span> <span class="st">"all"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> map_MS,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_unit =</span> <span class="st">"code"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="st">"Biome"</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/map3-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="bivariate" class="level2">
 <h2 class="anchored" data-anchor-id="bivariate">Bivariate</h2>
-<p><code>plot_bivariate</code> allows the visually assessment of associations between two variables. It will be a scatter plot if both variables are numeric and box plots if one of them is categorical. Options for customization include grouping by a variable using color or facets (<code>area</code> argument) and axis and title labeling.</p>
+<p><code>plot_bivariate</code> allows the visual assessment of associations between two variables. It will be a scatter plot if both variables are numeric and box plots if one of them is categorical. Options for customization include grouping by a variable using color or facets (<code>unit</code> argument) and axis and title labeling.</p>
 <p>In this first example, we explore the relationship between maximum temperature and drought while grouping by meso code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS, </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>), </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Max. temp"</span>, <span class="st">"PDSI"</span>),</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">area =</span> <span class="st">"meso_code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/biv1-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Max. temp"</span>, <span class="st">"PDSI"</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"meso_code"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/biv1-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>Next, we do the same but grouping using facets with free scales:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS, </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>), </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Max. temp"</span>, <span class="st">"PDSI"</span>),</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">area =</span> <span class="st">"meso_code"</span>, </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">facet =</span> <span class="cn">TRUE</span>, <span class="at">free_x_scale =</span> <span class="cn">TRUE</span>, <span class="at">free_y_scale =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/biv2-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"pdsi"</span>),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Max. temp"</span>, <span class="st">"PDSI"</span>),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">free_x_scale =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">free_y_scale =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/biv2-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>Lastly, we explore the distribution of minimum temperature and the categorical variable biome while coloring by meso code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(dengue_MS, </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"biome_name"</span>, <span class="st">"tmax"</span>), </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Biome"</span>, <span class="st">"Max. temp"</span>),</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">area =</span> <span class="st">"meso_code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/biv3-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"biome_name"</span>, <span class="st">"tmax"</span>),</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"Biome"</span>, <span class="st">"Max. temp"</span>),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"meso_code"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/biv3-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 <section id="correlation" class="level2">
 <h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
 <p><code>plot_correlation</code> plots a correlation matrix of a set of variables. By default, Pearson correlation is computed, and circles are used to depict correlation values in the lower triangle and the diagonal of the matrix, whereas numbering is used in the upper triangle:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_correlation</span>(dengue_MS, </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>,<span class="st">"pop_density"</span>, <span class="st">"tmax"</span>, <span class="st">"tmin"</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"pdsi"</span>, <span class="st">"urban"</span>, <span class="st">"water_network"</span>, <span class="st">"water_shortage"</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/corr1-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_correlation</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dengue_cases"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pop_density"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tmax"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tmin"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"urban"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"water_network"</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"water_shortage"</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/corr1-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>In this second example, we use Spearman correlation and customize the triangles and the palette.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_correlation</span>(dengue_MS, <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>,<span class="st">"pop_density"</span>, <span class="st">"tmax"</span>, <span class="st">"tmin"</span>,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"pdsi"</span>, <span class="st">"urban"</span>, <span class="st">"water_network"</span>, <span class="st">"water_shortage"</span>),  </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method =</span> <span class="st">"spearman"</span>, <span class="at">plot_type =</span> <span class="fu">c</span>(<span class="st">"number"</span>, <span class="st">"raster"</span>),</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">palette =</span> <span class="st">"RdBu"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/corr2-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_correlation</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  dengue_MS,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dengue_cases"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pop_density"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tmax"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tmin"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pdsi"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"urban"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"water_network"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"water_shortage"</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"spearman"</span>,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_type =</span> <span class="fu">c</span>(<span class="st">"number"</span>, <span class="st">"raster"</span>),</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"RdBu"</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/corr2-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>Custom labels for the variables can be provided using the <code>var_label</code> argument.</p>
+</section>
+<section id="cross-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="cross-correlation">Cross-correlation</h2>
+<p><code>plot_crosscorrelation</code> plots the correlation between two variables at different lag times, and is typically used to assess the correlation between a disease outcome and different lags of a covariate.</p>
+<p>In this first example, we plot the Pearson correlation at lags 0-6 months between dengue incidence and maximum temperature (see <code>type = c("inc", "cov")</code>) by micro area. Note that the second variable, i.e.&nbsp;the covariate, is the one getting lagged:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_crosscorrelation</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>, <span class="st">"tmax"</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"inc"</span>, <span class="st">"cov"</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_name"</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">lags =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/croscorr1-1.png" alt="" style="display: block; margin: auto;"></p>
+<p>Similarly to the rest of the functions, we can perform spatial aggregations and customize different aspects of the plot. We can also choose another correlation metric as well (kendall or spearman).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_crosscorrelation</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"dengue_cases"</span>, <span class="st">"tmax"</span>),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"inc"</span>, <span class="st">"cov"</span>),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_name"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"spearman"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_name"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Cross-correlation for meso areas"</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"navy"</span>,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">lags =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/croscorr2-1.png" alt="" style="display: block; margin: auto;"></p>
+</section>
+<section id="map-animation" class="level2">
+<h2 class="anchored" data-anchor-id="map-animation">Map animation</h2>
+<p>The function <code>animate_map</code> generates and writes to disk an animation in <code>*.gif</code> format that displays the spatio-temporal time series in a sequence of maps at different time points.</p>
+<blockquote class="blockquote">
+<p>💡 <strong>Tip</strong>: The function <code>animate_map</code> requires two optional additional dependencies, <code>gganimate</code> and <code>magick</code>. Also, it may run into memory issues for long time series with lots of frames, especially when <code>ts_include = TRUE</code>. If this is the case, please use a shorter time series or reduce the figure size.</p>
+</blockquote>
+<p>A basic usage of <code>animate_map</code> can be used to plot a covariate, e.g.&nbsp;monthly minimum temperature in years 2002-2004:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">animate_map</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS[dengue_MS<span class="sc">$</span>year <span class="sc">%in%</span> <span class="dv">2002</span><span class="sc">:</span><span class="dv">2004</span>, ],</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> map_MS,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_unit =</span> <span class="st">"code"</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"cov"</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Blue-Red 3"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">out_width =</span> <span class="dv">400</span>,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">out_height =</span> <span class="dv">300</span>,</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="st">"tmin.gif"</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div data-align="center">
+<p><img src="../../figures/GHRexplore/tmin.gif" width="400"></p>
+</div>
+<p>In this second example, we plot monthly case counts of dengue in years 2006-2007 and we add a synchronised time series plot with the number of cases. Note that we can customise the resulting figure as usual but here we have additional options such as the frame rate.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">animate_map</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS[dengue_MS<span class="sc">$</span>year <span class="sc">%in%</span> <span class="dv">2006</span><span class="sc">:</span><span class="dv">2007</span>, ],</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"dengue_cases"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> map_MS,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_unit =</span> <span class="st">"code"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"counts"</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">fps =</span> <span class="dv">2</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ts_include =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="st">"log10p1"</span>,</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">out_width =</span> <span class="dv">500</span>,</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">out_height =</span> <span class="dv">500</span>,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ts_color =</span> <span class="st">"#453975"</span>,</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="st">"counts.gif"</span>,</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div data-align="center">
+<p><img src="../../figures/GHRexplore/counts.gif" width="400"></p>
+</div>
 </section>
 <section id="compare" class="level2">
 <h2 class="anchored" data-anchor-id="compare">Compare</h2>
 <p><code>plot_compare</code> allows the visualization of several variables in the same figure using the same <strong>GHRexplore</strong> plotting function. Possible functions include <code>plot_timeseries</code>, <code>plot_heatmap</code>, <code>plot_seasonality</code> and <code>plot_map</code>.</p>
-<p>In <code>plot_compare</code>, the <code>var</code>, <code>var_lab</code>, <code>type</code> and <code>palette</code> can be vectors of the same length that refer to each of the elements to be plotted, while some other elements, like <code>pop</code>, <code>pt</code>, <code>time</code>, <code>area</code> and aggregation functions are shared. The final display of the multiple plots is automatically done via the <code>cowplot</code> package, and several options to arrange the figures are available (see <code>?plot_combine</code>) including all arguments of <code>cowplot::plot_grid</code>.</p>
+<p>In <code>plot_compare</code>, the <code>var</code>, <code>var_lab</code>, <code>type</code> and <code>palette</code> can be vectors of the same length that refer to each of the elements to be plotted, while some other elements, like <code>pop</code>, <code>pt</code>, <code>time</code>, <code>unit</code> and aggregation functions are shared. The final display of the multiple plots is automatically done via the <code>cowplot</code> package, and several options to arrange the figures are available (see <code>?plot_combine</code>) including all arguments of <code>cowplot::plot_grid</code>.</p>
 <p>In this first example, we plot the time series of PDSI and dengue incidence as a single column and combine the legends (<code>ncol=1</code>, <code>combine_legend=TRUE</code>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_compare</span>(<span class="at">plot_function =</span> plot_timeseries,</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dengue_MS, </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pdsi"</span>, <span class="st">"dengue_cases"</span>),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"inc"</span>), </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">var_lab =</span> <span class="fu">c</span>(<span class="st">"PDSI"</span>, <span class="st">"Dengue Incidence"</span>),</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">pop =</span> <span class="st">"population"</span>,</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">time =</span> <span class="st">"date"</span>, </span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">area =</span> <span class="st">"micro_code"</span>, </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol=</span><span class="dv">1</span>, </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">combine_legend=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/compare-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_compare</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_function =</span> plot_timeseries,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pdsi"</span>, <span class="st">"dengue_cases"</span>),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"inc"</span>),</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_lab =</span> <span class="fu">c</span>(<span class="st">"PDSI"</span>, <span class="st">"Dengue Incidence"</span>),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">combine_legend =</span> <span class="cn">TRUE</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/compare-1.png" alt="" style="display: block; margin: auto;"></p>
 <p>In this second example, we plot heatmaps of PDSI and dengue incidence using different palettes:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_compare</span>(<span class="at">plot_function =</span> plot_heatmap,</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dengue_MS, </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pdsi"</span>, <span class="st">"dengue_cases"</span>),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"inc"</span>), </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">var_lab =</span> <span class="fu">c</span>(<span class="st">"PDSI"</span>, <span class="st">"Incidence"</span>),</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"Purp"</span>, <span class="st">"Reds"</span>), </span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">pop =</span> <span class="st">"population"</span>,</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">time =</span> <span class="st">"date"</span>, </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">area =</span> <span class="st">"micro_code"</span>, </span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRexplore-vignette_files/figure-gfm/compare2-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_compare</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_function =</span> plot_heatmap,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="st">"pdsi"</span>, <span class="st">"dengue_cases"</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"cov"</span>, <span class="st">"inc"</span>),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_lab =</span> <span class="fu">c</span>(<span class="st">"PDSI"</span>, <span class="st">"Incidence"</span>),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"Purp"</span>, <span class="st">"Reds"</span>),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop =</span> <span class="st">"population"</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregate_space =</span> <span class="st">"meso_code"</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRexplore-vignette_files/figure-gfm/compare2-1.png" alt="" style="display: block; margin: auto;"></p>
 
 
 </section>
@@ -691,7 +900,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -700,8 +910,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -715,6 +986,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -877,44 +1149,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1012,6 +1294,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">
