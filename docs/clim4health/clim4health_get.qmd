@@ -18,7 +18,7 @@ for downloading climate data from the Copernicus Climate Data Store
 function `c4h_get_help()`, which allows you to explore the available
 datasets and their required parameters before downloading.
 
-## 0. Load the package
+## 0\. Load the package
 
 First, let’s load the package.
 
@@ -26,7 +26,7 @@ First, let’s load the package.
 library(clim4health)
 ```
 
-## 1. c4h_get arguments
+## 1\. c4h\_get arguments
 
 `c4h_get()` takes the following arguments:
 
@@ -36,10 +36,9 @@ library(clim4health)
     datasets can be found via `c4h_get_help()` or
     `c4h_get_help("datasets")`.
 3.  `product_type`: the name of the product type you want to download.
-    Available variables can be found via
-    `c4h_get_help("dataset", "product_type")`. For example, if
-    downloading monthly mean data, selecting
-    `product_type = "monthly_averaged_reanalysis"` or
+    Available variables can be found via `c4h_get_help("dataset",
+    "product_type")`. For example, if downloading monthly mean data,
+    selecting `product_type = "monthly_averaged_reanalysis"` or
     `product_type = "monthly_averaged_reanalysis_by_hour_of_day"` tells
     the CDS API whether to download the full monthly mean, or the
     monthly mean of a specified hour (e.g. the monthly mean of
@@ -73,7 +72,7 @@ The key idea is to specify:
 3.  The spatial extent: by specifying latitudes and longitudes
 4.  The file path to save the data
 
-## 2. c4h_get_help
+## 2\. c4h\_get\_help
 
 There are many types of climate data available on the CDS. To know what
 data is available to download from the CDS using **clim4health**, you
@@ -105,7 +104,7 @@ variables for ERA5-Land, we would run:
 c4h_get_help(dataset = "reanalysis-era5-land", parameter = "variable")
 ```
 
-## 3. Specifying arguments in c4h_get()
+## 3\. Specifying arguments in c4h\_get()
 
 Examples in this section of the vignette will fail if they are run
 because additional parameters need to be specified. They are purely for
@@ -121,10 +120,12 @@ interest. For example, to download hourly reanalysis data from 2011 to
 2025 in February and March:
 
 ``` r
-c4h_get(dataset = "reanalysis-era5-land", # data type
-        year = 2011:2025,                 # load multiple years
-        month = c(2,3),                   # load February and March
-        time = 0:23)                      # load all hours of the day
+c4h_get(
+  dataset = "reanalysis-era5-land", # data type
+  year = 2011:2025, # load multiple years
+  month = c(2, 3), # load February and March
+  time = 0:23
+) # load all hours of the day
 ```
 
 > 💡 **Note**: In this case (for hourly reanalysis data from ERA5-Land),
@@ -139,18 +140,20 @@ of February and March for a seasonal forecast initialised in February
 2025, we would specify:
 
 ``` r
-c4h_get(dataset = "seasonal-monthly-single-levels", # data type
-        year = c(2025),                             # year of initialisation
-        month = c(2),                               # month of initialisation
-        leadtime_month = c(1, 2))                   # leadtime months
+c4h_get(
+  dataset = "seasonal-monthly-single-levels", # data type
+  year = c(2025), # year of initialisation
+  month = c(2), # month of initialisation
+  leadtime_month = c(1, 2)
+) # leadtime months
 ```
 
 > 💡 **Note**: There is no default of `leadtime_month`, so the user must
 > specify the leadtime months they wish to download. Note that
 > specifying a single value will download exactly one leadtime month,
-> and not all leadtimes up to that month. For example,
-> `leadtime_month = 3` downloads only the third leadtime, not leadtimes
-> 1-3 (which could be specified using `leadtime_month = 1:3`).
+> and not all leadtimes up to that month. For example, `leadtime_month
+> = 3` downloads only the third leadtime, not leadtimes 1-3 (which could
+> be specified using `leadtime_month = 1:3`).
 
 ### Specifying spatial extent
 
@@ -167,8 +170,10 @@ between -4 and 4, and longitudes between -73, -70, we specify the box in
 order of its North, West, South, East boundaries.
 
 ``` r
-c4h_get(dataset = "reanalysis-era5-land", # data type
-        bbox = c(4, -73, -4, -70))        # bounding box in order N, W, S, E
+c4h_get(
+  dataset = "reanalysis-era5-land", # data type
+  bbox = c(4, -73, -4, -70)
+) # bounding box in order N, W, S, E
 ```
 
 > 💡 **Note**: There is no default of `bbox`. The user must always
@@ -183,8 +188,10 @@ above. The variable is then specified in `c4h_get()` using the
 ERA5-Land, the key parameters we would specify are:
 
 ``` r
-c4h_get(dataset = "reanalysis-era5-land", # data type
-        variable = "2m_temperature")      # variable name
+c4h_get(
+  dataset = "reanalysis-era5-land", # data type
+  variable = "2m_temperature"
+) # variable name
 ```
 
 ### Specifying the file path and name
@@ -195,11 +202,13 @@ directory. However, you may wish to specify a different directory using
 example:
 
 ``` r
-c4h_get(dataset = "reanalysis-era5-land",         # data type
-        variable = "2m_temperature",              # variable name
-        year = 2010:2012,                         # years to download
-        outpath = "/path/to/dir/",                # directory to save data
-        outname = "era5land_t2m")                 # file name stem
+c4h_get(
+  dataset = "reanalysis-era5-land", # data type
+  variable = "2m_temperature", # variable name
+  year = 2010:2012, # years to download
+  outpath = "/path/to/dir/", # directory to save data
+  outname = "era5land_t2m"
+) # file name stem
 ```
 
 > 💡 **Note**: It is recommended to save different datasets in different
@@ -213,7 +222,7 @@ example, in this case, our first output file would be stored as:
 `/path/to/dir/era5land_t2m_201001.nc`. When downloading data,
 `c4h_get()` will print the name of the file where the data is saved.
 
-## 4. Obtain your Personal Access Token (PAT)
+## 4\. Obtain your Personal Access Token (PAT)
 
 To download data from the CDS, you will need a (free) account with the
 ECMWF. If you don’t already have an ECMWF account, you can go to the
@@ -224,9 +233,10 @@ With these credentials you can now log into the
 [CDS](https://cds.climate.copernicus.eu/).
 
 Click on your user icon (top right corner of the webpage). Under the
-“[Your profile](https://cds.climate.copernicus.eu/profile?tab=profile)”
-tab, you can find your API key (PAT). Copy and paste to save it in your
-R session, as you will need it later when downloading the data.
+“[Your
+profile](https://cds.climate.copernicus.eu/profile?tab=profile)” tab,
+you can find your API key (PAT). Copy and paste to save it in your R
+session, as you will need it later when downloading the data.
 
 ``` r
 pat_api <- "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
@@ -234,12 +244,13 @@ pat_api <- "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 To download the data in this tutorial, you will also need to accept
 additional licenses. Under the
-“[Licences](https://cds.climate.copernicus.eu/profile?tab=licences)” tab
-in your profile, please check “Additional licence to use non European
-contributions” and “Licence to use Copernicus Products”. You can click
-on each of the licences to find out more information before accepting.
+“[Licences](https://cds.climate.copernicus.eu/profile?tab=licences)”
+tab in your profile, please check “Additional licence to use non
+European contributions” and “Licence to use Copernicus Products”. You
+can click on each of the licences to find out more information before
+accepting.
 
-## 5. Example downloads
+## 5\. Example downloads
 
 Once you know your PAT, the dataset you would like to download, and the
 required parameters, you can call `c4h_get()` as below. In these 3
@@ -267,14 +278,16 @@ saved will be printed in the console.
 
 ``` r
 # Download reanalysis data
-c4h_get(pat = pat_api,
-        dataset = "reanalysis-era5-land-monthly-means",
-        product_type = "monthly_averaged_reanalysis",
-        variable = "2m_temperature",
-        year = c(2010, 2011, 2012),
-        month = c(4, 5),
-        bbox = c(33, -93, -23, -17),
-        outname = "era5land")
+c4h_get(
+  pat = pat_api,
+  dataset = "reanalysis-era5-land-monthly-means",
+  product_type = "monthly_averaged_reanalysis",
+  variable = "2m_temperature",
+  year = c(2010, 2011, 2012),
+  month = c(4, 5),
+  bbox = c(33, -93, -23, -17),
+  outname = "era5land"
+)
 ```
 
 > 💡 **Note**: In this case (for monthly-mean reanalysis data from
@@ -297,19 +310,24 @@ files where the data is saved will be printed in the console.
 
 ``` r
 # Download hindcast data
-c4h_get(pat = pat_api,
-        dataset = "seasonal-monthly-single-levels",
-        originating_centre = c("ecmwf"),
-        system = c("51"),
-        variable = c("2m_temperature",
-                     "2m_dewpoint_temperature",
-                     "total_precipitation"),
-        product_type = c("monthly_mean"),
-        year = c(2010, 2011, 2012), month = c(4),
-        leadtime_month = c(1, 2),
-        bbox = c(33, -93, -23, -17),
-        outpath = "/path/to/dir/",
-        outname = "hindcast")
+c4h_get(
+  pat = pat_api,
+  dataset = "seasonal-monthly-single-levels",
+  originating_centre = c("ecmwf"),
+  system = c("51"),
+  variable = c(
+    "2m_temperature",
+    "2m_dewpoint_temperature",
+    "total_precipitation"
+  ),
+  product_type = c("monthly_mean"),
+  year = c(2010, 2011, 2012),
+  month = c(4),
+  leadtime_month = c(1, 2),
+  bbox = c(33, -93, -23, -17),
+  outpath = "/path/to/dir/",
+  outname = "hindcast"
+)
 ```
 
 ### 5.3. Forecast data
@@ -321,16 +339,18 @@ issued in April 2025. The file is saved in
 
 ``` r
 # Download forecast data
-c4h_get(pat = pat_api,
-        dataset = "seasonal-monthly-single-levels",
-        originating_centre = c("ecmwf"),
-        system = c("51"),
-        variable = c("total_precipitation"),
-        product_type = c("monthly_mean"),
-        year = c(2025),
-        month = c(4),
-        leadtime_month = c(1, 2),
-        bbox = c(33, -93, -23, -17),
-        outpath = "/path/to/dir/",
-        outname = "forecast")
+c4h_get(
+  pat = pat_api,
+  dataset = "seasonal-monthly-single-levels",
+  originating_centre = c("ecmwf"),
+  system = c("51"),
+  variable = c("total_precipitation"),
+  product_type = c("monthly_mean"),
+  year = c(2025),
+  month = c(4),
+  leadtime_month = c(1, 2),
+  bbox = c(33, -93, -23, -17),
+  outpath = "/path/to/dir/",
+  outname = "forecast"
+)
 ```

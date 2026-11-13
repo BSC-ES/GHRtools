@@ -4,13 +4,12 @@ format: html
 toc: true
 ---
 
-
 ```{=html}
 <img src="/figures/clim4health.svg" align="right" width="14%" style="margin-top: -60px; style="margin-top: 0px;>
 <br><br>
 ```
 
-## Overview
+## Overview 
 
 **clim4health** is an R package designed to load, transform, process,
 plot, and save climate data. It is specifically designed for use in
@@ -24,7 +23,7 @@ for use in health impact studies.
 This vignette provides an overview of the **clim4health** package
 methodology, the core functions, and a simple example workflow using
 real data. It deals with climate data in multidimensional arrays called
-*s2dv_cubes* (see the `clim4health_s2dv_cubes` vignette for more
+*s2dv\_cubes* (see the `clim4health_s2dv_cubes` vignette for more
 details). More complex use cases and examples are described in other
 vignettes (`clim4health_downscaling` regarding downscaling methodologies
 and `clim4health_verification` regarding the verification methodologies
@@ -69,76 +68,97 @@ column for the date, as well as a column or columns containing variable
 values. However, given the variety of formats used to store climate data
 in csv files, the user may need to either reformat the data before using
 clim4health’s load function, or follow the guide for formatting data
-into an s2dv_cube object (see the `clim4health_s2dv_cubes` vignette for
+into an s2dv\_cube object (see the `clim4health_s2dv_cubes` vignette for
 more information and a worked example).
 
 ## clim4health structure
 
-<div class="figure" style="text-align: center">
+<br>
 
-<img src="https://gitlab.earth.bsc.es/ghr/clim4health/-/blob/main/inst/figures/clim4health_function_order.svg?ref_type=heads" alt="Figure 1: Structure of the **clim4health** package, outlining its functions and general functionality." width="100%" />
-<p class="caption">
-Figure 1: Structure of the **clim4health** package, outlining its
-functions and general functionality.
-</p>
+<div data-align="center">
+
+<img src='/figures/clim4health/clim4health_function_order.svg' width="100%" />
 
 </div>
+
+<br>
 
 This vignette outlines one full example workflow using the
 **clim4health** package. The process is organized into three key stages:
 obtaining input data, transforming and processing the data, and
 preparing outputs.
 
-### 1. Obtain input data
+### 1\. Obtain input data
 
 To use **clim4health** functions, climate data must be loaded into an R
-session in a consistent format called an *s2dv_cube*. This object can be
-created by:
+session in a consistent format called an *s2dv\_cube*. This object can
+be created by:
 
-- downloading data from the CDS using `c4h_get()`, and then loading it
-  using `c4h_load()`.
+  - downloading data from the CDS using `c4h_get()`, and then loading it
+    using `c4h_load()`.
 
-- loading data from a local file and transforming it into an s2dv_cube
-  either manually or using `CSTools::s2dv_cube()`. The
-  `clim4health_s2dv_cubes` vignette provides a worked example of how to
-  do this for weather station data.
+  - loading data from a local file and transforming it into an
+    s2dv\_cube either manually or using `CSTools::s2dv_cube()`. The
+    `clim4health_s2dv_cubes` vignette provides a worked example of how
+    to do this for weather station data.
+
+| Function              | Purpose                                                                                                              |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| `c4h_get_help()`      | List the available datasets and variables that can be downloaded from the CDS via clim4health.                       |
+| `c4h_get()`           | Download data from the CDS.                                                                                          |
+| `c4h_load()`          | Load climate data into an s2dv\_cube object, either data downloaded using `c4h_get()` or data from a local csv file. |
+| `c4h_convert_units()` | Print or convert the units of a variable in an s2dv\_cube object.                                                    |
+
+Table 1: Overview of functions to prepare input data for clim4health.
 
 To use the rest of the **clim4health** functions, the data must be in an
-s2dv_cube format with the following dimensions:
+s2dv\_cube format with the following dimensions:
 
-- **dataset** - the datasets that are loaded.
+  - **dataset** - the datasets that are loaded.
 
-- **var** - the variables that are loaded, e.g. temperature,
-  precipitation, etc.
+  - **var** - the variables that are loaded, e.g. temperature,
+    precipitation, etc.
 
-- **sdate** - the forecast initialisation or start dates.
+  - **sdate** - the forecast initialisation or start dates.
 
-- **time** - the forecast lead time.
+  - **time** - the forecast lead time.
 
-- **ensemble** - the model ensemble members.
+  - **ensemble** - the model ensemble members.
 
-- one or two spatial dimensions, either:
-
-  - **latitude** and **longitude** for gridded data
-
-  - **area** for polygon data, e.g. administrative areas such as states
-    or provinces
-
-  - **location** for point data, e.g. weather station data
+  - one or two spatial dimensions, either:
+    
+      - **latitude** and **longitude** for gridded data
+    
+      - **area** for polygon data, e.g. administrative areas such as
+        states or provinces
+    
+      - **location** for point data, e.g. weather station data
 
 > 💡 **Tip**: the dimension **dataset** will always have size 1 in
 > **clim4health** cases. It only exists because it is required for
 > package dependencies in the downscaling and verification functions.
 
-Once the data has been loaded as an s2dv_cube, the user can move on to
+Once the data has been loaded as an s2dv\_cube, the user can move on to
 the transformation and postprocessing steps, which are described in the
 next section.
 
-### 2. Transform and process the data
+### 2\. Transform and process the data
 
 There are several functions available to transform and process the data,
 which can be applied in any order depending on the required output.
 These include:
+
+| Function          | Purpose                                                                                                                             |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| `c4h_space()`     | Spatially aggregate gridded data to administrative areas.                                                                           |
+| `c4h_time()`      | Temporal aggregation to a desired time resolution.                                                                                  |
+| `c4h_downscale()` | Downscale, calibrate and bias adjust climate data.                                                                                  |
+| `c4h_verify()`    | Perform a forecast verification and quality assessment of forecast skill.                                                           |
+| `c4h_index()`     | Mask climate data by applying thresholds to the data.                                                                               |
+| `c4h_collapse()`  | Collapse the data to a single value across one or more dimensions, e.g. calculating the ensemble mean or maximum value across time. |
+
+Table 2: Overview of functions to transform and process data for
+clim4health.
 
 For the more complex functions `c4h_downscale()` and `c4h_verify()`,
 vignettes are available (`clim4health_downscaling` and
@@ -146,11 +166,21 @@ vignettes are available (`clim4health_downscaling` and
 about the methodologies available and relevant choices of input
 arguments.
 
-### 3. Prepare outputs
+### 3\. Prepare outputs
 
 Once the data has been transformed and processed as required, the user
 can choose to plot the data, or convert it to a different data type, and
 save it.
+
+| Function          | Purpose                                                                                         |
+| :---------------- | :---------------------------------------------------------------------------------------------- |
+| `c4h_plot()`      | Plot aspects of the data.                                                                       |
+| `c4h_plotskill()` | Plot forecast skill and its significance.                                                       |
+| `c4h_convert()`   | Convert the data from s2dv\_cube to a different data type, including areal, tabular, or raster. |
+| `c4h_save()`      | Save the transformed data.                                                                      |
+
+Table 3: Overview of functions to visualise and output data for
+clim4health.
 
 # clim4health workflow
 
@@ -161,34 +191,35 @@ In this example, we will perform the following steps:
 
 **Step 1:**
 
-- Load the forecast, hindcast, and reanalysis data into R as s2dv_cube
-  objects.
-- Convert the units of the datasets.
-- Plot the forecast, hindcast, and reanalysis data to visualize the raw
-  data.
+  - Load the forecast, hindcast, and reanalysis data into R as
+    s2dv\_cube objects.
+  - Convert the units of the datasets.
+  - Plot the forecast, hindcast, and reanalysis data to visualize the
+    raw data.
 
 **Step 2:**
 
-- Spatially aggregate the hindcast and reanalysis data to administrative
-  areas.
-- Alternatively, downscale the forecast and hindcast data to the finer
-  spatial resolution of the reanalysis data.
-- Plot the downscaled forecast and hindcast data to visualize the
-  downscaling results.
-- Perform a forecast verification to assess the skill of the forecast
-  model compared to the reanalysis data.
-- Apply a threshold-based mask to the downscaled forecast data to
-  identify only grid cells that exceed a certain temperature threshold.
-- Aggregate the data to a different temporal resolution, e.g. weekly or
-  yearly.
-- Collapse the data across one or more dimensions, e.g. to calculate the
-  ensemble mean or maximum value across time.
+  - Spatially aggregate the hindcast and reanalysis data to
+    administrative areas.
+  - Alternatively, downscale the forecast and hindcast data to the finer
+    spatial resolution of the reanalysis data.
+  - Plot the downscaled forecast and hindcast data to visualize the
+    downscaling results.
+  - Perform a forecast verification to assess the skill of the forecast
+    model compared to the reanalysis data.
+  - Apply a threshold-based mask to the downscaled forecast data to
+    identify only grid cells that exceed a certain temperature
+    threshold.
+  - Aggregate the data to a different temporal resolution, e.g. weekly
+    or yearly.
+  - Collapse the data across one or more dimensions, e.g. to calculate
+    the ensemble mean or maximum value across time.
 
 **Step 3:**
 
-- Convert the transformed data to a different data type, e.g. to a
-  raster, polygon, or data frame.
-- Save the data.
+  - Convert the transformed data to a different data type, e.g. to a
+    raster, polygon, or data frame.
+  - Save the data.
 
 > 📝 **NOTE**: the order of operations performed here is illustrative
 > only, and users should decide based on their requirements.
@@ -199,7 +230,7 @@ First, load the required libraries.
 library(clim4health)
 ```
 
-## 1. Loading, inspecting, and preprocessing data
+## 1\. Loading, inspecting, and preprocessing data
 
 ### Dataset description
 
@@ -207,7 +238,7 @@ The data used in this example are the monthly mean 2m temperature
 forecast (issued in January 2025 for 3 months lead time) from ECMWF’s
 System 5.1 seasonal forecast, its corresponding hindcast, as well as
 reanalysis data from ERA5Land covering the same hindcast period
-(2010-2012).
+(2010-2013).
 
 > 📝 **NOTE**: in reality, a much longer hindcast period is required to
 > downscale and verify seasonal forecasts, but a short period is used
@@ -218,15 +249,19 @@ reanalysis data from ERA5Land covering the same hindcast period
 fcst_path <- system.file("extdata/forecast/", package = "clim4health")
 fcst_path <- paste0(fcst_path, "/")
 
-fcst <- c4h_load(fcst_path,
-                 variable = "t2m",
-                 year = 2025,
-                 month = 1,
-                 leadtime_month = "all",
-                 ext = "nc")
+fcst <- c4h_load(
+  fcst_path,
+  variable = "t2m",
+  year = 2025,
+  month = 1,
+  leadtime_month = "all",
+  ext = "nc"
+)
 
 # Print a summary of the values of the forecast data
 summary(fcst$data)
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>   287.5   290.6   295.3   294.5   298.6   300.5
 ```
 
 We can also load the hindcast and reanalysis data, which should be
@@ -239,23 +274,27 @@ period for the downscaling and verifications steps.
 hindcast_path <- system.file("extdata/hindcast/", package = "clim4health")
 hindcast_path <- paste0(hindcast_path, "/")
 
-hcst <- c4h_load(hindcast_path,
-                 variable = "t2m",
-                 year = 2010:2012,
-                 month = 1,
-                 leadtime_month = 1:3,
-                 ext = "nc")
+hcst <- c4h_load(
+  hindcast_path,
+  variable = "t2m",
+  year = 2010:2013,
+  month = 1,
+  leadtime_month = 1:3,
+  ext = "nc"
+)
 
 reanalysis_path <- system.file("extdata/reanalysis/", package = "clim4health")
 reanalysis_path <- paste0(reanalysis_path, "/")
 
 # Load the reanalysis data
-rean <- c4h_load(reanalysis_path,
-                 variable = "t2m",
-                 year = 2010:2012,
-                 month = 1,
-                 leadtime_month = 1:3,
-                 ext = "nc")
+rean <- c4h_load(
+  reanalysis_path,
+  variable = "t2m",
+  year = 2010:2013,
+  month = 1,
+  leadtime_month = 1:3,
+  ext = "nc"
+)
 ```
 
 Print the dimensions of the hindcast and reanalysis data, to compare
@@ -263,13 +302,19 @@ with the forecast.
 
 ``` r
 print(fcst$dims)
+#>   dataset       var     sdate      time  ensemble  latitude longitude 
+#>         1         1         1         3        51         5         5
 print(hcst$dims)
+#>   dataset       var     sdate      time  ensemble  latitude longitude 
+#>         1         1         4         3        25         5         5
 print(rean$dims)
+#>   dataset       var     sdate      time  ensemble  latitude longitude 
+#>         1         1         4         3         1        51        51
 ```
 
 Follow the `clim4health_s2dv_cubes` vignette for more information on the
-structure of the clim4health s2dv_cube objects, as well as details about
-the types of climate data used here.
+structure of the clim4health s2dv\_cube objects, as well as details
+about the types of climate data used here.
 
 ### Data preprocessing
 
@@ -293,6 +338,7 @@ rean <- c4h_convert_units(rean, to = "celsius", var = "t2m", from = "K")
 
 # Display the new units
 print(c4h_convert_units(fcst, var = "t2m"))
+#> NULL
 ```
 
 > 📝 **NOTE**: If you are using monthly mean data from CDS, take care
@@ -305,8 +351,8 @@ print(c4h_convert_units(fcst, var = "t2m"))
 > perform an additional transformation to obtain the monthly sum
 > precipitation. Unfortunately, **clim4health** cannot differentiate
 > between the identical units of `m`, and so you would have to make this
-> conversion manually (by typing
-> `output_data$data <- output_data$data * 30.44`).
+> conversion manually (by typing `output_data$data <- output_data$data
+> * 30.44`).
 
 ### Plot the raw data
 
@@ -316,13 +362,25 @@ data to visualize the raw data.
 ``` r
 # Plot the forecast data
 c4h_plot(fcst, var = "t2m", ensemble = TRUE)
+```
+
+<img src="clim4health_overview_files/figure-gfm/plot_raw_data 1-1.png" alt="" style="display: block; margin: auto;" />
+
+``` r
 # Plot the hindcast data
 c4h_plot(hcst, var = "t2m", ensemble = TRUE)
+```
+
+<img src="clim4health_overview_files/figure-gfm/plot_raw_data 2-1.png" alt="" style="display: block; margin: auto;" />
+
+``` r
 # Plot the reanalysis data
 c4h_plot(rean, var = "t2m", ensemble = TRUE)
 ```
 
-## 2. Processing the data
+<img src="clim4health_overview_files/figure-gfm/plot_raw_data 2-2.png" alt="" style="display: block; margin: auto;" />
+
+## 2\. Processing the data
 
 Once the data has been loaded and explored, we can use **clim4health**
 functions to transform, downscale, and verify the data as required. In
@@ -347,8 +405,12 @@ administrative areas.
 library(sf)
 
 # Region municipalities
-munip_path <- system.file("extdata", "areas", "munip_vallecauca.gpkg",
-                          package = "clim4health")
+munip_path <- system.file(
+  "extdata",
+  "areas",
+  "munip_vallecauca.gpkg",
+  package = "clim4health"
+)
 munip <- read_sf(munip_path)
 
 # Spatial aggregation
@@ -363,19 +425,28 @@ corresponds to the municipalities.
 
 ``` r
 print(hcst_aggr$dims)
+#>  dataset      var    sdate     time ensemble     area 
+#>        1        1        4        3       25       42
 ```
 
 We can plot the aggregated data in the same way as the gridded data, as
 `c4h_space()` stores the corresponding polygon geometries in
-`cube$attrs$area` in the output s2dv_cube `cube`, and `c4h_plot()` can
+`cube$attrs$area` in the output s2dv\_cube `cube`, and `c4h_plot()` can
 utilize these geometries for visualization.
 
 ``` r
 # Plot the aggregated hindcast data
 c4h_plot(hcst_aggr, ensemble = TRUE)
+```
+
+<img src="clim4health_overview_files/figure-gfm/plot_aggregated_data-1.png" alt="" style="display: block; margin: auto;" />
+
+``` r
 # Plot the aggregated reanalysis data
 c4h_plot(rean_aggr, ensemble = TRUE)
 ```
+
+<img src="clim4health_overview_files/figure-gfm/plot_aggregated_data-2.png" alt="" style="display: block; margin: auto;" />
 
 ### Downscaling
 
@@ -385,52 +456,55 @@ the reanalysis data. This is an important step for providing forecast
 data at a finer spatial resolution, and may help correct any systematic
 biases in the forecast model data.
 
-> 📝 **NOTE**: see more information about the downscaling and
-> calibrating capabilities in the `clim4health_downscaling` vignette.
+> 📝 **NOTE**: see more information about the downscaling and calibrating
+> capabilities in the `clim4health_downscaling` vignette.
 
 To use `c4h_downscale()`, the user must specify different parameters
 depending on the required methodology. The key parameters are:
 
-- `downscale_function`: the downscaling/calibration method to use.
-  Options are `"Interpolation"`, `"Intbc"`, `"Intlr"`, and `"Analogs"`.
-  See the `clim4health_downscaling` vignette for more information about
-  these methods.
+  - `downscale_function`: the downscaling/calibration method to use.
+    Options are `"Interpolation"`, `"Intbc"`, `"Intlr"`, and
+    `"Analogs"`. See the `clim4health_downscaling` vignette for more
+    information about these methods.
 
-- `obs`: the observational data.
+  - `obs`: the observational data.
 
-- `exp`: the experimental data (generally speaking, the hindcast data.
-  It should have the same time period as the observational data, and is
-  used to calculate the bias adjustment parameters).
+  - `exp`: the experimental data (generally speaking, the hindcast data.
+    It should have the same time period as the observational data, and
+    is used to calculate the bias adjustment parameters).
 
-- `exp_cor`: the experimental data to which the bias adjustment
-  parameters will be applied (generally speaking, the forecast data). If
-  it is NULL, the bias adjustment parameters will be applied to `exp`
-  instead. This is useful if the user wants to apply the bias adjustment
-  parameters to a different dataset (e.g. forecast data) than the one
-  used to calculate the bias adjustment parameters (e.g. hindcast data).
+  - `exp_cor`: the experimental data to which the bias adjustment
+    parameters will be applied (generally speaking, the forecast data).
+    If it is NULL, the bias adjustment parameters will be applied to
+    `exp` instead. This is useful if the user wants to apply the bias
+    adjustment parameters to a different dataset (e.g. forecast data)
+    than the one used to calculate the bias adjustment parameters
+    (e.g. hindcast data).
 
 First, let’s downscale the forecast data.
 
 ``` r
-cal <- c4h_downscale(downscale_function = "Intbc", # downscaling method
-                     obs = rean,                   # observational data, used to bias adjust the experiment
-                     exp = hcst,                   # the experimental data to calculate the bias adjustment parameters
-                     exp_cor = fcst,               # the experimental data to which the bias adjustment parameters will be applied
-                     method_bc = "bias",           # for "Intbc", the bias correction method to use
-                     method_remap = "bilinear")    # the method to remap the data to the new grid
+cal <- c4h_downscale(
+  downscale_function = "Intbc", # downscaling method
+  obs = rean, # observational data, used to bias adjust the experiment
+  exp = hcst, # the experimental data to calculate the bias adjustment parameters
+  exp_cor = fcst, # the experimental data to which the bias adjustment parameters will be applied
+  method_bc = "bias", # for "Intbc", the bias correction method to use
+  method_remap = "bilinear"
+) # the method to remap the data to the new grid
 ```
 
-> 📝 **NOTE**: you may see warnings when running `c4h_downscale()`.
-> These are completely normal. For example, if you are using ERA5-Land
+> 📝 **NOTE**: you may see warnings when running `c4h_downscale()`. These
+> are completely normal. For example, if you are using ERA5-Land
 > reanalysis near the ocean, you will have many NA values, which may
 > generate warnings.
 
-`c4h_downscale()` returns a list of two s2dv_cubes:
+`c4h_downscale()` returns a list of two s2dv\_cubes:
 
-- `cal$exp` contains the downscaled/calibrated experimental data (in
-  this case, the forecast data),
+  - `cal$exp` contains the downscaled/calibrated experimental data (in
+    this case, the forecast data),
 
-- `cal$obs` contains the observational data.
+  - `cal$obs` contains the observational data.
 
 > 📝 **NOTE**: in many cases, `cal$obs` will be the same as `rean_aggr`
 > (the input `obs`), but there are certain cases where it may differ.
@@ -441,12 +515,14 @@ verification step to assess the skill of the forecast model. In this
 case, we leave the `exp_cor` parameter as NULL.
 
 ``` r
-cal_hcst <- c4h_downscale(downscale_function = "Intbc",
-                          obs = rean,
-                          exp = hcst,
-                          method_bc = "bias",
-                          method_remap = "bilinear",
-                          loocv = FALSE)
+cal_hcst <- c4h_downscale(
+  downscale_function = "Intbc",
+  obs = rean,
+  exp = hcst,
+  method_bc = "bias",
+  method_remap = "bilinear",
+  loocv = FALSE
+)
 ```
 
 Plot the downscaled forecast and hindcast data to visualise the results
@@ -455,9 +531,16 @@ of the downscaling.
 ``` r
 # Plot the downscaled forecast data
 c4h_plot(cal$exp, ensemble = TRUE)
+```
+
+<img src="clim4health_overview_files/figure-gfm/plot_downscaled_data 1-1.png" alt="" style="display: block; margin: auto;" />
+
+``` r
 # Plot the downscaled hindcast data
 c4h_plot(cal_hcst$exp, ensemble = TRUE)
 ```
+
+<img src="clim4health_overview_files/figure-gfm/plot_downscaled_data 2-1.png" alt="" style="display: block; margin: auto;" />
 
 ### Verification and postprocessing
 
@@ -482,9 +565,11 @@ Score (CRPSS) of the forecast model compared to a reference forecast of
 climatology.
 
 ``` r
-skill <- c4h_verify(exp = cal_hcst$exp,   # the experimental data (downscaled hindcast data)
-                    obs = cal_hcst$obs,   # the observational data (downscaled hindcast data)
-                    metrics = c("CRPSS")) # the desired metrics to calculate
+skill <- c4h_verify(
+  exp = cal_hcst$exp, # the experimental data (downscaled hindcast data)
+  obs = cal_hcst$obs, # the observational data (downscaled hindcast data)
+  metrics = c("CRPSS")
+) # the desired metrics to calculate
 ```
 
 `c4h_verify()` returns a list of lists, where each element of the outer
@@ -508,8 +593,10 @@ layer to the plot using the `sign` parameter.
 c4h_plotskill(skill$CRPSS$crpss, sign = skill$CRPSS$sign)
 ```
 
-> 📝 **NOTE**: in this case, there are no significant values! Don’t
-> panic. This is because we only loaded three years of data to compare
+<img src="clim4health_overview_files/figure-gfm/plot_skill_significance-1.png" alt="" style="display: block; margin: auto;" />
+
+> 📝 **NOTE**: in this case, there are no significant values\! Don’t
+> panic. This is because we only loaded four years of data to compare
 > the hindcast and reanalysis, which is not enough to produce any
 > significant result.
 
@@ -522,32 +609,31 @@ be relevant for health impact studies (e.g. where certain vectors are
 only active above a certain temperature threshold). The user can
 specify:
 
-- `data`: the data to which the index will be applied.
+  - `data`: the data to which the index will be applied.
 
-- `return_mask`: whether to return a 0-1 mask of where the threshold is
-  exceeded, or to return the original data with values that do not
-  exceed the threshold masked to NA.
+  - `return_mask`: whether to return a 0-1 mask of where the threshold
+    is exceeded, or to return the original data with values that do not
+    exceed the threshold masked to NA.
 
-- `lower_threshold`: the lower threshold to apply to the data. Values
-  below this threshold will be masked.
+  - `lower_threshold`: the lower threshold to apply to the data. Values
+    below this threshold will be masked.
 
-- `upper_threshold`: the upper threshold to apply to the data. Values
-  above this threshold will be masked.
+  - `upper_threshold`: the upper threshold to apply to the data. Values
+    above this threshold will be masked.
 
-- `closed`: whether the interval should be open or closed (i.e. if the
-  threshold limits should be included in the valid interval or not).
+  - `closed`: whether the interval should be open or closed (i.e. if the
+    threshold limits should be included in the valid interval or not).
 
 For example, we can apply `c4h_index()` to the downscaled forecast data
 to identify only grid cells where the temperature exceeds 20ºC, and then
 we can plot this masked dataset.
 
 ``` r
-mask <- c4h_index(data = cal$exp,
-                  return_mask = FALSE,
-                  lower_threshold = 20)
-
+mask <- c4h_index(data = cal$exp, return_mask = FALSE, lower_threshold = 20)
 c4h_plot(mask, ensemble = TRUE)
 ```
+
+<img src="clim4health_overview_files/figure-gfm/apply_mask-1.png" alt="" style="display: block; margin: auto;" />
 
 ### Aggregating data temporally
 
@@ -559,27 +645,25 @@ epiweek.
 
 The user must specify:
 
-- `data`: the data to which the temporal aggregation will be applied.
+  - `data`: the data to which the temporal aggregation will be applied.
 
-- `time_aggregation`: the type of transformation to be applied,
-  e.g. `"weekly"`.
+  - `time_aggregation`: the type of transformation to be applied,
+    e.g. `"weekly"`.
 
-- `dim_aggregation`: the dimension across which the temporal aggregation
-  will be applied, e.g. `"sdate"` or `"time"`.
+  - `dim_aggregation`: the dimension across which the temporal
+    aggregation will be applied, e.g. `"sdate"` or `"time"`.
 
-- `fun`: the function to apply to the data for the temporal aggregation,
-  e.g. `"mean"` or `"max"`.
+  - `fun`: the function to apply to the data for the temporal
+    aggregation, e.g. `"mean"` or `"max"`.
 
-- `week_start`: if `time_aggregation` is `"weekly"`, the day on which
-  the week starts, e.g. `"Monday"`.
+  - `week_start`: if `time_aggregation` is `"weekly"`, the day on which
+    the week starts, e.g. `"Monday"`.
 
 Let’s load some daily station data to demonstrate this function.
 
 ``` r
-station_path <- system.file("extdata/stations/",
-                            package = "clim4health")
-station_data <- c4h_load(station_path, variable = "temp_mean",
-                         ext = "csv")
+station_path <- system.file("extdata/stations/", package = "clim4health")
+station_data <- c4h_load(station_path, variable = "temp_mean", ext = "csv")
 ```
 
 Since we have not specified any desired dates in our `c4h_load()`
@@ -591,11 +675,13 @@ daily-mean temperatures, by applying the mean function across the `time`
 dimension.
 
 ``` r
-weekly_data <- c4h_time(data = station_data,
-                        time_aggregation = "weekly",
-                        dim_aggregation = "time",
-                        fun = "mean",
-                        week_start = "Monday")
+weekly_data <- c4h_time(
+  data = station_data,
+  time_aggregation = "weekly",
+  dim_aggregation = "time",
+  fun = "mean",
+  week_start = "Monday"
+)
 ```
 
 If we wanted to obtain a climatology, we could load the data with years
@@ -603,24 +689,34 @@ in the `sdate` dimension, and then apply `c4h_time()` to calculate the
 mean across the `sdate` dimension.
 
 ``` r
-station_data <- c4h_load(station_path, variable = "temp_mean",
-                         ext = "csv", year = 2010:2012, month = 1, leadtime_month = 1:12)
+station_data <- c4h_load(
+  station_path,
+  variable = "temp_mean",
+  ext = "csv",
+  year = 2010:2013,
+  month = 1,
+  leadtime_month = 1:12
+)
 
 print(station_data$dims)
+#>  dataset      var    sdate     time ensemble location 
+#>        1        1      124       12        1       10
 ```
 
-`station_data` now contains the `sdate` dimension with length 93, which
-corresponds to the 93 start dates specified (year = 3 x month = 1 x day
+`station_data` now contains the `sdate` dimension with length 124, which
+corresponds to the 124 start dates specified (year = 4 x month = 1 x day
 = 31), and `time` dimension with length 12, which corresponds to the 12
 leadtime months specified. We can apply `c4h_time()` to calculate the
 mean across the `sdate` dimension to obtain a climatology (one value for
 each month).
 
 ``` r
-yearly_stat <- c4h_time(data = station_data,
-                        time_aggregation = "yearly",
-                        dim_aggregation = "sdate",
-                        fun = "mean")
+yearly_stat <- c4h_time(
+  data = station_data,
+  time_aggregation = "yearly",
+  dim_aggregation = "sdate",
+  fun = "mean"
+)
 ```
 
 ### Collapsing data across a dimension
@@ -632,36 +728,37 @@ or mean across all ensemble members, or the mean value across years
 (using the `sdate` dimension). We can use `c4h_collapse()` to do this.
 
 ``` r
-climatology <- c4h_collapse(data = yearly_stat,
-                            dim = "sdate",
-                            fun = "mean")
-
+climatology <- c4h_collapse(data = yearly_stat, dim = "sdate", fun = "mean")
 print(climatology$dims)
+#>  dataset      var    sdate     time ensemble location 
+#>        1        1        1       12        1       10
 ```
 
 We now have our climatology data, which has one value for each month.
 
-## 3. Outputting the data
+## 3\. Outputting the data
 
 Once the data has been transformed as required, we can use
 **clim4health** functions to convert to different formats, and then save
 any of these.
 
-### Convert data from an s2dv_cube to a different data type
+### Convert data from an s2dv\_cube to a different data type
 
 Once all the desired processing has been done, you can convert the data
-from an s2dv_cube to a different data type using `c4h_convert()`. It
-takes an s2dv_cube as input, and a string containing the desired output
+from an s2dv\_cube to a different data type using `c4h_convert()`. It
+takes an s2dv\_cube as input, and a string containing the desired output
 type - SpatRaster objects (`"terra"`), stars (`"stars"`), data frames
 (`"data.frame"`), or polygon objects (`"sf"`). You may also choose to
 use the flags `crs` to identify the coordinate reference system for the
 output and `drop` to remove any singleton dimensions.
 
 ``` r
-csv_out <- c4h_convert(data = climatology, output_format = "data.frame", drop = TRUE)
-
+csv_out <- c4h_convert(
+  data = climatology,
+  output_format = "data.frame",
+  drop = TRUE
+)
 terra_out <- c4h_convert(data = cal$exp, output_format = "terra")
-
 polygons_out <- c4h_convert(data = cal$exp, output_format = "sf")
 ```
 

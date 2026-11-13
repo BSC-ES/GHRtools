@@ -1,4 +1,4 @@
-generate_news <- function(input_md, output_qmd = NULL, package = NULL) {
+generate_news <- function(input_md = "NEWS.md", output_qmd = NULL, package = NULL) {
   
   # Read input markdown file
   lines <- readLines(input_md, warn = FALSE)
@@ -26,4 +26,4 @@ generate_news <- function(input_md, output_qmd = NULL, package = NULL) {
   invisible(output_qmd)
 }
 
-generate_news("GHRexplore-news.md", package = "GHRexplore")
+generate_news(output_qmd = "GHRexplore-news.md", package = "GHRexplore")
