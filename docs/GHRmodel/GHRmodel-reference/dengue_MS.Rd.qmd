@@ -7,7 +7,7 @@ toc: true
 
 ## Description
 
-The `dengue_MS` example data set contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates (e.g., environmental, socio-economic and meteo-climatic factors). This data set represents a subset of a larger national data set that covers the entire territory of Brazil. The subset focuses on a specific region, **Mato Grosso do Sul**, for the purposes of illustration and computational efficiency. See `@source` for access to the complete data set.
+The `dengue_MS` example data set contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates (e.g., environmental, socio-economic and meteo-climatic factors). This data set represents a subset of a larger national data set that covers the entire territory of Brazil. The subset focuses on a specific region, **Mato Grosso do Sul**, for the purposes of illustration and computational efficiency. See the source below for access to the complete data set.
 
 ```r
 dengue_MS
@@ -15,7 +15,7 @@ dengue_MS
 
 ## Format
 
-A data frame with 2,600 rows and 27 columns:
+A data frame with 2,640 rows and 28 columns:
 
 - **`micro_code`**: Unique ID number to each micro region (11 units)
 - **`micro_name`**: Name of each micro region
@@ -24,8 +24,8 @@ A data frame with 2,600 rows and 27 columns:
 - **`meso_name`**: Name of each meso region
 - **`state_code`**: Unique ID number to each state (1 unit)
 - **`state_name`**: Name of each state
-- **`region_code`**: Unique ID number given to each Brazilian Region, In this data frame all observations come from the "Southeast Region"
-- **`region_name`**: Name of each Brazilian Region, In this data frame all observations come from the "Southeast Region"
+- **`region_code`**: Unique ID number given to each Brazilian Region, In this data frame all observations come from the "Centre-West"
+- **`region_name`**: Name of each Brazilian Region, In this data frame all observations come from the "Centre-West"
 - **`biome_code`**: Biome code
 - **`biome_name`**: Biome name
 - **`ecozone_code`**: Ecozone code
@@ -43,8 +43,9 @@ A data frame with 2,600 rows and 27 columns:
 - **`urban`**: Percentage of inhabitants living in urban areas (2010 census)
 - **`water_network`**: Percentage of inhabitants with access to the piped water network according to the 2010 census
 - **`water_shortage`**: Frequency of reported water shortages per microregion between 2000 - 2016
-- **`date`**: First day of the Month, in date format ("%d-%m-%Y")
+- **`date`**: First day of the Month, in date format ("%Y-%m-%d")
+- **`pop100000`**: Population divided by 100000.
 
 ## Source
 
-[source code on GitHub](https://github.com/drrachellowe/hydromet_dengue); [source code on Zenodo](http://doi.org/10.5281/zenodo.4632205));
+[source code on GitHub](https://github.com/drrachellowe/hydromet_dengue); [source code on Zenodo](https://zenodo.org/records/4632205);

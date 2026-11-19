@@ -7,7 +7,7 @@ toc: true
 
 ## Description
 
-This function transforms covariates identified by `pattern` or `name` into varying effect terms of the form:`f(unit, covariate, model = 'iid')`, which allows covariates to have varying slopes across spatial or temporal units. The output can be used directly in the `covariates` argument of `write_inla_formulas`.
+This function transforms covariates identified by `pattern` or `name` into varying effect terms of the form: `f(unit, covariate, model = 'iid', constr = FALSE)`, which allows covariates to have varying slopes across spatial or temporal units. The output can be used directly in the `covariates` argument of `write_inla_formulas`.
 
 ```r
 cov_varying(
@@ -34,7 +34,6 @@ cov_varying(
 ## Details
 
  * Use `pattern` or `name` (or both) to specify which covariates to transform.
- * The resulting terms use INLA’s `f()` syntax: `f(unit, covariate, model = "iid")`.
  * Currently only supports `"iid"` models for varying effects.
 
 ## Returns

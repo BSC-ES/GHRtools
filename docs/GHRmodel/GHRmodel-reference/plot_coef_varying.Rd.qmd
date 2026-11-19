@@ -42,26 +42,22 @@ A `ggplot2` forest plot object representing the spatially or temporally varying 
 ## Examples
 
 ```r
-## Not run:
-
-# Load example GHRmodels object from the package: 
-model_cov_list_file <- system.file("examples", "model_cov_list.rds", package = "GHRmodel")
+# Load example GHRmodels object from the package:
+model_cov_list_file <- system.file("examples", "model_cov_list.rds",
+                                   package = "GHRmodel")
 model_cov_list <- readRDS(model_cov_list_file)
 
-# Plot varying slopes of pdsi.l1 depending on the climate zone
 plot_coef_varying(
-models = model_cov_list,               # A list of fitted INLA model objects
-mod_id = "mod8",                       # Select the model with varying slopes
-palette = "Blues",                     # Color palette for the plot 
-name = "main_climate_f",               # The grouping variable 
-title = "Effect of PDSI at one-month lag for each climate zone",  # Plot title
-ylab = "Main climate zones",           # Label for the y-axis 
-unit_label = c(                        # Map factor levels to descriptive names 
-  "1" = "Tropical Rainforest Climate", 
-  "2" = "Tropical Monsoon Climate", 
-  "3" = "Tropical Savanna Climate with Dry Winter",
-  "4" = "Humid Subtropical Climate"
+  models = model_cov_list,  # A list of fitted INLA model objects
+  mod_id = "mod8",          # Select the model with varying slopes
+  palette = "Blues",        # Color palette for the plot
+  name = "main_climate_f",  # The grouping variable
+  title = "Effect of PDSI at one-month lag for each climate zone",
+  ylab = "Main climate zones",   # Label for the y-axis
+  unit_label = c(                # Map factor levels to descriptive names
+    "1" = "Tropical Rainforest Climate",
+    "2" = "Tropical Monsoon Climate",
+    "3" = "Tropical Savanna Climate with Dry Winter",
+    "4" = "Humid Subtropical Climate")
 )
-)
-## End(Not run)
 ```

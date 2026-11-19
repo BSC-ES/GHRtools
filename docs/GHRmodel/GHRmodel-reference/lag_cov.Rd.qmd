@@ -18,8 +18,10 @@ lag_cov(data, name, time, lag, group = NULL, add = TRUE)
 - `data`: A `data.frame` containing equally spaced observations.
 - `name`: A character vector: name of the variable (or variables) to lag.
 - `time`: A single character string: name of the time-index variable (e.g., `"date"`).
-- `lag`: A numeric vector of one or more positive integers. Each value is interpreted as a 'lag' (i.e. shift the series backward by `k` observations).
-- `group`: Optional character vector naming column(s) that define independent time-series (e.g. regions). If `NULL`, the whole data set is treated as one series.
+- `lag`: A numeric vector of one or more positive integers. Each value is interpreted as a 'lag' (i.e. shift the series backward by `k`
+    
+    observations).
+- `group`: Optional character vector naming a column that define independent time-series (e.g. regions). If `NULL`, the whole data set is treated as one series.
 - `add`: Logical. If `TRUE` (default) the lagged columns are appended to `data`; if `FALSE` the function returns only the lagged columns as a matrix.
 
 ## Returns

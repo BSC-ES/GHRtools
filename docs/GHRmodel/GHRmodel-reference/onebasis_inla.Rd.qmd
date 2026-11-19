@@ -15,9 +15,9 @@ onebasis_inla(covariate, fun, basis_name, ...)
 
 ## Arguments
 
-- `covariate`: A numeric vector representing the covariate
+- `covariate`: A numeric vector representing the covariate.
 - `fun`: A character string specifying the shape function to be used by `onebasis`.
-- `basis_name`: A character string giving a base name for the columns in the resulting basis matrix. The default prefix (usually `"b"`) is replaced by this string.
+- `basis_name`: A character string giving a base name for the columns in the resulting basis matrix. The default prefix `"b"` produced by `dlnm` is replaced by this string.
 - `...`: Additional arguments passed to `onebasis`, such as `degree`, `df`, `knots`, etc.
 
 ## Returns

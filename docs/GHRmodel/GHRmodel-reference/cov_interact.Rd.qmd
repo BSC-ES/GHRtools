@@ -7,7 +7,7 @@ toc: true
 
 ## Description
 
-This function generates interaction terms between covariates specified in the `pattern` or `name` arguments. It requires a list of character vectors and appends interaction terms to each vector based on pairwise or three-way interactions. The resulting list can be input into the `covariates` argument in `write_inla_formulas`.
+This function generates interaction terms between covariates specified in the `pattern` or `name` arguments. It requires a list of character vectors and appends interaction terms to each vector based on pairwise or three-way interactions. More-way interactions are not supported and will be ignored. The resulting list can be input into the `covariates` argument in `write_inla_formulas`.
 
 ```r
 cov_interact(covariates = NULL, pattern = NULL, name = NULL, add = FALSE)
@@ -35,7 +35,8 @@ A list of character vectors, where each vector includes covariates and their cor
 
 ```r
 # Example dataset
-data <- data.frame(tmin.l1 = rnorm(10), pdsi.l1 = rnorm(10), urban = rnorm(10))
+data <- data.frame(tmin.l1 = rnorm(10), pdsi.l1 = rnorm(10),
+                   urban = rnorm(10))
 
 # Extract names
 covs <- extract_names(data, pattern = c("tmin", "pdsi", "urban"))

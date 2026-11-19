@@ -14,31 +14,49 @@ fit_models(
   formulas,
   data,
   family,
-  name,
-  offset = NULL,
+  name = "mod",
+  offset_var = NULL,
   control_compute = list(config = FALSE, vcov = FALSE),
-  nthreads = 8,
-  pb = FALSE
+  control_inla = list(strategy = "adaptive"),
+  control_family = list(),
+  ppd_samples = 500,
+  keep_ppd = FALSE,
+  keep_inlamod = FALSE,
+  nthreads = 1,
+  progress = FALSE,
+  verbose = FALSE,
+  offset = NULL
 )
 ```
 
 ## Arguments
 
-- `formulas`: A `GHRformulas` object containing multiple INLA model formulas.
+- `formulas`: Either a `GHRformulas` object containing multiple INLA model formulas, or a character vector of formulas (in this case, `as_GHRformulas()` will be executed internally).
 - `data`: A data frame containing the variables used in the model formulas.
-- `family`: A character string specifying the likelihood family (e.g., `"poisson"`, `"nbinomial"`, etc.).
-- `name`: A character string to label each fitted model (e.g., `"mod"`).
-- `offset`: A character string specifying the name of the offset variable in `data`. If `NULL`, no offset is applied. Default is `NULL`. Internally, `log(offset_values)` is applied.
-- `control_compute`: A named list controlling additional computation options:
+- `family`: A character string specifying the likelihood family. Currently available options include `"poisson"`, `"nbinomial"`, `"gaussian"`, `"zeroinflatedpoisson0"`, and `"zeroinflatednbinomial0"`.
+- `name`: Either a single character string to label each fitted model by attaching a count (e.g., `"mod"`) if there is more than one formula, or a character vector with the the same number of `"formulas"`.
+- `offset_var`: A character string specifying the name of the offset variable in `data`. If `NULL` (default), no offset is applied. Internally, `offset_var` is transformed according to the link function of the corresponding family: identity for `"gaussian"` and log for the rest of families.
+- `control_compute`: A named list controlling additional computation options passed to INLA's `control.compute`:
     
-    - **`config`**: Logical ; if `TRUE`, stores the Gaussian Markov Random Field (GMRF) and enables the computation of posterior predictive distribution (1,000 draws). Defaults to `FALSE`.
-    - **`vcov`**: Logical if `TRUE`, returns the variance-covariance (correlation) matrix of fixed effects. Defaults to `FALSE`.
-- `nthreads`: An integer specifying the number of threads for parallel computation. Default is `8`.
-- `pb`: Logical; if `TRUE`, displays a progress bar while fitting models. Default is `FALSE`.
+    - **`config`**: Logical indicating whether to store extra internal configuration (e.g., enabling posterior predictive checks like CRPS). Defaults to `FALSE`.
+    - **`vcov`**: Logical indicating whether to return the variance-covariance (correlation) matrix of fixed effects. Defaults to `FALSE`.
+    
+    Note that other elements of `control.compute` cannot be modified.
+- `control_inla`: Parameters passed to `control.inla` in `INLA::inla`. See `?INLA::control.inla` to see all available options. By default, uses the adaptive strategy.
+- `control_family`: Parameters passed to `control.family` in `INLA::inla`. See `?INLA::control.family` to see all available options.
+- `ppd_samples`: Numeric indicating the number of posterior predictive samples to draw. Only used if `config=TRUE`, defaults to 500.
+- `keep_ppd`: Default is FALSE (do not keep ppd). If TRUE (requires also `config=TRUE`), the posterior predictive distribution for all data samples is saved in the object, which can be useful for `plot_ppd()`.
+- `keep_inlamod`: Logical. Default is FALSE. If TRUE, the fitted INLA model objects are stored in the output list, which may result in a substantially larger object.
+- `nthreads`: An integer specifying the maximum number of threads for parallel computation. Default is `1`.
+- `progress`: Logical; if `TRUE`, displays progression while fitting models. Default is `FALSE`.
+- `verbose`: Logical; if `TRUE`, run INLA in verbose mode (useful for debugging). Default is `FALSE`.
+- `offset`: Deprecated, use offset_var instead.
 
 ## Details
 
 This function iterates over each formula in the `GHRformulas` object and fits the corresponding `INLA` model using the internal function `.fit_single_model()`. For each fitted model, it extracts the fitted values, fixed effects, and random effects summaries. Then, it calculates a series of model evaluation metrics using the `.gof_single_model()` internal function.
+
+Because the first formula is used as the reference model for all comparison metrics (see Section B below), if it fails to fit, `fit_models()` stops and no results are returned for any model. However, if a formula after the first fit fails, a message is printed and that model is skipped (GoF row is filled with `NA` and object components are left empty).
 
 The goodness-of-fit (GoF) metrics are organized into two categories:
 
@@ -65,17 +83,19 @@ These are computed separately for each model:
    
    `MAE = \frac{1}{n} \sum_{i=1}^n \left| y_i - \hat{y}_i \right|`
    
-   Measures the average absolute deviation between observed values `y_i` and predicted values `\hat{y}_i`. Lower MAE values indicate improved fit. If `config = TRUE`, MAE is computed using the full posterior predictive distribution (PPD); otherwise, it uses point estimates from INLA's `summary.fitted.values`.
+   Average absolute difference between observed and a point estimate of the predictions. As a point estimate, it uses the `summary.fitted.values` provided by INLA when `config = FALSE` and the mean of the ppd if `config = TRUE`. MAE is more robust to outliers than RMSE. Lower MAE values indicate improved model fit.
 5. Root Mean Squared Error (RMSE)
    
    `RMSE = \sqrt{ \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2 }`
    
-   Captures average squared deviation between observed and predicted values. RMSE penalizes larger errors more heavily. Lower values reflect better model fit. If `config = TRUE`, RMSE uses the PPD; otherwise, it uses point estimates.
+   Root average squared difference between observed and a point estimate of the predictions. As a point estimate, it uses the `summary.fitted.values` provided by INLA when `config = FALSE` and the mean of the ppd if `config = TRUE`. RMSE penalizes larger errors more heavily. Lower RMSE values reflect better model fit.
 6. Continuous Ranked Probability Score (CRPS)
    
    `\mathrm{CRPS}(F, y) = \int_{-\infty}^{\infty} \left[F(t) - \mathbf{1}\{y \leq t\}\right]^2 dt`
    
-   CRPS assesses how well the predictive cumulative distribution aligns with the observed outcome. Lower scores suggest better calibrated predictive distributions. Only available when `config = TRUE`.
+   The intergral is approximated with the empirical CRPS (see crps_empirical ): `\mathrm{CRPS} = \frac{1}{n} \sum_{i=1}^n |x_i - y| - \frac{1}{2n^2} \sum_{i=1}^n \sum_{j=1}^n |x_i - x_j|`
+   
+   CRPS assesses how well the entire posterior predictive distribution aligns with the observed outcome. The median CRPS across observations is returned. Lower scores suggest better calibrated predictive distributions. Only available when `config = TRUE`.
 
 B) Model Comparison Metrics (relative to the first model)
 
@@ -106,7 +126,7 @@ The first model in the list is treated as the baseline for model comparisons. Al
    
    `\frac{\mathrm{Var}_{re}}{\mathrm{Var}_{re}^{(1)}} - 1`
    
-   Represents the relative change in group-level variance compared to the baseline model. Helps assess how much variance is explained by added covariates.
+   Represents the relative change in group-level variance compared to the baseline model. Helps assess how much variance is explained by added covariates. `re1_var_change` refers to the change in specific random effects (ordered by number) whereas `re_meanchange` is the mean change across all random effects. `re_meanchange` is `NA` when no random effects are defined or if the variance change of any individual random effect is `NA`.
 
 ## Returns
 
@@ -116,10 +136,14 @@ An object of class `GHRmodels` containing:
 - **`$fitted`**: A list of fitted values (one element per model). If `config = TRUE`, these are derived from the posterior predictive distribution (PPD); otherwise, they are extracted from INLA's `summary.fitted.values`.
 - **`$fixed`**: A list of summary tables for fixed effects (one element per model).
 - **`$random`**: A list of summary tables for random effects (one element per model).
+- **`$vcov`**: A list of variance-covariance (correlation) matrices of fixed effects (one element per model). Populated only when `control_compute$vcov = TRUE`.
 - **`$formulas`**: A character vector of the original model formulas used.
 - **`$re`**: A character vector specifying any random effects defined in `formulas`.
 - **`$outcome`**: A character string indicating the outcome variable used.
+- **`$family`**: A character string indicating the likelihood family used.
 - **`$data`**: The original data frame passed to the function.
+- **`$ppd`**: (if `keep_ppd=TRUE`) A list of ppd matrices where rows are observations in the same order as in `data` and columns are ppd samples.
+- **`$inlamod`**: (if `keep_inlamod=TRUE`) A list of inla model objects.
 
 ## See Also
 
@@ -128,10 +152,9 @@ An object of class `GHRmodels` containing:
 ## Examples
 
 ```r
-## Not run:
-
 # Load example dataset
-data(dengueMS)
+data(dengue_MS)
+dengue_MS <- dengue_MS[dengue_MS$year %in% 2010:2012, ]
 
 # Declare formulas
 formulas <- c(
@@ -139,23 +162,17 @@ formulas <- c(
   "dengue_cases ~ pdsi +  f(year, model='rw1')"
 )
 
-# Tranform formulas into a 'GHRformulas' object
-ghr_formulas <- as_GHRformulas(formulas)
-
-# Fit multiple models 
+# Fit multiple models
 results <- fit_models(
-  formulas = ghr_formulas,
-  data     = dengue_MS,
-  family   = "nbinomial",
-  name     = "TestModel",
-  offset   = "population",
-nthreads = 2,
-control_compute = list(config = FALSE),
-pb       = TRUE
+  formulas = formulas,
+  data = dengue_MS,
+  family = "nbinomial",
+  name = "TestModel",
+  offset_var = "pop100000",
+  nthreads = 2,
+  progress = TRUE
 )
 
 # Inspect goodness-of-fit metrics
-
-head(results$mod_gof)
-## End(Not run)
+results$mod_gof
 ```

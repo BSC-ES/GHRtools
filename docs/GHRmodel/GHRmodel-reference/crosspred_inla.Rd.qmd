@@ -7,7 +7,7 @@ toc: true
 
 ## Description
 
-This function takes an object of class `GHRmodels`, extracts the relevant coefficients and variance-covariance matrix, and then calls dlnm::crosspred to compute predictions over a range of covariate values (or at specified points).
+This function takes an object of class `GHRmodels`, extracts the relevant coefficients and variance-covariance matrix, and then calls `dlnm::crosspred` to compute predictions over a range of covariate values (or at specified points).
 
 ```r
 crosspred_inla(
@@ -22,29 +22,31 @@ crosspred_inla(
   bylag = 1,
   cen = NULL,
   ci.level = 0.95,
-  cumul = FALSE,
-  ...
+  cumul = FALSE
 )
 ```
 
 ## Arguments
 
 - `models`: An object of class `GHRmodels`, containing fitted model output (e.g., `$fixed` and `$vcov` lists).
-- `basis`: A cross-basis or one-basis object, typically created by `crossbasis_inla` or `onebasis_inla`.
+- `basis`: A cross-basis or one-basis object created by `crossbasis_inla` or `onebasis_inla`.
 - `mod_id`: An integer or character string specifying which model within the input `GHRmodels` object to use (e.g., if `model$fixed` and `model$vcov` both have multiple entries).
-- `at`: A numeric vector of values at which to compute predictions (e.g.,`seq(10,25, by=0.2)`)
+- `at`: A numeric vector of values at which to compute predictions (e.g., `seq(10, 25, by = 0.2)`).
 - `from, to`: Numeric values specifying the range of the prediction sequence if `at` is not specified (e.g., `from = 10` and `to = 25`).
 - `by`: Numeric increment for the sequence if `at` is not specified (e.g., `by = 0.2`).
-- `lag`: A vector of two elements with min and max lag as declared in the `crossbasis_inla` function.
+- `lag`: An optional vector of two elements with min and max lag. If missing (default), it uses the same lag structure as defined in `crossbasis_inla`.
 - `bylag`: Numeric increment for lag steps (default is 1).
 - `cen`: A centering value (e.g., a reference exposure level).
 - `ci.level`: The credible interval level (default `0.95`).
 - `cumul`: Logical; if `TRUE`, cumulative predictions are computed (default `FALSE`).
-- `...`: Additional arguments passed on to crosspred , such as `bound`, `ci.arg`, etc.
 
 ## Details
 
-The function identifies which coefficients in `model$fixed[mod_id]` and which rows/columns in `model$vcov[mod_id]` correspond to the one-basis or cross-basis terms (i.e., matching the column names in `basis`). Then it passes these slices to dlnm::crosspred to generate predictions. The centering value (`cen`), if specified, indicates the reference exposure (e.g., a mean temperature) at which to center the effect estimates (e.g., the effect a given temperature value on the outcome will be compared to the effect of the centering value on the outcome, in this case the mean temperature).
+The function identifies which coefficients in `models$fixed[[mod_id]]` and which rows/columns in `models$vcov[[mod_id]]` correspond to the one-basis or cross-basis terms (i.e., matching the column names in `basis`).
+
+Then it passes these slices to `dlnm::crosspred` to generate predictions. The centering value (`cen`), if specified, indicates the reference exposure (e.g., a mean temperature) at which to center the effect estimates (e.g., the effect a given temperature value on the outcome will be compared to the effect of the centering value on the outcome, in this case the mean temperature).
+
+Credible intervals are not obtained by drawing from the joint posterior of the fixed effects. Instead, `dlnm::crosspred` combines the posterior mean coefficients with the posterior covariance matrix (`models$vcov`, itself INLA's Gaussian approximation to the joint posterior of the fixed effects), then builds a symmetric interval as fit `\pm` a Gaussian quantile times the propagated standard error. This is equivalent to a posterior-sampling-based interval as long as the joint posterior of the fixed effects is itself approximately Gaussian and does not reflect any skewness in the individual marginal posteriors.
 
 ## Returns
 
@@ -52,29 +54,28 @@ An object of class `"GHRcrosspred"`, inheriting from `"crosspred"`, with fields 
 
 ## See Also
 
-dlnm::crosspred for details on how predictions are computed.
+`dlnm::crosspred` for details on how predictions are computed.
 
 ## Examples
 
 ```r
 # Load example GHRmodels object from the package
-model_dlnm_file <- system.file("examples", "model_dlnm.rds", package = "GHRmodel")
+model_dlnm_file <- system.file("examples", "model_dlnm.rds",
+                               package = "GHRmodel")
 model_dlnm <- readRDS(model_dlnm_file)
 
-# Load example cross-basis matrix from the package: 2-dimensional cross-basis matrix of the 
-# non-linear effect of dengue risk across tmin values and lags: 
-cb_tmin_file <- system.file("examples","cb_tmin.rds", package = "GHRmodel")
-cb_tmin <- readRDS(cb_tmin_file) # loads cross-basis matrix into the environment
+# Load example cross-basis matrix from the package: 2-dimensional
+# cross-basis matrix of the non-linear effect of dengue risk across
+# tmin values and lags:
+cb_tmin_file <- system.file("examples", "cb_tmin.rds", package = "GHRmodel")
+cb_tmin <- readRDS(cb_tmin_file)
 
 # Generate predictions
 pred_result <- crosspred_inla(
-  models    = model_dlnm,
-  basis    = cb_tmin,
-  mod_id = "mod2",
-  at       = seq(10, 30, by = 1),  # e.g., temperature sequence
-  lag      = 4,
-  cen      = 20,
-  ci.level = 0.95
+  models = model_dlnm,
+  basis = cb_tmin,
+  mod_id = "mod3",
+  cen = 20
 )
 
 # Inspect predictions

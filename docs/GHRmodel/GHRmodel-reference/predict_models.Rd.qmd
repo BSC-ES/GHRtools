@@ -1,0 +1,87 @@
+---
+format: html
+toc: true
+---
+
+# Fit Multiple INLA Models and sample their predicted vales
+
+## Description
+
+This function is a simplified version of fit_models that only keeps predictions for the input data and accepts formula strings with different random effects.
+
+```r
+predict_models(
+  formulas,
+  data,
+  family,
+  pred_type = "ppd",
+  name = "mod",
+  offset_var = NULL,
+  ppd_samples = 500,
+  idx = NULL,
+  control_inla = list(strategy = "adaptive"),
+  control_family = list(),
+  nthreads = 1,
+  progress = TRUE,
+  verbose = FALSE,
+  offset = NULL
+)
+```
+
+## Arguments
+
+- `formulas`: A string vector containing multiple INLA model formulas. Can be the `$formulas` component of a `GHRformulas` object.
+- `data`: A data frame containing the variables used in the model formulas.
+- `family`: A character string specifying the likelihood family. Currently available options include `"poisson"`, `"nbinomial"`, `"gaussian"`, `"zeroinflatedpoisson0"`, and `"zeroinflatednbinomial0"`.
+- `pred_type`: A string indicating the prediction method to use. Options include "ppd" (default), "postmean" and "postmedian". See details.
+- `name`: Either a single character string to label each fitted model by attaching a count (e.g., `"mod"`), or a character vector with the the same number of `"formulas"` to label each of the models.
+- `offset_var`: A character string specifying the name of the offset variable in `data`. If `NULL` (default), no offset is applied. Internally, `offset_var` is transformed according to the link function of the corresponding family: identity for `"gaussian"` and log for the rest of families.
+- `ppd_samples`: Numeric indicating the number of posterior predictive samples to draw. Only used if `pred_type='ppd'`, defaults to 500.
+- `idx`: Default is NULL (keep all data rows). Alternatively, pass a vector of indices indicating the indices of the predictions to be kept.
+- `control_inla`: Parameters passed to `control.inla` in `INLA::inla`. See `?INLA::control.inla` to see all available options. By default, uses the adaptive strategy.
+- `control_family`: Parameters passed to `control.family` in `INLA::inla`. See `?INLA::control.family` to see all available options.
+- `nthreads`: An integer specifying the maximum number of threads for parallel computation. Default is `1`.
+- `progress`: Logical; if `TRUE`, displays progression while fitting models. Default is `TRUE`.
+- `verbose`: Logical; if `TRUE`, run INLA in verbose mode (useful for debugging). Default is `FALSE`.
+- `offset`: Deprecated, use offset_var instead.
+
+## Details
+
+The pred_type methods available include:
+
+ * `"ppd"`: Posterior predictive distribution, computed by generating posterior samples using `INLA::inla.posterior.sample` and simulating from the respective likelihood function.
+ * `"postmean"`: Posterior mean of the fitted mean response, obstained by `summary.fitted.values$mean` available in the INLA object.
+ * `"postmedian"`: Posterior median of the fitted mean response, obstained by `summary.fitted.values$0.5quant` available in the INLA object.
+
+Note that the methods `postmean` and `postmedian` are faster than `pdd`, but probabilistic scoring metrics cannot be calculated when using them.
+
+## Returns
+
+A named list with model names according to `name`, each containing a matrix with the predictions. The number of rows will be equal to the number of rows of `data` (unless `idx` has been used) and the number of columns will be equal to `ppd_samples` for `pred_type='ppd'` and 1 for the other prediction methods.
+
+## See Also
+
+fit_models for model fits with GoF metrics, INLA objects, and other information about the model fit.
+
+## Examples
+
+```r
+# Load example dataset
+data(dengue_MS)
+dengue_MS <- dengue_MS[dengue_MS$year %in% 2015:2016,]
+
+# Declare formulas
+formula <- "dengue_cases ~ tmin + f(month, model='rw1')"
+
+# 10 ppd samples, keep rows 30 to 49
+respred <- predict_models(
+  formulas = formula,
+  data = dengue_MS,
+  family = "nbinomial",
+  pred_type = "ppd",
+  name = "TestModel",
+  offset_var = "pop100000",
+  ppd_samples = 10,
+  idx = 30:49
+)
+```

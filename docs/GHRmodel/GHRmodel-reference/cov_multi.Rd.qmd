@@ -16,7 +16,7 @@ cov_multi(covariates, pattern = NULL, name = NULL, add = FALSE)
 ## Arguments
 
 - `covariates`: A character vector or a list of single-element character vectors. Typically obtained from `extract_names` or `cov_uni` or `cov_nl`.
-- `pattern`: A character vector of regular expression patterns (e.g., "tmin" matches "tmin", "tmin.l1", etc.). Each pattern defines a group to draw covariates from.
+- `pattern`: A character vector of regular expression patterns (e.g., "tmin" matches "f(INLA::inla.group(tmin.l1, method='quantile', n=10), model='rw2')"). Each pattern defines a group to draw covariates from.
 - `name`: A character vector of exact variable names to include as an additional group.
 - `add`: Logical; if `TRUE`, appends the generated combinations to the original `covariates` object. Default is `FALSE`.
 
@@ -41,5 +41,6 @@ cov_multi(covariates = covs, pattern = "tmin", name = "urban")
 
 # Use output as input to write_inla_formulas()
 combined_covs <- cov_multi(covariates = covs, pattern = c("tmin", "pdsi"))
-formulas <- write_inla_formulas(outcome = "cases", covariates = combined_covs)
+formulas <- write_inla_formulas(outcome = "cases",
+                                covariates = combined_covs)
 ```

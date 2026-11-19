@@ -1,0 +1,30 @@
+---
+format: html
+toc: true
+---
+
+# GHRmodel: Bayesian Hierarchical Modelling of Spatio-Temporal Health Data
+
+## Description
+
+Supports modeling health outcomes using Bayesian hierarchical spatio-temporal models with complex covariate effects (e.g., linear, non-linear, interactions, distributed lag linear and non-linear models) in the 'INLA' framework. It is designed to help users identify key drivers and predictors of disease risk by enabling streamlined model exploration, comparison, and visualization of complex covariate effects. See an application of the modelling framework in Lowe, Lee, O'Reilly et al. (2021) .
+
+## Author(s)
+
+Maintainer : Carles Milà carles.milagarcia@bsc.es ([ORCID](https://orcid.org/0000-0003-0470-0760))
+
+Authors:
+
+ * Carles Milà carles.milagarcia@bsc.es ([ORCID](https://orcid.org/0000-0003-0470-0760))
+ * Giovenale Moirano ([ORCID](https://orcid.org/0000-0001-8748-3321))
+ * Anna B. Kawiecki ([ORCID](https://orcid.org/0000-0002-0499-2612))
+ * Diego Villa ([ORCID](https://orcid.org/0000-0001-7832-5890))
+ * Rachel Lowe ([ORCID](https://orcid.org/0000-0003-3939-7343))
+
+## See Also
+
+Useful links:
+
+ * [https://gitlab.earth.bsc.es/ghr/ghrmodel](https://gitlab.earth.bsc.es/ghr/ghrmodel)
+ * [https://bsc-es.github.io/GHRtools/docs/GHRmodel/GHRmodel](https://bsc-es.github.io/GHRtools/docs/GHRmodel/GHRmodel)
+ * Report bugs at [https://gitlab.earth.bsc.es/ghr/ghrmodel/-/work_items](https://gitlab.earth.bsc.es/ghr/ghrmodel/-/work_items)

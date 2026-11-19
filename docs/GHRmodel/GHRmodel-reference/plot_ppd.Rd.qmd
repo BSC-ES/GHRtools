@@ -12,6 +12,7 @@ This function draws kernel-density curves for posterior-predictive samples and o
 ```r
 plot_ppd(
   ppd,
+  obs,
   xlab = "Outcome",
   ylab = "Density",
   title = "Posterior Predictive Distribution",
@@ -23,13 +24,14 @@ plot_ppd(
 
 ## Arguments
 
-- `ppd`: A `data.frame` containing posterior-predictive samples (one column per sample) and the column with `observed` data.
+- `ppd`: A `matrix` containing posterior predictive samples (one column per sample).
+- `obs`: A vector of observations, must have the same length as the number of columns in `ppd`.
 - `xlab`: Character: x-axis label. Default `"Outcome"`.
 - `ylab`: Character: y-axis label. Default `"Density"`.
 - `title`: Character: plot title. Default `"Posterior Predictive Distribution"`.
 - `xlim`: Numeric vector of length 2 giving the minimum and maximum x-axis values, e.g. `c(0, 25)`. If `NULL` (default) the limits are `c(0, quantile(observed, 0.95))`.
-- `obs_color`: Color for the observed line density
-- `ppd_color`: Color for the posterior predictive distribution lines density
+- `obs_color`: Color for the observed line density.
+- `ppd_color`: Color for the posterior predictive distribution line density.
 
 ## Returns
 
@@ -38,15 +40,29 @@ A `ggplot2` plot object.
 ## Examples
 
 ```r
-## Not run:
+# Load example dataset
+data(dengue_MS)
+dengue_MS <- dengue_MS[dengue_MS$year %in% 2015:2016,]
 
-# Load example posterior predictive distribution from the package: 
-ppd_df_file <- system.file("examples", "ppd_df.rds", package = "GHRmodel")
-ppd_df <- readRDS(ppd_df_file) # loads ghr_models into the environment
+# Declare formulas
+formulas <- "dengue_cases ~ tmin + f(year, model='rw1')"
 
-# Plot densities of the posterior predictive distribution and observed cases. 
-plot_ppd(ppd_df, 
-obs_color = "blue",
-ppd_color = "red")
-## End(Not run)
+# Tranform formulas into a 'GHRformulas' object
+ghr_formula <- as_GHRformulas(formulas)
+
+# Fit multiple models
+results <- fit_models(
+  formulas = ghr_formula,
+  data = dengue_MS,
+  family = "nbinomial",
+  name = "model",
+  offset_var = "pop100000",
+  nthreads = 2,
+  control_compute = list(config = TRUE),
+  keep_ppd = TRUE,
+  ppd_samples = 50
+)
+
+# Plot densities of the posterior predictive distribution and observed cases.
+plot_ppd(results$ppd[[1]], obs = dengue_MS$dengue_cases)
 ```

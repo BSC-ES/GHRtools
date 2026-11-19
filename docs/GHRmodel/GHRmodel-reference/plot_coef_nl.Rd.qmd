@@ -16,7 +16,7 @@ Generates plots of nonlinear effects from one or more fitted models contained wi
  * Collapsed (when `collapse = TRUE`): one non-linear effect combined across models into a single panel.
    
     * The user must explicitly specify the exact variable name using `name`. It only accepts one covariate name.
-    * Collapse mode can only be used when the selected effect is not replicated (that is, does not have the format `f(covariate, model = ..., replicate = group))` If replication is detected, an error will be thrown.
+    * Collapse mode can only be used when the selected effect is not replicated (that is, does not have the format `f(covariate, model = ..., replicate = group))`. If replication is detected, an error will be thrown.
 
 ```r
 plot_coef_nl(
@@ -58,7 +58,7 @@ plot_coef_nl(
 - `hist_fill`: Fill color for histogram bars. Default is `"grey"`.
 - `rug`: Include a rug plot in the x-axis. Default is FALSE.
 - `collapse`: Logical; if `TRUE`, attempts to collapse plots across models to show one plot per variable. This requires that selected nonlinear effect is not replicated (i.e. the covariate is not in the format f(covariate, model = ..., replicate = group))
-- `exp`: Logical,if `TRUE` the coefficients are exponentiated, Default is if `FALSE`.
+- `exp`: Logical,if `TRUE` the coefficients are exponentiated, Default is `FALSE`.
 
 ## Returns
 
@@ -67,26 +67,22 @@ A `ggplot` or `cowplot` object, depending on the plotting mode.
 ## Examples
 
 ```r
-## Not run:
-
-
-# Load example GHRmodels object from the package: 
-model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+# Load example GHRmodels object from the package:
+model_list_file <- system.file("examples", "model_list.rds",
+                               package = "GHRmodel")
 model_list <- readRDS(model_list_file)
 
-# Plot 2 models with a non-linear term of PDSI at one month lag in collapsed mode: 
+# Plot 2 models with non-linear PDSI at one month lag in collapsed mode:
 plot_coef_nl(
-models = model_list,
-mod_id = c( "mod5", "mod6") ,
-mod_label = c("mod6" = "pdsi.l1_nl",
-              "mod5" = "pdsi.l1_nl + tmin.l1_nl"),
-var_label = c("pdsi.l1" = "Drought index (PDSI)"),
-name = c("pdsi.l1"),
-title = "Change in non-linear term for drought index (PDSI)
-with and without mean min. temp lag 1",
-xlab = "PDSI",
-palette = "IDE2",
-collapse = TRUE    
+  models = model_list,
+  mod_id = c( "mod5", "mod6") ,
+  mod_label = c("mod6" = "pdsi.l1_nl",
+                "mod5" = "pdsi.l1_nl + tmin.l1_nl"),
+  var_label = c("pdsi.l1" = "Drought index (PDSI)"),
+  name = c("pdsi.l1"),
+  title = "Change in PDSI with and without mean min. temp lag 1",
+  xlab = "PDSI",
+  palette = "IDE2",
+  collapse = TRUE
 )
-## End(Not run)
 ```

@@ -21,7 +21,7 @@ plot_re(
   re_id,
   rep_id = NULL,
   map = NULL,
-  map_area = NULL,
+  map_unit = NULL,
   mod_label = NULL,
   re_label = NULL,
   rep_label = NULL,
@@ -44,7 +44,7 @@ plot_re(
 - `re_id`: Character; name of the variable defining the random effect (from `models$re`).
 - `rep_id`: Optional character string; name of a grouping variable if random effects are replicated. Default is `NULL`.
 - `map`: Optional `sf` object providing spatial geometry. If `NULL`, returns a caterpillar plot.
-- `map_area`: Character; column name in `map` indicating spatial units (must match `re_id` order).
+- `map_unit`: Character; column name in `map` indicating spatial units (must match `re_id` order).
 - `mod_label`: Optional labels for models. Can be a named vector (e.g., `c("mod1" = "Baseline", "mod2" = "Adjusted")`) or an unnamed vector with the same order as `mod_id`.
 - `re_label`: Optional; variable in the data to label the random effect units (e.g., year names instead of numeric IDs).
 - `rep_label`: Optional; label for replicated grouping variable (e.g., for years or time periods).
@@ -62,7 +62,7 @@ plot_re(
 
 Plot Random Effects from GHRmodels
 
- * If `map` is used, `map_area` must match a column in `map` and correspond in order to the RE unit.
+ * If `map` is used, `map_unit` must match a column in `map` and correspond in order to the RE unit.
  * For BYM/BYM2 models, only the total random effect is plotted (structured/unstructured parts are merged).
  * When no map is used, the plot compares models via colored points and intervals for each RE unit.
  * Replicated REs (e.g., for years) can be plotted across facets using `rep_label`.
@@ -73,7 +73,7 @@ Plot Random Effects from GHRmodels
 A `ggplot2` plot object:
 
  * If `map` is `NULL`, returns a caterpillar plot showing median REs with 95% uncertainty intervals.
- * If `map` is provided, returns a faceted choropleth map showing RE medians by area and (optionally) replicate.
+ * If `map` is provided, returns a faceted choropleth map showing RE medians by spatial unit and (optionally) replicate.
 
 ## See Also
 
@@ -82,30 +82,23 @@ A `ggplot2` plot object:
 ## Examples
 
 ```r
-## Not run:
-
-
-# Load example GHRmodels object from the package: 
-model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+# Load example GHRmodels object from the package:
+model_list_file <- system.file("examples", "model_list.rds",
+                               package = "GHRmodel")
 model_list <- readRDS(model_list_file)
 
 #  Plot the estimated yearly random effects for three different models.
 plot_re(
-model = model_list,                          # A GHRmodels object 
-mod_id = c("mod1", "mod3", "mod5"),          # IDs of the models 
-
-mod_label = c("Baseline",                    # Custom labels for the models
-              "tmin.l1_nl",           
-              "pdsi.l1_nl + tmin.l1_nl"),     
-
-re_id = "year_id",                           # Name of the random effect variable 
-re_label = "year",                           # Label to map year_id to calendar years
-
-ref_color = "grey",                          # Color for the reference model’s effects
-palette = "IDE2",                            # Color for other model effects
-
-title = "Yearly Random Effect",              # Title for the plot
-xlab = "Year"                                # Label for the x-axis 
+  model = model_list,                          # A GHRmodels object
+  mod_id = c("mod1", "mod3", "mod5"),          # IDs of the models
+  mod_label = c("Baseline",                    # Custom labels for the models
+                "tmin.l1_nl",
+                "pdsi.l1_nl + tmin.l1_nl"),
+  re_id = "year_id",  # Name of the random effect variable
+  re_label = "year",  # Label to map year_id to calendar years
+  ref_color = "grey", # Color for the reference model’s effects
+  palette = "IDE2",   # Color for other model effects
+  title = "Yearly Random Effect",              # Title for the plot
+  xlab = "Year"                                # Label for the x-axis
 )
-## End(Not run)
 ```

@@ -25,10 +25,9 @@ A list of character vectors.
 ## Examples
 
 ```r
-## Not run:
-
 # Load example dataset
-data(dengueMS)
+data(dengue_MS)
+dengue_MS <- dengue_MS[dengue_MS$year %in% 2015:2016,]
 
 # Declare formulas
 formulas <- c(
@@ -39,19 +38,18 @@ formulas <- c(
 # Tranform formulas into a 'GHRformulas' object
 ghr_formulas <- as_GHRformulas(formulas)
 
-# Fit multiple models 
+# Fit multiple models
 results <- fit_models(
   formulas = ghr_formulas,
-  data     = dengue_MS,
-  family   = "nbinomial",
-  name     = "TestModel",
-  offset   = "population",
-nthreads = 2,
-control_compute = list(config = FALSE),
-pb       = TRUE
+  data = dengue_MS,
+  family = "nbinomial",
+  name = "TestModel",
+  offset_var = "pop100000",
+  nthreads = 2,
+  control_compute = list(config = FALSE),
+  progress = TRUE
 )
 
-# Extract the list of covariates from the models 
+# Extract the list of covariates from the models
 get_covariates(results)
-## End(Not run)
 ```

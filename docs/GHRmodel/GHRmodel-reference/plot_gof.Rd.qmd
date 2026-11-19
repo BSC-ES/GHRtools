@@ -20,7 +20,11 @@ plot_gof(
   var_color = NULL,
   var_shape = NULL,
   var_facet = NULL,
-  palette = "IDE2"
+  palette = "IDE2",
+  title = "",
+  xlab = NULL,
+  ylab = NULL,
+  legend = NULL
 )
 ```
 
@@ -40,6 +44,10 @@ plot_gof(
 - `var_shape`: Optional; name of a column in `mod_gof` to use for point shape grouping.
 - `var_facet`: Optional; name of a column in `mod_gof` to use for faceting the plot.
 - `palette`: Character; name of a color palette to use if `var_color` is provided. Default is `"IDE2"`.
+- `title`: Character; title of the plot. Default is `""` (no title).
+- `xlab`: Label for the x-axis. If `NULL` (default), uses `"Model ID"`.
+- `ylab`: Label for the y-axis. If `NULL` (default), a label is derived automatically from `metric`.
+- `legend`: Legend title for the color and shape legends. If `NULL` (default), the title is derived automatically from `var_color` and `var_shape`.
 
 ## Details
 
@@ -64,20 +72,17 @@ A `ggplot2` object showing the specified metric for each model, optionally group
 ## Examples
 
 ```r
-## Not run:
-
-# Load example GHRmodels object from the package: 
-model_list_file <- system.file("examples", "model_list.rds", package = "GHRmodel")
+# Load example GHRmodels object from the package:
+model_list_file <- system.file("examples", "model_list.rds",
+                               package = "GHRmodel")
 model_list <- readRDS(model_list_file)
 
 # Plot models by difference in DIC
-        
+
 plot_gof(mod_gof = model_list$mod_gof,
         metric = "dic_vs_first",
         ci = TRUE,
         var_arrange = "dic",
-        var_color = "covariate_1",
-        var_shape = "covariate_2",
+        var_color = "model_id",
         palette= "IDE2")
-## End(Not run)
 ```

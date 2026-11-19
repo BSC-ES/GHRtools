@@ -62,6 +62,6 @@ covlist <- cov_multi(covs, pattern = c("tmin", "pdsi"))
 # Apply non-linear transformation to tmin variables
 cov_nl(covlist, pattern = "tmin", model = "rw2")
 
-# Include original variables along with transformed ones
-cov_nl(covlist, pattern = "tmin", model = "rw2", add = TRUE)
+# Include original variable along with transformed one
+cov_nl(covlist, name = "pdsi.l1", model = "rw2", add = TRUE)
 ```
