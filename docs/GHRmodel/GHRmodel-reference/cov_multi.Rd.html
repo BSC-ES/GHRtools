@@ -324,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
 <li><code>covariates</code>: A character vector or a list of single-element character vectors. Typically obtained from <code>extract_names</code> or <code>cov_uni</code> or <code>cov_nl</code>.</li>
-<li><code>pattern</code>: A character vector of regular expression patterns (e.g., “tmin” matches “tmin”, “tmin.l1”, etc.). Each pattern defines a group to draw covariates from.</li>
+<li><code>pattern</code>: A character vector of regular expression patterns (e.g., “tmin” matches “f(INLA::inla.group(tmin.l1, method=‘quantile’, n=10), model=‘rw2’)”). Each pattern defines a group to draw covariates from.</li>
 <li><code>name</code>: A character vector of exact variable names to include as an additional group.</li>
 <li><code>add</code>: Logical; if <code>TRUE</code>, appends the generated combinations to the original <code>covariates</code> object. Default is <code>FALSE</code>.</li>
 </ul>
@@ -349,7 +349,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use output as input to write_inla_formulas()</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>combined_covs <span class="ot">&lt;-</span> <span class="fu">cov_multi</span>(<span class="at">covariates =</span> covs, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>))</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">write_inla_formulas</span>(<span class="at">outcome =</span> <span class="st">"cases"</span>, <span class="at">covariates =</span> combined_covs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">write_inla_formulas</span>(<span class="at">outcome =</span> <span class="st">"cases"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                                <span class="at">covariates =</span> combined_covs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

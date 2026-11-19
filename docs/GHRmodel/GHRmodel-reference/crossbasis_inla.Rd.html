@@ -302,6 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
   <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
   <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">See Also</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
   </ul>
@@ -319,57 +320,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="description">Description</h2>
 <p>This function is a wrapper around dlnm::crossbasis</p>
 <p>to generate cross-basis matrices that capture nonlinear effects of a predictor across both exposure and lag dimensions. The input covariate is passed as a numeric matrix of lagged values, and the resulting columns can be renamed via <code>basis_name</code> for easier reference in model formulas.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crossbasis_inla</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  covariate,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  basis_name,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  lag,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">argvar =</span> <span class="fu">list</span>(),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">arglag =</span> <span class="fu">list</span>(),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crossbasis_inla</span>(covariate, basis_name, lag, argvar, arglag, ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
 <li><code>covariate</code>: A numeric matrix of covariate values. Typically this will be a matrix of lagged covariate values (which can be generated using <code>lag_cov</code>).</li>
 <li><code>basis_name</code>: A character string specifying the prefix for the spline columns in the resulting basis matrix (replacing the default <code>"v"</code>).</li>
-<li><code>lag</code>: A numeric vector with min and max lag of the matrix (as in <code>crossbasis</code>).</li>
-<li><code>argvar</code>: A list specifying the shape of the exposure-response function (as in <code>crossbasis</code>).</li>
-<li><code>arglag</code>: A list specifying the shape of the lag-response function (as in <code>crossbasis</code>).</li>
-<li><code>...</code>: Additional arguments passed to dlnm::crossbasis , such as <code>df</code>, <code>degree</code>, <code>knots</code>, etc.</li>
+<li><code>lag</code>: A numeric vector with min and max lag of the matrix (as in <code>dlnm::crossbasis</code>).</li>
+<li><code>argvar</code>: A list specifying the shape of the exposure-response function with named elements (e.g., “fun”, “df”, “degree”, “knots”) as in <code>dlnm::crossbasis</code>). See examples.</li>
+<li><code>arglag</code>: A list specifying the shape of the lag-response function with named elements (e.g., “fun”, “df”, “degree”, “knots”) as in <code>dlnm::crossbasis</code>). See examples.</li>
+<li><code>...</code>: Additional arguments passed to dlnm::crossbasis .</li>
 </ul>
 </section>
 <section id="returns" class="level2">
 <h2 class="anchored" data-anchor-id="returns">Returns</h2>
-<p>An object of class <code>"crossbasis_inla"</code> (also inheriting class <code>"crossbasis"</code>), as returned by <code>dlnm:crossbasis()</code> but with customized column names.</p>
+<p>An object of class <code>"crossbasis_inla"</code> (also inheriting class <code>"crossbasis"</code>), as returned by dlnm::crossbasis</p>
+<p>but with column names prefixed by <code>basis_name</code> instead of the default <code>"v"</code> (e.g.&nbsp;<code>"v1.l1"</code> becomes <code>"basis_name1.l1"</code>).</p>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">See Also</h2>
+<p><code>onebasis_inla</code> for the one-dimensional equivalent, and <code>crosspred_inla</code> to compute predictions from a fitted cross-basis.</p>
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build cross-basis with a custom prefix for columns</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import example data set </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import example data set</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dengue_MS"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>lag_mat <span class="ot">&lt;-</span> <span class="fu">lag_cov</span>(<span class="at">data =</span> dengue_MS,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"micro_code"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">FALSE</span>) <span class="co"># add = FALSE return only the lagged matrix</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>cb_inla <span class="ot">&lt;-</span> <span class="fu">crossbasis_inla</span>(</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate  =</span> lag_mat,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis_name =</span> <span class="st">"tempLag"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>),</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">argvar =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>, <span class="at">df =</span> <span class="dv">3</span>),</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">arglag =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"poly"</span>, <span class="at">degree =</span> <span class="dv">2</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Check class of the cross-basis object</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cb_inla)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># View resulting cross-basis matrix</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">colnames</span>(cb_inla))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>lag_mat <span class="ot">&lt;-</span> <span class="fu">lag_cov</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"micro_code"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>cb_inla <span class="ot">&lt;-</span> <span class="fu">crossbasis_inla</span>(</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate  =</span> lag_mat,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis_name =</span> <span class="st">"tempLag"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">argvar =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>, <span class="at">df =</span> <span class="dv">3</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">arglag =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"poly"</span>, <span class="at">degree =</span> <span class="dv">2</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Check class of the cross-basis object</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cb_inla)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># View resulting cross-basis matrix</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">colnames</span>(cb_inla))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

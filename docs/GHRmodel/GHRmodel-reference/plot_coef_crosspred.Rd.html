@@ -336,11 +336,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.7</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.2</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">""</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">heat_lims =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">""</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
@@ -356,6 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>line_size</code>: Numeric. Line width (default = 0.7).</li>
 <li><code>ribbon_color</code>: Character string. Color for credible interval ribbons. Defaults to <code>line_color</code>.</li>
 <li><code>ribbon_alpha</code>: Numeric. Alpha transparency for ribbons (default = 0.2).</li>
+<li><code>heat_lims</code>: Numeric vector of length 2 indicating the lower and upper limits of the colour scale when <code>type = "heatmap"</code>. If NULL (default), it uses a symmetric (on a linear scale if <code>exp=FALSE</code> and on a log scale if <code>exp=TRUE</code>) colour palette centred on the null effect with limits based on the data range.</li>
 <li><code>title</code>: Character string. Plot title.</li>
 <li><code>ylab</code>: Character string. Label for y-axis.</li>
 <li><code>xlab</code>: Character string. Label for x-axis.</li>
@@ -373,39 +375,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_dlnm_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_dlnm.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>model_dlnm <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_dlnm_file) </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example cross-basis matrix from the package: 2-dimensional cross-basis matrix of the </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># non-linear effect of dengue risk across tmin values and lags: </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>cb_tmin_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>,<span class="st">"cb_tmin.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>cb_tmin <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(cb_tmin_file) <span class="co"># loads cross-basis matrix into the environment</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>pred_result <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">models    =</span> model_dlnm,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis    =</span> cb_tmin,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod2"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">at       =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="at">by =</span> <span class="dv">1</span>),  <span class="co"># e.g., temperature sequence</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag      =</span> <span class="dv">4</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen      =</span> <span class="dv">20</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci.level =</span> <span class="fl">0.95</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot DLNM predictions </span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">crosspred =</span> pred_result,    <span class="co"># Crosspred object with model predictions</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">type =</span> <span class="st">"slices"</span>,            <span class="co"># Plot temperature-specific slices of exposure-response curves</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="at">exp =</span> <span class="cn">TRUE</span>,                 <span class="co"># Exponentiate the coefficients (to relative risk scale)</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="at">var =</span> <span class="fu">c</span>(<span class="dv">22</span><span class="sc">:</span><span class="dv">24</span>),             <span class="co"># Display results for temperature 22°C to 24°C</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="at">line_color =</span> <span class="st">"red"</span>,         <span class="co"># Red color for the lines representing effect estimates</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="at">line_size =</span> <span class="fl">0.8</span>,            <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="at">ribbon_color =</span> <span class="st">"red"</span>,       <span class="co"># Red shading for credible interval ribbons</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,         <span class="co"># Set ribbon transparency to 30%</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Effect of minimum temperatures 22°C to 23°C on dengue relative risk by lag"</span>,</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="at">xlab =</span> <span class="st">"Lag"</span>,               <span class="co"># Label for the x-axis (exposure variable)</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">"Relative Risk (RR)"</span> <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_dlnm_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"model_dlnm.rds"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_dlnm <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_dlnm_file)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example cross-basis matrix from the package:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2-dimensional cross-basis matrix of the</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># non-linear effect of dengue risk across tmin values and lags:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>cb_tmin_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>,<span class="st">"cb_tmin.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>cb_tmin <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(cb_tmin_file) <span class="co"># loads cross-basis matrix</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>pred_result <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">models    =</span> model_dlnm,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis    =</span> cb_tmin,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod3"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">at       =</span> <span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">24</span>, <span class="at">by =</span> <span class="dv">1</span>),  <span class="co"># e.g., temperature sequence</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen      =</span> <span class="dv">20</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci.level =</span> <span class="fl">0.95</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot DLNM predictions</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> pred_result, <span class="co"># Crosspred object with model predictions</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"slices"</span>, <span class="co"># Plot specific slices of exposure-response</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>, <span class="co"># Exponentiate coefficients (relative risk scale)</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="dv">22</span><span class="sc">:</span><span class="dv">24</span>), <span class="co"># Display results for temperature 22°C to 24°C</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"red"</span>, <span class="co"># Red color for the effect estimates lines</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>, <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"red"</span>, <span class="co"># Red shading for credible interval ribbons</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>, <span class="co"># Set ribbon transparency to 30%</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temp. 22°C to 23°C on dengue RR by lag"</span>,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Lag"</span>, <span class="co"># Label for the x-axis (exposure variable)</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Relative Risk (RR)"</span> <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

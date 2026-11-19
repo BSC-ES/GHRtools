@@ -318,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Create Spatially or Temporally Varying Effects for INLA</h1>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>This function transforms covariates identified by <code>pattern</code> or <code>name</code> into varying effect terms of the form:<code>f(unit, covariate, model = 'iid')</code>, which allows covariates to have varying slopes across spatial or temporal units. The output can be used directly in the <code>covariates</code> argument of <code>write_inla_formulas</code>.</p>
+<p>This function transforms covariates identified by <code>pattern</code> or <code>name</code> into varying effect terms of the form: <code>f(unit, covariate, model = 'iid', constr = FALSE)</code>, which allows covariates to have varying slopes across spatial or temporal units. The output can be used directly in the <code>covariates</code> argument of <code>write_inla_formulas</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov_varying</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  covariates,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  unit,</span>
@@ -345,7 +345,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="details">Details</h2>
 <ul>
 <li>Use <code>pattern</code> or <code>name</code> (or both) to specify which covariates to transform.</li>
-<li>The resulting terms use INLA’s <code>f()</code> syntax: <code>f(unit, covariate, model = "iid")</code>.</li>
 <li>Currently only supports <code>"iid"</code> models for varying effects.</li>
 </ul>
 </section>

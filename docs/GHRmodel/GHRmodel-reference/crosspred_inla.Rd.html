@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Generate DLNM Predictions from <code>GHRmodels</code> Objects</h1>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>This function takes an object of class <code>GHRmodels</code>, extracts the relevant coefficients and variance-covariance matrix, and then calls dlnm::crosspred to compute predictions over a range of covariate values (or at specified points).</p>
+<p>This function takes an object of class <code>GHRmodels</code>, extracts the relevant coefficients and variance-covariance matrix, and then calls <code>dlnm::crosspred</code> to compute predictions over a range of covariate values (or at specified points).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crosspred_inla</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  models,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  basis,</span>
@@ -332,30 +332,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">bylag =</span> <span class="dv">1</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci.level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">cumul =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">cumul =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
 <li><code>models</code>: An object of class <code>GHRmodels</code>, containing fitted model output (e.g., <code>$fixed</code> and <code>$vcov</code> lists).</li>
-<li><code>basis</code>: A cross-basis or one-basis object, typically created by <code>crossbasis_inla</code> or <code>onebasis_inla</code>.</li>
+<li><code>basis</code>: A cross-basis or one-basis object created by <code>crossbasis_inla</code> or <code>onebasis_inla</code>.</li>
 <li><code>mod_id</code>: An integer or character string specifying which model within the input <code>GHRmodels</code> object to use (e.g., if <code>model$fixed</code> and <code>model$vcov</code> both have multiple entries).</li>
-<li><code>at</code>: A numeric vector of values at which to compute predictions (e.g.,<code>seq(10,25, by=0.2)</code>)</li>
+<li><code>at</code>: A numeric vector of values at which to compute predictions (e.g., <code>seq(10, 25, by = 0.2)</code>).</li>
 <li><code>from, to</code>: Numeric values specifying the range of the prediction sequence if <code>at</code> is not specified (e.g., <code>from = 10</code> and <code>to = 25</code>).</li>
 <li><code>by</code>: Numeric increment for the sequence if <code>at</code> is not specified (e.g., <code>by = 0.2</code>).</li>
-<li><code>lag</code>: A vector of two elements with min and max lag as declared in the <code>crossbasis_inla</code> function.</li>
+<li><code>lag</code>: An optional vector of two elements with min and max lag. If missing (default), it uses the same lag structure as defined in <code>crossbasis_inla</code>.</li>
 <li><code>bylag</code>: Numeric increment for lag steps (default is 1).</li>
 <li><code>cen</code>: A centering value (e.g., a reference exposure level).</li>
 <li><code>ci.level</code>: The credible interval level (default <code>0.95</code>).</li>
 <li><code>cumul</code>: Logical; if <code>TRUE</code>, cumulative predictions are computed (default <code>FALSE</code>).</li>
-<li><code>...</code>: Additional arguments passed on to crosspred , such as <code>bound</code>, <code>ci.arg</code>, etc.</li>
 </ul>
 </section>
 <section id="details" class="level2">
 <h2 class="anchored" data-anchor-id="details">Details</h2>
-<p>The function identifies which coefficients in <code>model$fixed[mod_id]</code> and which rows/columns in <code>model$vcov[mod_id]</code> correspond to the one-basis or cross-basis terms (i.e., matching the column names in <code>basis</code>). Then it passes these slices to dlnm::crosspred to generate predictions. The centering value (<code>cen</code>), if specified, indicates the reference exposure (e.g., a mean temperature) at which to center the effect estimates (e.g., the effect a given temperature value on the outcome will be compared to the effect of the centering value on the outcome, in this case the mean temperature).</p>
+<p>The function identifies which coefficients in <code>models$fixed[[mod_id]]</code> and which rows/columns in <code>models$vcov[[mod_id]]</code> correspond to the one-basis or cross-basis terms (i.e., matching the column names in <code>basis</code>).</p>
+<p>Then it passes these slices to <code>dlnm::crosspred</code> to generate predictions. The centering value (<code>cen</code>), if specified, indicates the reference exposure (e.g., a mean temperature) at which to center the effect estimates (e.g., the effect a given temperature value on the outcome will be compared to the effect of the centering value on the outcome, in this case the mean temperature).</p>
+<p>Credible intervals are not obtained by drawing from the joint posterior of the fixed effects. Instead, <code>dlnm::crosspred</code> combines the posterior mean coefficients with the posterior covariance matrix (<code>models$vcov</code>, itself INLA’s Gaussian approximation to the joint posterior of the fixed effects), then builds a symmetric interval as fit <code>\pm</code> a Gaussian quantile times the propagated standard error. This is equivalent to a posterior-sampling-based interval as long as the joint posterior of the fixed effects is itself approximately Gaussian and does not reflect any skewness in the individual marginal posteriors.</p>
 </section>
 <section id="returns" class="level2">
 <h2 class="anchored" data-anchor-id="returns">Returns</h2>
@@ -363,35 +363,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="see-also" class="level2">
 <h2 class="anchored" data-anchor-id="see-also">See Also</h2>
-<p>dlnm::crosspred for details on how predictions are computed.</p>
+<p><code>dlnm::crosspred</code> for details on how predictions are computed.</p>
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_dlnm_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_dlnm.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>model_dlnm <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_dlnm_file)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example cross-basis matrix from the package: 2-dimensional cross-basis matrix of the </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># non-linear effect of dengue risk across tmin values and lags: </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>cb_tmin_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>,<span class="st">"cb_tmin.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>cb_tmin <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(cb_tmin_file) <span class="co"># loads cross-basis matrix into the environment</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>pred_result <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">models    =</span> model_dlnm,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis    =</span> cb_tmin,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod2"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">at       =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="at">by =</span> <span class="dv">1</span>),  <span class="co"># e.g., temperature sequence</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag      =</span> <span class="dv">4</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen      =</span> <span class="dv">20</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci.level =</span> <span class="fl">0.95</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect predictions</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>predvar  <span class="co"># the sequence of 'at' values</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>allfit   <span class="co"># fitted values</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>alllow   <span class="co"># lower CI</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>allhigh  <span class="co"># upper CI</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_dlnm_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_dlnm.rds"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_dlnm <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_dlnm_file)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example cross-basis matrix from the package: 2-dimensional</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cross-basis matrix of the non-linear effect of dengue risk across</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># tmin values and lags:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>cb_tmin_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"cb_tmin.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>cb_tmin <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(cb_tmin_file)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>pred_result <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_dlnm,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis =</span> cb_tmin,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod3"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="dv">20</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect predictions</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>predvar  <span class="co"># the sequence of 'at' values</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>allfit   <span class="co"># fitted values</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>alllow   <span class="co"># lower CI</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>pred_result<span class="sc">$</span>allhigh  <span class="co"># upper CI</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

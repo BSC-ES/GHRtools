@@ -299,6 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#vignettes" id="toc-vignettes" class="nav-link" data-scroll-target="#vignettes">Vignettes</a></li>
   <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
   <li><a href="#developers" id="toc-developers" class="nav-link" data-scroll-target="#developers">Developers</a></li>
   </ul>
@@ -333,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <div class="columns">
 <div class="column" style="width:75%;">
-<p>The <strong>GHRmodel</strong> package supports modeling health outcomes using Bayesian hierarchical spatio-temporal models with complex covariate effects (e.g., linear, non-linear, interactions, distributed lag linear and non-linear models) in the <a href="https://www.r-inla.org/home">R-INLA</a> framework. It is designed to help users identify key drivers and predictors of disease risk by enabling streamlined model exploration, comparison, and visualization of complex covariate effects.</p>
+<p>The <strong>GHRmodel</strong> package supports modeling health outcomes using Bayesian hierarchical spatio-temporal models with complex covariate effects (e.g., linear, non-linear, interactions, distributed lag linear and non-linear models) in the <a href="https://www.r-inla.org/">R-INLA</a> framework. It is designed to help users identify key drivers and predictors of disease risk by enabling streamlined model exploration, comparison, and visualization of complex covariate effects.</p>
 <p>The image below shows the structure of the <strong>GHRmodel</strong> package, outlining its functions (in blue), GHRmodel-specific output objects (in purple), generic output objects (in grey), and general functionality. Generic output objects can be provided directly by the user or can be generated using <strong>GHRmodel</strong> helper functions.</p>
 </div><div class="column" style="width:7.5%;">
 
@@ -361,59 +362,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">'https://earth.bsc.es/gitlab/ghr/ghrmodel.git'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="vignettes" class="level2">
+<h2 class="anchored" data-anchor-id="vignettes">Vignettes</h2>
+<p>Several vignettes are available to explore <strong>GHRmodel</strong>. Vignettes loaded in the package can be accessed in R by typing <code>vignette("vignettename")</code> (e.g., <code>vignette("GHRmodel_overview")</code>).</p>
+<p>The vignettes are: - <code>"GHRmodel_overview"</code>: a general introduction to the main functionalities of the package, including a worked example. - <code>"GHRmodel_covariates"</code>: shows how to create INLA-compatible formulas for complex Bayesian spatio-temporal models (including interactions, varying and replicated effects). - <code>"GHRmodel_DLNM"</code>: demonstrates how Distributed Lag Nonlinear Models (DLNMs) are integrated into the <strong>GHRmodel</strong> spatio-temporal Bayesian hierarchical modelling framework to estimate the delayed and nonlinear effects of various exposures on disease risk.</p>
+</section>
 <section id="usage" class="level2">
 <h2 class="anchored" data-anchor-id="usage">Usage</h2>
 <p>To fit a model with R-INLA, formulas need to follow its required syntax and structural conventions. INLA-compatible model formulas can be developed using either:</p>
 <ul>
-<li><p>User-defined INLA-compatible input, which may consist of either user-defined covariate lists or user-defined formula lists.</p></li>
-<li><p><strong>GHRmodel</strong> helper functions that allow the user to pre-process and transform covariates and streamline writing INLA-compatible formulas.</p></li>
+<li>User-defined INLA-compatible input, which may consist of either user-defined covariate lists or user-defined formula lists.</li>
+<li><strong>GHRmodel</strong> helper functions that allow the user to pre-process and transform covariates and streamline writing INLA-compatible formulas.</li>
 </ul>
-<p>In this example the user provides a list of INLA-compatible model formulas. These are passed to the <code>as_GHRformulas()</code> function to be converted into a standardized <code>GHRformulas</code> object. This ensures consistent output structure and random effect specification across models that can be interpreted by the function <code>fit_models()</code> for model fitting.</p>
+<p>In this example the user provides a list of INLA-compatible model formulas.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"GHRmodel"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert list of user-defined INLA formulas into a GHRformulas object </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>formulas_user_ghr <span class="ot">&lt;-</span> <span class="fu">as_GHRformulas</span>(<span class="fu">c</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model 1: random effects only, where monthly random effect is replicated by meso region and the spatial random effect is replicated by year</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dengue_cases ~ 1 +</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">     f(month_id, model = 'rw1', replicate = spat_meso_id, cyclic = TRUE, constr = TRUE, hyper = prior_t) +</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">     f(year_id, model = 'iid', constr = TRUE, hyper = prior_t) +</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">     f(spat_id, model = 'bym2', graph = g, constr = TRUE, hyper = prior_sp, replicate = year_id2)"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model 2: random effects and a varying effect for pdsi lag 1 by climate zone</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ 1 + f(main_climate_f, pdsi.l1, model = 'iid') +</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">     f(month_id, model = 'rw1', replicate = spat_meso_id, cyclic = TRUE, constr = TRUE, hyper = prior_t) +</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">     f(year_id, model = 'iid', constr = TRUE, hyper = prior_t) +</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">     f(spat_id, model = 'bym2', graph = g, constr = TRUE, hyper = prior_sp, replicate = year_id2)"</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model 3: random effects and a 3-way interaction between different pdsi and tmin lags</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ 1 + pdsi.l1 + tmin.l3 + pdsi.l6 + pdsi.l1:tmin.l3:pdsi.l6 +</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">     f(month_id, model = 'rw1', replicate = spat_meso_id, cyclic = TRUE, constr = TRUE, hyper = prior_t) +</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">     f(year_id, model = 'iid', constr = TRUE, hyper = prior_t) +</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">     f(spat_id, model = 'bym2', graph = g, constr = TRUE, hyper = prior_sp, replicate = year_id2)"</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example dataset</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(dengue_MS)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dengue_MS <span class="ot">&lt;-</span> dengue_MS[dengue_MS<span class="sc">$</span>year <span class="sc">%in%</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>, ]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare formulas</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ tmin +  f(year, model='rw1')"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ pdsi +  f(year, model='rw1')"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>fit_models()</code> function allows users to fit a set of INLA-compatible model formulas defined by a <code>GHRformulas</code> object to a provided data set. It automates model fitting, extraction of outputs, and computation of a wide range of goodness-of-fit (GoF) metrics. The output is a <code>GHRmodels</code> object.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined INLA-compatible formulas can be passed into fit_models() as a GHRformulas object</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>model_user <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> formulas_user_ghr,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"nbinomial"</span>,           <span class="co"># Negative binomial likelihood</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"mod"</span>,                   <span class="co"># Label prefix for each model</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset =</span> <span class="st">"population"</span>,          <span class="co"># Offset variable to account for population size</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_compute =</span> <span class="fu">list</span>(</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">config =</span> <span class="cn">FALSE</span>,               <span class="co"># Do not posterior predictive distribution</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">vcov =</span> <span class="cn">FALSE</span>                  <span class="co"># Do not return variance-covariance matrix</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span>,                      <span class="co"># Display progress bar</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">8</span>                    <span class="co"># Use 8 threads for parallel computation</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit multiple models</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> formulas,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"nbinomial"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset_var =</span> <span class="st">"pop100000"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">2</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For model evaluation, <strong>GHRmodel</strong> provides a range of functions for model diagnostics, interpretation and evaluation. Functions with the prefix <code>plot_*</code> return graphical <code>ggplot2</code> or <code>cowplot</code> objects, allowing users to easily customize visual outputs.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot any linear coefficients found in the fitted model results. </span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_user,              <span class="co"># Provide fitted model GHRmodels object</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                      <span class="co"># Exponentiate coefficients to relative risk scale</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Relative Risk (RR)"</span>     <span class="co"># Plot title</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> results,          </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                      </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Relative Risk (RR)"</span>    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="../../figures/GHRmodel/example_plot.png" width="80%"></p>
 </section>
 <section id="developers" class="level2">

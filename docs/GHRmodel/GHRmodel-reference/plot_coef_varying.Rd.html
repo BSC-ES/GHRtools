@@ -350,28 +350,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Not run:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package: </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_cov_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_cov_list.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_cov_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_cov_list_file)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot varying slopes of pdsi.l1 depending on the climate zone</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_varying</span>(</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">models =</span> model_cov_list,               <span class="co"># A list of fitted INLA model objects</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">mod_id =</span> <span class="st">"mod8"</span>,                       <span class="co"># Select the model with varying slopes</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">palette =</span> <span class="st">"Blues"</span>,                     <span class="co"># Color palette for the plot </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">name =</span> <span class="st">"main_climate_f"</span>,               <span class="co"># The grouping variable </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Effect of PDSI at one-month lag for each climate zone"</span>,  <span class="co"># Plot title</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">"Main climate zones"</span>,           <span class="co"># Label for the y-axis </span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">unit_label =</span> <span class="fu">c</span>(                        <span class="co"># Map factor levels to descriptive names </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Tropical Rainforest Climate"</span>, </span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Tropical Monsoon Climate"</span>, </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Tropical Savanna Climate with Dry Winter"</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"Humid Subtropical Climate"</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="do">## End(Not run)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_cov_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_cov_list.rds"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_cov_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_cov_list_file)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_varying</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_cov_list,  <span class="co"># A list of fitted INLA model objects</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod8"</span>,          <span class="co"># Select the model with varying slopes</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Blues"</span>,        <span class="co"># Color palette for the plot</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"main_climate_f"</span>,  <span class="co"># The grouping variable</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of PDSI at one-month lag for each climate zone"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Main climate zones"</span>,   <span class="co"># Label for the y-axis</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">unit_label =</span> <span class="fu">c</span>(                <span class="co"># Map factor levels to descriptive names</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Tropical Rainforest Climate"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Tropical Monsoon Climate"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Tropical Savanna Climate with Dry Winter"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"Humid Subtropical Climate"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

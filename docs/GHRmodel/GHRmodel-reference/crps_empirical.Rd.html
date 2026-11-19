@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>sample_ppd.rd – GHRtools</title>
+<title>crps_empirical.rd – GHRtools</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -297,12 +297,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sample-from-the-posterior-predictive-distribution" id="toc-sample-from-the-posterior-predictive-distribution" class="nav-link active" data-scroll-target="#sample-from-the-posterior-predictive-distribution">Sample from the Posterior Predictive Distribution</a>
+  <li><a href="#compute-the-empirical-continuous-ranked-probability-score-crps" id="toc-compute-the-empirical-continuous-ranked-probability-score-crps" class="nav-link active" data-scroll-target="#compute-the-empirical-continuous-ranked-probability-score-crps">Compute the empirical Continuous Ranked Probability Score (CRPS)</a>
   <ul class="collapse">
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
   <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
   <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -313,42 +313,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="sample-from-the-posterior-predictive-distribution" class="level1">
-<h1>Sample from the Posterior Predictive Distribution</h1>
+<section id="compute-the-empirical-continuous-ranked-probability-score-crps" class="level1">
+<h1>Compute the empirical Continuous Ranked Probability Score (CRPS)</h1>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>This function refits a specified model from a <code>GHRmodels</code> object and generates samples from its posterior predictive distribution.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_ppd</span>(models, mod_id, <span class="at">s =</span> <span class="dv">1000</span>, <span class="at">nthreads =</span> <span class="dv">8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Computes the CRPS for a single observation given a set of posterior predictive draws, using the empirical (energy form) estimator c(“<code>\\mathrm{CRPS} = \\frac{1}{n} \\sum_{i=1}^n |x_i - y| -\n</code>”, “<code>\\frac{1}{2n^2} \\sum_{i=1}^n \\sum_{j=1}^n |x_i - x_j|</code>”)</p>
+<p>where <code>y</code> is the observed value and <code>x_1, \dots, x_n</code> are the posterior predictive draws. Missing draws in <code>pred_pdd</code> are dropped before computation.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crps_empirical</span>(y, pred_pdd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
-<li><code>models</code>: A <code>GHRmodels</code> object.</li>
-<li><code>mod_id</code>: Character; model identifier (from <code>models$mod_gof$model_id</code>).</li>
-<li><code>s</code>: An integer specifying the number of samples to draw from the posterior predictive distribution.</li>
-<li><code>nthreads</code>: An integer specifying the number of threads for parallel computation to refit the model. Default is <code>8</code>.</li>
+<li><code>y</code>: A single numeric observed value. Returns <code>NA_real_</code> if missing.</li>
+<li><code>pred_pdd</code>: A numeric vector of posterior predictive draws for the observation. Returns <code>NA_real_</code> if empty or all missing.</li>
 </ul>
 </section>
 <section id="returns" class="level2">
 <h2 class="anchored" data-anchor-id="returns">Returns</h2>
-<p>A <code>data.frame</code> containing columns for each of the posterior predictive samples and one column with observed data.</p>
+<p>A single numeric CRPS value (or <code>NA_real_</code>, see above).</p>
 </section>
-<section id="examples" class="level2">
-<h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Not run:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package: </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 1000 samples from the posterior predictive distribution of model 3.</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ppd_df <span class="ot">&lt;-</span> <span class="fu">sample_ppd</span>( </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  model_list,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod3"</span>, </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">s =</span> <span class="dv">1000</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">2</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## End(Not run)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Gneiting, T. and Raftery, A. E. (2007). Strictly Proper Scoring Rules, Prediction, and Estimation. <strong>Journal of the American Statistical Association</strong>, 102(477), 359-378. (Defines the energy-form representation of the CRPS used here, their eq. 21.)</p>
+<p>Zamo, M. and Naveau, P. (2018). Estimation of the Continuous Ranked Probability Score with Limited Information and Applications to Ensemble Weather Forecasts. <strong>Mathematical Geosciences</strong>, 50(2), 209-234. (Calls this the “NRG” estimator, dividing the pairwise term by <code>n^2</code></p>
+<p>rather than <code>n(n-1)</code>; see that paper for the alternative, less biased “fair”/PWM estimator.)</p>
 
 
 </section>

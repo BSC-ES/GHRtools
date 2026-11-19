@@ -327,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Collapsed (when <code>collapse = TRUE</code>): one non-linear effect combined across models into a single panel.</p>
 <ul>
 <li>The user must explicitly specify the exact variable name using <code>name</code>. It only accepts one covariate name.</li>
-<li>Collapse mode can only be used when the selected effect is not replicated (that is, does not have the format <code>f(covariate, model = ..., replicate = group))</code> If replication is detected, an error will be thrown.</li>
+<li>Collapse mode can only be used when the selected effect is not replicated (that is, does not have the format <code>f(covariate, model = ..., replicate = group))</code>. If replication is detected, an error will be thrown.</li>
 </ul></li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_nl</span>(</span>
@@ -369,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>hist_fill</code>: Fill color for histogram bars. Default is <code>"grey"</code>.</li>
 <li><code>rug</code>: Include a rug plot in the x-axis. Default is FALSE.</li>
 <li><code>collapse</code>: Logical; if <code>TRUE</code>, attempts to collapse plots across models to show one plot per variable. This requires that selected nonlinear effect is not replicated (i.e.&nbsp;the covariate is not in the format f(covariate, model = …, replicate = group))</li>
-<li><code>exp</code>: Logical,if <code>TRUE</code> the coefficients are exponentiated, Default is if <code>FALSE</code>.</li>
+<li><code>exp</code>: Logical,if <code>TRUE</code> the coefficients are exponentiated, Default is <code>FALSE</code>.</li>
 </ul>
 </section>
 <section id="returns" class="level2">
@@ -378,28 +378,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Not run:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package: </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2 models with a non-linear term of PDSI at one month lag in collapsed mode: </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_nl</span>(</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">models =</span> model_list,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">mod_id =</span> <span class="fu">c</span>( <span class="st">"mod5"</span>, <span class="st">"mod6"</span>) ,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"mod6"</span> <span class="ot">=</span> <span class="st">"pdsi.l1_nl"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>              <span class="st">"mod5"</span> <span class="ot">=</span> <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI)"</span>),</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">name =</span> <span class="fu">c</span>(<span class="st">"pdsi.l1"</span>),</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Change in non-linear term for drought index (PDSI)</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">with and without mean min. temp lag 1"</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">xlab =</span> <span class="st">"PDSI"</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">palette =</span> <span class="st">"IDE2"</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">collapse =</span> <span class="cn">TRUE</span>    </span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="do">## End(Not run)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2 models with non-linear PDSI at one month lag in collapsed mode:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_nl</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>( <span class="st">"mod5"</span>, <span class="st">"mod6"</span>) ,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"mod6"</span> <span class="ot">=</span> <span class="st">"pdsi.l1_nl"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">"mod5"</span> <span class="ot">=</span> <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index (PDSI)"</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"pdsi.l1"</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Change in PDSI with and without mean min. temp lag 1"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"PDSI"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

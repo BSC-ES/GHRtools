@@ -262,8 +262,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">0.1.1</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.1.0</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">0.2.0</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.1.1</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">0.1.0</a></li>
   </ul>
 </nav>
     </div>
@@ -292,14 +293,61 @@ ul.task-list li input[type="checkbox"] {
 <img src="../../figures/GHRmodel.svg" align="right" width="14%" style="margin-top: -60px; style=" margin-top:="" 0px;="">
 <br><br>
 <section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">0.1.1</h2>
+<h2 class="anchored" data-anchor-id="section">0.2.0</h2>
+<p><strong>New features</strong></p>
+<ul>
+<li>New model selection workflow: <code>select_re()</code> and <code>select_fe()</code> perform two-stage (univariable then multivariable) selection of random-effects and fixed-effects specifications based on goodness-of-fit metrics. <code>select_report()</code> generates an HTML report summarising the results of either function. These functions are experimental and may change in future releases.</li>
+<li>New <code>predict_models()</code> function, a lighter-weight counterpart to <code>fit_models()</code> that fits multiple models and returns posterior predictive samples (or posterior mean/median, via the <code>pred_type</code> argument), without computing the full set of outputs and GoF metrics returned by <code>fit_models()</code>. Useful for cross-validation in <strong>GHRpredict</strong>.</li>
+<li><code>fit_models()</code> and <code>predict_models()</code> now support two additional likelihood families: <code>"gaussian"</code> and zero-inflated count models (<code>"zeroinflatedpoisson0"</code>, <code>"zeroinflatednbinomial0"</code>).</li>
+<li><code>fit_models()</code> gains <code>keep_ppd</code> and <code>keep_inlamod</code> arguments to optionally retain, respectively, the posterior predictive samples and the fitted <code>INLA</code> model objects in the returned <code>GHRmodels</code> object.</li>
+<li><code>fit_models()</code> and <code>predict_models()</code> now accept plain character vectors of formulas directly (in addition to <code>GHRformulas</code> objects).</li>
+<li><code>fit_models()</code> and <code>predict_models()</code> gain the arguments <code>control_inla</code> and <code>control_family</code>, which are passed to the <code>control.inla</code> and <code>control.family</code> arguments of <code>INLA::inla()</code> to customise the INLA inference strategy and the likelihood settings.</li>
+<li>New <code>print()</code> method for <code>GHRmodels</code> objects.</li>
+<li><code>plot_coef_crosspred()</code> gains a <code>heat_lims</code> argument to fix the colour scale limits of crossbasis heatmaps.</li>
+<li>The example datasets <code>dengue_MS</code> and <code>dengue_SP</code> now include a population column (<code>pop100000</code>, population divided by 100,000) for use with the <code>offset_var</code> argument of <code>fit_models()</code>/<code>predict_models()</code>.</li>
+<li>New exported function <code>crps_empirical()</code>, an efficient estimator of the empirical continuous ranked probability score, which is used to compute the CRPS in <code>fit_models()</code>.</li>
+<li><code>plot_fit()</code> gains the arguments <code>unit_id</code> (to show only some spatial units) and <code>aggregate_space</code> (to aggregate fitted and observed values over a larger spatial unit).</li>
+<li><code>plot_gof()</code> gains the arguments <code>title</code>, <code>xlab</code>, <code>ylab</code> and <code>legend</code>.</li>
+</ul>
+<p><strong>Breaking changes</strong></p>
+<ul>
+<li>In <code>fit_models()</code> the <code>offset</code> argument is deprecated and replaced by <code>offset_var</code>. The offset variable is now transformed internally according to the family (log for count families, identity for <code>"gaussian"</code>).</li>
+<li>In <code>fit_models()</code> the <code>pb</code> argument is replaced by <code>progress</code>, and a new <code>verbose</code> argument runs <code>INLA</code> in verbose mode.</li>
+<li>In <code>plot_re()</code> the <code>map_area</code> argument is renamed <code>map_unit</code>.</li>
+<li>In <code>plot_fit()</code> the arguments <code>group</code> and <code>group_id</code> are renamed <code>unit</code> and <code>unit_id</code>, and <code>mod_facet</code> is removed.</li>
+<li><code>sample_ppd()</code> is no longer exported; use <code>predict_models()</code> instead.</li>
+<li><code>crosspred_inla()</code> no longer accepts <code>...</code>.</li>
+</ul>
+<p><strong>Improvements</strong></p>
+<ul>
+<li><code>stack_models()</code> now also merges the <code>$re</code>, <code>$inlamod</code> and <code>$ppd</code> components of <code>GHRmodels</code> objects, and validates that all inputs share the same family, outcome and outcome values.</li>
+<li>The CRPS is now the median across observations of the empirical CRPS of the posterior predictive distribution, and the CRPS skill score (<code>crpss</code>) relative to the first model is reported in <code>mod_gof</code>.</li>
+<li><code>fit_models()</code>, <code>predict_models()</code> and the formula helpers have stricter input checks: the outcome and offset must be valid, and linear covariates used in the formulas must exist in <code>data</code> and have no missing values (e.g., lagged covariates must be computed on data that include the preceding time steps).</li>
+<li>MAE and RMSE goodness-of-fit metrics are now always computed as point estimates rather than averaged over posterior predictive samples.</li>
+<li><code>fit_models()</code> no longer appends a numeric suffix to <code>name</code> when only a single model is fitted.</li>
+<li>Default <code>nthreads</code> in <code>fit_models()</code> changed from 8 to 1.</li>
+<li>Sampling from the posterior predictive distribution in <code>fit_models()</code> and <code>predict_models()</code> can now run in parallel, using up to <code>nthreads</code> threads.</li>
+<li>General documentation clean-up across functions and vignettes.</li>
+</ul>
+<p><strong>Bug fixes</strong></p>
+<ul>
+<li>Fixed the handling of <code>nthreads</code> in <code>fit_models()</code> and <code>predict_models()</code>.</li>
+<li>Fixed a bug in the colour scale of crossbasis heatmaps.</li>
+<li>Fixed a bug in the temporal (single time series, no <code>unit</code>) case of the fixed/random-effects selection workflow.</li>
+<li>Fixed a bug in <code>plot_fit()</code>.</li>
+<li>Fixed a bug in <code>get_covariates()</code>.</li>
+<li>Fixed a bug in the parsing of non-linear terms (<code>inla.group()</code>) in <code>as_GHRformulas()</code>, which affected the names of non-linear variables.</li>
+</ul>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">0.1.1</h2>
 <ul>
 <li>Fixed bug in the colour scale in the function <code>plot_coef_crosspred()</code>.</li>
 <li>Minor updates in the documentation.</li>
 </ul>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">0.1.0</h2>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">0.1.0</h2>
 <ul>
 <li>Initial CRAN submission.</li>
 </ul>

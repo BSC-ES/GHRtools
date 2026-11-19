@@ -316,21 +316,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Dengue cases from the “São Paulo” state of Brazil</h1>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>The <code>dengue_SP</code> example data set reports the weekly number of notified dengue cases in the municipality of São Paulo together with climatic covariates. Data was sourced from Infodengue (see <code>@source</code>).</p>
+<p>The <code>dengue_SP</code> example data set reports the weekly number of notified dengue cases in the municipality of São Paulo together with climatic covariates. Data was sourced from Infodengue (see source below).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dengue_SP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="format" class="level2">
 <h2 class="anchored" data-anchor-id="format">Format</h2>
-<p>A data frame with 678 rows and 8 columns:</p>
+<p>A data frame with 624 rows and 9 columns:</p>
 <ul>
-<li><strong><code>date</code></strong>: First day of the week, in date format (“%d-%m-%Y”)</li>
-<li><strong><code>geocode</code></strong>: Unique ID code for São Paulo microregion</li>
+<li><strong><code>date</code></strong>: First day of the week, in date format (“%Y-%m-%d”)</li>
+<li><strong><code>geocode</code></strong>: IBGE municipality code for the city of São Paulo</li>
 <li><strong><code>cases</code></strong>: Number of notified dengue cases</li>
-<li><strong><code>year</code></strong>: Year 2000 - 2022</li>
+<li><strong><code>year</code></strong>: Year 2010 - 2021</li>
 <li><strong><code>temp_med</code></strong>: Weekly average daily mean temperature</li>
 <li><strong><code>precip_tot</code></strong>: Weekly cumulative precipitation</li>
 <li><strong><code>enso</code></strong>: El Niño-Southern Oscillation Index</li>
 <li><strong><code>pop</code></strong>: Number of inhabitants</li>
+<li><strong><code>pop100000</code></strong>: Population divided by 100000.</li>
 </ul>
 </section>
 <section id="source" class="level2">

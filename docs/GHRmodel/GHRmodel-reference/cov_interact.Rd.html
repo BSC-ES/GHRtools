@@ -318,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Generate Interaction Terms Between Covariates</h1>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>This function generates interaction terms between covariates specified in the <code>pattern</code> or <code>name</code> arguments. It requires a list of character vectors and appends interaction terms to each vector based on pairwise or three-way interactions. The resulting list can be input into the <code>covariates</code> argument in <code>write_inla_formulas</code>.</p>
+<p>This function generates interaction terms between covariates specified in the <code>pattern</code> or <code>name</code> arguments. It requires a list of character vectors and appends interaction terms to each vector based on pairwise or three-way interactions. More-way interactions are not supported and will be ignored. The resulting list can be input into the <code>covariates</code> argument in <code>write_inla_formulas</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov_interact</span>(<span class="at">covariates =</span> <span class="cn">NULL</span>, <span class="at">pattern =</span> <span class="cn">NULL</span>, <span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">add =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
@@ -346,20 +346,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example dataset</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">tmin.l1 =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">pdsi.l1 =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">urban =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract names</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>covs <span class="ot">&lt;-</span> <span class="fu">extract_names</span>(data, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>, <span class="st">"urban"</span>))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create combinations</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>combos <span class="ot">&lt;-</span> <span class="fu">cov_multi</span>(<span class="at">covariates =</span> covs, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add interaction terms</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cov_interact</span>(<span class="at">covariates =</span> combos, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>))</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Output can be passed to write_inla_formulas()</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>new_covs <span class="ot">&lt;-</span> <span class="fu">cov_interact</span>(combos, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>))</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">write_inla_formulas</span>(<span class="at">outcome =</span> <span class="st">"cases"</span>, <span class="at">covariates =</span> new_covs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">tmin.l1 =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">pdsi.l1 =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">urban =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract names</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>covs <span class="ot">&lt;-</span> <span class="fu">extract_names</span>(data, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>, <span class="st">"urban"</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create combinations</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>combos <span class="ot">&lt;-</span> <span class="fu">cov_multi</span>(<span class="at">covariates =</span> covs, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add interaction terms</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cov_interact</span>(<span class="at">covariates =</span> combos, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Output can be passed to write_inla_formulas()</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>new_covs <span class="ot">&lt;-</span> <span class="fu">cov_interact</span>(combos, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"tmin"</span>, <span class="st">"pdsi"</span>))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">write_inla_formulas</span>(<span class="at">outcome =</span> <span class="st">"cases"</span>, <span class="at">covariates =</span> new_covs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

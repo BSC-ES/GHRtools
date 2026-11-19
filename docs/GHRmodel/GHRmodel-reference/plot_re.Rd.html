@@ -331,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  re_id,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep_id =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_area =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">map_unit =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep_label =</span> <span class="cn">NULL</span>,</span>
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>re_id</code>: Character; name of the variable defining the random effect (from <code>models$re</code>).</li>
 <li><code>rep_id</code>: Optional character string; name of a grouping variable if random effects are replicated. Default is <code>NULL</code>.</li>
 <li><code>map</code>: Optional <code>sf</code> object providing spatial geometry. If <code>NULL</code>, returns a caterpillar plot.</li>
-<li><code>map_area</code>: Character; column name in <code>map</code> indicating spatial units (must match <code>re_id</code> order).</li>
+<li><code>map_unit</code>: Character; column name in <code>map</code> indicating spatial units (must match <code>re_id</code> order).</li>
 <li><code>mod_label</code>: Optional labels for models. Can be a named vector (e.g., <code>c("mod1" = "Baseline", "mod2" = "Adjusted")</code>) or an unnamed vector with the same order as <code>mod_id</code>.</li>
 <li><code>re_label</code>: Optional; variable in the data to label the random effect units (e.g., year names instead of numeric IDs).</li>
 <li><code>rep_label</code>: Optional; label for replicated grouping variable (e.g., for years or time periods).</li>
@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="details">Details</h2>
 <p>Plot Random Effects from GHRmodels</p>
 <ul>
-<li>If <code>map</code> is used, <code>map_area</code> must match a column in <code>map</code> and correspond in order to the RE unit.</li>
+<li>If <code>map</code> is used, <code>map_unit</code> must match a column in <code>map</code> and correspond in order to the RE unit.</li>
 <li>For BYM/BYM2 models, only the total random effect is plotted (structured/unstructured parts are merged).</li>
 <li>When no map is used, the plot compares models via colored points and intervals for each RE unit.</li>
 <li>Replicated REs (e.g., for years) can be plotted across facets using <code>rep_label</code>.</li>
@@ -385,7 +385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A <code>ggplot2</code> plot object:</p>
 <ul>
 <li>If <code>map</code> is <code>NULL</code>, returns a caterpillar plot showing median REs with 95% uncertainty intervals.</li>
-<li>If <code>map</code> is provided, returns a faceted choropleth map showing RE medians by area and (optionally) replicate.</li>
+<li>If <code>map</code> is provided, returns a faceted choropleth map showing RE medians by spatial unit and (optionally) replicate.</li>
 </ul>
 </section>
 <section id="see-also" class="level2">
@@ -394,32 +394,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Not run:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package: </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  Plot the estimated yearly random effects for three different models.</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">model =</span> model_list,                          <span class="co"># A GHRmodels object </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>),          <span class="co"># IDs of the models </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Custom labels for the models</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>              <span class="st">"tmin.l1_nl"</span>,           </span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>              <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),     </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">re_id =</span> <span class="st">"year_id"</span>,                           <span class="co"># Name of the random effect variable </span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">re_label =</span> <span class="st">"year"</span>,                           <span class="co"># Label to map year_id to calendar years</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">ref_color =</span> <span class="st">"grey"</span>,                          <span class="co"># Color for the reference model’s effects</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">palette =</span> <span class="st">"IDE2"</span>,                            <span class="co"># Color for other model effects</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Yearly Random Effect"</span>,              <span class="co"># Title for the plot</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">xlab =</span> <span class="st">"Year"</span>                                <span class="co"># Label for the x-axis </span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="do">## End(Not run)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  Plot the estimated yearly random effects for three different models.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_re</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_list,                          <span class="co"># A GHRmodels object</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod1"</span>, <span class="st">"mod3"</span>, <span class="st">"mod5"</span>),          <span class="co"># IDs of the models</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_label =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>,                    <span class="co"># Custom labels for the models</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tmin.l1_nl"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pdsi.l1_nl + tmin.l1_nl"</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_id =</span> <span class="st">"year_id"</span>,  <span class="co"># Name of the random effect variable</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">re_label =</span> <span class="st">"year"</span>,  <span class="co"># Label to map year_id to calendar years</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref_color =</span> <span class="st">"grey"</span>, <span class="co"># Color for the reference model’s effects</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"IDE2"</span>,   <span class="co"># Color for other model effects</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Yearly Random Effect"</span>,              <span class="co"># Title for the plot</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Year"</span>                                <span class="co"># Label for the x-axis</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

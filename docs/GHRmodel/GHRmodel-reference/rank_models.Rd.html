@@ -325,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
 <li><code>models</code>: A <code>GHRmodels</code> object containing fitted model output.</li>
-<li><code>metric</code>: A character string indicating which goodness-of-fit metric to use for ranking. One of: <code>"dic"</code>, <code>"waic"</code>,<code>"lms"</code>,<code>"mae"</code>, <code>"rmse"</code>,<code>"crps"</code>, <code>"rsq"</code>,<code>"dic_vs_first"</code>, <code>"waic_vs_first"</code>, <code>"mae_vs_first"</code>, <code>"rmse_vs_first"</code>, <code>"crps_vs_first"</code>, <code>"re_n_var"</code>, and <code>"re_n_var_change"</code> (where n is the number of random effect, for ex. <code>re_1_var</code>, <code>re_1_var_change</code>).</li>
+<li><code>metric</code>: A character string indicating which goodness-of-fit metric to use for ranking. One of: <code>"dic"</code>, <code>"waic"</code>,<code>"lms"</code>,<code>"mae"</code>, <code>"rmse"</code>, <code>"crps"</code>, <code>"rsq"</code>,<code>"dic_vs_first"</code>, <code>"waic_vs_first"</code>, <code>"mae_vs_first"</code>, <code>"rmse_vs_first"</code>, <code>"crps_vs_first"</code>, <code>"re_n_var"</code>, and <code>"re_n_var_change"</code> (where n is the number of random effect, for ex. <code>re_1_var</code>, <code>re_1_var_change</code>).</li>
 <li><code>n</code>: An integer specifying how many top-ranked models to return (default <code>10</code>).</li>
 </ul>
 </section>
@@ -339,19 +339,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Not run:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package: </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a list of the 5 best models by DIC</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>top_model_dic <span class="ot">&lt;-</span> <span class="fu">rank_models</span>(</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"dic"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## End(Not run)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a list of the 5 best models by DIC</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>top_model_dic <span class="ot">&lt;-</span> <span class="fu">rank_models</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_list,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"dic"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>top_model_dic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

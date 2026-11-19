@@ -325,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
-<li><code>formulas</code>: A character vector of model formulas formatted for R-INLA. Each formula must contain a single <code>~</code> separating the outcome variable from the predictors. Formulas generated with <code>write_inla_formulas</code> are compatible with this function.</li>
+<li><code>formulas</code>: A character vector of model formulas formatted for R-INLA. Each formula must contain a single <code>~</code> separating the outcome variable from the predictors, and its right-hand side must be syntactically valid R code (it is parsed internally to identify terms). Formulas generated with <code>write_inla_formulas</code> are compatible with this function.</li>
 </ul>
 </section>
 <section id="details" class="level2">
@@ -334,31 +334,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="returns" class="level2">
 <h2 class="anchored" data-anchor-id="returns">Returns</h2>
-<p>A structured list of class <code>GHRformulas</code> with the following components:</p>
+<p>A structured list of class <code>GHRformulas</code> with the components:</p>
 <ul>
-<li><strong><code>formulas</code></strong>: A character vector of the original INLA-compatible model formulas.</li>
-<li><strong><code>vars</code></strong>: A data frame where each row corresponds to a formula and each column to a covariate. Entries indicate whether a covariate is included in the formula.</li>
-<li><strong><code>re</code></strong>: A character vector listing the random effects specified across all formulas.</li>
+<li><strong><code>formulas</code></strong>: A character vector identical to the input <code>formulas</code> (unmodified, in the same order).</li>
+<li><strong><code>vars</code></strong>: A data frame where each row corresponds to a formula and each column to a covariate slot. Cells hold the covariate term present at that position for the given formula, or <code>NA</code> if that formula has fewer terms than the row with the most.</li>
+<li><strong><code>re</code></strong>: A character vector of the random effects specified across all formulas (identical across formulas by construction, see Details). <code>character(0)</code> if none are present; otherwise named <code>"re_1"</code>, <code>"re_2"</code>, … in the order they were found.</li>
 <li><strong><code>outcome</code></strong>: A character string indicating the outcome variable (must be consistent across formulas).</li>
 </ul>
 </section>
 <section id="see-also" class="level2">
 <h2 class="anchored" data-anchor-id="see-also">See Also</h2>
-<p><code>write_inla_formulas</code> to generate R-INLA compatible input formulas</p>
+<p><code>write_inla_formulas</code> to generate R-INLA compatible input formulas.</p>
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">"dengue_cases ~ 1 + f(month_id, model = 'rw1')"</span>, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">"dengue_cases ~ 1 + f(month_id, model = 'rw1') + tmin.l1"</span>) </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the formulas into a GHRformulas object</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">as_GHRformulas</span>(formulas)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the structured GHRformulas object</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(formulas)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize output: GHRformulas object</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(formulas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define formulas</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">"dengue_cases ~ 1 + f(month_id, model = 'rw1')"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">"dengue_cases ~ 1 + f(month_id, model = 'rw1') + tmin.l1"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the formulas into a GHRformulas object</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">as_GHRformulas</span>(formulas)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the structured GHRformulas object</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(formulas)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize output: GHRformulas object</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(formulas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

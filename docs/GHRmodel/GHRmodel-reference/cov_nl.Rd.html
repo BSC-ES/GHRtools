@@ -373,8 +373,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply non-linear transformation to tmin variables</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cov_nl</span>(covlist, <span class="at">pattern =</span> <span class="st">"tmin"</span>, <span class="at">model =</span> <span class="st">"rw2"</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Include original variables along with transformed ones</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cov_nl</span>(covlist, <span class="at">pattern =</span> <span class="st">"tmin"</span>, <span class="at">model =</span> <span class="st">"rw2"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Include original variable along with transformed one</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cov_nl</span>(covlist, <span class="at">name =</span> <span class="st">"pdsi.l1"</span>, <span class="at">model =</span> <span class="st">"rw2"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

@@ -65,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -318,8 +317,6 @@ div.csl-indent {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#example-dlnms-in-ghrmodel" id="toc-example-dlnms-in-ghrmodel" class="nav-link" data-scroll-target="#example-dlnms-in-ghrmodel">Example: DLNMs in GHRmodel</a>
-  <ul class="collapse">
   <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data">0. Prepare data</a>
   <ul class="collapse">
   <li><a href="#load-libraries" id="toc-load-libraries" class="nav-link" data-scroll-target="#load-libraries">Load libraries</a></li>
@@ -330,14 +327,17 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#one-dimensional-basis-matrix" id="toc-one-dimensional-basis-matrix" class="nav-link" data-scroll-target="#one-dimensional-basis-matrix">One-dimensional basis matrix</a></li>
   <li><a href="#cross-basis-matrix" id="toc-cross-basis-matrix" class="nav-link" data-scroll-target="#cross-basis-matrix">Cross-basis matrix</a></li>
-  <li><a href="#model-formulas-including-dlnm-terms" id="toc-model-formulas-including-dlnm-terms" class="nav-link" data-scroll-target="#model-formulas-including-dlnm-terms">Model formulas including DLNM terms</a></li>
+  <li><a href="#model-formulas-including-dlnm-terms" id="toc-model-formulas-including-dlnm-terms" class="nav-link" data-scroll-target="#model-formulas-including-dlnm-terms">Model formulas including DLNM terms</a>
+  <ul class="collapse">
+  <li><a href="#define-priors" id="toc-define-priors" class="nav-link" data-scroll-target="#define-priors">Define priors</a></li>
+  <li><a href="#define-formulas" id="toc-define-formulas" class="nav-link" data-scroll-target="#define-formulas">Define formulas</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#fit-dlnms-with-inla" id="toc-fit-dlnms-with-inla" class="nav-link" data-scroll-target="#fit-dlnms-with-inla">2. Fit DLNMs with INLA</a></li>
   <li><a href="#dlnm-output" id="toc-dlnm-output" class="nav-link" data-scroll-target="#dlnm-output">3. DLNM output</a>
   <ul class="collapse">
   <li><a href="#one-basis-terms" id="toc-one-basis-terms" class="nav-link" data-scroll-target="#one-basis-terms">One-basis terms</a></li>
   <li><a href="#cross-basis-terms" id="toc-cross-basis-terms" class="nav-link" data-scroll-target="#cross-basis-terms">Cross-basis terms</a></li>
-  </ul></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -376,62 +376,51 @@ div.csl-entry {
 </style>
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>This vignette demonstrates how Distributed Lag Nonlinear Models (DLNMs) (Gasparrini, 2011) are integrated into the <strong>GHRmodel</strong> spatio-temporal Bayesian hierarchical modelling framework to estimate the delayed and nonlinear effects of various exposures on disease risk (Lowe et al., 2018, 2021). Models are fitted using integrated nested Laplace approximations in R (<a href="https://www.r-inla.org/home">R-INLA</a>) (Lindgren et al., 2011). This approach enables simultaneous modelling of space-varying, nonlinear, and lagged relationships between climate, environmental and/or socio-economic drivers and health outcomes, leveraging the functionality of the <strong>dlnm</strong> package (Gasparrini, 2011) within <strong>GHRmodel</strong>.</p>
+<p>This vignette demonstrates how Distributed Lag Nonlinear Models (DLNMs) (Gasparrini, 2011) are integrated into the <strong>GHRmodel</strong> spatio-temporal Bayesian hierarchical modelling framework to estimate the delayed and nonlinear effects of various exposures on disease risk (Lowe et al., 2018, 2021). Models are fitted using integrated nested Laplace approximations in R (<a href="https://www.r-inla.org/">R-INLA</a>) (Lindgren et al., 2011). This approach enables simultaneous modelling of space-varying, nonlinear, and lagged relationships between climate, environmental and/or socio-economic drivers and health outcomes, leveraging the functionality of the <strong>dlnm</strong> package (Gasparrini, 2011) within <strong>GHRmodel</strong>.</p>
 <p>DLNMs extend distributed lag models (DLMs) to capture associations where the effect of an exposure (e.g.&nbsp;temperature) on an outcome (e.g.&nbsp;dengue incidence) is lagged in time. These exposure–lag–response associations are represented along two dimensions, exposure and lag, each modelled with its own basis function (a mathematical function used to flexibly represent nonlinear relationships) (Gasparrini, 2014). The two basis functions are then combined through a cross-basis tensor product (Gasparrini et al., 2010). The resulting cross-basis matrix can be included directly in an INLA-compatible model formula (Lowe et al., 2018, 2021). Model results are typically explored by predicting outcomes across a grid of lag times and exposure values. Interpretable outputs include exposure–response curves at specific lags, lag–response curves at specific exposure values, and cumulative effects summarising the exposure effect over the lag period. These outputs can be interpreted using either a forward or backward perspective (Gasparrini &amp; Leone, 2014).</p>
-<p><br> Information regarding installation and a brief summary of the package methodology is included in the vignette <em>GHRmodel Overview</em>, which can be accessed by typing <code>vignette("GHRmodel_overview")</code>.</p>
-</section>
-<section id="example-dlnms-in-ghrmodel" class="level1">
-<h1>Example: DLNMs in GHRmodel</h1>
 <p>In this example, we demonstrate how to use <strong>GHRmodel</strong> to formulate, fit and evaluate DLNM terms within Bayesian hierarchical models in the R-INLA framework. Using the resulting DLNM model estimates, we assess dengue risk across a range of <em>tmin</em> values (monthly average daily minimum temperature averaged across each micro-region) and <em>pdsi</em> values (Self-calibrated Palmer Drought Severity Index for each micro-region) and across 1- to 6-month lags.</p>
-<p>The example dataset contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates. This dataset represents a subset of a larger national dataset that covers the entire territory of Brazil. The subset focuses on a specific region, <em>Mato Grosso do Sul</em>, for the purposes of illustration and computational efficiency. The original full data set, which includes data from all Brazilian microregions, is available within this <a href="https://github.com/drrachellowe/hydromet_dengue">GitHub repository</a> and in <a href="https://doi.org/10.5281/zenodo.4632205">Zenodo</a>.</p>
+<p>Information regarding installation and a brief summary of the package methodology is included in the vignette <em>GHRmodel Overview</em>, which can be accessed by typing <code>vignette("GHRmodel_overview")</code>.</p>
 <blockquote class="blockquote">
-<p>💡 <strong>Tip</strong>: The examples in this vignette are designed to demonstrate package functionality and should not be interpreted as best-practice guidance for model selection.</p>
+<p>📝 <strong>Note</strong>: The examples in this vignette are designed to demonstrate package functionality and should not be interpreted as best-practice guidance for model selection.</p>
 </blockquote>
-<section id="prepare-data" class="level2">
-<h2 class="anchored" data-anchor-id="prepare-data">0. Prepare data</h2>
-<section id="load-libraries" class="level3">
-<h3 class="anchored" data-anchor-id="load-libraries">Load libraries</h3>
+</section>
+<section id="prepare-data" class="level1">
+<h1>0. Prepare data</h1>
+<section id="load-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="load-libraries">Load libraries</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary package dependencies</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)        <span class="co"># Data manipulation</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)        <span class="co"># Data tidying</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyselect)   <span class="co"># Helpers for selecting variables programmatically</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)        <span class="co"># Tools for tidy evaluation and non-standard evaluation in tidyverse code</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)      <span class="co"># Data visualization: creating plots and graphs</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)      <span class="co"># Combining and arranging multiple ggplot2 plots into a single figure</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grDevices)    <span class="co"># Base R graphics device functions (e.g., color palettes, saving plots)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer) <span class="co"># Predefined color palettes for plots</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorspace)   <span class="co"># Advanced color space manipulation and palettes</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)           <span class="co"># Handling spatial vector data (simple features)</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)        <span class="co"># Spatial dependence and autocorrelation analysis</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sn)           <span class="co"># Skew-normal and skew-t distributions (for modelling skewed data)</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(INLA)         <span class="co"># Integrated Nested Laplace Approximation for Bayesian models</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GHRexplore)   <span class="co"># Exploratory analysis of health data</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dlnm)         <span class="co"># Distributed linear and nonlinear models</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Load GHRmodel</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GHRmodel)     </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)      <span class="co"># Data visualization: creating plots and graphs</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)           <span class="co"># Handling spatial vector data (simple features)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)        <span class="co"># Spatial dependence and autocorrelation analysis</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(INLA)         <span class="co"># Bayesian inference</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dlnm)         <span class="co"># Distributed linear and nonlinear models</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load GHRmodel</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GHRmodel)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="data-pre-processing" class="level3">
-<h3 class="anchored" data-anchor-id="data-pre-processing">Data pre-processing</h3>
+<section id="data-pre-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-pre-processing">Data pre-processing</h2>
+<p>The example dataset contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates. This dataset represents a subset of a larger national dataset that covers the entire territory of Brazil. The subset focuses on a specific region, <em>Mato Grosso do Sul</em>, for the purposes of illustration and computational efficiency. The original full data set, which includes data from all Brazilian microregions, is available within this <a href="https://github.com/drrachellowe/hydromet_dengue">GitHub repository</a> and in <a href="https://doi.org/10.5281/zenodo.4632205">Zenodo</a>.</p>
 <p>Create numeric ID variables for categorical features (such as year, month, or spatial units) that may be included as random effects, in line with R-INLA’s requirements:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dengue_MS"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> dengue_MS</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create ID variables</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span>  </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter out the year 2000 </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter out the year 2000</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create numeric IDs for year, month and various spatial units.</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">year_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(year)),</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">month_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(month)),</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">spat_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(micro_code)), </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">spat_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(micro_code)),</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">spat_meso_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(meso_code))</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="spatial-data-and-graphs" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-data-and-graphs">Spatial data and graphs</h3>
+<section id="spatial-data-and-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-data-and-graphs">Spatial data and graphs</h2>
 <p>To perform spatial analysis, polygon geometries must be provided as an <code>sf</code> object. For the <code>dengue_MS</code> data set, the areal polygons are already included in the package in the <code>map_MS</code> object. In <code>map_MS</code>, the <em>code</em> variable corresponds to the <em>micro_code</em> area identifier in the <code>dengue_MS</code> object.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load map included in package</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"map_MS"</span>)</span>
@@ -441,12 +430,12 @@ div.csl-entry {
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> spdep<span class="sc">::</span><span class="fu">nb2mat</span>(nb, <span class="at">style =</span> <span class="st">"B"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="model-development" class="level2">
-<h2 class="anchored" data-anchor-id="model-development">1. Model development</h2>
+<section id="model-development" class="level1">
+<h1>1. Model development</h1>
 <p>In this example we demonstrate how to use the <strong>GHRmodel</strong> helper functions to streamline writing INLA-compatible formulas including DLNM matrices.</p>
-<section id="one-dimensional-basis-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="one-dimensional-basis-matrix">One-dimensional basis matrix</h3>
-<p>The <code>onebasis_inla()</code> function is a wrapper around <code>dlnm::onebasis()</code>, which creates a one-dimensional basis matrix - a function used to model the nonlinear relationship of the outcome across a single dimension, in this case exposure values. This wrapper enhances the original function by allowing users to specify a custom prefix for the column names using the <code>basis_name</code> argument. This is particularly useful when multiple basis matrices (e.g., for different covariates) are included in the same model formula, as it ensures that each set of basis variables can be easily identified in the model formula by the INLA framework.</p>
+<section id="one-dimensional-basis-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="one-dimensional-basis-matrix">One-dimensional basis matrix</h2>
+<p>The <code>onebasis_inla()</code> function is a wrapper around <code>dlnm::onebasis()</code>, which creates a one-dimensional basis matrix - a function used to model the nonlinear relationship of the outcome across a single dimension, in this case exposure values. This wrapper enhances the original function by allowing users to specify a custom prefix for the column names using the <code>basis_name</code> argument. This is particularly useful when multiple basis matrices (e.g., for different covariates) are included in the same model formula, as it ensures that each set of basis variables can be easily identified in the model formula by INLA.</p>
 <p>The covariate to be transformed is passed as a numeric vector to the <code>covariate</code> argument. The transformation applied to the covariate is controlled by the <code>fun</code> argument, which accepts the same options as <code>dlnm::onebasis()</code> and the <code>splines</code> package, including natural cubic splines (<code>"ns"</code>), B-splines (<code>"bs"</code>), and polynomial (<code>"poly"</code>) functions, among others. The smoothness and flexibility of these spline basis functions are controlled through arguments such as <code>degree</code> (the polynomial degree of each piece), <code>knots</code> (the internal breakpoints that define where spline pieces join), and <code>df</code> (the degrees of freedom). The final nonlinear effect of the covariate is obtained by taking a weighted sum of the basis functions.</p>
 <p>For detailed information about the available transformation functions, see <code>?onebasis</code>.</p>
 <blockquote class="blockquote">
@@ -464,20 +453,17 @@ div.csl-entry {
 <p>produces 5 basis functions with 2 internal knots (<code>5 – 3</code>).</p></li>
 </ul>
 </blockquote>
-<blockquote class="blockquote">
-<p>📝 <strong>Note</strong>: In addition to <code>onebasis_inla</code>, <strong>GHRmodel</strong> supports nonlinear transformation of covariates via the <code>cov_nl()</code> function. <code>cov_nl()</code> uses <code>inla.group()</code> to discretize a covariate into intervals and then model the relationship as a random walk of order 1 (<code>"rw1"</code>) or 2 (<code>"rw2"</code>). For more information about one-basis terms see the <em>Complex Covariate Structures in GHRmodel</em> vignette by typing <code>vignette("GHRmodel_covariates")</code>.</p>
-</blockquote>
 <p>Here we apply a cubic B-spline basis transformation to the <em>tmin</em> variable, measuring the minimum temperature, in order to include it as a nonlinear effect in the INLA-compatible model formula:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place 3 internal knots at the 25th, 50th, and 95th percentiles of tmin. </span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tminknots <span class="ot">=</span> <span class="fu">quantile</span>(df<span class="sc">$</span>tmin,<span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">95</span>)<span class="sc">/</span><span class="dv">100</span>, <span class="at">na.rm=</span>T)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place 3 internal knots at the 25th, 50th, and 95th percentiles of tmin.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tminknots <span class="ot">&lt;-</span> <span class="fu">quantile</span>(df<span class="sc">$</span>tmin, <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">95</span>) <span class="sc">/</span> <span class="dv">100</span>, <span class="at">na.rm =</span> T)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct a one-dimensional basis for modeling the nonlinear effect of minimum temperature (tmin).</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct a one-dimensional basis for modeling tmin.</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ob_tmin <span class="ot">&lt;-</span> <span class="fu">onebasis_inla</span>(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate   =</span> df<span class="sc">$</span>tmin,     <span class="co"># Numeric vector of the covariate values to transform.</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">fun         =</span> <span class="st">"bs"</span>,        <span class="co"># Basis function type: B-spline.</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">knots       =</span> tminknots,   <span class="co"># Internal knots for the spline</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">degree      =</span> <span class="dv">3</span>,           <span class="co"># Polynomial degree (cubic spline)</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis_name  =</span> <span class="st">"tmin"</span>       <span class="co"># Prefix for the generated basis matrix column names.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate   =</span> df<span class="sc">$</span>tmin,   <span class="co"># Covariate values to transform.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">fun         =</span> <span class="st">"bs"</span>,      <span class="co"># Basis function type: B-spline.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">knots       =</span> tminknots, <span class="co"># Internal knots for the spline</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">degree      =</span> <span class="dv">3</span>,         <span class="co"># Degree of each spline piece (cubic)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis_name  =</span> <span class="st">"tmin"</span>     <span class="co"># Prefix for the generated basis matrix column names.</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows of the basis matrix to inspect the transformation.</span></span>
@@ -489,138 +475,153 @@ div.csl-entry {
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4,]     0 0.0106996786 0.39954732 0.5387557 0.05099734 0.0000000000</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5,]     0 0.0184877161 0.46489629 0.4880934 0.02852261 0.0000000000</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6,]     0 0.0014234095 0.24044045 0.6086812 0.14945494 0.0000000000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The returned object is a <code>onebasis</code> matrix and can be referenced by name in <code>write_inla_formulas()</code>, as shown below.</p>
+<blockquote class="blockquote">
+<p>📝 <strong>Note</strong>: In addition to <code>onebasis_inla</code>, <strong>GHRmodel</strong> supports nonlinear transformation of covariates via the <code>cov_nl()</code> function. <code>cov_nl()</code> uses <code>inla.group()</code> to discretize a covariate into intervals and then model the relationship as a random walk of order 1 (<code>"rw1"</code>) or 2 (<code>"rw2"</code>). For more information about <code>cov_nl()</code> and other covariate helper functions see the <em>Complex Covariate Structures in GHRmodel</em> vignette by typing <code>vignette("GHRmodel_covariates")</code>.</p>
+</blockquote>
 </section>
-<section id="cross-basis-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="cross-basis-matrix">Cross-basis matrix</h3>
+<section id="cross-basis-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="cross-basis-matrix">Cross-basis matrix</h2>
 <p>The <code>crossbasis_inla()</code> function is a wrapper around <code>dlnm::crossbasis()</code>, which creates a cross-basis matrix which models the nonlinear relationship of the outcome in two dimensions: the exposure (covariate or predictor) dimension and the lag dimension. The column names of the resulting matrix can be customized using the <code>basis_name</code> argument, to ensure that each set of cross-basis variables (for example, for different covariates) can be easily distinguishable in a model formula or output.</p>
 <p>The covariate to be transformed is passed as a numeric matrix of lagged values to the <code>covariate</code> argument. The shape of the exposure-response dimension is controlled by the <code>argvar</code> argument and the shape of the lag-response dimension is defined by the <code>arglag</code> argument. These arguments are passed to the underlying <code>onebasis</code> and support the same options. Common choices are natural splines (<code>"ns"</code>), B-splines (<code>"bs"</code>), and polynomial (<code>"poly"</code>) functions, among others (see <code>?onebasis</code>). Finally, the <code>lag</code> argument defines the lag range to include in the cross-basis matrix.</p>
-<p>To produce cross-basis matrices for <em>tmin</em> and <em>pdsi</em>, the first step is to produce the lagged-covariate matrix, which can be easily done using the <code>lag_cov()</code> function with the argument <code>add = FALSE</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagged covariate matrix for tmin </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lagged_tmin <span class="ot">&lt;-</span> <span class="fu">lag_cov</span>(<span class="at">data =</span> df,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name =</span> <span class="st">"tmin"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">time =</span> <span class="st">"date"</span>,        </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>),         <span class="co"># 1 to 2-month lags</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> <span class="st">"micro_code"</span>, <span class="co"># Independent time-series for each microregion</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">add =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagged covariate matrix for pdsi</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>lagged_pdsi <span class="ot">&lt;-</span> <span class="fu">lag_cov</span>(<span class="at">data =</span> df,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name =</span> <span class="st">"pdsi"</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">time =</span> <span class="st">"date"</span>,        </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>),         <span class="co"># 1 to 2-month lags</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> <span class="st">"micro_code"</span>, <span class="co"># Independent time-series for each microregion</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">add =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To produce cross-basis matrices for <em>tmin</em> and <em>pdsi</em>, the first step is to produce the lagged-covariate matrix, which can be easily done using the <code>lag_cov()</code> function with the argument <code>add = FALSE</code>. The lags requested here must match the <code>lag</code> argument passed to <code>crossbasis_inla()</code> below: lags 1 to 2 for <em>tmin</em> and lags 0 to 2 for <em>pdsi</em>. Lag 0 is allowed and corresponds to the current time step.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagged covariate matrix for tmin</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lagged_tmin <span class="ot">&lt;-</span> <span class="fu">lag_cov</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,         <span class="co"># 1 to 2-month lags</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"micro_code"</span>, <span class="co"># Independent time-series for each microregion</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagged covariate matrix for pdsi</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>lagged_pdsi <span class="ot">&lt;-</span> <span class="fu">lag_cov</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"pdsi"</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">"date"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>,         <span class="co"># 0 to 2-month lags</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"micro_code"</span>, <span class="co"># Independent time-series for each microregion</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Here we create a cross-basis matrix for the response to <em>tmin</em> exposure across a lag period of 1 to 2 months. This matrix captures the relationship between both the level of exposure and the timing of its effect (lag).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2-dimensional nonlinear effect of dengue risk across tmin values and lags</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cb_tmin <span class="ot">&lt;-</span> <span class="fu">crossbasis_inla</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate =</span> lagged_tmin,              <span class="co"># Matrix of lagged tmin values</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),                        <span class="co"># Lags from 1 to 2 months</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis_name =</span> <span class="st">"tmin"</span>,                  <span class="co"># Prefix for output column names</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">argvar  =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>),           <span class="co"># Polynomial degree (cubic spline)</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">arglag  =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"ns"</span>,            <span class="co"># Natural cubic splines for lag-response</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">knots=</span><span class="fu">logknots</span>(<span class="dv">2</span>,      <span class="co"># Maximum lag (here 2)</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">nk=</span><span class="dv">1</span>))  <span class="co"># Number of knots </span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the resulting matrix</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(cb_tmin)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cb_tmin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cb_tmin <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"cb_tmin.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate =</span> lagged_tmin,   <span class="co"># Matrix of lagged tmin values</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),             <span class="co"># Lags from 1 to 2 months</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis_name =</span> <span class="st">"tmin"</span>,       <span class="co"># Prefix for output column names</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">argvar =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>), <span class="co"># Default B-spline (cubic) for exposure-response</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">arglag =</span> <span class="fu">list</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="st">"ns"</span>, <span class="co"># Natural cubic splines for lag-response</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">knots =</span> <span class="fu">logknots</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="dv">2</span>,     <span class="co"># Maximum lag (here 2)</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">nk =</span> <span class="dv">1</span> <span class="co"># Number of knots</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the resulting matrix</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(cb_tmin)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2508    9</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cb_tmin)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "tmin1.l1" "tmin1.l2" "tmin1.l3" "tmin2.l1" "tmin2.l2" "tmin2.l3" "tmin3.l1"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [8] "tmin3.l2" "tmin3.l3"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The cross-basis object has class <code>crossbasis_inla</code> and one column per combination of exposure and lag basis functions, named with the <code>basis_name</code> prefix (e.g.&nbsp;<code>tmin1.l1</code>). The same object must later be passed to <code>crosspred_inla()</code> so that its columns can be matched to the model coefficients.</p>
 <p>Here we produce a similar cross-basis object for the <em>pdsi</em> variable:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2-dimensional nonlinear effect of dengue risk across pdsi values and lags</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cb_pdsi <span class="ot">&lt;-</span> <span class="fu">crossbasis_inla</span>(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate =</span> lagged_pdsi,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>),</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis_name =</span> <span class="st">"pdsi"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">argvar  =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>), <span class="co"># Default B-spline for exposure-response</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">arglag  =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>)  <span class="co"># Default B-spline for lag-response</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">argvar =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>), <span class="co"># Default B-spline for exposure-response</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">arglag =</span> <span class="fu">list</span>(<span class="at">fun =</span> <span class="st">"bs"</span>)  <span class="co"># Default B-spline for lag-response</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="model-formulas-including-dlnm-terms" class="level3">
-<h3 class="anchored" data-anchor-id="model-formulas-including-dlnm-terms">Model formulas including DLNM terms</h3>
-<ol type="1">
-<li><strong>Define priors</strong></li>
-</ol>
+<section id="model-formulas-including-dlnm-terms" class="level2">
+<h2 class="anchored" data-anchor-id="model-formulas-including-dlnm-terms">Model formulas including DLNM terms</h2>
+<section id="define-priors" class="level3">
+<h3 class="anchored" data-anchor-id="define-priors">Define priors</h3>
 <p>Bayesian models require priors to be assigned to parameters that the model will estimate. For more details regarding these prior choices, see <em>GHRmodel_overview</em>. For more details about priors in R-INLA, see <a href="https://becarioprecario.bitbucket.io/inla-gitbook/ch-priors.html">this book chapter</a> (Gómez-Rubio, 2020).</p>
 <p>The monthly and yearly random effects are assigned weakly informative Gamma priors on the precision with parameters <code>0.01</code> and <code>0.01</code> (Gómez-Rubio, 2020).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Gamma priors for the precision of temporal random effects</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>prior_t <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">prec =</span> <span class="fu">list</span>(<span class="at">prior =</span> <span class="st">'loggamma'</span>, <span class="at">param =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.01</span>))) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>prior_t <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">prec =</span> <span class="fu">list</span>(<span class="at">prior =</span> <span class="st">"loggamma"</span>, <span class="at">param =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.01</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The spatial random effect is specified using the BYM2 model, which facilitates assigning Penalized Complexity (PC) priors to its hyperparameters (Simpson et al., 2017). These priors are conservative and weakly informative, thus allowing the data to drive the inclusion of spatial structure (Moraga, 2019).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define penalized complexity (PC) priors for spatial random effects using BYM2</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>prior_sp <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">prec =</span> <span class="fu">list</span>(<span class="at">prior =</span> <span class="st">'pc.prec'</span>, <span class="at">param =</span> <span class="fu">c</span>(<span class="fl">0.5</span> <span class="sc">/</span> <span class="fl">0.31</span>, <span class="fl">0.01</span>)),  <span class="co"># Precision of spatial effect</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">phi  =</span> <span class="fu">list</span>(<span class="at">prior =</span> <span class="st">'pc'</span>, <span class="at">param =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>))              <span class="co"># Mixing parameter: structured vs unstructured</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">prec =</span> <span class="fu">list</span>(<span class="at">prior =</span> <span class="st">"pc.prec"</span>, <span class="at">param =</span> <span class="fu">c</span>(<span class="fl">0.5</span> <span class="sc">/</span> <span class="fl">0.31</span>, <span class="fl">0.01</span>)), <span class="co"># Precision of spatial effect</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">phi  =</span> <span class="fu">list</span>(<span class="at">prior =</span> <span class="st">"pc"</span>, <span class="at">param =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>))             <span class="co"># Mixing parameter</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="define-formulas" class="level3">
+<h3 class="anchored" data-anchor-id="define-formulas">Define formulas</h3>
 <p>Here we construct a set of model formulas including DLNM terms using the <code>write_inla_formulas()</code> function. The resulting formulas are then standardized into a <code>GHRformulas</code> object for use with the <code>fit_models()</code> function.</p>
+<p>The one-basis and cross-basis matrices are referenced as character vectors, meaning that the corresponding objects must already exist in the R environment for the models to run correctly.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write INLA-compatible model formulas including DLNM terms</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>formulas_dlnm <span class="ot">&lt;-</span> <span class="fu">write_inla_formulas</span>(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">"dengue_cases"</span>,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariates =</span> <span class="fu">list</span>(</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"ob_tmin"</span>),                 <span class="co"># Model 1: includes one-basis object (minimum temperature)</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"cb_tmin"</span>),                 <span class="co"># Model 2: includes cross-basis for temperature</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"cb_tmin"</span>, <span class="st">"cb_pdsi"</span>)       <span class="co"># Model 3: includes cross-basis for temperature and drought index</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"ob_tmin"</span>),           <span class="co"># Model 2: includes one-basis object (tmin)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"cb_tmin"</span>),           <span class="co"># Model 3: includes cross-basis for tmin</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"cb_tmin"</span>, <span class="st">"cb_pdsi"</span>) <span class="co"># Model 4: includes cross-basis for tmin and pdsi</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline =</span> <span class="cn">TRUE</span>,          <span class="co"># Model 1: random effects only (default: TRUE)</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First random effect: monthly seasonality</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">re1 =</span> <span class="fu">list</span>(</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">id        =</span> <span class="st">"month_id"</span>,      <span class="co"># Time index for monthly effect</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">model     =</span> <span class="st">"rw1"</span>,           <span class="co"># First-order random walk model</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cyclic    =</span> <span class="cn">TRUE</span>,            <span class="co"># Enforce cyclicity over months (Dec → Jan wrap-around)</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">hyper     =</span> <span class="st">"prior_t"</span>,       <span class="co"># Hyperprior object for precision</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">replicate =</span> <span class="st">"spat_meso_id"</span>   <span class="co"># Separate seasonal pattern per mesoregion</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">id        =</span> <span class="st">"month_id"</span>,    <span class="co"># Time index for monthly effect</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">model     =</span> <span class="st">"rw1"</span>,         <span class="co"># First-order random walk model</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cyclic    =</span> <span class="cn">TRUE</span>,          <span class="co"># Enforce cyclicity over months</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">hyper     =</span> <span class="st">"prior_t"</span>,     <span class="co"># Hyperprior object for precision</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">replicate =</span> <span class="st">"spat_meso_id"</span> <span class="co"># Separate seasonal pattern per mesoregion</span></span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Second random effect: inter-annual trend</span></span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">re2 =</span> <span class="fu">list</span>(</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> <span class="st">"year_id"</span>,           <span class="co"># Year index</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> <span class="st">"iid"</span>,               <span class="co"># Independent and identically distributed</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">hyper =</span> <span class="st">"prior_t"</span>            <span class="co"># Hyperprior for temporal smoothness</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> <span class="st">"year_id"</span>, <span class="co"># Year index</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> <span class="st">"iid"</span>,     <span class="co"># Independent and identically distributed</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">hyper =</span> <span class="st">"prior_t"</span>  <span class="co"># Hyperprior for temporal smoothness</span></span>
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Third random effect: spatial autocorrelation</span></span>
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">re3 =</span> <span class="fu">list</span>(</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> <span class="st">"spat_id"</span>,           <span class="co"># Spatial unit identifier</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> <span class="st">"bym2"</span>,              <span class="co"># BYM2 spatial model (structured + unstructured)</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">graph =</span> <span class="st">"g"</span>,                 <span class="co"># Pre-computed spatial adjacency graph</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">hyper =</span> <span class="st">"prior_sp"</span>           <span class="co"># PC priors for BYM2 model parameters</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert formulas list into a GHRformulas object for model fitting</span></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>formulas_dlnm_ghr <span class="ot">&lt;-</span> <span class="fu">as_GHRformulas</span>(formulas_dlnm)</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Output is a GHRformulas object</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(formulas_dlnm_ghr)</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRformulas" "list"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> <span class="st">"spat_id"</span>, <span class="co"># Spatial unit identifier</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> <span class="st">"bym2"</span>,    <span class="co"># BYM2 spatial model (structured + unstructured)</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">graph =</span> <span class="st">"g"</span>,       <span class="co"># Pre-computed spatial adjacency graph</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">hyper =</span> <span class="st">"prior_sp"</span> <span class="co"># PC priors for BYM2 model parameters</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="fit-dlnms-with-inla" class="level2">
-<h2 class="anchored" data-anchor-id="fit-dlnms-with-inla">2. Fit DLNMs with INLA</h2>
+</section>
+<section id="fit-dlnms-with-inla" class="level1">
+<h1>2. Fit DLNMs with INLA</h1>
 <p>To fit a DLNM using INLA, you must first create the necessary basis functions using appropriate spline or polynomial transformations. These should be available in your working environment prior to model fitting (see <a href="#model-development">1. Model development</a>).</p>
-<p>When fitting DLNMs, it is essential to include the variance-covariance matrix of fixed effects in the model output to enable interpretation of the combined effects across lag dimensions. This is done by setting <code>vcov = TRUE</code> within the <code>control_compute</code> argument of <code>fit_models()</code>.</p>
+<p>When fitting DLNMs, it is essential to include the variance-covariance matrix of fixed effects in the model output to enable interpretation of the combined effects across lag dimensions. This is done by setting <code>vcov = TRUE</code> within the <code>control_compute</code> argument of <code>fit_models()</code>. <code>vcov = TRUE</code> requires <code>config = TRUE</code>, so both are set below.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting a DLNM model using a previously defined formula and basis objects</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: vcov = TRUE is required for DLNM interpretation and plotting</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>model_dlnm <span class="ot">&lt;-</span><span class="fu">fit_models</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> formulas_dlnm_ghr, </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span><span class="st">"mod"</span>, </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df, </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span><span class="st">"nbinomial"</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset =</span> <span class="st">"population"</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_compute =</span> <span class="fu">list</span> (<span class="at">config =</span> <span class="cn">TRUE</span>, <span class="at">vcov =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(model_dlnm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>model_dlnm <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> formulas_dlnm,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"mod"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"nbinomial"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset_var =</span> <span class="st">"pop100000"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_compute =</span> <span class="fu">list</span>(<span class="at">config =</span> <span class="cn">TRUE</span>, <span class="at">vcov =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Printing the resulting <code>GHRmodels</code> object gives a compact summary of the number of models, the outcome, the likelihood family and the elements it contains:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_dlnm</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GHRmodels object</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ----------------</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of models:  4 </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Outcome:  dengue_cases </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Family:  nbinomial </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Elements:  mod_gof, fitted, fixed, random, vcov, formulas, inlamod, ppd, family, data, re, outcome</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="dlnm-output" class="level2">
-<h2 class="anchored" data-anchor-id="dlnm-output">3. DLNM output</h2>
-<p>To interpret DLNM model results, predictions over a range of exposure and lag values can be generated using the <code>crosspred_inla()</code> function. <code>crosspred_inla()</code> extracts the relevant estimated coefficients and variance-covariance matrix from a <code>GHRmodels</code> object and passes them to the <code>dlnm::crosspred()</code> function to return a <code>GHRcrosspred</code> object that can be used to compute predictions and uncertainty intervals. It requires the fitted model to include a variance-covariance matrix (<code>vcov = TRUE</code> in <code>fit_models()</code>). The range of exposure values over which predictions are generated can be adjusted using the <code>from</code>, <code>to</code> and <code>at</code> arguments.</p>
-<p>The <code>plot_coef_crosspred()</code> function provides flexible plotting options for visualizing DLNM results from a <code>GHRcrosspred</code> object. The output is a <code>ggplot2</code> object, allowing the user to further customize the output. It supports multiple plot types depending on the structure of the basis used (one-basis or cross-basis):</p>
+<section id="dlnm-output" class="level1">
+<h1>3. DLNM output</h1>
+<p>To interpret DLNM model results, predictions over a range of exposure and lag values can be generated using the <code>crosspred_inla()</code> function. <code>crosspred_inla()</code> extracts the relevant estimated coefficients and variance-covariance matrix from a <code>GHRmodels</code> object and passes them to the <code>dlnm::crosspred()</code> function to return a <code>GHRcrosspred</code> object that can be used to compute predictions and uncertainty intervals. The range of exposure values over which predictions are generated can be adjusted using the <code>from</code>, <code>to</code> and <code>at</code> arguments.</p>
+<p>The <code>plot_coef_crosspred()</code> function provides flexible plotting options for visualizing DLNM results from a <code>GHRcrosspred</code> object. The output is a <code>ggplot2</code> object, allowing the user to further customize the output. It supports multiple plot types:</p>
 <ul>
-<li><p><code>type = "overall"</code>: Plots the overall exposure-response relationship across all lags.</p></li>
-<li><p><code>type = "slices"</code>: Plots slices across lags (for a given exposure level) or exposures (for a given lag).</p></li>
-<li><p><code>type = "heatmap"</code>: A two-dimensional heatmap of the effect surface over exposure and lag (for cross-basis only). This visualization provides a clear overview of the joint effect pattern but does not depict uncertainty, such as credible intervals.</p></li>
+<li><code>type = "overall"</code>: Plots the overall exposure-response relationship across all lags.</li>
+<li><code>type = "slices"</code>: Plots slices across lags (for a given exposure level) or exposures (for a given lag).</li>
+<li><code>type = "heatmap"</code>: A two-dimensional heatmap of the effect surface over exposure and lag (for cross-basis only). This visualization provides a clear overview of the joint effect pattern but does not depict uncertainty, such as credible intervals.</li>
 </ul>
-<p>Here we show the <code>model_dlnm$mod_gof</code> element to provide a convenient overview of all fitted models describing identifiers for each model and the one-basis or cross-basis objects included.</p>
+<p>Below we show the first columns of the <code>model_dlnm$mod_gof</code> element, which provide a convenient overview of all fitted models, with the identifier of each model and the one-basis or cross-basis objects it includes.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -653,102 +654,112 @@ div.csl-entry {
 </tbody>
 </table>
 <p>DLNM terms in <code>model_dlnm</code></p>
-<section id="one-basis-terms" class="level3">
-<h3 class="anchored" data-anchor-id="one-basis-terms">One-basis terms</h3>
+<section id="one-basis-terms" class="level2">
+<h2 class="anchored" data-anchor-id="one-basis-terms">One-basis terms</h2>
 <p>The following example demonstrates how to extract and visualize the nonlinear effect of the <em>tmin</em> variable at lag 0 from a fitted model using <code>crosspred_inla()</code> and <code>plot_coef_crosspred()</code>.</p>
 <p>First, we generate predictions for the nonlinear effect of <em>tmin</em> using the corresponding one-basis object estimates (<code>ob_tmin</code>) from the second model in the <code>model_dlnm</code> object (<em>mod2</em>). The effect is centered at a reference value of 19°C (the mean of <em>tmin</em> <code>mean(df$tmin)</code>) to aid interpretability, meaning all effect estimates are relative to that value.</p>
 <blockquote class="blockquote">
 <p>💡 <strong>Tip</strong>: The reference value sets the baseline for interpreting the estimated effect. This can be the mean of the covariate, a specific threshold of interest, or 0 when variables are centered at 0 (such as SPI or PDSI).</p>
 </blockquote>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate dengue risk predictions for a range of tmin values. </span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cpred_ob_tmin <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> model_dlnm,   <span class="co"># GHRmodels object</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis =</span> ob_tmin,      <span class="co"># One-basis object for the `tmin` variable</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod2"</span>,      <span class="co"># Identifier to select the correct model component</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="dv">19</span>,             <span class="co"># Temperature centered at the mean of tmin 19°C</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">15</span>,            <span class="co"># Predictions are generated for temperature values above 15</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">24</span>               <span class="co"># Predictions are generated for temperature values below 24</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Output a GHRcrosspred object</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cpred_ob_tmin)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRcrosspred" "crosspred"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Next, we visualize the predicted nonlinear effect across a range of <em>tmin</em> values (15°C to 25°C) at lag 0 using the <code>"slices"</code> plot type. This slice plot shows how the effect of minimum temperature on dengue risk varies at different values, with credible intervals highlighting uncertainty. Here we observe that minimum temperatures of 21°C and 22°C increase risk of dengue compared to the mean minimum temperature of 19°C.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted dengue risk values against the tmin values</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  cpred_ob_tmin,           <span class="co"># The cross-predicted object from crosspred_inla()</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"slices"</span>,         <span class="co"># Plot type: shows effect as a continuous curve</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">seq</span>(<span class="dv">15</span>,<span class="dv">24</span>),        <span class="co"># Range of tmin values to display on the x-axis</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"red"</span>,      <span class="co"># Color of the fitted effect line</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>,         <span class="co"># Thickness of the effect line</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"red"</span>,    <span class="co"># Color of the credible interval (ribbon)</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,      <span class="co"># Transparency level of the ribbon (0 = invisible)</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue risk"</span>,  <span class="co"># Plot title</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Minimum temperature"</span>,   <span class="co"># Label for the x-axis</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Effect"</span>                 <span class="co"># Label for the y-axis </span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_DLNM_files/figure-gfm/plot_coef_crosspred-1.png" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate dengue risk predictions for a range of tmin values.</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cpred_ob_tmin <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_dlnm, <span class="co"># GHRmodels object</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis =</span> ob_tmin,     <span class="co"># One-basis object for the `tmin` variable</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod2"</span>,     <span class="co"># Identifier to select the correct model component</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="dv">19</span>,            <span class="co"># Temperature centered at the mean of tmin 19°C</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">15</span>,           <span class="co"># Predictions are generated from 15°C ...</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">24</span>              <span class="co"># ... up to 24°C</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Output a GHRcrosspred object</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cpred_ob_tmin)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRcrosspred" "crosspred"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Next, we visualize the predicted nonlinear effect across a range of <em>tmin</em> values (15°C to 24°C) at lag 0 using the <code>"slices"</code> plot type. This slice plot shows how the effect of minimum temperature on dengue risk varies at different values, with credible intervals highlighting uncertainty. Here we observe that, compared to the mean minimum temperature of 19°C, the effect increases with temperature above this value, with credible intervals excluding zero for the highest temperatures.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted dengue risk values against the tmin values</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  cpred_ob_tmin,    <span class="co"># The cross-predicted object from crosspred_inla()</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"slices"</span>,              <span class="co"># Plot type: shows effect as a continuous curve</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">seq</span>(<span class="dv">15</span>, <span class="dv">24</span>),            <span class="co"># Range of tmin values to display on the x-axis</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"red"</span>,         <span class="co"># Color of the fitted effect line</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>,              <span class="co"># Thickness of the effect line</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"red"</span>,       <span class="co"># Color of the credible interval (ribbon)</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,           <span class="co"># Transparency level of the ribbon</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue risk"</span>, <span class="co"># Plot title</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Minimum temperature"</span>, <span class="co"># Label for the x-axis</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Effect"</span>               <span class="co"># Label for the y-axis</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/plot_coef_crosspred-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
-<section id="cross-basis-terms" class="level3">
-<h3 class="anchored" data-anchor-id="cross-basis-terms">Cross-basis terms</h3>
+<section id="cross-basis-terms" class="level2">
+<h2 class="anchored" data-anchor-id="cross-basis-terms">Cross-basis terms</h2>
 <p>This section demonstrates how to evaluate and visualize the effects from cross-basis DLNM estimates fit in an INLA model. In this case we use these estimates to assess how the effects of minimum temperature (<em>tmin</em>) on dengue risk change over time lag period and over a range of temperature values.</p>
 <p><code>crosspred_inla()</code> extracts model predictions for the cross-basis of minimum temperature (<code>cb_tmin</code>) across lags from the fitted model <code>model_dlnm</code>. The effect estimates are centered at 19°C (the mean minimum temperature).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate dengue risk predictions for a range of tmin values and lags. </span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cpred_cb_tmin <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_dlnm, <span class="co"># GHRmodels object</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis =</span> cb_tmin,     <span class="co"># Cross-basis from tmin</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod3"</span>,     <span class="co"># Model identifier</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="dv">19</span>,            <span class="co"># Centering value (mean minimum temperature 20°C)</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">17</span>,           <span class="co"># Start predicting at </span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">to=</span> <span class="dv">24</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Output a GHRcrosspred object</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cpred_cb_tmin)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRcrosspred" "crosspred"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Here we visualize the estimated relative risks (i.e., exponentiated effects) (<code>exp = TRUE</code>) across lags 1 to 2 for a range of temperature values using slice plots (<code>type = "slices"</code>) with smooth interpolation across lags. These plots illustrate how the effect of temperature on dengue risk evolves over different lag times. We observe that high minimum temperatures of 23°C and 24°C, particularly at a one-month lag, are associated with a notable increase in dengue relative risk.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted dengue risk values against the tmin values and lags</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin,  <span class="co"># Crosspred object with model predictions</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"slices"</span>,            <span class="co"># Plot lag-specific slices of exposure-response curves</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                 <span class="co"># Exponentiate the coefficients,</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,                  <span class="co"># Display results for lags 1 through 6</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"red"</span>,         <span class="co"># Red color for the lines representing effect estimates</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>,            <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"red"</span>,       <span class="co"># Red shading for credible interval ribbons</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,         <span class="co"># Set ribbon transparency to 30%</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue relative risk by lag"</span>,  <span class="co"># Main plot title</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Mean minimum temperature exposure"</span>,    <span class="co"># Label for the x-axis (exposure variable)</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Relative Risk (RR)"</span> <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by lag-1.png" style="display: block; margin: auto;"> <br></p>
-<p>Here we focus on the estimated relative risk for specific temperature values, between 19°C and 24°C, specified in the <code>var</code> argument and displayed in the facets. In this plot we can observe that mean minimum temperatures 24°C at 1 month lag have a positive effect on dengue.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate dengue risk predictions for a range of tmin values and lags.</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cpred_cb_tmin <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_dlnm, <span class="co"># GHRmodels object</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis =</span> cb_tmin,     <span class="co"># Cross-basis from tmin</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod3"</span>,     <span class="co"># Model identifier</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="dv">19</span>,            <span class="co"># Centering value (mean minimum temperature, 19°C)</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">17</span>,           <span class="co"># Start predicting at</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">24</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Output a GHRcrosspred object</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(cpred_cb_tmin)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "GHRcrosspred" "crosspred"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here we visualize the estimated relative risks (i.e., exponentiated effects) (<code>exp = TRUE</code>) across lags 1 to 2 for a range of temperature values using slice plots (<code>type = "slices"</code>) with smooth interpolation across lags. These plots illustrate how the effect of temperature on dengue risk evolves over different lag times. We observe that the highest minimum temperatures, particularly 24°C at a one-month lag, are associated with a notable increase in dengue relative risk, whereas for lower temperatures the credible intervals include 1.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted dengue risk values against the tmin values and lags</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin,  <span class="co"># Crosspred object with model predictions</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"slices"</span>,            <span class="co"># Plot temperature-specific slices of exposure-response curves</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                 <span class="co"># Exponentiate the coefficients (to relative risk scale)</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">24</span>),             <span class="co"># Display results for temperature 19°C to 24°C</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"red"</span>,         <span class="co"># Red color for the lines representing effect estimates</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>,            <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"red"</span>,       <span class="co"># Red shading for credible interval ribbons</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,         <span class="co"># Set ribbon transparency to 30%</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperatures 19°C to 24°C on dengue relative risk by lag"</span>,  <span class="co"># Main plot title</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Lag"</span>,               <span class="co"># Label for the x-axis (exposure variable)</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Relative Risk (RR)"</span> <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin, <span class="co"># Crosspred object with model predictions</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"slices"</span>,           <span class="co"># Plot lag-specific slices of exposure-response curves</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                <span class="co"># Exponentiate the coefficients,</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lag =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,                 <span class="co"># Display results for lags 1 and 2</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"red"</span>,        <span class="co"># Red color for the lines representing effect estimates</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>,           <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"red"</span>,      <span class="co"># Red shading for credible interval ribbons</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,        <span class="co"># Set ribbon transparency to 30%</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue relative risk by lag"</span>, </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Mean minimum temperature exposure"</span>, <span class="co"># Label for the x-axis (exposure variable)</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Relative Risk (RR)"</span>                 <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
 <span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by temp values-1.png" style="display: block; margin: auto;"> <br></p>
-<p>Here we visualize the estimated relative risks using <code>type = "heatmap"</code> to examine how the association between temperature and dengue varies jointly across different temperature values and lag periods. The plot reveals that the most pronounced effects occur at a lag of approximately one month: higher minimum temperatures at this lag are associated with an increased risk of dengue, while lower temperatures, around the mean temperature, are linked to a decreased risk.</p>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by lag-1.png" alt="" style="display: block; margin: auto;"> <br></p>
+<p>Here we focus on the estimated relative risk for specific temperature values, between 20°C and 24°C, specified in the <code>var</code> argument and displayed in the facets. In this plot we can observe that mean minimum temperatures 24°C at 1 month lag have a positive effect on dengue.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted dengue risk values against the tmin values and lags</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin,  <span class="co"># Crosspred object containing model predictions</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"heatmap"</span>,           <span class="co"># Create a 2D heatmap of effects over exposure and lag values</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                 <span class="co"># Exponentiate effects to show relative risks</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-RdBu"</span>,          <span class="co"># Use the inverted "RdBu" color palette for the heatmap (blue for lower values)</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue relative risk by lag"</span>,  <span class="co"># Main plot title</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Mean minimum temperature exposure"</span>,    <span class="co"># Label for the x-axis (exposure variable)</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap-1.png" style="display: block; margin: auto;"> <br></p>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin,  <span class="co"># Crosspred object with model predictions</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"slices"</span>,            <span class="co"># Plot temperature-specific slices of exposure-response curves</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                 <span class="co"># Exponentiate the coefficients (to relative risk scale)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">c</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">24</span>),             <span class="co"># Display results for temperature 20°C to 24°C</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"red"</span>,         <span class="co"># Red color for the lines representing effect estimates</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>,            <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"red"</span>,       <span class="co"># Red shading for credible interval ribbons</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,         <span class="co"># Set ribbon transparency to 30%</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperatures 20°C to 24°C on dengue relative risk by lag"</span>, <span class="co"># Main plot title</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Lag"</span>,               <span class="co"># Label for the x-axis (exposure variable)</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Relative Risk (RR)"</span> <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin slices by temp values-1.png" alt="" style="display: block; margin: auto;"> <br></p>
+<p>Here we visualize the estimated relative risks using <code>type = "heatmap"</code> to examine how the association between temperature and dengue varies jointly across different temperature values and lag periods. The plot reveals that the most pronounced effects occur at a lag of approximately one month: higher minimum temperatures at this lag are associated with an increased risk of dengue, while temperatures around the reference value show little change in risk. Note that the heatmap does not display uncertainty, so it should be read together with the slice plots above.</p>
+<p>The colour scale is symmetric around the null effect by default. To fix the limits of the scale, for example to compare several heatmaps, use the <code>heat_lims</code> argument of <code>plot_coef_crosspred()</code>. With <code>exp = TRUE</code> the lower limit must be between 0 and 1 and the upper limit must be greater than 1; with <code>exp = FALSE</code> the lower limit must be negative and the upper limit positive. A warning is issued if some predictions fall outside the limits.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Same heatmap with fixed colour scale limits</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"heatmap"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">heat_lims =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">2</span>),     <span class="co"># Colour scale limits on the relative risk scale</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-RdBu"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue relative risk by lag"</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap limits-1.png" alt="" style="display: block; margin: auto;"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted dengue risk values summed across lags</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin, <span class="co"># Crosspred object containing model predictions</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"heatmap"</span>,          <span class="co"># Heatmap of effects over exposure and lag values</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                <span class="co"># Exponentiate effects to show relative risks</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-RdBu"</span>,         <span class="co"># Use the inverted "RdBu" color palette</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue relative risk by lag"</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap-1.png" alt="" style="display: block; margin: auto;"> <br></p>
 <blockquote class="blockquote">
 <p>💡 <strong>Tip</strong>: To produce a smoother exposure-lag heatmap, you can fine-tune both the prediction resolution and the plotting interpolation</p>
 </blockquote>
@@ -756,77 +767,78 @@ div.csl-entry {
 <li>Smoother x-axis (exposure): Increase the granularity of predicted exposure values by specifying a dense sequence via the at argument in <code>crosspred_inla()</code>. This results in more prediction points across the exposure range.</li>
 <li>Smoother y-axis (lag): Increase the number of interpolated lag points using the <code>n_lag_smooth</code> argument in <code>plot_coef_crosspred()</code>. This controls how finely the effects are interpolated across lags for the heatmap.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions using a higher-resolution range of temperature values</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cpred_cb_tmin_smooth <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_dlnm,    <span class="co"># GHRmodels object</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis =</span> cb_tmin,        <span class="co"># Cross-basis from tmin</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod3"</span>,        <span class="co"># Model identifier</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="dv">19</span>,               <span class="co"># Centering value (mean minimum temperature 19°C)</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">at =</span> <span class="fu">seq</span>(<span class="dv">17</span>,<span class="dv">24</span>, <span class="at">by=</span><span class="fl">0.05</span>), <span class="co"># Increase the number of temperature points for prediction</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">17</span>, </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">to=</span> <span class="dv">24</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a more granular heatmap with increased number of temperature values for prediction</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># and increased number of lag interpolation values</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin_smooth,   <span class="co"># Crosspred object containing model predictions</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"heatmap"</span>,           <span class="co"># Create a 2D heatmap of effects over exposure and lag</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                 <span class="co"># Exponentiate effects to show relative risks</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_lag_smooth =</span> <span class="dv">200</span>,         <span class="co"># Smooth across lag with 200 interpolation points</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-RdBu"</span>,          <span class="co"># Use the inverted "RdBu" color palette</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue relative risk by lag"</span>,  <span class="co"># Main plot title</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Mean minimum temperature exposure"</span>,    <span class="co"># Label for the x-axis (exposure variable)</span></span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap smooth-1.png" style="display: block; margin: auto;"> <br></p>
-<p>Lastly, the <code>type = "overall"</code> displays the overall effect of the exposure variable (<em>tmin</em>) aggregated across all lag times, summarizing the total exposure-response relationship. This plot helps in understanding the net impact of the exposure on the outcome without focusing on individual lag effects. In this example, we observe that mean minimum temperatures above 22°C are associated with an increased risk of dengue. However, this plot does not reveal that this effect is primarily driven by temperatures at a one-month lag, which is clearer in the lag-specific plots.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot overall effect of tmin on dengue across lags</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(<span class="at">crosspred =</span> cpred_cb_tmin,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type =</span> <span class="st">"overall"</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">exp=</span> <span class="cn">TRUE</span>, <span class="co"># Exponentiate effects to show relative risks</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">line_color =</span> <span class="st">"Red"</span>, <span class="co"># Red color for the lines representing effect estimates</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">line_size =</span> <span class="fl">0.8</span>, <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ribbon_color =</span> <span class="st">"Red"</span>, <span class="co"># Red shading for credible interval ribbons</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>, <span class="co"># Set ribbon transparency to 30%</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xlab =</span> <span class="st">"Mean minimum temperature exposure"</span>, <span class="co"># Label for the x-axis</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylab =</span> <span class="st">"Effect"</span> <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin overall-1.png" style="display: block; margin: auto;"></p>
-</section>
+<!-- end list -->
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions using a higher-resolution range of temperature values</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>cpred_cb_tmin_smooth <span class="ot">&lt;-</span> <span class="fu">crosspred_inla</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> model_dlnm,         <span class="co"># GHRmodels object</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">basis =</span> cb_tmin,             <span class="co"># Cross-basis from tmin</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mod_id =</span> <span class="st">"mod3"</span>,             <span class="co"># Model identifier</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cen =</span> <span class="dv">19</span>,                    <span class="co"># Centering value (mean minimum temperature 19°C)</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">at =</span> <span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">24</span>, <span class="at">by =</span> <span class="fl">0.05</span>), <span class="co"># Increased number of points for prediction</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">17</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">24</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a granular heatmap with increased number of values for prediction</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># and increased number of lag interpolation values</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin_smooth, <span class="co"># Crosspred object</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"heatmap"</span>,                 <span class="co"># Heatmap of effects over exposure and lag</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,                       <span class="co"># Exponentiate effects to show RR</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_lag_smooth =</span> <span class="dv">200</span>,               <span class="co"># Smooth across lag with 200 interpolation points</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"-RdBu"</span>,                <span class="co"># Use the inverted "RdBu" color palette</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Effect of minimum temperature on dengue relative risk by lag"</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Mean minimum temperature exposure"</span> <span class="co"># Label for the y-axis</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin heatmap smooth-1.png" alt="" style="display: block; margin: auto;"> <br></p>
+<p>Lastly, the <code>type = "overall"</code> displays the overall effect of the exposure variable (<em>tmin</em>) aggregated across all lag times, summarizing the total exposure-response relationship. This plot helps in understanding the net impact of the exposure on the outcome without focusing on individual lag effects. In this example, we observe that the overall risk of dengue increases with minimum temperatures above approximately 22°C, with credible intervals that exclude 1 for the highest values. However, this plot does not reveal that this effect is primarily driven by temperatures at a one-month lag, which is clearer in the lag-specific plots.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot overall effect of tmin on dengue across lags</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_crosspred</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crosspred =</span> cpred_cb_tmin,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"overall"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp =</span> <span class="cn">TRUE</span>,           <span class="co"># Exponentiate effects to show relative risks</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_color =</span> <span class="st">"Red"</span>,   <span class="co"># Red color for the lines representing effect estimates</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_size =</span> <span class="fl">0.8</span>,      <span class="co"># Line thickness set to 0.8 for better visibility</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_color =</span> <span class="st">"Red"</span>, <span class="co"># Red shading for credible interval ribbons</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,   <span class="co"># Set ribbon transparency to 30%</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Mean minimum temperature exposure"</span>, <span class="co"># Label for the x-axis</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Effect"</span>       <span class="co"># Label for the y-axis (effect estimate scale)</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="GHRmodel_DLNM_files/figure-gfm/Plot coefficients for cb_tmin overall-1.png" alt="" style="display: block; margin: auto;"></p>
 </section>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-gasparrini_distributed_2011" class="csl-entry" role="listitem">
-Gasparrini, A. (2011). Distributed Lag Linear and Non-Linear Models in <em>r</em> : The Package <strong>dlnm</strong>. <em>Journal of Statistical Software</em>, <em>43</em>(8). <a href="https://doi.org/10.18637/jss.v043.i08" class="uri">https://doi.org/10.18637/jss.v043.i08</a>
+<div id="refs" class="references hanging-indent" role="list">
+<div id="ref-gasparrini_distributed_2011">
+<p>Gasparrini, A. (2011). Distributed Lag Linear and Non-Linear Models in <em>r</em> : The Package <strong>dlnm</strong>. <em>Journal of Statistical Software</em>, <em>43</em>(8). <a href="https://doi.org/10.18637/jss.v043.i08" class="uri">https://doi.org/10.18637/jss.v043.i08</a></p>
 </div>
-<div id="ref-gasparrini_modeling_2014" class="csl-entry" role="listitem">
-Gasparrini, A. (2014). Modeling exposure–lag–response associations with distributed lag non-linear models. <em>Statistics in Medicine</em>, <em>33</em>(5), 881–899. <a href="https://doi.org/10.1002/sim.5963" class="uri">https://doi.org/10.1002/sim.5963</a>
+<div id="ref-gasparrini_modeling_2014">
+<p>Gasparrini, A. (2014). Modeling exposure–lag–response associations with distributed lag non-linear models. <em>Statistics in Medicine</em>, <em>33</em>(5), 881–899. <a href="https://doi.org/10.1002/sim.5963" class="uri">https://doi.org/10.1002/sim.5963</a></p>
 </div>
-<div id="ref-gasparrini_distributed_2010" class="csl-entry" role="listitem">
-Gasparrini, A., Armstrong, B., &amp; Kenward, M. G. (2010). Distributed lag non‐linear models. <em>Statistics in Medicine</em>, <em>29</em>(21), 2224–2234. <a href="https://doi.org/10.1002/sim.3940" class="uri">https://doi.org/10.1002/sim.3940</a>
+<div id="ref-gasparrini_distributed_2010">
+<p>Gasparrini, A., Armstrong, B., &amp; Kenward, M. G. (2010). Distributed lag non‐linear models. <em>Statistics in Medicine</em>, <em>29</em>(21), 2224–2234. <a href="https://doi.org/10.1002/sim.3940" class="uri">https://doi.org/10.1002/sim.3940</a></p>
 </div>
-<div id="ref-gasparrini_attributable_2014" class="csl-entry" role="listitem">
-Gasparrini, A., &amp; Leone, M. (2014). Attributable risk from distributed lag models. <em>BMC Medical Research Methodology</em>, <em>14</em>(1), 55. <a href="https://doi.org/10.1186/1471-2288-14-55" class="uri">https://doi.org/10.1186/1471-2288-14-55</a>
+<div id="ref-gasparrini_attributable_2014">
+<p>Gasparrini, A., &amp; Leone, M. (2014). Attributable risk from distributed lag models. <em>BMC Medical Research Methodology</em>, <em>14</em>(1), 55. <a href="https://doi.org/10.1186/1471-2288-14-55" class="uri">https://doi.org/10.1186/1471-2288-14-55</a></p>
 </div>
-<div id="ref-gomez-rubio_bayesian_2020" class="csl-entry" role="listitem">
-Gómez-Rubio, V. (2020). <em>Bayesian inference with INLA</em>. Chapman &amp;Hall/CRC Press. <a href="https://becarioprecario.bitbucket.io/inla-gitbook/index.html" class="uri">https://becarioprecario.bitbucket.io/inla-gitbook/index.html</a>
+<div id="ref-gomez-rubio_bayesian_2020">
+<p>Gómez-Rubio, V. (2020). <em>Bayesian inference with INLA</em>. Chapman &amp;Hall/CRC Press. <a href="https://becarioprecario.bitbucket.io/inla-gitbook/index.html" class="uri">https://becarioprecario.bitbucket.io/inla-gitbook/index.html</a></p>
 </div>
-<div id="ref-lindgren_explicit_2011" class="csl-entry" role="listitem">
-Lindgren, F., Rue, H., &amp; Lindström, J. (2011). An Explicit Link between Gaussian Fields and Gaussian Markov Random Fields: The Stochastic Partial Differential Equation Approach. <em>Journal of the Royal Statistical Society Series B: Statistical Methodology</em>, <em>73</em>(4), 423–498. <a href="https://doi.org/10.1111/j.1467-9868.2011.00777.x" class="uri">https://doi.org/10.1111/j.1467-9868.2011.00777.x</a>
+<div id="ref-lindgren_explicit_2011">
+<p>Lindgren, F., Rue, H., &amp; Lindström, J. (2011). An Explicit Link between Gaussian Fields and Gaussian Markov Random Fields: The Stochastic Partial Differential Equation Approach. <em>Journal of the Royal Statistical Society Series B: Statistical Methodology</em>, <em>73</em>(4), 423–498. <a href="https://doi.org/10.1111/j.1467-9868.2011.00777.x" class="uri">https://doi.org/10.1111/j.1467-9868.2011.00777.x</a></p>
 </div>
-<div id="ref-lowe_nonlinear_2018" class="csl-entry" role="listitem">
-Lowe, R., Gasparrini, A., Van Meerbeeck, C. J., Lippi, C. A., Mahon, R., Trotman, A. R., Rollock, L., Hinds, A. Q. J., Ryan, S. J., &amp; Stewart-Ibarra, A. M. (2018). Nonlinear and delayed impacts of climate on dengue risk in Barbados: A modelling study. <em>PLOS Medicine</em>, <em>15</em>(7), e1002613. <a href="https://doi.org/10.1371/journal.pmed.1002613" class="uri">https://doi.org/10.1371/journal.pmed.1002613</a>
+<div id="ref-lowe_nonlinear_2018">
+<p>Lowe, R., Gasparrini, A., Van Meerbeeck, C. J., Lippi, C. A., Mahon, R., Trotman, A. R., Rollock, L., Hinds, A. Q. J., Ryan, S. J., &amp; Stewart-Ibarra, A. M. (2018). Nonlinear and delayed impacts of climate on dengue risk in Barbados: A modelling study. <em>PLOS Medicine</em>, <em>15</em>(7), e1002613. <a href="https://doi.org/10.1371/journal.pmed.1002613" class="uri">https://doi.org/10.1371/journal.pmed.1002613</a></p>
 </div>
-<div id="ref-lowe_combined_2021" class="csl-entry" role="listitem">
-Lowe, R., Lee, S. A., O’Reilly, K. M., Brady, O. J., Bastos, L., Carrasco-Escobar, G., De Castro Catão, R., Colón-González, F. J., Barcellos, C., Carvalho, M. S., Blangiardo, M., Rue, H., &amp; Gasparrini, A. (2021). Combined effects of hydrometeorological hazards and urbanisation on dengue risk in Brazil: A spatiotemporal modelling study. <em>The Lancet Planetary Health</em>, <em>5</em>(4), e209–e219. <a href="https://doi.org/10.1016/S2542-5196(20)30292-8" class="uri">https://doi.org/10.1016/S2542-5196(20)30292-8</a>
+<div id="ref-lowe_combined_2021">
+<p>Lowe, R., Lee, S. A., O’Reilly, K. M., Brady, O. J., Bastos, L., Carrasco-Escobar, G., De Castro Catão, R., Colón-González, F. J., Barcellos, C., Carvalho, M. S., Blangiardo, M., Rue, H., &amp; Gasparrini, A. (2021). Combined effects of hydrometeorological hazards and urbanisation on dengue risk in Brazil: A spatiotemporal modelling study. <em>The Lancet Planetary Health</em>, <em>5</em>(4), e209–e219. <a href="https://doi.org/10.1016/S2542-5196(20)30292-8" class="uri">https://doi.org/10.1016/S2542-5196(20)30292-8</a></p>
 </div>
-<div id="ref-moraga_geospatial_2019" class="csl-entry" role="listitem">
-Moraga, P. (2019). <em>Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny</em>. Chapman &amp; Hall/CRC Biostatistics Series. <a href="https://www.paulamoraga.com/book-geospatial/index.html" class="uri">https://www.paulamoraga.com/book-geospatial/index.html</a>
+<div id="ref-moraga_geospatial_2019">
+<p>Moraga, P. (2019). <em>Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny</em>. Chapman &amp; Hall/CRC Biostatistics Series. <a href="https://www.paulamoraga.com/book-geospatial/index.html" class="uri">https://www.paulamoraga.com/book-geospatial/index.html</a></p>
 </div>
-<div id="ref-simpson_penalising_2017" class="csl-entry" role="listitem">
-Simpson, D., Rue, H., Riebler, A., Martins, T. G., &amp; Sørbye, S. H. (2017). Penalising Model Component Complexity: A Principled, Practical Approach to Constructing Priors. <em>Statistical Science</em>, <em>32</em>(1). <a href="https://doi.org/10.1214/16-STS576" class="uri">https://doi.org/10.1214/16-STS576</a>
+<div id="ref-simpson_penalising_2017">
+<p>Simpson, D., Rue, H., Riebler, A., Martins, T. G., &amp; Sørbye, S. H. (2017). Penalising Model Component Complexity: A Principled, Practical Approach to Constructing Priors. <em>Statistical Science</em>, <em>32</em>(1). <a href="https://doi.org/10.1214/16-STS576" class="uri">https://doi.org/10.1214/16-STS576</a></p>
 </div>
 </div>
 

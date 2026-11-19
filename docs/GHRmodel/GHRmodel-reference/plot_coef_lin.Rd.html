@@ -303,7 +303,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
   <li><a href="#details" id="toc-details" class="nav-link" data-scroll-target="#details">Details</a></li>
   <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
-  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">See Also</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
   </ul>
@@ -343,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>models</code>: An object of class <code>GHRmodels</code> containing fitted model output.</li>
 <li><code>mod_id</code>: Character vector of model identifiers (must match entries in <code>model$mod_gof$model_id</code>). If <code>NULL</code> (the default), all models are considered.</li>
 <li><code>name</code>: A character vector specifying exact linear covariates names to be plotted. If both <code>pattern</code> and <code>name</code> are <code>NULL</code> (the default), all terms (except <code>(Intercept)</code>) are plotted.</li>
-<li><code>pattern</code>: A character vector specifying prefix(es) to match (e.g., “tmin” matches “tmin”, “tmin.l1”, etc.) Covariates matching these patterns (case‐insensitive search) will be plotted. If both <code>pattern</code> and <code>name</code> are <code>NULL</code> (the default), all terms (except <code>(Intercept)</code>) are plotted.</li>
+<li><code>pattern</code>: A character vector specifying prefix(es) to match (e.g., “tmin” matches “tmin”, “tmin.l1”, etc.). Covariates matching these patterns (case‐insensitive search) will be plotted. If both <code>pattern</code> and <code>name</code> are <code>NULL</code> (the default), all terms (except <code>(Intercept)</code>) are plotted.</li>
 <li><code>title</code>: An optional string specifying an overall plot title.</li>
 <li><code>mod_label</code>: An optional named character vector mapping model names to custom labels, e.g.&nbsp;c(“mod1” = “Model 1”). Any model not found in the vector names retains its original label.</li>
 <li><code>var_label</code>: An optional named character vector mapping variable (or interaction) names to custom labels. Interaction matching is order-insensitive: <code>"A:B"</code> matches <code>"B:A"</code>. Any term not found in the vector names retains its original label.</li>
@@ -365,24 +364,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="returns">Returns</h2>
 <p>A <code>ggplot2</code> forest plot object (class <code>ggplot</code>).</p>
 </section>
-<section id="see-also" class="level2">
-<h2 class="anchored" data-anchor-id="see-also">See Also</h2>
-<p><code>geom_errorbar</code> for the plotting environment.</p>
-</section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package: </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot point estimates with confidence intervals for the linear covariates: </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">model =</span> model_list,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod2"</span>,<span class="st">"mod4"</span>),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"tmin.l1"</span><span class="ot">=</span> <span class="st">"Min. temp lag 1"</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>              <span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index lag 1"</span>),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Effects of linear covariates"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example GHRmodels object from the package:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_list_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"model_list.rds"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(model_list_file)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot point estimates with confidence intervals for the linear covariates:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_coef_lin</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">model =</span> model_list,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">mod_id =</span> <span class="fu">c</span>(<span class="st">"mod2"</span>,<span class="st">"mod4"</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">var_label =</span> <span class="fu">c</span>(<span class="st">"tmin.l1"</span><span class="ot">=</span> <span class="st">"Min. temp lag 1"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">"pdsi.l1"</span> <span class="ot">=</span> <span class="st">"Drought index lag 1"</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Effects of linear covariates"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

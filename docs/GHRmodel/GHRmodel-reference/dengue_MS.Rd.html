@@ -316,12 +316,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Dengue cases from the “Mato Grosso do Sul” state of Brazil</h1>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>The <code>dengue_MS</code> example data set contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates (e.g., environmental, socio-economic and meteo-climatic factors). This data set represents a subset of a larger national data set that covers the entire territory of Brazil. The subset focuses on a specific region, <strong>Mato Grosso do Sul</strong>, for the purposes of illustration and computational efficiency. See <code>@source</code> for access to the complete data set.</p>
+<p>The <code>dengue_MS</code> example data set contains monthly counts of notified dengue cases by microregion, along with a range of spatial and spatiotemporal covariates (e.g., environmental, socio-economic and meteo-climatic factors). This data set represents a subset of a larger national data set that covers the entire territory of Brazil. The subset focuses on a specific region, <strong>Mato Grosso do Sul</strong>, for the purposes of illustration and computational efficiency. See the source below for access to the complete data set.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dengue_MS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="format" class="level2">
 <h2 class="anchored" data-anchor-id="format">Format</h2>
-<p>A data frame with 2,600 rows and 27 columns:</p>
+<p>A data frame with 2,640 rows and 28 columns:</p>
 <ul>
 <li><strong><code>micro_code</code></strong>: Unique ID number to each micro region (11 units)</li>
 <li><strong><code>micro_name</code></strong>: Name of each micro region</li>
@@ -330,8 +330,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong><code>meso_name</code></strong>: Name of each meso region</li>
 <li><strong><code>state_code</code></strong>: Unique ID number to each state (1 unit)</li>
 <li><strong><code>state_name</code></strong>: Name of each state</li>
-<li><strong><code>region_code</code></strong>: Unique ID number given to each Brazilian Region, In this data frame all observations come from the “Southeast Region”</li>
-<li><strong><code>region_name</code></strong>: Name of each Brazilian Region, In this data frame all observations come from the “Southeast Region”</li>
+<li><strong><code>region_code</code></strong>: Unique ID number given to each Brazilian Region, In this data frame all observations come from the “Centre-West”</li>
+<li><strong><code>region_name</code></strong>: Name of each Brazilian Region, In this data frame all observations come from the “Centre-West”</li>
 <li><strong><code>biome_code</code></strong>: Biome code</li>
 <li><strong><code>biome_name</code></strong>: Biome name</li>
 <li><strong><code>ecozone_code</code></strong>: Ecozone code</li>
@@ -349,12 +349,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong><code>urban</code></strong>: Percentage of inhabitants living in urban areas (2010 census)</li>
 <li><strong><code>water_network</code></strong>: Percentage of inhabitants with access to the piped water network according to the 2010 census</li>
 <li><strong><code>water_shortage</code></strong>: Frequency of reported water shortages per microregion between 2000 - 2016</li>
-<li><strong><code>date</code></strong>: First day of the Month, in date format (“%d-%m-%Y”)</li>
+<li><strong><code>date</code></strong>: First day of the Month, in date format (“%Y-%m-%d”)</li>
+<li><strong><code>pop100000</code></strong>: Population divided by 100000.</li>
 </ul>
 </section>
 <section id="source" class="level2">
 <h2 class="anchored" data-anchor-id="source">Source</h2>
-<p><a href="https://github.com/drrachellowe/hydromet_dengue">source code on GitHub</a>; <a href="http://doi.org/10.5281/zenodo.4632205">source code on Zenodo</a>);</p>
+<p><a href="https://github.com/drrachellowe/hydromet_dengue">source code on GitHub</a>; <a href="https://zenodo.org/records/4632205">source code on Zenodo</a>;</p>
 
 
 </section>

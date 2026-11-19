@@ -320,24 +320,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This function draws kernel-density curves for posterior-predictive samples and observed data using <code>ggplot2::geom_line()</code>. Each predictive sample’s density is plotted in light blue; the observed density is overlaid in black.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ppd</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  ppd,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Outcome"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Posterior Predictive Distribution"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs_color =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ppd_color =</span> <span class="cn">NULL</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  obs,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Outcome"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Posterior Predictive Distribution"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs_color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ppd_color =</span> <span class="cn">NULL</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
-<li><code>ppd</code>: A <code>data.frame</code> containing posterior-predictive samples (one column per sample) and the column with <code>observed</code> data.</li>
+<li><code>ppd</code>: A <code>matrix</code> containing posterior predictive samples (one column per sample).</li>
+<li><code>obs</code>: A vector of observations, must have the same length as the number of columns in <code>ppd</code>.</li>
 <li><code>xlab</code>: Character: x-axis label. Default <code>"Outcome"</code>.</li>
 <li><code>ylab</code>: Character: y-axis label. Default <code>"Density"</code>.</li>
 <li><code>title</code>: Character: plot title. Default <code>"Posterior Predictive Distribution"</code>.</li>
 <li><code>xlim</code>: Numeric vector of length 2 giving the minimum and maximum x-axis values, e.g.&nbsp;<code>c(0, 25)</code>. If <code>NULL</code> (default) the limits are <code>c(0, quantile(observed, 0.95))</code>.</li>
-<li><code>obs_color</code>: Color for the observed line density</li>
-<li><code>ppd_color</code>: Color for the posterior predictive distribution lines density</li>
+<li><code>obs_color</code>: Color for the observed line density.</li>
+<li><code>ppd_color</code>: Color for the posterior predictive distribution line density.</li>
 </ul>
 </section>
 <section id="returns" class="level2">
@@ -346,17 +348,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Not run:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example posterior predictive distribution from the package: </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ppd_df_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"examples"</span>, <span class="st">"ppd_df.rds"</span>, <span class="at">package =</span> <span class="st">"GHRmodel"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ppd_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(ppd_df_file) <span class="co"># loads ghr_models into the environment</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot densities of the posterior predictive distribution and observed cases. </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ppd</span>(ppd_df, </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">obs_color =</span> <span class="st">"blue"</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">ppd_color =</span> <span class="st">"red"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## End(Not run)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(dengue_MS)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dengue_MS <span class="ot">&lt;-</span> dengue_MS[dengue_MS<span class="sc">$</span>year <span class="sc">%in%</span> <span class="dv">2015</span><span class="sc">:</span><span class="dv">2016</span>,]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare formulas</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="st">"dengue_cases ~ tmin + f(year, model='rw1')"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Tranform formulas into a 'GHRformulas' object</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ghr_formula <span class="ot">&lt;-</span> <span class="fu">as_GHRformulas</span>(formulas)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit multiple models</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> ghr_formula,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"nbinomial"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"model"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset_var =</span> <span class="st">"pop100000"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">2</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_compute =</span> <span class="fu">list</span>(<span class="at">config =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">keep_ppd =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">ppd_samples =</span> <span class="dv">50</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot densities of the posterior predictive distribution and observed cases.</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ppd</span>(results<span class="sc">$</span>ppd[[<span class="dv">1</span>]], <span class="at">obs =</span> dengue_MS<span class="sc">$</span>dengue_cases)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

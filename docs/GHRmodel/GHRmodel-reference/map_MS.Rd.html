@@ -297,11 +297,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#administrative-map-for-municipalities-in-the-mato-grosso-do-sul" id="toc-administrative-map-for-municipalities-in-the-mato-grosso-do-sul" class="nav-link active" data-scroll-target="#administrative-map-for-municipalities-in-the-mato-grosso-do-sul">Administrative Map for Municipalities in the Mato Grosso do Sul</a>
+  <li><a href="#administrative-boundaries-of-mato-grosso-do-sul" id="toc-administrative-boundaries-of-mato-grosso-do-sul" class="nav-link active" data-scroll-target="#administrative-boundaries-of-mato-grosso-do-sul">Administrative boundaries of <strong>Mato Grosso do Sul</strong></a>
   <ul class="collapse">
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
   <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format">Format</a></li>
-  <li><a href="#source" id="toc-source" class="nav-link" data-scroll-target="#source">Source</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -312,24 +311,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="administrative-map-for-municipalities-in-the-mato-grosso-do-sul" class="level1">
-<h1>Administrative Map for Municipalities in the Mato Grosso do Sul</h1>
+<section id="administrative-boundaries-of-mato-grosso-do-sul" class="level1">
+<h1>Administrative boundaries of <strong>Mato Grosso do Sul</strong></h1>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>A simple feature (<code>sf</code>) multipolygon object representing a map of <strong>Mato Grosso do Sul</strong>, Brazil, including 11 municipalities. See <code>@source</code> for access to the complete data set.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>map_MS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Administrative boundaries (polygon geometries) of the 11 municipalities in <strong>Mato Grosso do Sul</strong> (Brazil) to be used with the <code>dengue_MS</code> data set.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(map_MS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="format" class="level2">
 <h2 class="anchored" data-anchor-id="format">Format</h2>
 <p>A simple feature (sf) object including 11 rows and 2 columns:</p>
 <ul>
-<li><strong><code>$code</code></strong>: Unique ID number for each micro region (11 units)</li>
-<li><strong><code>$geometry</code></strong>: geometries of the sf multipolygon</li>
+<li><strong>code</strong>: Unique ID number to each micro region (11 units).</li>
+<li><strong>geometry</strong>: Geometries of the sf multipolygon.</li>
 </ul>
-</section>
-<section id="source" class="level2">
-<h2 class="anchored" data-anchor-id="source">Source</h2>
-<p><a href="https://github.com/drrachellowe/hydromet_dengue">source code on GitHub</a>; <a href="http://doi.org/10.5281/zenodo.4632205">source code on Zenodo</a>);</p>
 
 
 </section>

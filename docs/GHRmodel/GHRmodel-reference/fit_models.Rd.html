@@ -324,33 +324,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  formulas,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  data,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  family,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  name,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"mod"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset_var =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_compute =</span> <span class="fu">list</span>(<span class="at">config =</span> <span class="cn">FALSE</span>, <span class="at">vcov =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">8</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">FALSE</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_inla =</span> <span class="fu">list</span>(<span class="at">strategy =</span> <span class="st">"adaptive"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">control_family =</span> <span class="fu">list</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ppd_samples =</span> <span class="dv">500</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">keep_ppd =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">keep_inlamod =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">1</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset =</span> <span class="cn">NULL</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
 <ul>
-<li><p><code>formulas</code>: A <code>GHRformulas</code> object containing multiple INLA model formulas.</p></li>
+<li><p><code>formulas</code>: Either a <code>GHRformulas</code> object containing multiple INLA model formulas, or a character vector of formulas (in this case, <code>as_GHRformulas()</code> will be executed internally).</p></li>
 <li><p><code>data</code>: A data frame containing the variables used in the model formulas.</p></li>
-<li><p><code>family</code>: A character string specifying the likelihood family (e.g., <code>"poisson"</code>, <code>"nbinomial"</code>, etc.).</p></li>
-<li><p><code>name</code>: A character string to label each fitted model (e.g., <code>"mod"</code>).</p></li>
-<li><p><code>offset</code>: A character string specifying the name of the offset variable in <code>data</code>. If <code>NULL</code>, no offset is applied. Default is <code>NULL</code>. Internally, <code>log(offset_values)</code> is applied.</p></li>
-<li><p><code>control_compute</code>: A named list controlling additional computation options:</p>
+<li><p><code>family</code>: A character string specifying the likelihood family. Currently available options include <code>"poisson"</code>, <code>"nbinomial"</code>, <code>"gaussian"</code>, <code>"zeroinflatedpoisson0"</code>, and <code>"zeroinflatednbinomial0"</code>.</p></li>
+<li><p><code>name</code>: Either a single character string to label each fitted model by attaching a count (e.g., <code>"mod"</code>) if there is more than one formula, or a character vector with the the same number of <code>"formulas"</code>.</p></li>
+<li><p><code>offset_var</code>: A character string specifying the name of the offset variable in <code>data</code>. If <code>NULL</code> (default), no offset is applied. Internally, <code>offset_var</code> is transformed according to the link function of the corresponding family: identity for <code>"gaussian"</code> and log for the rest of families.</p></li>
+<li><p><code>control_compute</code>: A named list controlling additional computation options passed to INLA’s <code>control.compute</code>:</p>
 <ul>
-<li><strong><code>config</code></strong>: Logical ; if <code>TRUE</code>, stores the Gaussian Markov Random Field (GMRF) and enables the computation of posterior predictive distribution (1,000 draws). Defaults to <code>FALSE</code>.</li>
-<li><strong><code>vcov</code></strong>: Logical if <code>TRUE</code>, returns the variance-covariance (correlation) matrix of fixed effects. Defaults to <code>FALSE</code>.</li>
-</ul></li>
-<li><p><code>nthreads</code>: An integer specifying the number of threads for parallel computation. Default is <code>8</code>.</p></li>
-<li><p><code>pb</code>: Logical; if <code>TRUE</code>, displays a progress bar while fitting models. Default is <code>FALSE</code>.</p></li>
+<li><strong><code>config</code></strong>: Logical indicating whether to store extra internal configuration (e.g., enabling posterior predictive checks like CRPS). Defaults to <code>FALSE</code>.</li>
+<li><strong><code>vcov</code></strong>: Logical indicating whether to return the variance-covariance (correlation) matrix of fixed effects. Defaults to <code>FALSE</code>.</li>
+</ul>
+<p>Note that other elements of <code>control.compute</code> cannot be modified.</p></li>
+<li><p><code>control_inla</code>: Parameters passed to <code>control.inla</code> in <code>INLA::inla</code>. See <code>?INLA::control.inla</code> to see all available options. By default, uses the adaptive strategy.</p></li>
+<li><p><code>control_family</code>: Parameters passed to <code>control.family</code> in <code>INLA::inla</code>. See <code>?INLA::control.family</code> to see all available options.</p></li>
+<li><p><code>ppd_samples</code>: Numeric indicating the number of posterior predictive samples to draw. Only used if <code>config=TRUE</code>, defaults to 500.</p></li>
+<li><p><code>keep_ppd</code>: Default is FALSE (do not keep ppd). If TRUE (requires also <code>config=TRUE</code>), the posterior predictive distribution for all data samples is saved in the object, which can be useful for <code>plot_ppd()</code>.</p></li>
+<li><p><code>keep_inlamod</code>: Logical. Default is FALSE. If TRUE, the fitted INLA model objects are stored in the output list, which may result in a substantially larger object.</p></li>
+<li><p><code>nthreads</code>: An integer specifying the maximum number of threads for parallel computation. Default is <code>1</code>.</p></li>
+<li><p><code>progress</code>: Logical; if <code>TRUE</code>, displays progression while fitting models. Default is <code>FALSE</code>.</p></li>
+<li><p><code>verbose</code>: Logical; if <code>TRUE</code>, run INLA in verbose mode (useful for debugging). Default is <code>FALSE</code>.</p></li>
+<li><p><code>offset</code>: Deprecated, use offset_var instead.</p></li>
 </ul>
 </section>
 <section id="details" class="level2">
 <h2 class="anchored" data-anchor-id="details">Details</h2>
 <p>This function iterates over each formula in the <code>GHRformulas</code> object and fits the corresponding <code>INLA</code> model using the internal function <code>.fit_single_model()</code>. For each fitted model, it extracts the fitted values, fixed effects, and random effects summaries. Then, it calculates a series of model evaluation metrics using the <code>.gof_single_model()</code> internal function.</p>
+<p>Because the first formula is used as the reference model for all comparison metrics (see Section B below), if it fails to fit, <code>fit_models()</code> stops and no results are returned for any model. However, if a formula after the first fit fails, a message is printed and that model is skipped (GoF row is filled with <code>NA</code> and object components are left empty).</p>
 <p>The goodness-of-fit (GoF) metrics are organized into two categories:</p>
 <ol type="A">
 <li>Model-Specific Goodness-of-Fit Metrics</li>
@@ -368,13 +384,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>LMS assesses the average negative log-predictive density using Conditional Predictive Ordinates (CPO). Lower LMS values indicate stronger predictive performance by penalizing models that assign low probability to observed outcomes.</p></li>
 <li><p>Mean Absolute Error (MAE)</p>
 <p><code>MAE = \frac{1}{n} \sum_{i=1}^n \left| y_i - \hat{y}_i \right|</code></p>
-<p>Measures the average absolute deviation between observed values <code>y_i</code> and predicted values <code>\hat{y}_i</code>. Lower MAE values indicate improved fit. If <code>config = TRUE</code>, MAE is computed using the full posterior predictive distribution (PPD); otherwise, it uses point estimates from INLA’s <code>summary.fitted.values</code>.</p></li>
+<p>Average absolute difference between observed and a point estimate of the predictions. As a point estimate, it uses the <code>summary.fitted.values</code> provided by INLA when <code>config = FALSE</code> and the mean of the ppd if <code>config = TRUE</code>. MAE is more robust to outliers than RMSE. Lower MAE values indicate improved model fit.</p></li>
 <li><p>Root Mean Squared Error (RMSE)</p>
 <p><code>RMSE = \sqrt{ \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2 }</code></p>
-<p>Captures average squared deviation between observed and predicted values. RMSE penalizes larger errors more heavily. Lower values reflect better model fit. If <code>config = TRUE</code>, RMSE uses the PPD; otherwise, it uses point estimates.</p></li>
+<p>Root average squared difference between observed and a point estimate of the predictions. As a point estimate, it uses the <code>summary.fitted.values</code> provided by INLA when <code>config = FALSE</code> and the mean of the ppd if <code>config = TRUE</code>. RMSE penalizes larger errors more heavily. Lower RMSE values reflect better model fit.</p></li>
 <li><p>Continuous Ranked Probability Score (CRPS)</p>
 <p><code>\mathrm{CRPS}(F, y) = \int_{-\infty}^{\infty} \left[F(t) - \mathbf{1}\{y \leq t\}\right]^2 dt</code></p>
-<p>CRPS assesses how well the predictive cumulative distribution aligns with the observed outcome. Lower scores suggest better calibrated predictive distributions. Only available when <code>config = TRUE</code>.</p></li>
+<p>The intergral is approximated with the empirical CRPS (see crps_empirical ): <code>\mathrm{CRPS} = \frac{1}{n} \sum_{i=1}^n |x_i - y| - \frac{1}{2n^2} \sum_{i=1}^n \sum_{j=1}^n |x_i - x_j|</code></p>
+<p>CRPS assesses how well the entire posterior predictive distribution aligns with the observed outcome. The median CRPS across observations is returned. Lower scores suggest better calibrated predictive distributions. Only available when <code>config = TRUE</code>.</p></li>
 </ol>
 <ol start="2" type="A">
 <li>Model Comparison Metrics (relative to the first model)</li>
@@ -396,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Quantifies residual variance due to group- or cluster-level effects. Computed only when random effects are defined in the model formula.</p></li>
 <li><p>Proportional Change in Random Effect Variance</p>
 <p><code>\frac{\mathrm{Var}_{re}}{\mathrm{Var}_{re}^{(1)}} - 1</code></p>
-<p>Represents the relative change in group-level variance compared to the baseline model. Helps assess how much variance is explained by added covariates.</p></li>
+<p>Represents the relative change in group-level variance compared to the baseline model. Helps assess how much variance is explained by added covariates. <code>re1_var_change</code> refers to the change in specific random effects (ordered by number) whereas <code>re_meanchange</code> is the mean change across all random effects. <code>re_meanchange</code> is <code>NA</code> when no random effects are defined or if the variance change of any individual random effect is <code>NA</code>.</p></li>
 </ol>
 </section>
 <section id="returns" class="level2">
@@ -407,10 +424,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong><code>$fitted</code></strong>: A list of fitted values (one element per model). If <code>config = TRUE</code>, these are derived from the posterior predictive distribution (PPD); otherwise, they are extracted from INLA’s <code>summary.fitted.values</code>.</li>
 <li><strong><code>$fixed</code></strong>: A list of summary tables for fixed effects (one element per model).</li>
 <li><strong><code>$random</code></strong>: A list of summary tables for random effects (one element per model).</li>
+<li><strong><code>$vcov</code></strong>: A list of variance-covariance (correlation) matrices of fixed effects (one element per model). Populated only when <code>control_compute$vcov = TRUE</code>.</li>
 <li><strong><code>$formulas</code></strong>: A character vector of the original model formulas used.</li>
 <li><strong><code>$re</code></strong>: A character vector specifying any random effects defined in <code>formulas</code>.</li>
 <li><strong><code>$outcome</code></strong>: A character string indicating the outcome variable used.</li>
+<li><strong><code>$family</code></strong>: A character string indicating the likelihood family used.</li>
 <li><strong><code>$data</code></strong>: The original data frame passed to the function.</li>
+<li><strong><code>$ppd</code></strong>: (if <code>keep_ppd=TRUE</code>) A list of ppd matrices where rows are observations in the same order as in <code>data</code> and columns are ppd samples.</li>
+<li><strong><code>$inlamod</code></strong>: (if <code>keep_inlamod=TRUE</code>) A list of inla model objects.</li>
 </ul>
 </section>
 <section id="see-also" class="level2">
@@ -419,36 +440,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Not run:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example dataset</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(dengueMS)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare formulas</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ tmin +  f(year, model='rw1')"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ pdsi +  f(year, model='rw1')"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Tranform formulas into a 'GHRformulas' object</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ghr_formulas <span class="ot">&lt;-</span> <span class="fu">as_GHRformulas</span>(formulas)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit multiple models </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> ghr_formulas,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data     =</span> dengue_MS,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">family   =</span> <span class="st">"nbinomial"</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">name     =</span> <span class="st">"TestModel"</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset   =</span> <span class="st">"population"</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">nthreads =</span> <span class="dv">2</span>,</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">control_compute =</span> <span class="fu">list</span>(<span class="at">config =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">pb       =</span> <span class="cn">TRUE</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect goodness-of-fit metrics</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results<span class="sc">$</span>mod_gof)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="do">## End(Not run)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load example dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(dengue_MS)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dengue_MS <span class="ot">&lt;-</span> dengue_MS[dengue_MS<span class="sc">$</span>year <span class="sc">%in%</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>, ]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare formulas</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ tmin +  f(year, model='rw1')"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dengue_cases ~ pdsi +  f(year, model='rw1')"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit multiple models</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulas =</span> formulas,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dengue_MS,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"nbinomial"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"TestModel"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset_var =</span> <span class="st">"pop100000"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="dv">2</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect goodness-of-fit metrics</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>mod_gof</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
